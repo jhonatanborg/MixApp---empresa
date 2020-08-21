@@ -1,0 +1,256 @@
+{
+    "product": [{
+            "id": 1,
+            "name": "Destaques",
+            "items": [{
+                    "id": 1,
+                    "mount": true,
+                    "name": "Macarrão 500 gramas",
+                    "saleValue": "14,50",
+                    "details": "Macarrão 500 gramas + acréscimos à sua escolha",
+                    "img": "https://cdn.panelinha.com.br/receita/1575565134976-putanesca2.jpg"
+
+                },
+                {
+                    "id": 2,
+                    "mount": false,
+                    "name": "Macarrão 500 gramas",
+                    "saleValue": "14,50",
+                    "details": "Macarrão 500 gramas + acréscimos à sua escolha",
+                    "img": "https://cdn.panelinha.com.br/receita/1575565134976-putanesca2.jpg"
+                }
+
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Promoção",
+            "items": [{
+                    "id": 3,
+                    "mount": false,
+                    "name": "Macarrão 800 gramas",
+                    "saleValue": "14,50",
+                    "details": "Macarrão 500 gramas + acréscimos à sua escolha",
+                    "img": "https://cdn.panelinha.com.br/receita/1575565134976-putanesca2.jpg"
+                }
+
+            ]
+        }
+
+
+    ],
+    "complement": [{
+            "id": 1,
+            "complements": [{
+                    "id": 1,
+                    "name": "Massa",
+                    "mandatory": "Obrigatório",
+                    "limit": true,
+                    "limit-select": 2,
+                    "components": [{
+                            "id": "1",
+                            "title": "Pene",
+                            "price": "0,00",
+                            "status_availability": true
+                        },
+                        {
+                            "id": "2",
+                            "title": "Espaguete",
+                            "price": "0,00",
+                            "status_availability": false
+                        },
+                        {
+                            "id": "3",
+                            "title": "Talharim",
+                            "price": "0,00",
+                            "status_availability": false
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "name": "Molho",
+                    "mandatory": "Obrigatório",
+                    "limit": true,
+                    "limit-select": 2,
+                    "components": [{
+                            "id": "1",
+                            "title": "Bolonhesa",
+                            "price": "5,50",
+                            "status_availability": true
+
+                        },
+                        {
+                            "id": "2",
+                            "title": "Branco",
+                            "price": "5,50",
+                            "status_availability": true
+
+                        },
+                        {
+                            "id": "3",
+                            "title": "4 queijos",
+                            "price": "5,50",
+                            "status_availability": true
+
+                        },
+                        {
+                            "id": "4",
+                            "title": "Sugo",
+                            "price": "5,50",
+                            "status_availability": true
+
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "name": "Ingredientes",
+                    "mandatory": "Opcional",
+                    "limit": false,
+                    "limit-select": null,
+                    "components": [{
+                            "id": "1",
+                            "title": "Azeitona",
+                            "price": "5,50",
+                            "status_availability": true
+
+                        },
+                        {
+                            "id": "2",
+                            "title": "Bacon",
+                            "price": "5,50",
+                            "status_availability": true
+
+                        },
+                        {
+                            "id": "3",
+                            "title": "Calabresa",
+                            "price": "5,50",
+                            "status_availability": true
+
+                        },
+                        {
+                            "id": "4",
+                            "title": "Queijo",
+                            "price": "5,50",
+                            "status_availability": true
+
+                        },
+                        {
+                            "id": "5",
+                            "title": "Presunto",
+                            "price": "5,50",
+                            "status_availability": true
+
+                        },
+                        {
+                            "id": "6",
+                            "title": "Palmito",
+                            "price": "5,50"
+                        },
+                        {
+                            "id": "7",
+                            "title": "Ervilha",
+                            "price": "5,50"
+                        },
+                        {
+                            "id": "8",
+                            "title": "Milho",
+                            "price": "5,50"
+                        },
+                        {
+                            "id": "9",
+                            "title": "Brocolis",
+                            "price": "5,50"
+                        },
+                        {
+                            "id": "10",
+                            "title": "Pimenta calabresa",
+                            "price": "5,50"
+                        },
+                        {
+                            "id": "11",
+                            "title": "Cheiro Verde",
+                            "price": "5,50"
+                        },
+                        {
+                            "id": "12",
+                            "title": "Oregano",
+                            "price": "5,50"
+                        }
+                    ]
+                }
+
+            ]
+        },
+        {
+            "id": 2,
+            "complements": [{
+                    "id": 1,
+                    "name": "Tamanho",
+                    "mandatory": "Obrigatório",
+                    "limit": true,
+                    "limit-select": 1,
+                    "components": [{
+                            "id": "1",
+                            "title": "300 ML",
+                            "price": "15,00",
+                            "status_availability": true
+                        },
+                        {
+                            "id": "2",
+                            "title": "400 ml",
+                            "price": "16,00",
+                            "status_availability": false
+                        },
+                        {
+                            "id": "3",
+                            "title": "900 ml",
+                            "price": "20,00",
+                            "status_availability": false
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "name": "Adicionais Grátis",
+                    "mandatory": "Obrigatório",
+                    "limit": true,
+                    "limit-select": 4,
+                    "components": [{
+                            "id": "1",
+                            "title": "Chocolate",
+                            "price": "0,00",
+                            "status_availability": true
+
+                        },
+                        {
+                            "id": "2",
+                            "title": "Leite condensado",
+                            "price": "0,00",
+                            "status_availability": true
+
+                        },
+                        {
+                            "id": "3",
+                            "title": "Brigadeiro",
+                            "price": "0,00",
+                            "status_availability": true
+
+                        },
+                        {
+                            "id": "4",
+                            "title": "Beijinho",
+                            "price": "0,00",
+                            "status_availability": true
+
+                        }
+                    ]
+                }
+
+            ]
+        }
+    ]
+
+}
