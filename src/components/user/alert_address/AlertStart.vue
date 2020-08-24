@@ -133,20 +133,13 @@ export default {
     searchLocal() {
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(this.showPosition);
-        this.$store.commit("alertAddress", { value: false, route: "home" });
+        this.$store.commit("alertAddress", { value: false });
       } else {
         this.$store.commit("alertAddress", true);
       }
     },
     showPosition(position) {
       if (position) {
-        this.execRequest(
-          "company/request",
-          "companies",
-          `/company/${position.coords.latitude},${position.coords.longitude}`,
-          "GET",
-          true
-        );
         this.execRequest("user/request", "address", "/coord", "POST", true, {
           lat: position.coords.latitude,
           long: position.coords.longitude,
@@ -156,9 +149,7 @@ export default {
           longitude: position.coords.longitude,
         };
         localStorage.setItem("geolocation", JSON.stringify(location));
-        if (this.$route.path !== "/restaurants") {
-          this.$router.push("/restaurants");
-        }
+        this.$store.commit("alertAddress", { value: false });
       } else {
         this.$store.commit("alertAddress", true);
       }

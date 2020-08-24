@@ -69,7 +69,7 @@ export default {
           table: "sale",
         },
       });
-      this.$store.commit("alertAddress", { value: false, route: "home" });
+      this.$store.commit("alertAddress", { value: false });
       this.$store.commit("showAlert", false, { root: true });
     },
   },

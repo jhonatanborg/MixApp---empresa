@@ -9,7 +9,7 @@
     max-width="500"
     transition="dialog-transition"
   >
-    <v-card>
+    <v-card v-if="company">
       <div class="align-center">
         <v-list-item class="mx-0">
           <v-list-item-avatar tile>
@@ -39,7 +39,7 @@
         </v-list-item>
       </div>
 
-      <div class="py-1 grey lighten-4">
+      <div class="py-1 ">
         <v-list-item class="mx-0">
           <v-list-item-content>
             <v-list-item-title>
@@ -55,41 +55,57 @@
       </div>
       <div>
         <div>
-          {{ valueChange }}
-          <v-list-item-group v-model="payment" color="#765eda" rounded>
-            <v-list-item v-for="(item, i) in payments" :key="i" :value="item">
-              <template v-slot:default="{ active, toggle }">
-                <v-list-item-content>
-                  <v-list-item-title>
-                    {{ item.name }}
-                  </v-list-item-title>
-                </v-list-item-content>
+          <v-list-item-group
+            v-for="(item, i) in payments"
+            :key="i"
+            color="#765eda"
+            rounded
+            v-model="payment"
+          >
+            <div>
+              <div class="py-3 grey lighten-4">
+                <span class="mx-3 text-capitalize">{{ item.title }}</span>
+              </div>
 
-                <v-list-item-action>
-                  <v-checkbox
-                    :input-value="active"
-                    color="#765eda"
-                    @click="toggle"
-                  ></v-checkbox>
-                </v-list-item-action>
-              </template>
-            </v-list-item>
-            <div
-              v-if="returnMoney"
-              class="my-2 col-sm-12 animate__animated animate__zoomIn"
-            >
-              <v-text-field
-                label="Troco para"
-                outlined
-                dense
-                :error="changeError"
-                :error-messages="changeError ? 'Valor inválido' : ''"
-                v-model.lazy="valueChange"
-                v-money="money"
-                name="name"
-              ></v-text-field>
+              <v-list-item
+                v-for="(pay, key) in item.payments"
+                :key="key"
+                :value="pay"
+              >
+                <template v-slot:default="{ active, toggle }">
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      {{ pay.title }}
+                    </v-list-item-title>
+                  </v-list-item-content>
+
+                  <v-list-item-action>
+                    <v-checkbox
+                      :input-value="active"
+                      :true-value="pay.id"
+                      color="#765eda"
+                      @click="toggle"
+                    ></v-checkbox>
+                  </v-list-item-action>
+                </template>
+              </v-list-item>
             </div>
           </v-list-item-group>
+          <div
+            v-if="returnMoney"
+            class="my-2 col-sm-12 animate__animated animate__zoomIn"
+          >
+            <v-text-field
+              label="Troco para"
+              outlined
+              dense
+              :error="changeError"
+              :error-messages="changeError ? 'Valor inválido' : ''"
+              v-model.lazy="valueChange"
+              v-money="money"
+              name="name"
+            ></v-text-field>
+          </div>
         </div>
         <div>
           <div class="py-3 grey lighten-4">
@@ -134,7 +150,7 @@ export default {
 
   data: () => ({
     step: 1,
-    payment: null,
+    payment: [],
     valueChange: 0.0,
     money: {
       decimal: ",",
@@ -147,15 +163,19 @@ export default {
   }),
   computed: {
     company() {
-      return this.$store.state.cart.saleCompany || [];
+      localStorage.setItem(
+        "company",
+        JSON.stringify(this.$store.state.company)
+      );
+      return this.$store.state.company || {};
     },
     payments() {
-      return this.$store.state.cart.payments;
+      return this.$store.getters["cart/getPayments"] || [];
     },
     returnMoney() {
       let change;
       if (this.payment) {
-        if (this.payment.name === "Dinheiro") {
+        if (this.payment.title === "dinheiro") {
           change = true;
         } else {
           change = false;
@@ -166,8 +186,9 @@ export default {
   },
   methods: {
     payConfirm() {
+      console.log(this.payments);
       let change;
-      if (this.valueChange) {
+      if (this.payment) {
         change = parseFloat(
           this.valueChange
             .slice(2)
@@ -180,7 +201,7 @@ export default {
       } else {
         this.changeError = false;
         this.$store.commit("cart/changeFor", change);
-        this.$store.commit("cart/paySelect", this.payment);
+        this.$store.commit("cart/paySelect", this.payment.id);
         this.$emit("close-pay");
       }
     },

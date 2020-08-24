@@ -215,9 +215,8 @@
         >
           <v-card>
             <v-img
-              height="30%"
+              :aspect-ratio="16 / 9"
               width="100%"
-              aspect-ratio="1.1"
               :src="productSelected.img"
             >
               <v-row justify="end">
@@ -275,7 +274,7 @@
                 >
               </div>
 
-              <div class="my-3 px-5">
+              <div class="my-3 px-5 mb-10 pb-10">
                 <v-textarea
                   outlined
                   dense
@@ -498,20 +497,35 @@ export default {
     },
     AddPurchase() {
       if (localStorage.getItem("acess-token")) {
-        localStorage.setItem("company", JSON.stringify(this.company));
-        let sale = {
-          product_id: this.productSelected.id,
-          product_qtd: this.quantity,
-          comment: this.comment,
-          product_name: this.productSelected.name,
-          total: this.Total,
-          sale_type_id: 1,
-          company_id: this.company.id,
-          cashback_return: this.productSelected.cashback_return,
-        };
+        if (localStorage.getItem("geolocation")) {
+          localStorage.setItem("company", JSON.stringify(this.company));
+          let sale = {
+            product_id: this.productSelected.id,
+            product_qtd: this.quantity,
+            comment: this.comment,
+            product_name: this.productSelected.name,
+            total: this.Total,
+            sale_type_id: 1,
+            company_id: this.company.id,
+            cashback_return: this.productSelected.cashback_return,
+          };
 
-        this.insertIdb(sale);
-        this.viewDialog = false;
+          this.insertIdb(sale);
+          this.viewDialog = false;
+        } else {
+          this.$store.commit("alertAddress", { value: true });
+          if (localStorage.getItem("acess-token")) {
+            this.$store.commit("user/request", {
+              state: "addressTabs",
+              data: 3,
+            });
+          } else {
+            this.$store.commit("user/request", {
+              state: "addressTabs",
+              data: 1,
+            });
+          }
+        }
       } else {
         this.viewDialog = false;
         this.$router.push({ name: "session" });
@@ -550,11 +564,25 @@ export default {
       };
 
       if (localStorage.getItem("acess-token")) {
-        this.insertIdb(sale);
-        this.viewDialogMount = false;
+        if (localStorage.getItem("geolocation")) {
+          this.insertIdb(sale);
+          this.viewDialogMount = false;
+        } else {
+          this.$store.commit("alertAddress", { value: true });
+          if (localStorage.getItem("acess-token")) {
+            this.$store.commit("user/request", {
+              state: "addressTabs",
+              data: 3,
+            });
+          } else {
+            this.$store.commit("user/request", {
+              state: "addressTabs",
+              data: 1,
+            });
+          }
+        }
       } else {
         this.viewDialogMount = false;
-
         this.$router.push({ name: "session" });
       }
     },

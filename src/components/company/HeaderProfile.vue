@@ -1,5 +1,5 @@
 <template>
-  <v-row>
+  <v-row v-if="company">
     <v-col cols="12" sm="2"
       ><v-card flat>
         <v-img
@@ -14,7 +14,7 @@
           <span v-text="company.name"></span>
         </div>
         <div class="category">
-          <span v-text="company.primaryCategory.name"> </span>
+          <span> Massas</span>
           <v-icon x-small class="mx-3">mdi-circle</v-icon>
           <span v-text="company.distance"></span> <span>KM</span>
         </div>
@@ -22,17 +22,11 @@
           <v-col cols="auto"
             ><v-chip outlined color="dark">
               Tempo de espera:
-              <b
-                class="mx-3"
-                v-text="company.deliveryFee.delivery_max_time"
-              ></b> </v-chip
+              <b class="mx-3"></b> </v-chip
           ></v-col>
           <v-col cols="auto"
             ><v-chip outlined color="green"
-              >Entrega:
-              <b class="mx-3 green--text" v-text="company.deliveryFee.value"
-                >Grátis</b
-              ></v-chip
+              >Entrega: <b class="mx-3 green--text">Grátis</b></v-chip
             ></v-col
           >
           <v-col cols="auto"

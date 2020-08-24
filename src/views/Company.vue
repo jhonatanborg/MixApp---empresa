@@ -1,9 +1,9 @@
 <template>
   <div class="grey lighten-5">
     <MenuBar />
-    <div id="company" v-if="company && company.logo && company.address">
+    <div id="company" v-if="company">
       <v-container>
-        <ProfileDetails :company="company" />
+        <ProfileDetails :company="company.company" />
         <v-row align="center" justify="space-between">
           <v-col cols="auto">
             <v-chip class="pa-5" large text-color="white" color="#765eda">
@@ -31,7 +31,10 @@
           </v-col>
 
           <v-col cols="auto " sm="12">
-            <ProductBar :company="company" :products="company.prodCategories" />
+            <ProductBar
+              :company="company"
+              :products="company.company.prodCategories"
+            />
           </v-col>
         </v-row>
       </v-container>
@@ -87,9 +90,9 @@ export default {
     company() {
       localStorage.setItem(
         "company",
-        JSON.stringify(this.$store.state.company.company)
+        JSON.stringify(this.$store.state.company)
       );
-      return this.$store.state.company.company || {};
+      return this.$store.state.company || {};
     },
     categories() {
       return this.$store.getters["company/getCategories"];
@@ -107,20 +110,7 @@ export default {
       return this.$store.state.company.addressVerify;
     },
   },
-  watch: {
-    $route() {
-      this.listDataCompany();
-    },
-    company(value) {
-      if (value.message) {
-        this.$store.commit("company/request", {
-          state: "addressVerify",
-          data: true,
-        });
-        this.$router.push("/restaurants");
-      }
-    },
-  },
+  watch: {},
   methods: {
     execRequest(action, state, url, method, insert, data = null) {
       this.$store.dispatch(action, {
@@ -146,17 +136,25 @@ export default {
         const payload = {
           state: "company",
           method: "get",
-          url: `/company-show/${this.$route.params.id},${coords.latitude},${coords.longitude}`,
+          url: `/company-show/${process.env.VUE_APP_COMPANY_OBJECT_ID},${coords.latitude},${coords.longitude}`,
           insert: true,
         };
+        console.log(payload.url);
         this.execRequest("user/request", "address", "/coord", "POST", true, {
           lat: coords.latitude,
           long: coords.longitude,
         });
-
         this.$store.dispatch("company/request", payload);
       } else {
-        this.$store.commit("alertAddress", true);
+        const payload = {
+          state: "company",
+          method: "get",
+          url: `/company-show-one/${process.env.VUE_APP_COMPANY_ID}`,
+          insert: true,
+        };
+        console.log(payload.url);
+
+        this.$store.dispatch("company/request", payload);
       }
     },
     convertMoney(money) {

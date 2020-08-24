@@ -4,8 +4,9 @@
     :value="$store.state.addressAlert"
     persistent
     max-width="550px"
+    scrollable
   >
-    <v-card class="pa-5">
+    <v-card>
       <v-row no-gutters align="center" justify="space-between">
         <v-col cols="auto">
           <span class="ma-5">{{ currentTitle }}</span>
@@ -33,13 +34,13 @@
         <v-window-item class="px-3 py-0" :value="2">
           <RegisterAddress @return="controlsTabs" />
         </v-window-item>
-        <v-window-item class="px-3 py-0" :value="3">
+        <v-window-item class="pa-0" :value="3">
           <AlertListAddress
             @new-address="controlsTabs"
             @error-address="controlsTabs"
           />
         </v-window-item>
-        <v-window-item class="px-3 py-0" :value="4">
+        <v-window-item class=" py-0" :value="4">
           <AlertErrorAddress @return-list="controlsTabs" />
         </v-window-item>
       </v-window>

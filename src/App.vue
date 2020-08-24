@@ -9,7 +9,7 @@
       <Sale />
       <router-view />
 
-      <!-- <v-layout v-if="bagStatus" class="col-sm-12 sale">
+      <v-layout v-if="bagStatus" class="col-sm-12 sale">
         <v-btn
           @click="$store.commit('cart/sidebar', true)"
           class="elevation-7"
@@ -20,7 +20,7 @@
         >
           Sacola ({{ sale.length }})
         </v-btn>
-      </v-layout> -->
+      </v-layout>
     </v-main>
   </v-app>
 </template>
@@ -38,18 +38,7 @@ export default {
     SaleError,
     // MenuMobile,
   },
-  mounted() {
-    this.getSaleIdb();
-    this.execRequest(
-      "company/request",
-      "categories",
-      "/company-category",
-      "GET",
-      true
-    );
 
-    this.execRequest("cart/request", "payments", "/payment", "GET");
-  },
   data: () => ({
     dialogStep: null,
   }),

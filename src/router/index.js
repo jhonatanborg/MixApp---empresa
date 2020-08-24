@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
 
 import goTo from "vuetify/es5/services/goto";
 Vue.use(VueRouter);
@@ -11,16 +10,11 @@ const routes = [
     component: () => import("../views/Error.vue"),
   },
   {
-    path: "/testing",
-    name: "Testing",
-    component: () => import("../views/Testing.vue"),
+    path: "/",
+    name: "company",
+    component: () => import("../views/Company.vue"),
   },
 
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
   {
     path: "/minha-conta/",
     name: "profile",
@@ -112,11 +106,7 @@ const routes = [
       },
     ],
   },
-  {
-    path: "/restaurante/:id",
-    name: "company",
-    component: () => import("../views/Company.vue"),
-  },
+
   {
     path: "/restaurants",
     name: "restaurants",

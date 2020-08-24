@@ -9,7 +9,6 @@ const cart = {
     saleEmpty: true,
     saleCompany: null,
     sidebar: false,
-    payments: null,
     quantitySale: null,
     saleMode: null,
     paySelect: null,
@@ -50,6 +49,34 @@ const cart = {
         return true;
       } else {
         return false;
+      }
+    },
+    getPayments(state) {
+      if (state.saleCompany) {
+        const groups = [];
+        const payments = state.saleCompany.company.payments;
+        payments.map((payment) => {
+          if (!groups.find((item) => item.id === payment.payment.group.id)) {
+            groups.push(payment.payment.group);
+          }
+          groups.map((group) => {
+            group.payments = [];
+          });
+        });
+
+        groups.map((group) => {
+          payments.map((payment) => {
+            if (group.id === payment.payment.payment_group_available_id) {
+              group.payments.push({
+                id: payment.payment.id,
+                title: payment.payment.title,
+                img: payment.payment.img,
+              });
+            }
+          });
+        });
+
+        return groups;
       }
     },
   },

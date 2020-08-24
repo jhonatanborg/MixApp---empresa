@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-list two-line>
+    <v-list max-height="500px" class="overflow-y-auto" two-line>
       <v-list-item-group v-model="addressSelected">
         <template v-for="(item, i) in user.address">
           <v-divider v-if="!item" :key="`divider-${i}`"></v-divider>
@@ -31,30 +31,32 @@
         </template>
       </v-list-item-group>
     </v-list>
-    <v-row>
-      <v-col cols="12" sm="4">
-        <v-btn
-          @click="$emit('new-address', 1)"
-          depressed
-          dense
-          block
-          color="primary"
-          >Novo endereço?</v-btn
-        >
-      </v-col>
-      <v-col cols="12" sm="8">
-        <v-btn
-          @click="updateLocalAddress()"
-          depressed
-          block
-          dark
-          dense
-          color="#765eda"
-          class="font-weight-bold"
-          >Confirmar</v-btn
-        >
-      </v-col>
-    </v-row>
+    <v-toolbar width="100%" flat height="80px">
+      <v-row align="justify-space-between">
+        <v-col cols="12" sm="6">
+          <v-btn
+            @click="$emit('new-address', 1)"
+            depressed
+            dense
+            block
+            color="primary"
+            >Novo endereço?</v-btn
+          >
+        </v-col>
+        <v-col cols="12" sm="6">
+          <v-btn
+            @click="updateLocalAddress()"
+            depressed
+            block
+            dark
+            dense
+            color="#765eda"
+            class="font-weight-bold"
+            >Confirmar</v-btn
+          >
+        </v-col>
+      </v-row>
+    </v-toolbar>
   </div>
 </template>
 
@@ -96,14 +98,6 @@ export default {
         state: "address",
         data: this.addressSelected,
       });
-      await this.execRequest(
-        "company/request",
-        "companies",
-        `/company/${this.addressSelected.latitude},${this.addressSelected.longitude}`,
-        "GET",
-        true
-      );
-
       let VerifyCompanyAvailable;
       if (this.sale.length > 0) {
         VerifyCompanyAvailable = this.companies.find(
@@ -112,10 +106,10 @@ export default {
         if (!VerifyCompanyAvailable) {
           this.$emit("error-address", 4);
         } else {
-          this.$store.commit("alertAddress", { value: false, route: "home" });
+          this.$store.commit("alertAddress", { value: false });
         }
       } else {
-        this.$store.commit("alertAddress", { value: false, route: "home" });
+        this.$store.commit("alertAddress", { value: false });
       }
 
       let location = {
@@ -123,9 +117,7 @@ export default {
         longitude: this.addressSelected.longitude,
       };
       localStorage.setItem("geolocation", JSON.stringify(location));
-      if (this.$route.path !== "/restaurants") {
-        this.$router.push("/restaurants");
-      }
+
       // this.$router.push("/restaurants");
     },
   },

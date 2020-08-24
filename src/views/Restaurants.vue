@@ -37,20 +37,7 @@
             ></v-overflow-btn>
           </v-col>
         </v-row>
-        <div v-if="company.message">
-          <v-row>
-            <v-col>
-              <v-alert
-                color="#FFB900"
-                :value="addressVerify"
-                dismissible
-                transition="fade-transition"
-              >
-                <span v-html="company.message"> </span>
-              </v-alert>
-            </v-col>
-          </v-row>
-        </div>
+
         <div class="">
           <v-row justify="start">
             <v-col cols="auto">

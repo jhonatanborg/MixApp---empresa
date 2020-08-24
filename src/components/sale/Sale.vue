@@ -198,10 +198,7 @@
                         Taxa de entrega
                       </v-list-item-subtitle>
                     </v-list-item-content>
-                    <div
-                      class="subtitle"
-                      v-text="convertMoney(company.deliveryFee.value)"
-                    ></div>
+                    <div class="subtitle" v-text="convertMoney(15)"></div>
                   </v-list-item>
                   <v-list-item dense v-if="cupomValidate == false">
                     <v-list-item-content>
@@ -342,7 +339,11 @@ export default {
       return this.$store.state.company.companies;
     },
     company() {
-      return this.$store.state.cart.saleCompany;
+      localStorage.setItem(
+        "company",
+        JSON.stringify(this.$store.state.company)
+      );
+      return this.$store.state.company || {};
     },
 
     sale() {
@@ -366,9 +367,7 @@ export default {
     total() {
       let sum;
       if (this.sale && this.company) {
-        sum =
-          parseFloat(this.subTotal) +
-          parseFloat(this.company.deliveryFee.value);
+        sum = parseFloat(this.subTotal) + parseFloat(15);
       }
       if (this.discount_value) {
         sum = sum - this.discount_value;
@@ -453,7 +452,7 @@ export default {
       );
       if (!VerifyCompanyAvailable) {
         this.$store.commit("user/request", { state: "addressTabs", data: 4 });
-        this.$store.commit("alertAddress", { value: true, route: "home" });
+        this.$store.commit("alertAddress", { value: true });
       } else {
         let sale = {
           address: this.address,
@@ -544,12 +543,6 @@ export default {
       }
     },
     paySelect() {
-      const payload = {
-        state: "payments",
-        method: "GET",
-        url: `/payment-company/ ${this.company.id}`,
-      };
-      this.$store.dispatch("cart/request", payload);
       this.dialogPay = !this.dialogPay;
     },
     clearPay() {

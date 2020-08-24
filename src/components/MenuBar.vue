@@ -1,7 +1,7 @@
 <template>
-  <v-app-bar dark color="#765eda" app flat id="app-bar">
+  <v-app-bar dark color="#ff5252" app flat id="app-bar">
     <v-btn dense :to="'/'" :ripple="false" text
-      ><v-icon>mdi-food</v-icon><b>Mix</b></v-btn
+      ><v-icon>mdi-food</v-icon><b>Emporio do caldo</b></v-btn
     >
     <v-spacer></v-spacer>
 
@@ -16,7 +16,7 @@
         large
         text
         v-else
-        @click="$store.commit('alertAddress', true)"
+        @click="$store.commit('alertAddress', { value: true })"
       >
         <v-icon class="mr-3">mdi-map-marker-radius</v-icon>
         Localização
@@ -142,7 +142,7 @@ export default {
       }
     },
     openDialogAddress() {
-      this.$store.commit("alertAddress", { value: true, route: "home" });
+      this.$store.commit("alertAddress", { value: true });
       if (localStorage.getItem("acess-token")) {
         this.$store.commit("user/request", { state: "addressTabs", data: 3 });
       } else {

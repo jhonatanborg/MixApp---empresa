@@ -31,11 +31,7 @@ export default new Vuex.Store({
       state.alertSale = data;
     },
     alertAddress(state, data) {
-      if (data.route == "home") {
-        state.addressAlert = data.value;
-      } else {
-        state.addressAlert = true;
-      }
+      state.addressAlert = data.value;
     },
     ...mutationsGlobal,
   },

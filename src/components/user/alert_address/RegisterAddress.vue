@@ -13,10 +13,13 @@
           <v-col cols="12" sm="4">
             <v-text-field
               clearable
-              hide-details
               color="#765eda"
               outlined
               dense
+              :error="error"
+              :error-messages="
+                error ? 'Escreva um titulo para esse endereço' : ''
+              "
               v-model="title"
               label="Título"
               placeholder="Ex: Casa"
@@ -85,30 +88,32 @@ export default {
     },
     updateLocalAddress() {
       this.address.complement = this.complement;
-      this.address.title = this.title;
-      this.$store.commit("user/request", {
-        state: "address",
-        data: this.address,
-      });
-      this.execRequest(
-        "company/request",
-        "companies",
-        `/company/${this.address.latitude},${this.address.longitude}`,
-        "GET",
-        true
-      );
-      let location = {
-        latitude: this.address.latitude,
-        longitude: this.address.longitude,
-      };
+      if (this.title) {
+        this.address.title = this.title;
+        this.$store.commit("user/request", {
+          state: "address",
+          data: this.address,
+        });
+        this.execRequest(
+          "company/request",
+          "companies",
+          `/company/${this.address.latitude},${this.address.longitude}`,
+          "GET",
+          true
+        );
+        let location = {
+          latitude: this.address.latitude,
+          longitude: this.address.longitude,
+        };
 
-      localStorage.setItem("geolocation", JSON.stringify(location));
-      this.$store.commit("alertAddress", { value: false, route: "home" });
-      if (this.$route.path !== "/restaurants") {
-        this.$router.push("/restaurants");
-      }
-      if (localStorage.getItem("acess-token")) {
-        this.registerAddress(this.address);
+        localStorage.setItem("geolocation", JSON.stringify(location));
+        this.$store.commit("alertAddress", { value: false });
+
+        if (localStorage.getItem("acess-token")) {
+          this.registerAddress(this.address);
+        }
+      } else {
+        this.error = true;
       }
     },
     registerAddress(address) {

@@ -57,8 +57,8 @@
               </v-list-item>
               <v-list-item>
                 <v-btn block @click="logout()" outlined color="error"
-                  >Encerrar sessão 1</v-btn
-                >
+                  >Encerrar sessão
+                </v-btn>
               </v-list-item>
             </v-list>
           </div>
