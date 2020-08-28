@@ -6,7 +6,7 @@
           <div class="d-flex justify-space-between align-center">
             <div class="ml-2">
               Olá, {{ userName }}
-              <b> </b>  
+              <b> </b>
             </div>
           </div>
         </v-list-item>
@@ -18,8 +18,8 @@
             params: { userRouter: user },
           }"
         >
-          Informações de conta
-        </v-list-item>
+          Informações de conta </v-list-item
+        >;
         <v-list-item color="#765eda" :to="{ name: 'cashback' }" link>
           Cashback
         </v-list-item>
