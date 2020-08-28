@@ -100,18 +100,13 @@ const routes = [
         component: () => import("../components/user/PurchasesList.vue"),
       },
       {
-        path: "pedido/:id",
+        path: "/meus-pedidos/pedido/:id",
         name: "purchase-details",
         component: () => import("../components/user/PurchaseDetails.vue"),
       },
     ],
   },
 
-  {
-    path: "/restaurants",
-    name: "restaurants",
-    component: () => import("../views/Restaurants.vue"),
-  },
   {
     path: "/cashback",
     name: "cashback",

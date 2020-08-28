@@ -1,54 +1,56 @@
 <template>
-  <v-app-bar dark color="#ff5252" app flat id="app-bar">
-    <v-btn dense :to="'/'" :ripple="false" text
-      ><v-icon>mdi-food</v-icon><b>Emporio do caldo</b></v-btn
-    >
-    <v-spacer></v-spacer>
-
-    <div class="hidden-sm-and-down" dense>
-      <v-btn rounded text large v-if="address" @click="openDialogAddress()">
-        <v-icon class="mr-3">mdi-map-marker-radius</v-icon>
-        {{ address.street }}, {{ address.number }} - {{ address.city }}
-        <v-icon>mdi-chevron-down</v-icon>
-      </v-btn>
-      <v-btn
-        rounded
-        large
-        text
-        v-else
-        @click="$store.commit('alertAddress', { value: true })"
+  <div class="">
+    <v-app-bar dark color="#ff5252" v-if="companyName" app flat id="app-bar">
+      <v-btn dense :to="'/'" :ripple="false" text
+        ><b>{{ companyName }}</b></v-btn
       >
-        <v-icon class="mr-3">mdi-map-marker-radius</v-icon>
-        Localização
-        <v-icon>mdi-chevron-down</v-icon>
-      </v-btn>
+      <v-spacer></v-spacer>
 
-      <v-btn
-        v-if="sale.length > 0"
-        class="mr-3"
-        rounded
-        @click="$store.commit('cart/sidebar', true)"
-      >
-        <v-icon class="mr-2">mdi-basket-outline</v-icon>Sacola
-        <b class="notify">{{ sale.length }}</b>
-      </v-btn>
-    </div>
-    <div class="hidden-sm-and-down mr-3">
-      <div v-if="LoginUser">
-        <v-btn rounded large dense :to="{ name: 'session' }" text
-          >Iniciar sessão
+      <div class="hidden-sm-and-down" dense>
+        <v-btn rounded text large v-if="address" @click="openDialogAddress()">
+          <v-icon class="mr-3">mdi-map-marker-radius</v-icon>
+          {{ address.street }}, {{ address.number }} - {{ address.city }}
+          <v-icon>mdi-chevron-down</v-icon>
+        </v-btn>
+        <v-btn
+          rounded
+          large
+          text
+          v-else
+          @click="$store.commit('alertAddress', { value: true })"
+        >
+          <v-icon class="mr-3">mdi-map-marker-radius</v-icon>
+          Localização
+          <v-icon>mdi-chevron-down</v-icon>
+        </v-btn>
+
+        <v-btn
+          v-if="sale.length > 0"
+          class="mr-3"
+          rounded
+          @click="$store.commit('cart/sidebar', true)"
+        >
+          <v-icon class="mr-2">mdi-basket-outline</v-icon>Sacola
+          <b class="notify">{{ sale.length }}</b>
         </v-btn>
       </div>
-      <div v-else>
-        <MenuUser :user="user" />
+      <div class="hidden-sm-and-down mr-3">
+        <div v-if="LoginUser">
+          <v-btn rounded large dense :to="{ name: 'session' }" text
+            >Iniciar sessão
+          </v-btn>
+        </div>
+        <div v-else>
+          <MenuUser :user="user" />
+        </div>
       </div>
-    </div>
-    <div class="hidden-lg-and-up hidden-lg-only">
-      <v-icon @click="$store.commit('mobile/mobileMenu')" color="white"
-        >mdi-menu</v-icon
-      >
-    </div>
-  </v-app-bar>
+      <div class="hidden-lg-and-up hidden-lg-only">
+        <v-icon @click="$store.commit('mobile/mobileMenu')" color="white"
+          >mdi-menu</v-icon
+        >
+      </div>
+    </v-app-bar>
+  </div>
 </template>
 
 <script>
@@ -57,7 +59,6 @@ import MenuUser from "@/components/MenuUser";
 
 export default {
   name: "MenuBar",
-
   props: {
     widht: Number,
   },
@@ -99,6 +100,9 @@ export default {
     },
     sale() {
       return this.$store.state.cart.saleIdb;
+    },
+    companyName() {
+      return this.$store.state.company.company.name;
     },
   },
   watch: {

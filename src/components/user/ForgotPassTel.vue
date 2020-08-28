@@ -26,11 +26,11 @@
       </router-link>
       <div id="buttons-login">
         <v-row>
-          <v-col cols="auto" sm="6">
+          <!-- <v-col cols="auto" sm="6">
             <v-btn text color="primary" :to="{ name: 'forgot-pass' }"
               >Tente com seu e-mail</v-btn
             >
-          </v-col>
+          </v-col> -->
           <v-col cols="auto" sm="6">
             <v-btn dark depressed @click="verifyTel()" block color="#765eda"
               >Avançar

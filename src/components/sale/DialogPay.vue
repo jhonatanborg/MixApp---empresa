@@ -20,10 +20,7 @@
               Pedidos em:
             </v-list-item-subtitle>
             <v-list-item-title>
-              <router-link
-                :to="{ path: '/company/' + company.object_id }"
-                dense
-              >
+              <router-link :to="{ name: 'company' }" dense>
                 <b> {{ company.name }}</b></router-link
               >
             </v-list-item-title>
@@ -58,8 +55,10 @@
           <v-list-item-group
             v-for="(item, i) in payments"
             :key="i"
+            multiple
             color="#765eda"
             rounded
+            max="2"
             v-model="payment"
           >
             <div>
@@ -74,7 +73,7 @@
               >
                 <template v-slot:default="{ active, toggle }">
                   <v-list-item-content>
-                    <v-list-item-title>
+                    <v-list-item-title class="text-capitalize">
                       {{ pay.title }}
                     </v-list-item-title>
                   </v-list-item-content>
@@ -107,8 +106,8 @@
             ></v-text-field>
           </div>
         </div>
-        <div>
-          <div class="py-3 grey lighten-4">
+        <div class="pa-5">
+          <!-- <div class="py-3 grey lighten-4">
             <span class="mx-3">Usar cashback</span>
           </div>
           <v-list-item>
@@ -130,7 +129,7 @@
                 ></v-checkbox>
               </v-list-item-action>
             </template>
-          </v-list-item>
+          </v-list-item> -->
 
           <v-btn @click="payConfirm()" x-large color="#765eda" dark block>
             Confirmar
@@ -163,11 +162,7 @@ export default {
   }),
   computed: {
     company() {
-      localStorage.setItem(
-        "company",
-        JSON.stringify(this.$store.state.company)
-      );
-      return this.$store.state.company || {};
+      return this.$store.getters["company/getCompany"] || {};
     },
     payments() {
       return this.$store.getters["cart/getPayments"] || [];
@@ -186,22 +181,24 @@ export default {
   },
   methods: {
     payConfirm() {
-      console.log(this.payments);
+      console.log(this.payment);
       let change;
       if (this.payment) {
-        change = parseFloat(
-          this.valueChange
-            .slice(2)
-            .replace(".", "")
-            .replace(",", ".")
-        );
+        if (this.valueChange) {
+          change = parseFloat(
+            this.valueChange
+              .slice(2)
+              .replace(".", "")
+              .replace(",", ".")
+          );
+        }
       }
       if (change <= this.total && change > 0) {
         this.changeError = true;
       } else {
         this.changeError = false;
         this.$store.commit("cart/changeFor", change);
-        this.$store.commit("cart/paySelect", this.payment.id);
+        this.$store.commit("cart/paySelect", this.payment);
         this.$emit("close-pay");
       }
     },

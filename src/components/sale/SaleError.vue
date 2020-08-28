@@ -28,7 +28,7 @@
                 depressed
                 block
                 color="#765eda"
-                >Ver restaurantes disponíveis
+                >Tentar fazer outro pedido
               </v-btn>
             </v-col>
           </v-row>
@@ -57,7 +57,7 @@ export default {
         },
       });
       this.$router.push({
-        name: "restaurants",
+        name: "company",
       });
       this.$store.commit("cart/request", {
         state: "errorSale",

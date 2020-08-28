@@ -1,44 +1,40 @@
 <template>
   <div class="grey lighten-5">
     <MenuBar />
-    <div id="company" v-if="company">
+    {{ $store.state.cart.addressVerify }}
+    <div id="company" v-if="company.name">
       <v-container>
-        <ProfileDetails :company="company.company" />
-        <v-row align="center" justify="space-between">
-          <v-col cols="auto">
-            <v-chip class="pa-5" large text-color="white" color="#765eda">
-              <span class="mr-4">Mix on |</span>
-              <span>seu saldo:</span>
-              <b class="mx-3">120 pontos</b></v-chip
-            >
-          </v-col>
-          <v-col cols="auto" sm="3">
-            <v-overflow-btn
+        <div v-if="!$vuetify.breakpoint.xsOnly">
+          <ProfileDetails :company="company" />
+        </div>
+
+        <div v-else><ProfileMobile :company="company" /></div>
+        <v-row>
+          <v-col cols="12" sm="12" lg="3">
+            <!-- <v-overflow-btn
               dense
               hide-details
               class="my-0 py-0"
               color="#765eda"
-              chips
               @change="filterScroll()"
               v-model="filterItem"
               deletable-chips
-              :items="company.prodCategories"
+              :items="company.company.prodCategories"
               item-text="name"
               item-value="id"
               label="Relevância"
               target="#dropdown-example"
-            ></v-overflow-btn>
+            ></v-overflow-btn> -->
           </v-col>
-
+        </v-row>
+        <v-row align="center" justify="space-between">
           <v-col cols="auto " sm="12">
-            <ProductBar
-              :company="company"
-              :products="company.company.prodCategories"
-            />
+            <ProductBar :company="company" :products="company.prodCategories" />
           </v-col>
         </v-row>
       </v-container>
     </div>
+    <DialogAbout />
     <v-dialog
       v-model="dialogPay"
       scrollable
@@ -55,7 +51,8 @@ import ProductBar from "@/components/company/ProductBar";
 import Brands from "@/components/company/BrandsPay.vue";
 import MenuBar from "@/components/MenuBar";
 import ProfileDetails from "@/components/company/HeaderProfile";
-
+import ProfileMobile from "@/components/mobile/company/HeaderProfile";
+import DialogAbout from "@/components/company/DialogAbout.vue";
 export default {
   name: "Company",
   components: {
@@ -63,6 +60,8 @@ export default {
     Brands,
     MenuBar,
     ProfileDetails,
+    ProfileMobile,
+    DialogAbout,
   },
   beforeMount() {
     this.listDataCompany();
@@ -92,7 +91,7 @@ export default {
         "company",
         JSON.stringify(this.$store.state.company)
       );
-      return this.$store.state.company || {};
+      return this.$store.getters["company/getCompany"] || {};
     },
     categories() {
       return this.$store.getters["company/getCategories"];

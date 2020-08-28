@@ -15,7 +15,6 @@
         class="mx-0 pa-0 my-0 "
         v-if="bagStatus && address && company"
       >
-        {{ $store.state.cart.errorSale.message }}
         <div class="align-center">
           <v-list-item class="mx-0">
             <v-list-item-avatar tile>
@@ -26,10 +25,7 @@
                 Pedidos em:
               </v-list-item-subtitle>
               <v-list-item-title>
-                <router-link
-                  :to="{ path: '/company/' + company.object_id }"
-                  dense
-                >
+                <router-link :to="{ name: 'company' }" dense>
                   <b> {{ company.name }}</b></router-link
                 >
               </v-list-item-title>
@@ -57,15 +53,7 @@
                 <div class="py-2 grey lighten-4">
                   <span class="mx-3">Entregar em:</span>
                 </div>
-                <v-list-item
-                  @click="
-                    $store.commit('alertAddress', {
-                      data: { value: true, route: '' },
-                    })
-                  "
-                  link
-                  dense
-                >
+                <v-list-item @click="openDialogAddress()" link dense>
                   <v-list-item-content>
                     <v-list-item-subtitle>
                       {{ address.street }}, {{ address.number }} -
@@ -99,7 +87,10 @@
                         <b> {{ item.product_qtd }}x</b>
                         {{ item.product_name }}</v-list-item-title
                       >
-                      <v-list-item-subtitle class="green--text">
+                      <v-list-item-subtitle
+                        v-if="item.cashback_return"
+                        class="green--text"
+                      >
                         + {{ parseInt(item.cashback_return) }} pontos
                       </v-list-item-subtitle>
                     </v-list-item-content>
@@ -244,7 +235,13 @@
                         <v-list-item @click="paySelect()" link dense>
                           <v-list-item-content>
                             <v-list-item-subtitle>
-                              {{ pay.name }}
+                              <span
+                                class="text-capitalize"
+                                v-for="(item, key) in pay"
+                                :key="key"
+                              >
+                                {{ item.title }}
+                              </span>
                             </v-list-item-subtitle>
                           </v-list-item-content>
                           <v-list-item-action>
@@ -343,7 +340,7 @@ export default {
         "company",
         JSON.stringify(this.$store.state.company)
       );
-      return this.$store.state.company || {};
+      return this.$store.getters["company/getCompany"] || {};
     },
 
     sale() {
@@ -445,21 +442,17 @@ export default {
       });
     },
     sendPurchase() {
-      let VerifyCompanyAvailable;
-
-      VerifyCompanyAvailable = this.companies.find(
-        (element) => element.id === this.company.id
-      );
-      if (!VerifyCompanyAvailable) {
-        this.$store.commit("user/request", { state: "addressTabs", data: 4 });
-        this.$store.commit("alertAddress", { value: true });
-      } else {
+      let paymentsArray = [];
+      this.pay.forEach((element) => {
+        paymentsArray.push(element.id);
+      });
+      if (paymentsArray.length > 0) {
         let sale = {
           address: this.address,
           saleItems: this.sale,
           change_for: this.change ? this.change : null,
           cupom: this.cupom,
-          payment_id: this.pay.id,
+          payment_available_id: paymentsArray,
           company_id: this.company.id,
         };
 
@@ -473,12 +466,12 @@ export default {
         })
           .then((resp) => {
             this.$store.commit("user/request", {
-              state: "purchase",
-              data: resp.data,
+              state: "purchaseDetails",
+              data: resp.data[0],
             });
             this.$router.push({
-              name: "purchasedetails",
-              params: { id: resp.data.id },
+              name: "purchase-details",
+              params: { id: resp.data[0].id },
             });
             this.deleteSale();
           })
@@ -557,6 +550,14 @@ export default {
     },
     eventSale(data) {
       this.$store.commit("cart/sidebar", data);
+    },
+    openDialogAddress() {
+      this.$store.commit("alertAddress", { value: true });
+      if (localStorage.getItem("acess-token")) {
+        this.$store.commit("user/request", { state: "addressTabs", data: 3 });
+      } else {
+        this.$store.commit("user/request", { state: "addressTabs", data: 1 });
+      }
     },
   },
 };

@@ -54,7 +54,7 @@ const cart = {
     getPayments(state) {
       if (state.saleCompany) {
         const groups = [];
-        const payments = state.saleCompany.company.payments;
+        const payments = state.saleCompany.payments;
         payments.map((payment) => {
           if (!groups.find((item) => item.id === payment.payment.group.id)) {
             groups.push(payment.payment.group);

@@ -1,7 +1,6 @@
 <template>
   <v-app id="App" class="app grey lighten-5 ">
-    <!-- <MenuMobile /> -->
-
+    <MenuMobile />
     <v-main class="bar">
       <AlertAdress @close-dialog="closeDialog" />
       <SaleError />
@@ -14,6 +13,7 @@
           @click="$store.commit('cart/sidebar', true)"
           class="elevation-7"
           block
+          large
           color="#765eda"
           dark
           rounded
@@ -26,7 +26,7 @@
 </template>
 <script>
 import Sale from "@/components/sale/Sale";
-// import MenuMobile from "@/components/MenuMobile";
+import MenuMobile from "@/components/mobile/shared/MenuMobile";
 import AlertAdress from "@/components/user/alert_address/AlertAddress";
 import SaleError from "@/components/sale/SaleError";
 
@@ -36,9 +36,11 @@ export default {
     Sale,
     AlertAdress,
     SaleError,
-    // MenuMobile,
+    MenuMobile,
   },
-
+  mounted() {
+    this.getSaleIdb();
+  },
   data: () => ({
     dialogStep: null,
   }),

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-list max-height="500px" class="overflow-y-auto" two-line>
+    <v-list class="overflow-y-auto barscroll" max-height="300px" two-line>
       <v-list-item-group v-model="addressSelected">
         <template v-for="(item, i) in user.address">
           <v-divider v-if="!item" :key="`divider-${i}`"></v-divider>
@@ -98,30 +98,38 @@ export default {
         state: "address",
         data: this.addressSelected,
       });
-      let VerifyCompanyAvailable;
-      if (this.sale.length > 0) {
-        VerifyCompanyAvailable = this.companies.find(
-          (element) => element.id === this.companySale.id
-        );
-        if (!VerifyCompanyAvailable) {
-          this.$emit("error-address", 4);
-        } else {
-          this.$store.commit("alertAddress", { value: false });
-        }
-      } else {
-        this.$store.commit("alertAddress", { value: false });
-      }
 
       let location = {
         latitude: this.addressSelected.latitude,
         longitude: this.addressSelected.longitude,
       };
       localStorage.setItem("geolocation", JSON.stringify(location));
-
-      // this.$router.push("/restaurants");
+      this.$store.commit("alertAddress", { value: false });
     },
   },
 };
 </script>
 
-<style></style>
+<style>
+.barscroll::-webkit-scrollbar {
+  width: 15px;
+}
+
+.barscroll::-webkit-scrollbar-track {
+  background: #e6e6e6;
+  border-left: 1px solid #dadada;
+}
+
+.barscroll::-webkit-scrollbar-thumb {
+  background: #ef354e;
+  border: solid 3px #e6e6e6;
+  border-radius: 7px;
+}
+
+.barscroll::-webkit-scrollbar-thumb:hover {
+  background: black;
+}
+.fixed-item {
+  max-height: 300px;
+}
+</style>

@@ -9,6 +9,7 @@ const company = {
     categories: [],
     categorySelected: "Todos",
     addressVerify: false,
+    aboutCompany: false,
   }),
   getters: {
     getProducts(state) {
@@ -37,6 +38,10 @@ const company = {
         });
       });
       return categories;
+    },
+    getCompany(state) {
+      if (state.company.message) return (state.company = state.company.company);
+      return state.company;
     },
   },
 

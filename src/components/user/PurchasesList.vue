@@ -84,8 +84,8 @@ export default {
     getPurchases() {
       this.execRequest("user/request", "purchase", "/sale", "GET", true);
     },
-    setPurchase(purchase) {
-      this.$store.commit("user/setPurchase", purchase);
+    setPurchase(purchaseDetails) {
+      this.$store.commit("user/setPurchase", purchaseDetails);
     },
     convertDate(date) {
       return date

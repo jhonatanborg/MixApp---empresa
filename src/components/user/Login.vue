@@ -31,7 +31,7 @@
           label="Senha"
         ></v-text-field>
         <div class="mb-4">
-          <router-link :to="{ name: 'forgot-pass' }">
+          <router-link :to="{ name: 'forgot-pass-tel' }">
             <b>Esqueceu sua senha?</b>
           </router-link>
         </div>

@@ -2,8 +2,8 @@
   <div class="product">
     <v-card flat>
       <v-list-item three-line>
-        <v-list-item-avatar tile size="130">
-          <v-img width="80" aspect-ratio="1.1" :src="img"></v-img>
+        <v-list-item-avatar tile size="100">
+          <v-img width="50" aspect-ratio="1.1" :src="img"></v-img>
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title class="title-product" v-text="title">

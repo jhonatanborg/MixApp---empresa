@@ -6,7 +6,7 @@
       >
     </div>
     <v-card width="100%" class="elevation-0">
-      <v-list-item three-line>
+      <!-- <v-list-item three-line>
         <v-list-item-content>
           <v-list-item-title class="title-company"
             >Emporio do caldo</v-list-item-title
@@ -19,13 +19,13 @@
             <v-icon color="#00c996" size="10">mdi-circle</v-icon> pendente
           </span>
         </v-list-item-content>
-      </v-list-item>
+      </v-list-item> -->
     </v-card>
     <v-card flat class="my-5">
-      <v-alert class="ma-0" type="success"
-        ><span class="white--text font-weight-bold"
-          >Entregue com sucesso</span
-        ></v-alert
+      <v-alert class="ma-0" :color="statuspurchase(purchaseDetails.status)"
+        ><span class="white--text font-weight-bold">{{
+          purchaseDetails.status
+        }}</span></v-alert
       >
       <div class="px-3">
         <v-row justify="space-between">
@@ -90,7 +90,30 @@
         <div class="px-4 grey lighten-5">
           <v-row justify="space-between">
             <v-col cols="auto">Forma de pagamento</v-col>
-            <v-col cols="auto">Cartão de crédito</v-col>
+            <v-col cols="auto">
+              <!-- <v-list-item
+                v-for="(pay, key) in item.purchaseDetails.payments"
+                :key="key"
+                :value="pay"
+              >
+                <template v-slot:default="{ active, toggle }">
+                  <v-list-item-content>
+                    <v-list-item-title class="text-capitalize">
+                      {{ pay.title }}
+                    </v-list-item-title>
+                  </v-list-item-content>
+
+                  <v-list-item-action>
+                    <v-checkbox
+                      :input-value="active"
+                      :true-value="pay.id"
+                      color="#765eda"
+                      @click="toggle"
+                    ></v-checkbox>
+                  </v-list-item-action>
+                </template> </v-list-item
+            > -->
+            </v-col>
           </v-row>
         </div>
         <div
@@ -122,14 +145,42 @@
 <script>
 export default {
   mounted() {
-    this.getPurchases();
+    this.getPurchase();
   },
+
   computed: {
     purchaseDetails() {
       return this.$store.state.user.purchaseDetails || {};
     },
   },
+
   methods: {
+    statuspurchase(status) {
+      let statusColor;
+      switch (status) {
+        case "Pendente":
+          statusColor = "warning";
+          break;
+        case "Confirmado":
+          statusColor = "purple";
+          break;
+        case "Saiu para Entrega":
+          statusColor = "primary";
+          break;
+        case "Entregue":
+          statusColor = "green";
+          break;
+        case "Cancelado":
+          statusColor = "red";
+          break;
+        case "Finalizado":
+          statusColor = "light-green";
+          break;
+        default:
+          break;
+      }
+      return statusColor;
+    },
     convertDate(date) {
       return date
         .substr(0, 10)
@@ -149,12 +200,15 @@ export default {
         return "Grátis";
       }
     },
-    getPurchases() {
+    getPurchase() {
       this.$store.dispatch("user/request", {
         state: "purchaseDetails",
         method: "GET",
         url: `/sale/${this.$route.params.id}`,
       });
+      setTimeout(() => {
+        this.getPurchase();
+      }, 40000);
     },
   },
 };

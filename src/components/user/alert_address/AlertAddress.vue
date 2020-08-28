@@ -3,8 +3,9 @@
     :fullscreen="$vuetify.breakpoint.xsOnly"
     :value="$store.state.addressAlert"
     persistent
-    max-width="550px"
     scrollable
+    height="600px"
+    max-width="550px"
   >
     <v-card>
       <v-row no-gutters align="center" justify="space-between">
@@ -27,7 +28,8 @@
           </v-btn>
         </v-col>
       </v-row>
-      <v-window class="pa-0" v-model="addressStep">
+
+      <v-window class="pa-0 " v-model="addressStep">
         <v-window-item class="px-3 py-0" :value="1">
           <AlertStart @next-register="controlsTabs" />
         </v-window-item>
