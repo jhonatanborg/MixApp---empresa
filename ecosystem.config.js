@@ -18,7 +18,7 @@ module.exports = {
     }
   ],
   deploy: {
-    client: {
+    personal: {
       key: "~/.ssh/id_rsa",
       ssh_options: "ForwardAgent=yes",
       user: "node",
