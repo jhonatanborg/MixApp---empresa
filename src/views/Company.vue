@@ -135,7 +135,7 @@ export default {
         const payload = {
           state: "company",
           method: "get",
-          url: `/company-show/${process.env.VUE_APP_COMPANY_OBJECT_ID},${coords.latitude},${coords.longitude}`,
+          url: `/company-show/${process.env.VUE_APP_DOMAIN},${coords.latitude},${coords.longitude}`,
           insert: true,
         };
         console.log(payload.url);
@@ -148,7 +148,7 @@ export default {
         const payload = {
           state: "company",
           method: "get",
-          url: `/company-show-one/${process.env.VUE_APP_COMPANY_ID}`,
+          url: `/company-show-one/${process.env.VUE_APP_DOMAIN}`,
           insert: true,
         };
         console.log(payload.url);
