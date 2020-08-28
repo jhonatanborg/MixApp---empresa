@@ -82,7 +82,13 @@ export default {
       });
     },
     getPurchases() {
-      this.execRequest("user/request", "purchase", "/sale", "GET", true);
+      this.execRequest(
+        "user/request",
+        "purchase",
+        "/my-purchase-domain/" + process.env.VUE_APP_DOMAIN,
+        "GET",
+        true
+      );
     },
     setPurchase(purchaseDetails) {
       this.$store.commit("user/setPurchase", purchaseDetails);

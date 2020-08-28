@@ -204,7 +204,7 @@ export default {
       this.$store.dispatch("user/request", {
         state: "purchaseDetails",
         method: "GET",
-        url: `/sale/${this.$route.params.id}`,
+        url: `/my-purchase/${this.$route.params.id}`,
       });
       setTimeout(() => {
         this.getPurchase();
