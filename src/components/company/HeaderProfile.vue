@@ -6,7 +6,7 @@
           sizes="109"
           width="100%"
           aspect-ratio="1.1"
-          :src="company.logo"
+          :src="'https://server.mixentregas.com.br/' + company.logo"
         ></v-img></v-card
     ></v-col>
     <v-col>

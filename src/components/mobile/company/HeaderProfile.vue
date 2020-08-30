@@ -3,7 +3,11 @@
     <v-col>
       <v-card color="grey lighten-5" flat>
         <v-card width="100%" flat color="grey lighten-5">
-          <v-img width="120%" aspect-ratio="1.1" :src="company.logo"></v-img>
+          <v-img
+            width="120%"
+            aspect-ratio="1.1"
+            :src="'https://server.mixentregas.com.br/' + company.logo"
+          ></v-img>
         </v-card>
         <v-row justify="start">
           <v-col cols="auto" sm="7" lg="6">

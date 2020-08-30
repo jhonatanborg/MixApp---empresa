@@ -1,8 +1,8 @@
 <template>
   <div class="">
-    <v-app-bar dark color="#ff5252" v-if="companyName" app flat id="app-bar">
+    <v-app-bar dark color="#ff5252" app flat id="app-bar">
       <v-btn dense :to="'/'" :ripple="false" text
-        ><b>{{ companyName }}</b></v-btn
+        ><b>{{ company.name }}</b></v-btn
       >
       <v-spacer></v-spacer>
 
@@ -45,7 +45,13 @@
         </div>
       </div>
       <div class="hidden-lg-and-up hidden-lg-only">
-        <v-icon @click="$store.commit('mobile/mobileMenu')" color="white"
+        <v-icon
+          @click="
+            LoginUser
+              ? $router.push({ name: 'session' })
+              : $store.commit('mobile/mobileMenu')
+          "
+          color="white"
           >mdi-menu</v-icon
         >
       </div>
@@ -84,7 +90,7 @@ export default {
     deliveryFee: 15.5,
     saleItemsLocal: null,
     qtditem: " 1",
-    LoginUser: true,
+    LoginUser: false,
     MenuUser: Boolean,
     menuMobile: false,
     login: true,
@@ -101,8 +107,12 @@ export default {
     sale() {
       return this.$store.state.cart.saleIdb;
     },
-    companyName() {
-      return this.$store.state.company.company.name;
+    company() {
+      localStorage.setItem(
+        "company",
+        JSON.stringify(this.$store.state.company)
+      );
+      return this.$store.getters["company/getCompany"] || {};
     },
   },
   watch: {

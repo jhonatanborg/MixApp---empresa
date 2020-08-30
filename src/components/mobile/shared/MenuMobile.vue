@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer width="100%" :value="$store.state.mobile.mobileMenu" app>
     <v-card flat>
-      <v-list>
+      <v-list v-if="LoginUser">
         <v-list-item>
           <div class="d-flex justify-space-between align-center">
             <div class="ml-2">
@@ -47,6 +47,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      LoginUser: false,
+    };
+  },
   computed: {
     userName() {
       return this.$store.state.user.userName;
@@ -74,6 +79,20 @@ export default {
       localStorage.clear();
       this.$router.go();
     },
+  },
+  sessionUserVerify() {
+    if (localStorage.getItem("acess-token")) {
+      this.LoginUser = false;
+      const payload = {
+        state: "userProfile",
+        method: "get",
+        url: "/my-profile",
+        insert: true,
+      };
+      this.$store.dispatch("user/request", payload);
+    } else {
+      this.LoginUser = true;
+    }
   },
 };
 </script>

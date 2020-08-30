@@ -51,7 +51,7 @@
               width="100%"
               height="30%"
               aspect-ratio="1.1"
-              :src="productSelected.img"
+              :src="'https://server.mixentregas.com.br/' + productSelected.img"
             >
               <v-row justify="end">
                 <v-col cols="auto">
@@ -217,7 +217,7 @@
             <v-img
               :aspect-ratio="16 / 9"
               width="100%"
-              :src="productSelected.img"
+              :src="'https://server.mixentregas.com.br/' + productSelected.img"
             >
               <v-row justify="end">
                 <v-col cols="auto">

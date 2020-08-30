@@ -8,9 +8,7 @@
 
     <v-tabs v-model="activeTab" grow>
       <v-tab active-class="tabs__item--active ">Dados Pessoais</v-tab>
-      <v-tab active-class="tabs__item--active" :disabled="twoTab"
-        >Endereço</v-tab
-      >
+
       <v-tab active-class="tabs__item--active " :disabled="threeTab"
         >Confirmação</v-tab
       >
@@ -134,164 +132,7 @@
             </div>
           </div>
         </v-tab-item>
-        <v-tab-item>
-          <div v-if="!successEdit">
-            <div class="text-center my-3">
-              <h4>
-                <b>
-                  Informe sua localização
-                </b>
-              </h4>
-            </div>
-            <v-row>
-              <v-col cols="12" sm="9">
-                <v-text-field
-                  clearable
-                  color="#765eda"
-                  outlined
-                  dense
-                  hide-details
-                  v-model="user.address.street"
-                  label="Rua"
-                  placeholder="Ex: Rua dos papiros"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="3">
-                <v-text-field
-                  clearable
-                  hide-details
-                  color="#765eda"
-                  outlined
-                  dense
-                  v-model="user.address.number"
-                  label="Nº"
-                  placeholder="Ex: 36"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="12">
-                <v-text-field
-                  clearable
-                  color="#765eda"
-                  outlined
-                  dense
-                  hide-details
-                  v-model="user.address.district"
-                  label="Bairro"
-                  placeholder="Ex: Residencial Sul"
-                ></v-text-field>
-              </v-col>
-              <div v-if="error" class="">
-                <v-col cols="12" sm="12">
-                  <v-text-field
-                    clearable
-                    color="#765eda"
-                    outlined
-                    dense
-                    hide-details
-                    v-model="user.address.cep"
-                    label="Cep"
-                    placeholder="Ex: 78550-041"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="12" class="py-0">
-                  <v-alert close type="error" dense>
-                    Endereço não encontrado, informe o cep e cidade para
-                    aumentar a precisão
-                  </v-alert>
-                </v-col>
-              </div>
 
-              <v-col cols="12" sm="12">
-                <v-btn
-                  x-large
-                  @click="getAddressByString()"
-                  block
-                  color="#765eda"
-                >
-                  Confirmar
-                </v-btn>
-              </v-col>
-
-              <v-col cols="12" sm="12">
-                <v-btn
-                  x-large
-                  @click="backProfile()"
-                  block
-                  outlined
-                  color="error"
-                >
-                  Voltar
-                </v-btn>
-              </v-col>
-            </v-row>
-          </div>
-          <div v-if="successEdit">
-            <div class="my-3">
-              <h4>
-                <b>
-                  Confirmar Localização
-                </b>
-              </h4>
-            </div>
-            <div v-if="successEdit">
-              <v-row>
-                <v-col class="py-0">
-                  <v-alert
-                    class="my-3"
-                    :type="numberVerify ? 'success' : 'error'"
-                    dense
-                  >
-                    {{ user.address.street }}, {{ user.address.number }} -
-                    {{ user.address.district }} {{ user.address.city }},
-                    {{ user.address.state }}
-                  </v-alert>
-                </v-col></v-row
-              >
-              <v-row class="my-5">
-                <v-col class="py-0" cols="12" sm="4">
-                  <v-text-field
-                    outlined
-                    dense
-                    hide-details
-                    v-model="user.address.title"
-                    label="Titulo"
-                    placeholder="Casa"
-                    color="#765eda"
-                  ></v-text-field>
-                </v-col>
-                <v-col class="py-0">
-                  <v-text-field
-                    outlined
-                    dense
-                    hide-details
-                    v-model="user.address.complement"
-                    label="Complemento"
-                    placeholder="Ex: Esquina com a mercearia"
-                    color="#765eda"
-                  ></v-text-field>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12" sm="12">
-                  <v-btn x-large block color="#765eda" @click="nextTel()"
-                    >Confirmar</v-btn
-                  >
-                </v-col>
-                <v-col cols="12" sm="12">
-                  <v-btn
-                    large
-                    block
-                    outlined
-                    color="error"
-                    @click="successEdit = !successEdit"
-                    dark
-                    >Voltar</v-btn
-                  >
-                </v-col>
-              </v-row>
-            </div>
-          </div>
-        </v-tab-item>
         <v-tab-item>
           <div class="py-5">
             <div v-if="!sendSMS">
@@ -390,16 +231,6 @@ export default {
       confirmated_password: "0101",
       phone: "66999769452",
       birthday: null,
-      address: {
-        cep: "",
-        district: "Residencial Sul",
-        city: "",
-        state: " ",
-        street: "Rua papiros",
-        number: "36",
-        title: "",
-        complement: "",
-      },
     },
     lat: "",
     long: "",
@@ -469,6 +300,7 @@ export default {
       }
     },
     register() {
+      console.log(this.user);
       axios({
         url: process.env.VUE_APP_BASE_URL_SERVER_LOCAL + "/user",
         method: "post",

@@ -40,6 +40,7 @@ export default {
   },
   mounted() {
     this.getSaleIdb();
+    this.listDataCompany();
   },
   data: () => ({
     dialogStep: null,
@@ -79,6 +80,33 @@ export default {
     },
     closeDialog() {
       this.alertAddress = !this.alertAddress;
+    },
+    listDataCompany() {
+      if (localStorage.getItem("geolocation")) {
+        let coords = JSON.parse(localStorage.getItem("geolocation"));
+        const payload = {
+          state: "company",
+          method: "get",
+          url: `/company-show/${process.env.VUE_APP_DOMAIN},${coords.latitude},${coords.longitude}`,
+          insert: true,
+        };
+        console.log(payload.url);
+        this.execRequest("user/request", "address", "/coord", "POST", true, {
+          lat: coords.latitude,
+          long: coords.longitude,
+        });
+        this.$store.dispatch("company/request", payload);
+      } else {
+        const payload = {
+          state: "company",
+          method: "get",
+          url: `/company-show-one/${process.env.VUE_APP_DOMAIN}`,
+          insert: true,
+        };
+        console.log(payload.url);
+
+        this.$store.dispatch("company/request", payload);
+      }
     },
   },
 };
