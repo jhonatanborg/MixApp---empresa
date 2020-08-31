@@ -17,12 +17,6 @@
             <v-list>
               <v-list-item>
                 <div class="d-flex justify-space-between align-center">
-                  <v-avatar size="60">
-                    <v-img
-                      width="100%"
-                      src="https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                    ></v-img>
-                  </v-avatar>
                   <div class="ml-2">
                     Olá,
                     <b v-text="userName[0].toUpperCase() + userName.slice(1)">
