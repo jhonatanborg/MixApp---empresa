@@ -74,9 +74,9 @@ export default {
     lat: "",
     long: "",
     newAddress: {
-      street: "Rua das amendoeiras",
-      number: "1976",
-      district: "Bairro 13  de Maio",
+      street: "",
+      number: "",
+      district: "",
     },
     error: false,
     isLoading: false,
