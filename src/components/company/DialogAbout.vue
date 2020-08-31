@@ -42,12 +42,14 @@
               ><div>
                 <div><span>Horário de Funcionamento</span></div>
                 <div
-                  class=""
+                  class="my-3"
                   v-for="(item, key) in company.openingHours"
                   :key="key"
                 >
                   <span v-text="item.day"></span> <br />
-                  <span> {{ item.start }} - {{ item.end }} </span>
+                  <span>
+                    {{ item.start.substr(0, 5) }} - {{ item.end.substr(0, 5) }}
+                  </span>
                 </div>
               </div></v-col
             >

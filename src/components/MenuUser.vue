@@ -40,9 +40,9 @@
               >
                 Informações de conta
               </v-list-item>
-              <v-list-item color="#765eda" :to="{ name: 'cashback' }" link>
+              <!-- <v-list-item color="#765eda" :to="{ name: 'cashback' }" link>
                 Cashback
-              </v-list-item>
+              </v-list-item> -->
               <v-list-item color="#765eda" :to="{ name: 'address' }" link>
                 Meus Endereços
               </v-list-item>

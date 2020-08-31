@@ -86,6 +86,11 @@ const routes = [
         name: "success-forgot",
         component: () => import("../components/user/SuccessForgot.vue"),
       },
+      {
+        path: "/confirmado",
+        name: "success-process",
+        component: () => import("../components/user/SuccessProcess.vue"),
+      },
     ],
   },
   {

@@ -9,12 +9,7 @@
             </v-btn>
           </v-col>
           <v-col cols="auto">
-            <v-btn
-              @click="$router.go(-1)"
-              class="px-5"
-              color="#765eda"
-              outlined
-            >
+            <v-btn to="/" class="px-5" color="#765eda" outlined>
               Voltar
             </v-btn>
           </v-col>

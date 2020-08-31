@@ -134,7 +134,7 @@
         </v-tab-item>
 
         <v-tab-item>
-          <div class="py-5">
+          <div class="py-5 px-3">
             <div v-if="!sendSMS">
               <div class=" my-5">
                 <h4>
@@ -165,7 +165,7 @@
             </div>
             <div v-else>
               <div>
-                <div class="my-5">
+                <div class="my-5 pa-5">
                   <span>Seu telefone:</span>
                   <h3>{{ user.phone }}</h3>
                   <h4>
@@ -175,11 +175,12 @@
                   </h4>
                 </div>
                 <div>
-                  <h5>
+                  <h5 class="px-5 mb-3">
                     Enviamos o código sms em seu dispositivo. Por favor, insira
                     o código abaixo.
                   </h5>
                   <v-text-field
+                    class="px-5"
                     v-model="code_sms"
                     min-widht="100px"
                     dense
@@ -305,9 +306,15 @@ export default {
         url: process.env.VUE_APP_BASE_URL_SERVER_LOCAL + "/user",
         method: "post",
         data: this.user,
-      }).then((response) => {
-        localStorage.setItem("acess-token", response.data.user.token);
-        this.$router.go(-1);
+      }).then(() => {
+        this.$router.push({
+          name: "success-process",
+          params: {
+            title: "Cadastro realizado com sucesso",
+            message:
+              "Faça o login na sua nova conta para se conectar com o mix ",
+          },
+        });
       });
     },
     sendSms() {

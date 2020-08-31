@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer width="100%" :value="$store.state.mobile.mobileMenu" app>
     <v-card flat>
-      <v-list v-if="LoginUser">
+      <v-list>
         <v-list-item>
           <div class="d-flex justify-space-between align-center">
             <div class="ml-2">
@@ -18,11 +18,11 @@
             params: { userRouter: user },
           }"
         >
-          Informações de conta </v-list-item
-        >;
-        <v-list-item color="#765eda" :to="{ name: 'cashback' }" link>
-          Cashback
+          Informações de conta
         </v-list-item>
+        <!-- <v-list-item color="#765eda" :to="{ name: 'cashback' }" link>
+          Cashback
+        </v-list-item> -->
         <v-list-item color="#765eda" :to="{ name: 'address' }" link>
           Meus Endereços
         </v-list-item>
@@ -52,6 +52,7 @@ export default {
       LoginUser: false,
     };
   },
+
   computed: {
     userName() {
       return this.$store.state.user.userName;
@@ -79,20 +80,19 @@ export default {
       localStorage.clear();
       this.$router.go();
     },
-  },
-  sessionUserVerify() {
-    if (localStorage.getItem("acess-token")) {
-      this.LoginUser = false;
-      const payload = {
-        state: "userProfile",
-        method: "get",
-        url: "/my-profile",
-        insert: true,
-      };
-      this.$store.dispatch("user/request", payload);
-    } else {
-      this.LoginUser = true;
-    }
+    sessionUserVerify() {
+      if (localStorage.getItem("acess-token")) {
+        const payload = {
+          state: "userProfile",
+          method: "get",
+          url: "/my-profile",
+          insert: true,
+        };
+        this.$store.dispatch("user/request", payload);
+      } else {
+        this.$router.push({ name: "session" });
+      }
+    },
   },
 };
 </script>

@@ -45,15 +45,7 @@
         </div>
       </div>
       <div class="hidden-lg-and-up hidden-lg-only">
-        <v-icon
-          @click="
-            LoginUser
-              ? $router.push({ name: 'session' })
-              : $store.commit('mobile/mobileMenu')
-          "
-          color="white"
-          >mdi-menu</v-icon
-        >
+        <v-icon @click="sessionUserVerify()" color="white">mdi-menu</v-icon>
       </div>
     </v-app-bar>
   </div>
@@ -83,7 +75,7 @@ export default {
     });
     this.getLocal();
 
-    this.sessionUserVerify();
+    this.loginVerify();
   },
   data: () => ({
     shoppingCart: true,
@@ -123,7 +115,7 @@ export default {
   methods: {
     sessionUserVerify() {
       if (localStorage.getItem("acess-token")) {
-        this.LoginUser = false;
+        this.$store.commit("mobile/mobileMenu");
         const payload = {
           state: "userProfile",
           method: "get",
@@ -132,7 +124,20 @@ export default {
         };
         this.$store.dispatch("user/request", payload);
       } else {
-        this.LoginUser = true;
+        this.$router.push({ name: "session" });
+      }
+    },
+    loginVerify() {
+      if (localStorage.getItem("acess-token")) {
+        const payload = {
+          state: "userProfile",
+          method: "get",
+          url: "/my-profile",
+          insert: true,
+        };
+        this.$store.dispatch("user/request", payload);
+      } else {
+        this.LoginUser = false;
       }
     },
     execRequest(action, state, url, method, insert, data = null) {

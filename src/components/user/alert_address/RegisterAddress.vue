@@ -75,6 +75,9 @@ export default {
     address() {
       return this.$store.state.user.addressEdit;
     },
+    user() {
+      return this.$store.state.user.userProfile;
+    },
   },
   methods: {
     execRequest(action, state, url, method, insert, data = null) {

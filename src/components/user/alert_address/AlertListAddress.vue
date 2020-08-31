@@ -1,62 +1,91 @@
 <template>
   <div>
-    <v-list class="overflow-y-auto barscroll" max-height="300px" two-line>
-      <v-list-item-group v-model="addressSelected">
-        <template v-for="(item, i) in user.address">
-          <v-divider v-if="!item" :key="`divider-${i}`"></v-divider>
+    <div v-if="user.address.length > 0">
+      <v-list class="overflow-y-auto barscroll" max-height="300px" two-line>
+        <v-list-item-group v-model="addressSelected">
+          <template v-for="(item, i) in user.address">
+            <v-divider v-if="!item" :key="`divider-${i}`"></v-divider>
 
-          <v-list-item
-            v-else
-            :key="`item-${i}`"
-            :value="item"
-            active-class="deep-purple--text text--accent-4"
-          >
-            <template v-slot:default="{ active }">
-              <v-list-item-content>
-                <v-list-item-title v-text="item.title"></v-list-item-title>
-                <v-list-item-title>
-                  {{ item.street }}, {{ item.number }},
-                  {{ item.complement }}</v-list-item-title
-                >
-              </v-list-item-content>
+            <v-list-item
+              v-else
+              :key="`item-${i}`"
+              :value="item"
+              active-class="deep-purple--text text--accent-4"
+            >
+              <template v-slot:default="{ active }">
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.title"></v-list-item-title>
+                  <v-list-item-title>
+                    {{ item.street }}, {{ item.number }} - {{ item.district }}
+                    <span
+                      v-if="item.complement"
+                      v-text="' - ' + item.complement"
+                    ></span>
+                  </v-list-item-title>
+                </v-list-item-content>
 
-              <v-list-item-action>
-                <v-checkbox
-                  :input-value="active"
-                  color="deep-purple accent-4"
-                ></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-        </template>
-      </v-list-item-group>
-    </v-list>
-    <v-toolbar width="100%" flat height="80px">
-      <v-row align="justify-space-between">
-        <v-col cols="12" sm="6">
-          <v-btn
-            @click="$emit('new-address', 1)"
-            depressed
-            dense
-            block
-            color="primary"
-            >Novo endereço?</v-btn
-          >
-        </v-col>
-        <v-col cols="12" sm="6">
-          <v-btn
-            @click="updateLocalAddress()"
-            depressed
-            block
-            dark
-            dense
-            color="#765eda"
-            class="font-weight-bold"
-            >Confirmar</v-btn
-          >
-        </v-col>
-      </v-row>
-    </v-toolbar>
+                <v-list-item-action>
+                  <v-checkbox
+                    :input-value="active"
+                    color="deep-purple accent-4"
+                  ></v-checkbox>
+                </v-list-item-action>
+              </template>
+            </v-list-item>
+          </template>
+        </v-list-item-group>
+      </v-list>
+      <v-toolbar width="100%" flat height="80px">
+        <v-row align="justify-space-between">
+          <v-col cols="12" sm="6">
+            <v-btn
+              @click="$emit('new-address', 1)"
+              depressed
+              dense
+              block
+              color="primary"
+              >Novo endereço?</v-btn
+            >
+          </v-col>
+          <v-col cols="12" sm="6">
+            <v-btn
+              @click="updateLocalAddress()"
+              depressed
+              block
+              dark
+              dense
+              color="#765eda"
+              class="font-weight-bold"
+              >Confirmar</v-btn
+            >
+          </v-col>
+        </v-row>
+      </v-toolbar>
+    </div>
+    <div v-else>
+      <div class=" mx-auto">
+        <div class=" col-sm--6 text-center">
+          <h2 class="title-message-error ">
+            Cadastre aonde você quer receber seu pedido!
+          </h2>
+        </div>
+
+        <v-row justify="center">
+          <v-col cols="12" sm="6">
+            <v-btn
+              @click="$emit('new-address', 1)"
+              dark
+              large
+              depressed
+              block
+              color="#765eda"
+            >
+              Cadastrar endereço
+            </v-btn>
+          </v-col>
+        </v-row>
+      </div>
+    </div>
   </div>
 </template>
 

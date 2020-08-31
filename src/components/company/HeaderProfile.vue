@@ -24,12 +24,12 @@
         <v-row>
           <v-col cols="auto"
             ><v-chip
+              v-text="company.opened === 'S' ? 'Aberto' : 'Fechado Agora'"
               :color="company.opened === 'S' ? 'success' : 'error'"
-              v-text="company.opened === 'S' ? ' Aberto' : 'Estamos Fechado '"
             >
             </v-chip
           ></v-col>
-          <v-col v-if="company.deliveryFee" cols="auto"
+          <v-col v-if="!company.deliveryFee.length" cols="auto"
             ><v-chip outlined color="green"
               >Entrega:
               <b
