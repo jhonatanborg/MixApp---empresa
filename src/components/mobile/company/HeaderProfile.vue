@@ -37,7 +37,7 @@
                     class="mr-3"
                     :color="company.opened === 'S' ? 'success' : 'error'"
                     v-text="
-                      company.opened === 'S' ? ' Aberto' : 'Estamos Fechado'
+                      company.opened === 'S' ? ' Aberto' : 'Fechado agora'
                     "
                   >
                   </v-chip>
