@@ -35,7 +35,7 @@
         </v-btn>
       </div>
       <div class="hidden-sm-and-down mr-3">
-        <div v-if="LoginUser">
+        <div v-if="!LoginUser">
           <v-btn rounded large dense :to="{ name: 'session' }" text
             >Iniciar sessão
           </v-btn>
@@ -44,7 +44,7 @@
           <MenuUser :user="user" />
         </div>
       </div>
-      <div class="hidden-lg-and-up hidden-lg-only">
+      <div v-if="$vuetify.breakpoint.xsOnly">
         <v-icon @click="sessionUserVerify()" color="white">mdi-menu</v-icon>
       </div>
     </v-app-bar>
@@ -135,6 +135,8 @@ export default {
           url: "/my-profile",
           insert: true,
         };
+        this.LoginUser = true;
+
         this.$store.dispatch("user/request", payload);
       } else {
         this.LoginUser = false;

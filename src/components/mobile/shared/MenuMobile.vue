@@ -1,5 +1,10 @@
 <template>
-  <v-navigation-drawer width="100%" :value="$store.state.mobile.mobileMenu" app>
+  <v-navigation-drawer
+    v-if="user"
+    width="100%"
+    :value="$store.state.mobile.mobileMenu"
+    app
+  >
     <v-card flat>
       <v-list>
         <v-list-item>
