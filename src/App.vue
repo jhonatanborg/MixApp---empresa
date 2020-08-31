@@ -8,7 +8,10 @@
       <Sale />
       <router-view />
 
-      <v-layout v-if="bagStatus" class="col-sm-12 sale">
+      <v-layout
+        v-if="bagStatus && $vuetify.breakpoint.xsOnly"
+        class="col-sm-12 sale"
+      >
         <v-btn
           @click="$store.commit('cart/sidebar', true)"
           class="elevation-7"

@@ -18,7 +18,8 @@
         <div class="align-center">
           <v-list-item class="mx-0">
             <v-list-item-avatar tile>
-              <v-img :src="company.logo"> </v-img>
+              <v-img :src="'https://server.mixentregas.com.br' + company.logo">
+              </v-img>
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-subtitle>
