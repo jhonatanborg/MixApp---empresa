@@ -30,7 +30,7 @@
           ></l-marker>
         </l-map>
       </v-col>
-      <v-col class="py-0" cols="12" sm="4">
+      <v-col class="py-0" sm="4">
         <v-text-field
           hide-details
           clearable
@@ -54,7 +54,7 @@
           placeholder="Ex: Casa"
         ></v-text-field>
       </v-col>
-      <v-col class="pb-0" cols="12" sm="12">
+      <v-col class="pb-0" cols="12">
         <v-text-field
           clearable
           hide-details

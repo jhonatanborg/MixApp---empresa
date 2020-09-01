@@ -3,7 +3,6 @@
     :fullscreen="$vuetify.breakpoint.xsOnly"
     :value="$store.state.addressAlert"
     persistent
-    scrollable
     max-width="550px"
     id="map"
   >
