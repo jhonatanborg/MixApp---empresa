@@ -13,11 +13,13 @@
     "animate.css": "^4.1.0",
     "axios": "^0.19.2",
     "dexie": "^3.0.1",
+    "leaflet": "^1.6.0",
     "register-service-worker": "^1.6.2",
     "v-money": "^0.8.1",
     "vue": "^2.6.11",
     "vue-router": "^3.1.5",
     "vue-the-mask": "^0.11.1",
+    "vue2-leaflet": "^2.5.2",
     "vuetify": "^2.3.0",
     "vuex": "^3.4.0",
     "webpack": "^4.41.6"

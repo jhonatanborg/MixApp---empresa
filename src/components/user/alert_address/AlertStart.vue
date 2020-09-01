@@ -139,7 +139,7 @@ export default {
       }
     },
     showPosition(position) {
-      if (position && !localStorage.getItem("acess-token")) {
+      if (position) {
         this.execRequest("user/request", "address", "/coord", "POST", true, {
           lat: position.coords.latitude,
           long: position.coords.longitude,
@@ -148,24 +148,8 @@ export default {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         };
-        localStorage.setItem("geolocation", JSON.stringify(location));
-        this.$store.commit("alertAddress", { value: false });
-      } else if (position && localStorage.getItem("acess-token")) {
-        this.execRequest(
-          "user/request",
-          "addressEdit",
-          "/coord",
-          "POST",
-          true,
-          {
-            lat: position.coords.latitude,
-            long: position.coords.longitude,
-          }
-        );
         this.$emit("next-register", 2);
         localStorage.setItem("geolocation", JSON.stringify(location));
-      } else {
-        this.$store.commit("alertAddress", true);
       }
     },
   },

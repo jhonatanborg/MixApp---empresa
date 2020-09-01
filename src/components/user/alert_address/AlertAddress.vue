@@ -4,38 +4,30 @@
     :value="$store.state.addressAlert"
     persistent
     scrollable
-    height="600px"
     max-width="550px"
+    id="map"
   >
     <v-card>
-      <div class="mb-10 mt-5">
-        <span class="ma-5">{{ currentTitle }}</span>
+      <v-toolbar flat dense>
+        <v-toolbar-title
+          ><small>{{ currentTitle }}</small></v-toolbar-title
+        >
+        <v-spacer></v-spacer>
         <v-btn
-          icon
-          absolute
-          right
-          top
           @click="
             $store.commit('alertAddress', { value: false, route: 'home' }),
               (error = false)
           "
+          icon
+          x-small
           class="ma-5"
           outlined
           color="error"
         >
           <v-icon>mdi-close</v-icon>
         </v-btn>
-      </div>
-      <!-- <v-row class="red" no-gutters justify="space-between">
-        <v-col cols="auto" sm="4">
-       
-        </v-col>
-
-        <v-col sm="4" cols="auto" v-if="addressStep != 4">
-        
-        </v-col>
-      </v-row> -->
-      <v-window class="pa-0 " v-model="addressStep">
+      </v-toolbar>
+      <v-window touchless class="pa-0 " v-model="addressStep">
         <v-window-item class="px-3 py-0" :value="1">
           <AlertStart @next-register="controlsTabs" />
         </v-window-item>

@@ -7,7 +7,6 @@ const user = {
     address: null,
     userProfile: null,
     userName: null,
-    addressEdit: null,
     addressTabs: 1,
     purchase: null,
     purchaseDetails: null,
@@ -27,7 +26,7 @@ const user = {
       state.userProfile = data;
     },
     setAddresEdit(state, data) {
-      state.addressEdit = data;
+      state.address = data;
     },
     setUserName(state, data) {
       state.userName = data;
