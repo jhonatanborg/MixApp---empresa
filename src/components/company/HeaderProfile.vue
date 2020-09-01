@@ -29,7 +29,9 @@
             >
             </v-chip
           ></v-col>
-          <v-col v-if="!company.deliveryFee.length" cols="auto"
+          <v-col
+            v-if="company.deliveryFee && !company.deliveryFee.length"
+            cols="auto"
             ><v-chip outlined color="green"
               >Entrega:
               <b

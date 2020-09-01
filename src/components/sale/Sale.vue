@@ -190,7 +190,11 @@
                         Taxa de entrega
                       </v-list-item-subtitle>
                     </v-list-item-content>
-                    <div class="subtitle" v-text="convertMoney(15)"></div>
+                    <div
+                      v-if="company.deliveryFee"
+                      class="subtitle"
+                      v-text="convertMoney(company.deliveryFee.value)"
+                    ></div>
                   </v-list-item>
                   <v-list-item dense v-if="cupomValidate == false">
                     <v-list-item-content>

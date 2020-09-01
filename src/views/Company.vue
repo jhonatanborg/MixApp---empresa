@@ -1,7 +1,7 @@
 <template>
   <div class="grey lighten-5">
     <MenuBar />
-    {{ $store.state.cart.addressVerify }}
+
     <div id="company" v-if="company.name">
       <v-container>
         <div v-if="!$vuetify.breakpoint.xsOnly">
