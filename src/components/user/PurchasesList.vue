@@ -13,7 +13,7 @@
       <v-row justify="space-between" align="start">
         <v-col cols="auto"
           ><h4 class="number-purchase">Pedido {{ item.id }}</h4>
-          <span class="title-company">Açai no quintal</span>
+          <span class="title-company" v-text="item.company.name"></span>
           <h4 class="value-purchase" v-text="convertMoney(item.total)"></h4>
         </v-col>
         <v-col cols="auto">

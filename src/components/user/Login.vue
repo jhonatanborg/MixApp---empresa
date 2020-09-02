@@ -44,7 +44,13 @@
       </div>
       <div id="buttons-login">
         <div>
-          <v-btn dark x-large @click="login()" block color="#765eda"
+          <v-btn
+            :loading="loading"
+            dark
+            x-large
+            @click="login()"
+            block
+            color="#765eda"
             >Entrar</v-btn
           >
         </div>
@@ -67,10 +73,7 @@ import axios from "axios";
 import { Bus } from "@/plugins/Bus";
 export default {
   data: () => ({
-    windowSize: {
-      x: 0,
-      y: 0,
-    },
+    loading: false,
     user: {
       email: "",
       pass: "",
@@ -135,12 +138,15 @@ export default {
       };
     },
     login() {
+      this.loading = true;
       if (!this.user.email) {
         this.errorMail = true;
+        this.loading = false;
       }
 
       if (!this.user.pass) {
         this.errorPass = true;
+        this.loading = false;
       } else {
         axios({
           url: process.env.VUE_APP_BASE_URL_SERVER_LOCAL + "/session",
@@ -161,14 +167,17 @@ export default {
               this.$router.push({ name: "company", params: company.object_id });
             }
             Bus.$emit("success-login");
+            this.loading = false;
           })
           .catch((err) => {
             if (err.response.data[0]) {
               this.error = true;
               this.messageError = err.response.data[0].message;
+              this.loading = false;
             } else {
               this.error = true;
               this.messageError = err.response.data.message;
+              this.loading = false;
             }
           });
       }

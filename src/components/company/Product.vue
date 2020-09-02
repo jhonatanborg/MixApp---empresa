@@ -6,7 +6,7 @@
           <v-img
             width="50"
             aspect-ratio="1.1"
-            :src="'https://server.mixentregas.com.br/' + img"
+            :src="'http://192.168.0.2:3333' + img"
           ></v-img>
         </v-list-item-avatar>
         <v-list-item-content>

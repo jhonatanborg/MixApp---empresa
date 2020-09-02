@@ -132,6 +132,14 @@ export default {
         latitude: this.addressSelected.latitude,
         longitude: this.addressSelected.longitude,
       };
+      const payload = {
+        state: "company",
+        method: "get",
+        url: `/company-show/${process.env.VUE_APP_DOMAIN},${this.addressSelected.latitude},${this.addressSelected.longitude}`,
+        insert: true,
+      };
+      this.$store.dispatch("company/request", payload);
+
       localStorage.setItem("geolocation", JSON.stringify(location));
       this.$store.commit("alertAddress", { value: false });
     },

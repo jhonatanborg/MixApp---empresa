@@ -18,8 +18,7 @@
         <div class="align-center">
           <v-list-item class="mx-0">
             <v-list-item-avatar tile>
-              <v-img :src="'https://server.mixentregas.com.br' + company.logo">
-              </v-img>
+              <v-img :src="'http://192.168.0.2:3333' + company.logo"> </v-img>
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-subtitle>
@@ -134,18 +133,21 @@
                     <span class="mx-3">Adicionar cupom</span>
                   </div>
                   <div>
-                    <v-row justify="space-between" class="my-3 mx-3" no-gutters>
+                    <v-row
+                      v-if="!successCupom"
+                      justify="space-between"
+                      class="my-3 mx-3"
+                      no-gutters
+                    >
                       <v-col cols="7" sm="4" md="7">
                         <v-text-field
                           label="Insira cupom"
                           v-model="cupom"
-                          :error="cupomValidate"
-                          :error-messages="
-                            cupomValidate ? 'Cupom inválido' : ''
-                          "
+                          :error="errorCupom"
+                          :error-messages="errorCupom ? 'Cupom inválido' : ''"
                           outlined
                           dense
-                          :hide-details="!cupomValidate"
+                          :hide-details="!errorCupom"
                         ></v-text-field
                       ></v-col>
                       <v-col cols="4" sm="2" md="4">
@@ -184,19 +186,8 @@
                     </v-list-item-content>
                     <div class="subtitle" v-text="convertMoney(subTotal)"></div>
                   </v-list-item>
-                  <v-list-item dense>
-                    <v-list-item-content>
-                      <v-list-item-subtitle>
-                        Taxa de entrega
-                      </v-list-item-subtitle>
-                    </v-list-item-content>
-                    <div
-                      v-if="company.deliveryFee"
-                      class="subtitle"
-                      v-text="convertMoney(company.deliveryFee.value)"
-                    ></div>
-                  </v-list-item>
-                  <v-list-item dense v-if="cupomValidate == false">
+
+                  <v-list-item dense v-if="successCupom == true">
                     <v-list-item-content>
                       <v-list-item-subtitle>
                         Desconto
@@ -210,6 +201,18 @@
                       @click:close="removeCupom()"
                       ><span v-text="convertMoney(discount_value)"> </span
                     ></v-chip>
+                  </v-list-item>
+                  <v-list-item dense>
+                    <v-list-item-content>
+                      <v-list-item-subtitle>
+                        Taxa de entrega
+                      </v-list-item-subtitle>
+                    </v-list-item-content>
+                    <div
+                      v-if="company.deliveryFee"
+                      class="subtitle"
+                      v-text="convertMoney(company.deliveryFee.value)"
+                    ></div>
                   </v-list-item>
                   <v-list-item dense>
                     <v-list-item-content>
@@ -295,9 +298,7 @@
                   Não sabe o que comer? Centenas de delicias esperam por você!
                 </h4>
               </div>
-              <v-btn large color="#765eda" to="/restaurants" dark
-                >Ver restaurantes</v-btn
-              >
+              <v-btn large color="#765eda" to="/" dark>Veja o cardápio</v-btn>
             </div>
           </div>
         </v-card>
@@ -321,9 +322,9 @@ export default {
     step: 1,
     dialogPay: false,
     purchase: [],
-    cupomValidate: null,
+    errorCupom: false,
     cupom: null,
-    discount_value: 0,
+    discount_value: null,
     successCupom: null,
     loadingCupom: false,
   }),
@@ -343,7 +344,7 @@ export default {
     company() {
       localStorage.setItem(
         "company",
-        JSON.stringify(this.$store.state.company)
+        JSON.stringify(this.$store.getters["company/getCompany"])
       );
       return this.$store.getters["company/getCompany"] || {};
     },
@@ -367,14 +368,13 @@ export default {
     },
 
     total() {
-      let sum;
-      if (this.sale && this.company) {
-        sum = parseFloat(this.subTotal) + parseFloat(15);
+      let sum = this.subTotal;
+      if (this.company.deliveryFee) {
+        if (this.discount_value) {
+          sum = parseFloat(sum) - parseFloat(this.discount_value);
+        }
+        sum = parseFloat(sum) + parseFloat(this.company.deliveryFee.value);
       }
-      if (this.discount_value) {
-        sum = sum - this.discount_value;
-      }
-
       return sum;
     },
     address() {
@@ -447,6 +447,7 @@ export default {
       });
     },
     sendPurchase() {
+      console.log(this.cupom);
       let paymentsArray = [];
       this.pay.forEach((element) => {
         paymentsArray.push(element.id);
@@ -456,7 +457,7 @@ export default {
           address: this.address,
           saleItems: this.sale,
           change_for: this.change ? this.change : null,
-          cupom: this.cupom,
+          cupom: this.cupom + "@" + this.company.id,
           payment_available_id: paymentsArray,
           company_id: this.company.id,
         };
@@ -521,21 +522,36 @@ export default {
           },
           url:
             `${process.env.VUE_APP_BASE_URL_SERVER_LOCAL}/verify-cupom/` +
-            this.cupom,
+            this.cupom +
+            "@" +
+            this.company.id,
         })
           .then((resp) => {
-            this.discount_value = parseInt(resp.data.discount_value);
-            this.cupomValidate = false;
-            this.successCupom = true;
-            this.loadingCupom = false;
+            let cupom = resp.data;
+            if (cupom.type === "currency") {
+              this.discount_value = cupom.discount_value;
+              this.successCupom = true;
+              this.loadingCupom = false;
+            } else if (cupom.type === "percentage") {
+              this.successCupom = true;
+              this.discount_value =
+                parseFloat(cupom.discount_value / 100) *
+                parseFloat(this.subTotal);
+
+              this.loadingCupom = false;
+            }
           })
           .catch(() => {
+            this.cupom = "";
+
             this.successCupom = false;
-            this.cupomValidate = true;
+            this.errorCupom = true;
             this.loadingCupom = false;
           });
       } else {
-        this.cupomValidate = true;
+        this.errorCupom = true;
+        this.cupom = "";
+        this.successCupom = false;
 
         this.loadingCupom = false;
       }
@@ -550,7 +566,7 @@ export default {
     removeCupom() {
       this.successCupom = false;
       this.cupom = null;
-      this.cupomValidate = null;
+      this.cupomValidate = false;
       this.discount_value = null;
     },
     eventSale(data) {

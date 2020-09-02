@@ -126,7 +126,12 @@
               Preencha todos os campos obrigatórios
             </v-alert>
             <div>
-              <v-btn block x-large color="#765eda" @click="nextAddress()" large
+              <v-btn
+                :loading="loading"
+                block
+                dense
+                color="#765eda"
+                @click="nextAddress()"
                 >Avançar</v-btn
               >
             </div>
@@ -158,7 +163,12 @@
                 ></v-text-field>
               </div>
               <div>
-                <v-btn color="#765eda" block @click="sendSms()" x-large
+                <v-btn
+                  :loading="loadingConfirmCell"
+                  color="#765eda"
+                  block
+                  @click="sendSms()"
+                  dense
                   >Enviar</v-btn
                 >
               </div>
@@ -190,7 +200,13 @@
                   ></v-text-field>
                 </div>
               </div>
-              <v-btn dense block color="#765eda" @click="confirmSms()" dark
+              <v-btn
+                :loading="loadingConfirmCode"
+                dense
+                block
+                color="#765eda"
+                @click="confirmSms()"
+                dark
                 >Verificar Código</v-btn
               >
             </div>
@@ -217,6 +233,7 @@ export default {
       (v) => !!v || "Digite seu e-mail",
       (v) => /.+@.+/.test(v) || "E-mail inválido",
     ],
+    loading: false,
     msgError: "",
     nameRules: [(v) => !!v || "Digite seu nome"],
     passRules: [(v) => !!v || "Digite uma senha"],
@@ -258,6 +275,8 @@ export default {
     errorTelMessage: "",
     show1: false,
     show2: false,
+    loadingConfirmCell: false,
+    loadingConfirmCode: false,
   }),
   watch: {
     menu(val) {
@@ -271,37 +290,7 @@ export default {
       }
     },
 
-    getAddressByString() {
-      if (
-        this.user.address.street &&
-        this.user.address.number &&
-        this.user.address.district
-      ) {
-        axios({
-          method: "POST",
-          url: `${process.env.VUE_APP_BASE_URL_SERVER_LOCAL}/coord-address`,
-          data: {
-            address: `${this.user.address.street}, ${this.user.address.number},${this.user.address.district}, ${this.user.address.cep}`,
-          },
-        })
-          .then((resp) => {
-            if (resp.data.street && resp.data.number && resp.data.district) {
-              this.user.address = resp.data;
-
-              this.successEdit = true;
-            } else {
-              this.error = true;
-            }
-          })
-          .catch(() => {
-            this.error = true;
-          });
-      } else {
-        this.error = true;
-      }
-    },
     register() {
-      console.log(this.user);
       axios({
         url: process.env.VUE_APP_BASE_URL_SERVER_LOCAL + "/user",
         method: "post",
@@ -318,8 +307,10 @@ export default {
       });
     },
     sendSms() {
+      this.loadingConfirmCell = true;
       if (!this.user.phone) {
         this.errorTel = true;
+        this.loadingConfirmCell = false;
       } else {
         axios({
           url: process.env.VUE_APP_BASE_URL_SERVER_LOCAL + "/sms",
@@ -330,19 +321,23 @@ export default {
         })
           .then(() => {
             this.sendSMS = true;
+            this.loadingConfirmCell = false;
           })
           .catch((error) => {
             if (error.response.data[0]) {
               this.errorTelMessage = error.response.data[0].message;
               this.errorTel = true;
+              this.loadingConfirmCell = false;
             } else {
               this.errorTelMessage = error.response.data.message;
               this.errorTel = true;
+              this.loadingConfirmCell = false;
             }
           });
       }
     },
     confirmSms() {
+      this.loadingConfirmCode = true;
       let phone = this.user.phone.replace(/[&\\#,+()$~%.'":*?<>{}-]/g, "");
       phone = phone.split(" ").join("");
       axios({
@@ -353,18 +348,11 @@ export default {
           code_sms: this.code_sms,
         },
       }).then(() => {
-        this.sendSMS = false;
-        this.sendRegister = true;
+        this.loadingConfirmCode = false;
         this.register();
       });
     },
-    activate() {
-      if (this.windowSize.x <= 700) {
-        return "d-none";
-      } else {
-        return "col-sm-6 normal";
-      }
-    },
+
     onResize() {
       this.windowSize = {
         x: window.innerWidth,
@@ -419,28 +407,7 @@ export default {
         this.formErrorTab1 = false;
       }
     },
-    nextTel() {
-      let next = true;
-      if (
-        !this.user.address.cep ||
-        !this.user.address.district ||
-        !this.user.address.city ||
-        !this.user.address.street ||
-        !this.user.address.title
-      ) {
-        next = false;
-      }
-      if (!this.user.address.number) {
-        next = false;
-        this.isActive = true;
-      }
 
-      if (next) {
-        this.activeTab = 2;
-      } else {
-        this.formErrorTab2 = false;
-      }
-    },
     backProfile() {
       this.activeTab = 0;
     },

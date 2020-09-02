@@ -122,9 +122,6 @@ export default {
   color: #293040 !important;
 }
 
-html ::-webkit-scrollbar {
-  display: none;
-}
 .bar ::-webkit-scrollbar {
   display: contents;
 }

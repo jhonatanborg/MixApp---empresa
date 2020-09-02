@@ -19,6 +19,35 @@ const user = {
         return state.userProfile;
       }
     },
+    getPurchase(state) {
+      const subcategories = [];
+
+      if (state.purchaseDetails) {
+        const {
+          itens: [{ childItem }],
+        } = state.purchaseDetails;
+        childItem.map((item) => {
+          if (
+            !subcategories.find(
+              (item2) => item.product.subcategory.id === item2.id
+            )
+          ) {
+            subcategories.push(item.product.subcategory);
+          }
+        });
+        subcategories.map((sub) => {
+          sub.products = [];
+          childItem.map((item) => {
+            if (item.product.subcategory.id === sub.id) {
+              item.product.qtd = item.product_qtd;
+              sub.products.push(item.product);
+            }
+          });
+        });
+      }
+
+      return subcategories;
+    },
   },
 
   mutations: {

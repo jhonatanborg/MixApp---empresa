@@ -48,6 +48,7 @@
           color="#765eda"
           outlined
           dense
+          :rules="ruleTitle"
           :error="error"
           v-model="title"
           label="Título"
@@ -107,7 +108,7 @@ export default {
     addressSave: {},
     error: false,
     sheet: true,
-
+    ruleTitle: [(v) => !!v || "Digite um título"],
     complement: null,
     title: null,
     coordsMaker: [0, 0],

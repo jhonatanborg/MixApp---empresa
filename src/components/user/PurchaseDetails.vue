@@ -5,6 +5,8 @@
         >Voltar</v-btn
       >
     </div>
+    {{ purchaseDetails }}
+
     <v-card width="100%" class="elevation-0">
       <!-- <v-list-item three-line>
         <v-list-item-content>
@@ -22,7 +24,7 @@
       </v-list-item> -->
     </v-card>
     <v-card flat class="my-5">
-      <v-alert class="ma-0" :color="statuspurchase(purchaseDetails.status)"
+      <!-- <v-alert class="ma-0" :color="statuspurchase(purchaseDetails.status)"
         ><span class="white--text font-weight-bold">{{
           purchaseDetails.status
         }}</span></v-alert
@@ -37,11 +39,11 @@
         <v-row justify="space-between">
           <v-col cols="auto">Itens</v-col>
         </v-row>
-      </div>
+      </div> -->
       <v-list>
         <div>
-          <v-list-item
-            v-for="(item, key) in purchaseDetails.itens"
+          <!-- <v-list-item
+            v-for="(item, key) in purchaseDetails"
             :key="key"
             class="px-3"
           >
@@ -55,11 +57,11 @@
               class="value-product"
               v-text="convertMoney(item.product.sale_value)"
             ></v-list-item-action>
-          </v-list-item>
+          </v-list-item> -->
           <v-divider class="px-3"></v-divider>
         </div>
       </v-list>
-      <v-list>
+      <!-- <v-list>
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title>Subtotal</v-list-item-title>
@@ -86,12 +88,12 @@
             v-text="convertMoney(purchaseDetails.total)"
             class="value-product"
           ></v-list-item-action>
-        </v-list-item>
-        <div class="px-4 grey lighten-5">
-          <v-row justify="space-between">
-            <v-col cols="auto">Forma de pagamento</v-col>
-            <v-col cols="auto">
-              <!-- <v-list-item
+        </v-list-item> -->
+      <div class="px-4 grey lighten-5">
+        <v-row justify="space-between">
+          <v-col cols="auto">Forma de pagamento</v-col>
+          <v-col cols="auto">
+            <!-- <v-list-item
                 v-for="(pay, key) in item.purchaseDetails.payments"
                 :key="key"
                 :value="pay"
@@ -113,10 +115,10 @@
                   </v-list-item-action>
                 </template> </v-list-item
             > -->
-            </v-col>
-          </v-row>
-        </div>
-        <div
+          </v-col>
+        </v-row>
+      </div>
+      <!-- <div
           v-if="purchaseDetails.deliveryAddress"
           class="px-4 purchase-address"
         >
@@ -136,8 +138,8 @@
               ></span>
             </span>
           </div>
-        </div>
-      </v-list>
+        </div> -->
+      <!-- </v-list> -->
     </v-card>
   </div>
 </template>
@@ -150,7 +152,7 @@ export default {
 
   computed: {
     purchaseDetails() {
-      return this.$store.state.user.purchaseDetails || {};
+      return this.$store.getters["user/getPurchase"];
     },
   },
 
