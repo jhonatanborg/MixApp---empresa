@@ -18,7 +18,7 @@
         <div class="align-center">
           <v-list-item class="mx-0">
             <v-list-item-avatar tile>
-              <v-img :src="'http://192.168.0.2:3333' + company.logo"> </v-img>
+              <v-img :src="$store.state.server + company.logo"> </v-img>
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-subtitle>
@@ -447,52 +447,56 @@ export default {
       });
     },
     sendPurchase() {
-      console.log(this.cupom);
-      let paymentsArray = [];
-      this.pay.forEach((element) => {
-        paymentsArray.push(element.id);
-      });
-      if (paymentsArray.length > 0) {
-        let sale = {
-          address: this.address,
-          saleItems: this.sale,
-          change_for: this.change ? this.change : null,
-          cupom: this.cupom + "@" + this.company.id,
-          payment_available_id: paymentsArray,
-          company_id: this.company.id,
-        };
+      if (localStorage.getItem("acess-token")) {
+        let paymentsArray = [];
+        this.pay.forEach((element) => {
+          paymentsArray.push(element.id);
+        });
+        if (paymentsArray.length > 0) {
+          let sale = {
+            address: this.address,
+            saleItems: this.sale,
+            change_for: this.change ? this.change : null,
+            cupom: this.cupom + "@" + this.company.id,
+            payment_available_id: paymentsArray,
+            company_id: this.company.id,
+          };
 
-        axios({
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("acess-token")}`,
-          },
-          url: `${process.env.VUE_APP_BASE_URL_SERVER_LOCAL}/sale`,
-          data: sale,
-        })
-          .then((resp) => {
-            this.$store.commit("user/request", {
-              state: "purchaseDetails",
-              data: resp.data[0],
-            });
-            this.$router.push({
-              name: "purchase-details",
-              params: { id: resp.data[0].id },
-            });
-            this.deleteSale();
+          axios({
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("acess-token")}`,
+            },
+            url: `${process.env.VUE_APP_BASE_URL_SERVER_LOCAL}/sale`,
+            data: sale,
           })
-          .catch((err) => {
-            console.log(err.response.data);
-            if (err.response.data.message) {
-              this.$store.commit("cart/request", {
-                state: "errorSale",
-                data: {
-                  value: true,
-                  message: err.response.data.message,
-                },
+            .then((resp) => {
+              this.$store.commit("user/request", {
+                state: "purchaseDetails",
+                data: resp.data[0],
               });
-            }
-          });
+              this.$router.push({
+                name: "purchase-details",
+                params: { id: resp.data[0].id },
+              });
+              this.deleteSale();
+            })
+            .catch((err) => {
+              console.log(err.response.data);
+              if (err.response.data.message) {
+                this.$store.commit("cart/request", {
+                  state: "errorSale",
+                  data: {
+                    value: true,
+                    message: err.response.data.message,
+                    status: err.response.data.status,
+                  },
+                });
+              }
+            });
+        }
+      } else {
+        this.$router.push({ name: "session" });
       }
     },
     deleteSale() {

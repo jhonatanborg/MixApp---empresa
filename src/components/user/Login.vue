@@ -39,7 +39,7 @@
 
       <div>
         <v-alert dense type="error" :value="error">
-          E-mail ou senha inválidos
+          {{ messageError }}
         </v-alert>
       </div>
       <div id="buttons-login">
@@ -70,7 +70,6 @@
 
 <script>
 import axios from "axios";
-import { Bus } from "@/plugins/Bus";
 export default {
   data: () => ({
     loading: false,
@@ -166,7 +165,6 @@ export default {
               console.log(company.object_id);
               this.$router.push({ name: "company", params: company.object_id });
             }
-            Bus.$emit("success-login");
             this.loading = false;
           })
           .catch((err) => {

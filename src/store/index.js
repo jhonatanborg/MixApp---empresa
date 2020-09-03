@@ -25,6 +25,7 @@ export default new Vuex.Store({
     next: true,
     alertSale: false,
     addressAlert: false,
+    server: "http://192.168.0.2:3333",
   },
   mutations: {
     showAlert(state, data) {

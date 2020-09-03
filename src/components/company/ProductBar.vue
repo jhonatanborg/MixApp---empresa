@@ -22,15 +22,7 @@
                 sm="6"
               >
                 <a @click="modal(product)">
-                  <Product
-                    :title="product.name"
-                    :details="product.description"
-                    :value="convertMoney(product.sale_value)"
-                    :img="product.img"
-                    :action="modal"
-                    :cashbackReturn="parseInt(product.cashback_return)"
-                    :cashback_cost="parseInt(product.cashback_cost)"
-                  />
+                  <Product :product="product" />
                 </a>
               </v-col>
             </v-row>
@@ -51,7 +43,7 @@
               width="100%"
               height="30%"
               aspect-ratio="1.1"
-              :src="'http://192.168.0.2:3333' + productSelected.img"
+              :src="$store.state.server + productSelected.img"
             >
               <v-row justify="end">
                 <v-col cols="auto">
@@ -217,7 +209,7 @@
             <v-img
               :aspect-ratio="16 / 9"
               width="100%"
-              :src="'http://192.168.0.2:3333' + productSelected.img"
+              :src="$store.state.server + productSelected.img"
             >
               <v-row justify="end">
                 <v-col cols="auto">
@@ -328,8 +320,7 @@
 </template>
 
 <script>
-import Product from "@/components/company/Product";
-import { Bus } from "@/plugins/Bus";
+import Product from "@/components/company/product/Product";
 import AlertSale from "@/components/sale/AlertSale";
 
 // import ProductDialog from "@/components/ProductDialog";
@@ -496,39 +487,33 @@ export default {
       return "Opcional";
     },
     AddPurchase() {
-      if (localStorage.getItem("acess-token")) {
-        if (localStorage.getItem("geolocation")) {
-          localStorage.setItem("company", JSON.stringify(this.company));
-          let sale = {
-            product_id: this.productSelected.id,
-            product_qtd: this.quantity,
-            comment: this.comment,
-            product_name: this.productSelected.name,
-            total: this.Total,
-            sale_type_id: 1,
-            company_id: this.company.id,
-            cashback_return: this.productSelected.cashback_return,
-          };
-
-          this.insertIdb(sale);
-          this.viewDialog = false;
-        } else {
-          this.$store.commit("alertAddress", { value: true });
-          if (localStorage.getItem("acess-token")) {
-            this.$store.commit("user/request", {
-              state: "addressTabs",
-              data: 3,
-            });
-          } else {
-            this.$store.commit("user/request", {
-              state: "addressTabs",
-              data: 1,
-            });
-          }
-        }
-      } else {
+      localStorage.setItem("company", JSON.stringify(this.company));
+      let sale = {
+        product_id: this.productSelected.id,
+        product_qtd: this.quantity,
+        comment: this.comment,
+        product_name: this.productSelected.name,
+        total: this.Total,
+        sale_type_id: 1,
+        company_id: this.company.id,
+        cashback_return: this.productSelected.cashback_return,
+      };
+      if (localStorage.getItem("geolocation")) {
+        this.insertIdb(sale);
         this.viewDialog = false;
-        this.$router.push({ name: "session" });
+      } else {
+        this.$store.commit("alertAddress", { value: true });
+        if (localStorage.getItem("acess-token")) {
+          this.$store.commit("user/request", {
+            state: "addressTabs",
+            data: 3,
+          });
+        } else {
+          this.$store.commit("user/request", {
+            state: "addressTabs",
+            data: 1,
+          });
+        }
       }
     },
     AddPurchaseMount() {
@@ -563,33 +548,25 @@ export default {
         comment: this.comment,
       };
 
-      if (localStorage.getItem("acess-token")) {
-        if (localStorage.getItem("geolocation")) {
-          this.insertIdb(sale);
-          this.viewDialogMount = false;
-        } else {
-          this.$store.commit("alertAddress", { value: true });
-          if (localStorage.getItem("acess-token")) {
-            this.$store.commit("user/request", {
-              state: "addressTabs",
-              data: 3,
-            });
-          } else {
-            this.$store.commit("user/request", {
-              state: "addressTabs",
-              data: 1,
-            });
-          }
-        }
-      } else {
+      if (localStorage.getItem("geolocation")) {
+        this.insertIdb(sale);
         this.viewDialogMount = false;
-        this.$router.push({ name: "session" });
+      } else {
+        this.$store.commit("alertAddress", { value: true });
+        if (localStorage.getItem("acess-token")) {
+          this.$store.commit("user/request", {
+            state: "addressTabs",
+            data: 3,
+          });
+        } else {
+          this.$store.commit("user/request", {
+            state: "addressTabs",
+            data: 1,
+          });
+        }
       }
     },
-    eventLogin() {
-      Bus.$emit("success-login");
-      this.loginAlert = !this.loginAlert;
-    },
+
     insertIdb(item) {
       const payload = {
         idb: {

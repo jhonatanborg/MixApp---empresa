@@ -35,8 +35,7 @@
               ></v-text-field>
             </div>
             <div>
-              <v-alert dense type="error" :value="error">
-                E-mail ou senha inválidos
+              <v-alert v-text="messageError" dense type="error" :value="error">
               </v-alert>
             </div>
             <div id="buttons-login">
@@ -95,7 +94,6 @@ export default {
             this.$store.commit("user/setUser", resp.data);
             this.$store.commit("user/setUserName", resp.data.name);
             this.$router.go(-1);
-            this.$emit("success-login");
           })
           .catch((err) => {
             if (err.response.data[0]) {

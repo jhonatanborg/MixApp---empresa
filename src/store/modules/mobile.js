@@ -8,8 +8,8 @@ const mobile = {
     mobileMenu: false,
   }),
   mutations: {
-    mobileMenu(state) {
-      state.mobileMenu = !state.mobileMenu;
+    mobileMenu(state, data) {
+      state.mobileMenu = data;
     },
     ...mutationsGlobal,
   },

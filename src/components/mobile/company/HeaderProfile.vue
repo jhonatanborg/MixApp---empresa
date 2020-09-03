@@ -6,7 +6,7 @@
           <v-img
             width="120%"
             aspect-ratio="1.1"
-            :src="'http://192.168.0.2:3333' + company.logo"
+            :src="$store.state.server + company.logo"
           ></v-img>
         </v-card>
         <v-row justify="start">

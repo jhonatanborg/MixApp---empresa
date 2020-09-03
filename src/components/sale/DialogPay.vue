@@ -12,7 +12,7 @@
       <div class="align-center">
         <v-list-item class="mx-0">
           <v-list-item-avatar tile>
-            <v-img :src="'http://192.168.0.2:3333' + company.logo"> </v-img>
+            <v-img :src="$store.state.server + company.logo"> </v-img>
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-subtitle>

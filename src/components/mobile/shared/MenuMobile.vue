@@ -1,19 +1,29 @@
 <template>
   <v-navigation-drawer
+    @input="hiden"
     v-if="user"
-    width="100%"
     :value="$store.state.mobile.mobileMenu"
     app
   >
     <v-card flat>
       <v-list>
         <v-list-item>
-          <div class="d-flex justify-space-between align-center">
+          <v-list-item-content>
             <div class="ml-2">
               Olá, {{ userName }}
               <b> </b>
             </div>
-          </div>
+          </v-list-item-content>
+          <v-list-item-action>
+            <v-btn
+              @click="$store.commit('mobile/mobileMenu', false)"
+              icon
+              small
+              color="error"
+            >
+              <v-icon size="20">mdi-close</v-icon>
+            </v-btn>
+          </v-list-item-action>
         </v-list-item>
         <v-list-item
           class="mt-3"
@@ -34,12 +44,12 @@
         <v-list-item color="#765eda" :to="{ name: 'purchases' }" link>
           Meus Pedidos
         </v-list-item>
-        <v-list-item link>
+        <!-- <v-list-item link>
           Segurança
         </v-list-item>
         <v-list-item link>
           Ajuda
-        </v-list-item>
+        </v-list-item> -->
         <v-list-item>
           <v-btn block @click="logout()" outlined color="error"
             >Encerrar sessão
@@ -67,6 +77,11 @@ export default {
     },
   },
   methods: {
+    hiden(event) {
+      if (!event) {
+        this.$store.commit("mobile/mobileMenu", false);
+      } else this.$store.commit("mobile/mobileMenu", true);
+    },
     logout() {
       const payload = {
         idb: {

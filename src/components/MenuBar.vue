@@ -35,7 +35,7 @@
         </v-btn>
       </div>
       <div class="hidden-sm-and-down mr-3">
-        <div v-if="!LoginUser">
+        <div v-if="!user">
           <v-btn rounded large dense :to="{ name: 'session' }" text
             >Iniciar sessão
           </v-btn>
@@ -45,14 +45,13 @@
         </div>
       </div>
       <div v-if="$vuetify.breakpoint.xsOnly">
-        <v-icon @click="sessionUserVerify()" color="white">mdi-menu</v-icon>
+        <v-icon @click="openMenuMobile()" color="white">mdi-menu</v-icon>
       </div>
     </v-app-bar>
   </div>
 </template>
 
 <script>
-import { Bus } from "@/plugins/Bus";
 import MenuUser from "@/components/MenuUser";
 
 export default {
@@ -63,19 +62,11 @@ export default {
   components: {
     MenuUser,
   },
-  created() {
-    this.getLocal();
-    Bus.$on("success-login", () => {
-      this.sessionUserVerify();
-    });
-  },
-  mounted() {
-    Bus.$on("success-login", () => {
-      this.sessionUserVerify();
-    });
-    this.getLocal();
 
-    this.loginVerify();
+  mounted() {
+    this.sessionUserVerify();
+
+    this.getLocal();
   },
   data: () => ({
     shoppingCart: true,
@@ -115,19 +106,18 @@ export default {
   methods: {
     sessionUserVerify() {
       if (localStorage.getItem("acess-token")) {
-        this.$store.commit("mobile/mobileMenu");
         const payload = {
           state: "userProfile",
           method: "get",
           url: "/my-profile",
           insert: true,
         };
-        this.$store.dispatch("user/request", payload);
-      } else {
-        this.$router.push({ name: "session" });
+        this.$store
+          .dispatch("user/request", payload)
+          .catch(() => localStorage.removeItem("acess-token"));
       }
     },
-    loginVerify() {
+    openMenuMobile() {
       if (localStorage.getItem("acess-token")) {
         const payload = {
           state: "userProfile",
@@ -135,13 +125,16 @@ export default {
           url: "/my-profile",
           insert: true,
         };
-        this.LoginUser = true;
-
-        this.$store.dispatch("user/request", payload);
-      } else {
-        this.LoginUser = false;
-      }
+        this.$store
+          .dispatch("user/request", payload)
+          .then(() => this.$store.commit("mobile/mobileMenu", true))
+          .catch(() => {
+            localStorage.removeItem("acess-token");
+            this.$router.push({ name: "session" });
+          });
+      } else this.$router.push({ name: "session" });
     },
+
     execRequest(action, state, url, method, insert, data = null) {
       this.$store.dispatch(action, {
         state: state,

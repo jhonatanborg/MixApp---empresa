@@ -162,21 +162,19 @@ export default {
           state: "address",
           data: this.address,
         });
-        this.execRequest(
-          "company/request",
-          "companies",
-          `/company/${this.address.latitude},${this.address.longitude}`,
-          "GET",
-          true
-        );
+        const payload = {
+          state: "company",
+          method: "get",
+          url: `/company-show/${process.env.VUE_APP_DOMAIN},${this.address.latitude},${this.address.longitude}`,
+          insert: true,
+        };
         let location = {
           latitude: this.address.latitude,
           longitude: this.address.longitude,
         };
-
+        this.$store.dispatch("company/request", payload);
         localStorage.setItem("geolocation", JSON.stringify(location));
         this.$store.commit("alertAddress", { value: false });
-
         if (localStorage.getItem("acess-token")) {
           this.registerAddress(this.address);
         }
