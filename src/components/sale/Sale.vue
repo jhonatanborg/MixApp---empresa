@@ -8,7 +8,7 @@
       clipped
       height="100%"
       :width="$vuetify.breakpoint.xsOnly ? '100%' : '370px'"
-      :value="$store.state.cart.sidebar"
+      :value="$store.state.cart.sidebar.open"
     >
       <v-card
         flat
@@ -33,12 +33,17 @@
                 <a to="/home"> <b> </b></a>
               </v-list-item-title>
             </v-list-item-content>
-            <v-list-item-action v-if="step == 2">
-              <v-btn @click="step--" outlined color="primary">Voltar</v-btn>
+            <v-list-item-action v-if="step.step == 2">
+              <v-btn
+                @click="$store.commit('cart/sidebar', { open: true, step: 1 })"
+                outlined
+                color="primary"
+                >Voltar</v-btn
+              >
             </v-list-item-action>
             <v-list-item-action v-else>
               <v-btn
-                @click="$store.commit('cart/sidebar', false)"
+                @click="$store.commit('cart/sidebar', { open: false, step: 1 })"
                 outlined
                 color="error"
                 >Fechar</v-btn
@@ -48,7 +53,7 @@
         </div>
         <div>
           <div id="list-products">
-            <v-window v-model="step">
+            <v-window :value="step.step">
               <v-window-item :value="1">
                 <div class="py-2 grey lighten-4">
                   <span class="mx-3">Entregar em:</span>
@@ -122,7 +127,7 @@
                   ></div>
                 </v-list-item>
                 <div class="col-sm-12">
-                  <v-btn dense @click="step++" block color="#765eda" dark
+                  <v-btn dense @click="userVerify()" block color="#765eda" dark
                     >Confirmar</v-btn
                   >
                 </div>
@@ -319,7 +324,6 @@ export default {
     Pay,
   },
   data: () => ({
-    step: 1,
     dialogPay: false,
     purchase: [],
     errorCupom: false,
@@ -351,6 +355,9 @@ export default {
 
     sale() {
       return this.$store.state.cart.saleIdb;
+    },
+    step() {
+      return this.$store.state.cart.sidebar;
     },
     pay() {
       return this.$store.state.cart.paySelect;
@@ -396,6 +403,11 @@ export default {
     },
   },
   methods: {
+    userVerify() {
+      if (localStorage.getItem("acess-token")) {
+        this.$store.commit("cart/sidebar", { open: true, step: 2 });
+      } else this.$router.push({ name: "session" });
+    },
     closepay() {
       this.dialogPay = !this.dialogPay;
     },
@@ -452,12 +464,14 @@ export default {
         this.pay.forEach((element) => {
           paymentsArray.push(element.id);
         });
+        console.log(this.pay);
         if (paymentsArray.length > 0) {
+          delete this.address.type;
           let sale = {
             address: this.address,
             saleItems: this.sale,
             change_for: this.change ? this.change : null,
-            cupom: this.cupom + "@" + this.company.id,
+            cupom: this.cupom ? this.cupom + "@" + this.company.id : "",
             payment_available_id: paymentsArray,
             company_id: this.company.id,
           };
@@ -475,6 +489,8 @@ export default {
                 state: "purchaseDetails",
                 data: resp.data[0],
               });
+              this.cupom = "";
+              this.successCupom = null;
               this.$router.push({
                 name: "purchase-details",
                 params: { id: resp.data[0].id },
@@ -482,6 +498,9 @@ export default {
               this.deleteSale();
             })
             .catch((err) => {
+              this.cupom = "";
+              this.successCupom = null;
+
               console.log(err.response.data);
               if (err.response.data.message) {
                 this.$store.commit("cart/request", {
@@ -574,7 +593,8 @@ export default {
       this.discount_value = null;
     },
     eventSale(data) {
-      this.$store.commit("cart/sidebar", data);
+      console.log(data);
+      this.$store.commit("cart/sidebar", { open: data, step: 1 });
     },
     openDialogAddress() {
       this.$store.commit("alertAddress", { value: true });

@@ -28,7 +28,7 @@
           v-if="sale.length > 0"
           class="mr-3"
           rounded
-          @click="$store.commit('cart/sidebar', true)"
+          @click="$store.commit('cart/sidebar', { open: true, step: 1 })"
         >
           <v-icon class="mr-2">mdi-basket-outline</v-icon>Sacola
           <b class="notify">{{ sale.length }}</b>
