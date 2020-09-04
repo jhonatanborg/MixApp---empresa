@@ -14,7 +14,7 @@
           </v-list-item-title>
           <v-list-item-subtitle v-text="product.description">
           </v-list-item-subtitle>
-          <span v-text="product.sale_value"> </span>
+          <span v-text="convertMoney(product.sale_value)"> </span>
 
           <div v-if="company.cashback_type">
             <span v-if="product.cashback_cost > 0" class="mx-2"
@@ -45,6 +45,20 @@ export default {
   computed: {
     company() {
       return this.$store.getters["company/getCompany"] || {};
+    },
+  },
+  methods: {
+    convertMoney(money) {
+      if (money > 0) {
+        const toCurrency = (n, curr, LanguageFormat = undefined) =>
+          Intl.NumberFormat(LanguageFormat, {
+            style: "currency",
+            currency: curr,
+          }).format(n);
+        return toCurrency(money, "BRL");
+      } else {
+        return "Grátis";
+      }
     },
   },
 };
