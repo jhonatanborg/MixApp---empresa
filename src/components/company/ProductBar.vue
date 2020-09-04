@@ -3,7 +3,6 @@
     <div id="ProductBar">
       <div>
         <div
-          class="my-5"
           id="list-products text-uppercase"
           v-for="(item, index) in products"
           :key="index"
@@ -41,7 +40,7 @@
           <v-card>
             <v-img
               width="100%"
-              height="30%"
+              height="25%"
               aspect-ratio="1.1"
               :src="$store.state.server + productSelected.img"
             >
@@ -118,6 +117,7 @@
                 </v-row>
 
                 <v-list-item-group
+                  dense
                   v-for="item2 in item.products"
                   v-model="lista[item.name]"
                   :key="item2.id"
@@ -125,7 +125,7 @@
                   multiple
                   :max="item.limit > 0 ? item.limit : 1000"
                 >
-                  <v-list-item :value="item2">
+                  <v-list-item dense :value="item2">
                     <template v-slot:default="{ active, toggle }">
                       <v-list-item-content>
                         <v-list-item-title>
