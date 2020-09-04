@@ -1,58 +1,42 @@
 <template>
-  <v-row justify="center" v-if="company">
-    <v-col>
-      <v-card color="grey lighten-5" flat>
-        <v-card width="100%" flat color="grey lighten-5">
+  <v-row class="col-sm-12" justify="center" v-if="company">
+    <v-card color="grey lighten-5" flat>
+      <v-row justify="start" align="content-center">
+        <v-col cols="4">
           <v-img
-            width="120%"
-            aspect-ratio="1.1"
-            :src="$store.state.server + company.logo"
+            src="https://scontent.fops1-1.fna.fbcdn.net/v/t1.0-9/20799930_1574456292577856_3034606225261362567_n.png?_nc_cat=107&_nc_sid=09cbfe&_nc_ohc=NAMN85BwskwAX_q7XCT&_nc_ht=scontent.fops1-1.fna&oh=94380ef7bfc671bb22a96cc1ea0202d1&oe=5F775E09"
           ></v-img>
-        </v-card>
-        <v-row justify="start">
-          <v-col cols="auto" sm="7" lg="6">
-            <div>
-              <div class="title-company">
-                <span v-text="company.name"> </span>
-              </div>
-              <div class="">
-                <span v-text="company.primaryCategory.name"> </span>
-              </div>
-              <v-chip
-                @click="
-                  $store.commit('company/request', {
-                    state: 'aboutCompany',
-                    data: true,
-                  })
-                "
-                outlined
-              >
-                <v-icon size="20" class="mr-1  ">mdi-information</v-icon>
-                Mais informações</v-chip
-              >
-
-              <div class="my-4 d-flex">
-                <div>
-                  <v-chip
-                    class="mr-3"
-                    :color="company.opened === 'S' ? 'success' : 'error'"
-                    v-text="
-                      company.opened === 'S' ? ' Aberto' : 'Fechado agora'
-                    "
-                  >
-                  </v-chip>
-                </div>
-                <div class="">
-                  <v-chip>
-                    Espera: 50 min
-                  </v-chip>
-                </div>
-              </div>
-            </div>
-          </v-col>
-        </v-row>
-      </v-card>
-    </v-col>
+        </v-col>
+        <v-col>
+          <div class="title-company">
+            <span v-text="company.name"> </span>
+          </div>
+          <div class="">
+            <span v-text="company.primaryCategory.name"> </span>
+          </div>
+          <v-chip
+            small
+            class="mr-3 my-2"
+            @click="
+              $store.commit('company/request', {
+                state: 'aboutCompany',
+                data: true,
+              })
+            "
+            outlined
+          >
+            <v-icon size="15" class="mr-1  ">mdi-information</v-icon>
+            Sobre</v-chip
+          >
+          <v-chip
+            small
+            :color="company.opened === 'S' ? 'success' : 'error'"
+            v-text="company.opened === 'S' ? ' Aberto' : 'Fechado agora'"
+          >
+          </v-chip>
+        </v-col>
+      </v-row>
+    </v-card>
   </v-row>
 </template>
 
@@ -79,10 +63,10 @@ export default {
 
 <style>
 .title-company {
-  font-weight: normal;
-  font-size: 22px;
+  font-weight: 800;
+  font-size: 16px;
   text-align: left;
   color: #111;
-  text-transform: uppercase;
+  text-transform: initial;
 }
 </style>
