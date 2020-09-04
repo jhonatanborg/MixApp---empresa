@@ -20,12 +20,12 @@ const user = {
       }
     },
     getPurchase(state) {
-      const subcategories = [];
-
       if (state.purchaseDetails) {
         const {
           itens: [{ childItem }],
         } = state.purchaseDetails;
+        const subcategories = [];
+
         childItem.map((item) => {
           if (
             !subcategories.find(
@@ -44,8 +44,8 @@ const user = {
             }
           });
         });
+        return subcategories;
       }
-      return subcategories;
     },
   },
 
