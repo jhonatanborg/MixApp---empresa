@@ -13,7 +13,7 @@
         class="col-sm-12 sale"
       >
         <v-btn
-          @click="$store.commit('cart/sidebar', true)"
+          @click="$store.commit('cart/sidebar', { open: true, step: 1 })"
           class="elevation-7"
           block
           large
