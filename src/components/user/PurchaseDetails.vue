@@ -1,145 +1,157 @@
 <template>
-  <div id="purchase-details">
-    <div class="d-flex justify-end">
-      <v-btn color="error" :to="{ name: 'purchaseslist' }" outlined
-        >Voltar</v-btn
-      >
-    </div>
-    {{ purchaseDetails }}
-
-    <v-card width="100%" class="elevation-0">
-      <!-- <v-list-item three-line>
-        <v-list-item-content>
-          <v-list-item-title class="title-company"
-            >Emporio do caldo</v-list-item-title
-          >
-          <v-list-item-subtitle>
-            Cashback:
-          </v-list-item-subtitle>
-          <span class="cash-return"
-            >150 pontos
-            <v-icon color="#00c996" size="10">mdi-circle</v-icon> pendente
-          </span>
-        </v-list-item-content>
-      </v-list-item> -->
-    </v-card>
-    <v-card flat class="my-5">
-      <!-- <v-alert class="ma-0" :color="statuspurchase(purchaseDetails.status)"
+  <div v-if="purchaseDetails && purchaseDetails.deliveryAddress">
+    <v-card class=" card-purchase-details" tile outlined>
+      <v-alert :color="statusPurchase.status" class="ma-0"
         ><span class="white--text font-weight-bold">{{
           purchaseDetails.status
         }}</span></v-alert
       >
-      <div class="px-3">
-        <v-row justify="space-between">
-          <v-col cols="auto">Pedido {{ purchaseDetails.id }}</v-col>
-          <v-col cols="auto">Hoje 11:45</v-col>
-        </v-row>
-      </div>
-      <div class="px-3">
-        <v-row justify="space-between">
-          <v-col cols="auto">Itens</v-col>
-        </v-row>
-      </div> -->
-      <v-list>
+      <div class="d-flex justify-space-between pa-5 ">
         <div>
-          <!-- <v-list-item
-            v-for="(item, key) in purchaseDetails"
-            :key="key"
-            class="px-3"
-          >
-            <v-list-item-content>
-              <v-list-item-title
-                ><span v-text="item.product_qtd + 'X '"></span>
-                <span v-text="item.product.name"></span>
-              </v-list-item-title>
-            </v-list-item-content>
-            <v-list-item-action
-              class="value-product"
-              v-text="convertMoney(item.product.sale_value)"
-            ></v-list-item-action>
-          </v-list-item> -->
-          <v-divider class="px-3"></v-divider>
+          <div>
+            <b> Pedido {{ purchaseDetails.id }} </b>
+          </div>
         </div>
-      </v-list>
-      <!-- <v-list>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title>Subtotal</v-list-item-title>
-          </v-list-item-content>
-          <v-list-item-action
-            v-text="convertMoney(purchaseDetails.subtotal)"
-            class="value-product"
-          ></v-list-item-action>
-        </v-list-item>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title>Taxa de entrega</v-list-item-title>
-          </v-list-item-content>
-          <v-list-item-action
-            v-text="convertMoney(purchaseDetails.delivery_value)"
-            class="value-product"
-          ></v-list-item-action>
-        </v-list-item>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title>Total</v-list-item-title>
-          </v-list-item-content>
-          <v-list-item-action
-            v-text="convertMoney(purchaseDetails.total)"
-            class="value-product"
-          ></v-list-item-action>
-        </v-list-item> -->
-      <div class="px-4 grey lighten-5">
-        <v-row justify="space-between">
-          <v-col cols="auto">Forma de pagamento</v-col>
-          <v-col cols="auto">
-            <!-- <v-list-item
-                v-for="(pay, key) in item.purchaseDetails.payments"
-                :key="key"
-                :value="pay"
-              >
-                <template v-slot:default="{ active, toggle }">
-                  <v-list-item-content>
-                    <v-list-item-title class="text-capitalize">
-                      {{ pay.title }}
-                    </v-list-item-title>
-                  </v-list-item-content>
-
-                  <v-list-item-action>
-                    <v-checkbox
-                      :input-value="active"
-                      :true-value="pay.id"
-                      color="#765eda"
-                      @click="toggle"
-                    ></v-checkbox>
-                  </v-list-item-action>
-                </template> </v-list-item
-            > -->
-          </v-col>
-        </v-row>
+        <div>
+          <div class="complements">Horário: {{ time }}</div>
+        </div>
       </div>
-      <!-- <div
-          v-if="purchaseDetails.deliveryAddress"
-          class="px-4 purchase-address"
-        >
-          <div>
-            <span>Entregar em:</span>
+
+      <div
+        class="items  px-5"
+        v-for="(item, i) in purchaseDetails.itens"
+        :key="i"
+      >
+        <div>
+          <div class="mt-2 d-flex justify-space-between">
+            <div>
+              <span class="mr-3">{{ item.product_qtd }}x</span>
+              {{ item.product.name }}
+            </div>
+            <div>R$ {{ item.total }}</div>
           </div>
-          <div>
-            <span v-text="purchaseDetails.deliveryAddress.title">Casa</span>
+          <div v-if="item.comment"><span>obs: </span>{{ item.comment }}</div>
+          <div v-if="item.childItem.length > 0">
+            <v-expansion-panels flat tile>
+              <v-expansion-panel>
+                <v-expansion-panel-header>
+                  <v-row>
+                    <v-btn small color="primary" class="pa-0 " text>
+                      Detalhes
+                    </v-btn>
+                  </v-row>
+                </v-expansion-panel-header>
+                <v-expansion-panel-content
+                  v-for="(subcategory, i) in subcategories"
+                  :key="i"
+                  class="complements"
+                >
+                  <div>
+                    <h3>{{ subcategory.name }}</h3>
+                  </div>
+                  <div
+                    v-for="child in subcategory.products"
+                    class="d-flex justify-space-between"
+                    :key="child.id"
+                  >
+                    <div>{{ child.qtd }}x {{ child.name }}</div>
+                    <div>
+                      R$
+                      {{ parseFloat(child.sale_value * child.qtd).toFixed(2) }}
+                    </div>
+                  </div>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
           </div>
-          <div>
-            <span>
-              {{ purchaseDetails.deliveryAddress.street }},
-              {{ purchaseDetails.deliveryAddress.number }}
-              <span
-                v-if="purchaseDetails.deliveryAddress.complement"
-                v-text="', ' + purchaseDetails.deliveryAddress.complement"
-              ></span>
-            </span>
+        </div>
+      </div>
+
+      <v-divider></v-divider>
+
+      <div class="my-5 pa-5" id="address">
+        <div>
+          <div class="font-weight-bold">Entregar em</div>
+        </div>
+        <div>
+          <v-list-item-title>
+            {{ purchaseDetails.deliveryAddress.title }}</v-list-item-title
+          >
+          <div class="subheader ">
+            {{ purchaseDetails.deliveryAddress.district }},
+            {{ purchaseDetails.deliveryAddress.street }}, nº
+            {{ purchaseDetails.deliveryAddress.number }}
+            <span v-if="purchaseDetails.deliveryAddress.complement"
+              >, {{ purchaseDetails.deliveryAddress.complement }}</span
+            >
           </div>
-        </div> -->
-      <!-- </v-list> -->
+        </div>
+      </div>
+      <div class="font-weight-bold my-5 pa-5">
+        <v-divider></v-divider>
+        <div class="no-focus">
+          <div class="my-5 d-flex justify-space-between">
+            <div>Subtotal</div>
+            <v-chip>
+              R$
+              {{ parseFloat(purchaseDetails.subtotal).toFixed(2) }}
+            </v-chip>
+          </div>
+          <v-divider></v-divider>
+          <div
+            v-if="purchaseDetails.userCupom"
+            class="my-5 d-flex justify-space-between"
+          >
+            <div>Cupom: {{ purchaseDetails.userCupom.cupom.name }}</div>
+            <v-chip color="red" class="white--text">
+              - R$
+              {{
+                purchaseDetails.userCupom.cupom.type === "percentage"
+                  ? (
+                      parseFloat(purchaseDetails.subtotal) *
+                      parseFloat(
+                        purchaseDetails.userCupom.cupom.discount_value / 100
+                      ).toFixed(2)
+                    ).toFixed(2)
+                  : ""
+              }}
+            </v-chip>
+          </div>
+          <v-divider v-if="purchaseDetails.cupom"></v-divider>
+          <div class="my-5 d-flex justify-space-between">
+            <div>Taxa de entrega</div>
+            <v-chip color="green" class="white--text">
+              + R$ {{ purchaseDetails.delivery_value }}
+            </v-chip>
+          </div>
+          <v-divider></v-divider>
+
+          <div class="my-5 d-flex justify-space-between">
+            <div>Total</div>
+            <v-chip color="primary">R$ {{ purchaseDetails.total }}</v-chip>
+          </div>
+          <v-divider></v-divider>
+          <div class="my-5">
+            <div class="no-focus">Pagamento em</div>
+            <v-row
+              no-gutters
+              v-for="payments in purchaseDetails.payments"
+              :key="payments.id"
+            >
+              <v-col class="text-capitalize" cols="auto">
+                <div>
+                  {{ payments.payment.group.title }} -
+                  {{ payments.payment.title }}
+                </div>
+              </v-col>
+            </v-row>
+            <div v-if="purchaseDetails.change_for > 0" class="no-focus">
+              <div>troco para: R$ {{ purchaseDetails.change_for }}</div>
+              <div>troco: R$ {{ purchaseDetails.change }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </v-card>
   </div>
 </template>
@@ -149,40 +161,56 @@ export default {
   mounted() {
     this.getPurchase();
   },
-
   computed: {
     purchaseDetails() {
+      return this.$store.state.user.purchaseDetails || {};
+    },
+    subcategories() {
       return this.$store.getters["user/getPurchase"];
     },
-  },
-
-  methods: {
-    statuspurchase(status) {
-      let statusColor;
-      switch (status) {
+    time() {
+      return new Date(this.purchaseDetails.created_at).toLocaleTimeString();
+    },
+    statusPurchase() {
+      let status;
+      let action;
+      let statusUpdate;
+      switch (this.purchaseDetails.status) {
         case "Pendente":
-          statusColor = "warning";
+          status = "warning";
+
+          statusUpdate = "Confirmado";
           break;
         case "Confirmado":
-          statusColor = "purple";
+          status = "purple";
+
+          statusUpdate = "Saiu para Entrega";
           break;
         case "Saiu para Entrega":
-          statusColor = "primary";
+          status = "primary";
+
+          statusUpdate = "Entregue";
           break;
         case "Entregue":
-          statusColor = "green";
+          status = "green";
+
+          statusUpdate = "Finalizado";
           break;
         case "Cancelado":
-          statusColor = "red";
+          status = "red";
+          action = "Pedido Cancelado";
           break;
         case "Finalizado":
-          statusColor = "light-green";
+          status = "light-green";
+          action = null;
           break;
         default:
           break;
       }
-      return statusColor;
+      return { status, action, statusUpdate };
     },
+  },
+  methods: {
     convertDate(date) {
       return date
         .substr(0, 10)
@@ -206,7 +234,7 @@ export default {
       this.$store.dispatch("user/request", {
         state: "purchaseDetails",
         method: "GET",
-        url: `/my-purchase/${this.$route.params.id}`,
+        url: `/sale/${this.$route.params.id}`,
       });
       setTimeout(() => {
         this.getPurchase();
