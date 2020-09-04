@@ -3,8 +3,8 @@
     :fullscreen="$vuetify.breakpoint.xsOnly"
     :value="$store.state.addressAlert"
     persistent
+    scrollable
     max-width="550px"
-    id="map"
   >
     <v-card>
       <v-toolbar flat dense>
@@ -31,7 +31,7 @@
           <AlertStart @next-register="controlsTabs" />
         </v-window-item>
         <v-window-item class="px-3 py-0" :value="2">
-          <RegisterAddress @return="controlsTabs" />
+          <MapAddress @confirm-address="controlsTabs" />
         </v-window-item>
         <v-window-item class="pa-0" :value="3">
           <AlertListAddress
@@ -42,6 +42,9 @@
         <v-window-item class=" py-0" :value="4">
           <AlertErrorAddress @return-list="controlsTabs" />
         </v-window-item>
+        <v-window-item class=" py-0" :value="5">
+          <AlertConfirmAddress @return-map="controlsTabs" />
+        </v-window-item>
       </v-window>
     </v-card>
   </v-dialog>
@@ -49,16 +52,18 @@
 
 <script>
 import AlertStart from "@/components/user/alert_address/AlertStart.vue";
-import RegisterAddress from "@/components/user/alert_address/RegisterAddress.vue";
+import MapAddress from "@/components/user/alert_address/MapAddress.vue";
 import AlertListAddress from "@/components/user/alert_address/AlertListAddress.vue";
 import AlertErrorAddress from "@/components/user/alert_address/AlertErrorAddress.vue";
+import AlertConfirmAddress from "@/components/user/alert_address/AlertConfirmAddress.vue";
 
 export default {
   components: {
     AlertStart,
-    RegisterAddress,
+    MapAddress,
     AlertListAddress,
     AlertErrorAddress,
+    AlertConfirmAddress,
   },
 
   data: () => ({}),
@@ -71,6 +76,8 @@ export default {
           return "Entregar em:";
         case 3:
           return "Seus endereços";
+        case 5:
+          return "Confirme o endereço de entrega";
         default:
           return "";
       }
