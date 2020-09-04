@@ -169,7 +169,8 @@ export default {
     returnMoney() {
       let change;
       if (this.payment) {
-        if (this.payment.title === "dinheiro") {
+        const found = this.payment.find((item) => item.title === "dinheiro");
+        if (found) {
           change = true;
         } else {
           change = false;
