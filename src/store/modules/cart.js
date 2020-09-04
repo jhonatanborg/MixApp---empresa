@@ -8,7 +8,10 @@ const cart = {
     shoppingCart: false,
     saleEmpty: true,
     saleCompany: null,
-    sidebar: false,
+    sidebar: {
+      open: false,
+      step: 1,
+    },
     quantitySale: null,
     saleMode: null,
     paySelect: null,
