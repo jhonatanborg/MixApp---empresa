@@ -1,8 +1,8 @@
 <template>
   <div>
     <div v-if="user.address.length > 0">
-      <v-list class="overflow-y-auto barscroll" max-height="300px" two-line>
-        <v-list-item-group v-model="addressSelected">
+      <v-list class="overflow-y-auto barscroll" max-height="500px" two-line>
+        <v-list-item-group dense v-model="addressSelected">
           <template v-for="(item, i) in user.address">
             <v-divider v-if="!item" :key="`divider-${i}`"></v-divider>
 
@@ -165,6 +165,7 @@ export default {
 
 .barscroll::-webkit-scrollbar-thumb:hover {
   background: black;
+  -webkit-overflow-scrolling: touch;
 }
 .fixed-item {
   max-height: 300px;
