@@ -60,7 +60,7 @@
             </v-img>
 
             <v-card-title>
-              <v-row justify="space-between" align="center">
+              <v-row justify="space-between">
                 <v-col cols="auto">
                   <div class="title-product mr-3">
                     <span>{{ productSelected.name }}</span>
