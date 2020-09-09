@@ -66,9 +66,8 @@ export default {
     coordsMaker: [0, 0],
     zoomIsUpdating: false,
     markerIcon: L.icon({
-      iconUrl:
-        "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png",
-      iconSize: [32, 37],
+      iconUrl: "https://i.imgur.com/CKRDqm1.png",
+      iconSize: [40, 40],
       iconAnchor: [16, 37],
     }),
     zoom: 17,

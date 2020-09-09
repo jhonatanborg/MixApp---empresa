@@ -111,7 +111,7 @@
 </template>
 
 <script>
-import MenuBar from "@/components/MenuBar";
+import MenuBar from "@/components/shared/MenuBar";
 
 export default {
   components: {

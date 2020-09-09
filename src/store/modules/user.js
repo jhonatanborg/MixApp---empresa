@@ -10,6 +10,8 @@ const user = {
     addressTabs: 1,
     purchase: null,
     purchaseDetails: null,
+    editAddress: "",
+    dialogAddress: true,
   }),
   getters: {
     getUser(state) {
@@ -53,8 +55,9 @@ const user = {
     setUser(state, data) {
       state.userProfile = data;
     },
-    setAddresEdit(state, data) {
-      state.address = data;
+    setAddressEdit(state, data) {
+      state.editAddress = data.address;
+      state.dialogAddress = data.dialog;
     },
     setUserName(state, data) {
       state.userName = data;

@@ -36,7 +36,7 @@
         </v-list-item-group>
       </v-list>
       <v-toolbar width="100%" flat height="80px">
-        <v-row align="justify-space-between">
+        <v-row>
           <v-col cols="12" sm="6">
             <v-btn
               @click="$emit('new-address', 1)"

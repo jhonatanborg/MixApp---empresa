@@ -11,7 +11,7 @@
         <div v-else><ProfileMobile :company="company" /></div>
         <v-row>
           <v-col cols="12" sm="12" lg="3">
-            <!-- <v-overflow-btn
+            <v-overflow-btn
               dense
               hide-details
               class="my-0 py-0"
@@ -19,12 +19,12 @@
               @change="filterScroll()"
               v-model="filterItem"
               deletable-chips
-              :items="company.company.prodCategories"
+              :items="company.prodCategories"
               item-text="name"
               item-value="id"
               label="Relevância"
               target="#dropdown-example"
-            ></v-overflow-btn> -->
+            ></v-overflow-btn>
           </v-col>
         </v-row>
         <v-row align="center" justify="space-between">
@@ -49,7 +49,7 @@
 <script>
 import ProductBar from "@/components/company/ProductBar";
 import Brands from "@/components/company/BrandsPay.vue";
-import MenuBar from "@/components/MenuBar";
+import MenuBar from "@/components/shared/MenuBar";
 import ProfileDetails from "@/components/company/HeaderProfile";
 import ProfileMobile from "@/components/mobile/company/HeaderProfile";
 import DialogAbout from "@/components/company/DialogAbout.vue";
