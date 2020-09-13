@@ -60,9 +60,19 @@ const routes = [
         component: () => import("../components/user/session/Login.vue"),
       },
       {
+        path: "/cadastro-tipo",
+        name: "register-type",
+        component: () => import("../components/user/session/RegisterType.vue"),
+      },
+      {
         path: "/cadastro",
         name: "register",
         component: () => import("../components/user/session/Register.vue"),
+      },
+      {
+        path: "/cadastro-email",
+        name: "register-email",
+        component: () => import("../components/user/session/RegisterEmail.vue"),
       },
       {
         path: "/resetar-senha",
@@ -78,6 +88,12 @@ const routes = [
         path: "/confimarcao/",
         name: "code-verify",
         component: () => import("../components/user/session/CodeVerify.vue"),
+      },
+      {
+        path: "/confirmar-cadastro/",
+        name: "confirm-register",
+        component: () =>
+          import("../components/user/session/ConfirmRegister.vue"),
       },
       {
         path: "/nova-senha",

@@ -19,14 +19,25 @@
       </div>
 
       <div>
+        <v-text-field
+          color="#765eda"
+          v-model="user.login"
+          outlined
+          :rules="nameRules"
+          label="E-mail"
+          :error="errors.login"
+          :error-messages="errors.login ? 'O e-mail é obrigatório.' : ''"
+        ></v-text-field>
+      </div>
+      <div>
         <vue-tel-input-vuetify
           outlined
-          :error="errors.login"
+          :error="errors.phone"
           :placeholder="''"
           :label="'Digite seu telefone'"
           :rules="telRules"
-          :error-messages="errors.login ? 'O login é obrigatório.' : ''"
-          v-model="user.login"
+          :error-messages="errors.phone ? 'O telefone é obrigatório.' : ''"
+          v-model="user.phone"
         ></vue-tel-input-vuetify>
       </div>
       <div class>
@@ -78,6 +89,7 @@ export default {
     user: {
       name: null,
       login: null,
+      phone: null,
       password: null,
     },
     errors: {
@@ -96,13 +108,21 @@ export default {
   methods: {
     validForm() {
       let valid;
-      if (this.user.name && this.user.login && this.user.password) {
+      if (
+        this.user.name &&
+        this.user.login &&
+        this.user.password &&
+        this.user.phone
+      ) {
         valid = true;
       }
       if (!this.user.name) {
         this.errors.name = true;
         valid = false;
-        console.log("resp");
+      }
+      if (!this.user.phone) {
+        this.errors.phone = true;
+        valid = false;
       }
       if (!this.user.login) {
         this.errors.login = true;

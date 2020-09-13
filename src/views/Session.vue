@@ -14,7 +14,7 @@
             </v-btn>
           </v-col>
         </v-row>
-        <v-row justify="center" no-gutters>
+        <v-row justify="center" align="center" no-gutters>
           <v-col cols="12" sm="6">
             <router-view></router-view>
           </v-col>

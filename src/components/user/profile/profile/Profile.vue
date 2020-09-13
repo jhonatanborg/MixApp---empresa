@@ -36,14 +36,6 @@
           </v-list-item>
           <v-divider></v-divider>
 
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-subtitle>Data de nascimento</v-list-item-subtitle>
-              <v-list-item-title
-                v-text="formatBirthday(user.birthday)"
-              ></v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
           <v-divider></v-divider>
 
           <v-list-item>

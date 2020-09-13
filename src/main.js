@@ -9,10 +9,16 @@ import VueTheMask from "vue-the-mask";
 import store from "./store";
 import money from "v-money";
 import "animate.css";
+import VueTelInputVuetify from "vue-tel-input-vuetify/lib";
+
+Vue.use(VueTelInputVuetify, {
+  vuetify,
+});
 import { LMap, LTileLayer, LMarker, LControl } from "vue2-leaflet";
 import "leaflet";
 Vue.prototype.$bus = new Vue({});
 Vue.use(VueTheMask);
+
 Vue.use(money, { precision: 2 });
 Vue.component("l-map", LMap);
 Vue.component("l-tile-layer", LTileLayer);

@@ -109,7 +109,7 @@ export default {
         const payload = {
           state: "userProfile",
           method: "get",
-          url: "/my-profile",
+          url: "/my-profile-client",
           insert: true,
         };
         this.$store
@@ -122,7 +122,7 @@ export default {
         const payload = {
           state: "userProfile",
           method: "get",
-          url: "/my-profile",
+          url: "/my-profile-client",
           insert: true,
         };
         this.$store
