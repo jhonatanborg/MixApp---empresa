@@ -1,20 +1,15 @@
 <template>
-  <div class="col-sm-6 mx-auto"><Address :user="user" /> <MenuBar /></div>
+  <div class="col-sm-6 mx-auto"><Address /> <MenuBar /></div>
 </template>
 
 <script>
-import Address from "@/components/user/Address";
-import MenuBar from "@/components/MenuBar";
+import Address from "@/components/user/profile/address/Address";
+import MenuBar from "@/components/shared/MenuBar";
 
 export default {
   components: {
     Address,
     MenuBar,
-  },
-  computed: {
-    user() {
-      return this.$store.getters["user/getUser"];
-    },
   },
 };
 </script>

@@ -21,6 +21,7 @@
             label="E-mail"
             outlined
             dense
+            disabled
             v-model="user.email"
           ></v-text-field>
         </div>
@@ -42,12 +43,18 @@
             v-model="user.phone"
           ></v-text-field>
         </div>
-
-        <div class="subtitle-large">
-          <v-btn @click="changeUser()" large block color="#765eda" dark
-            >Salvar 1</v-btn
+        <v-row>
+          <v-col>
+            <v-btn :to="{ name: 'profile' }" large color="error" outlined
+              >Cancelar</v-btn
+            ></v-col
           >
-        </div>
+          <v-col>
+            <v-btn @click="changeUser()" large block color="#765eda" dark
+              >Salvar
+            </v-btn>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </div>

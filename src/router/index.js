@@ -25,17 +25,20 @@ const routes = [
       {
         path: "/",
         name: "profile",
-        component: () => import("../components/user/Profile.vue"),
+        component: () =>
+          import("../components/user/profile/profile/Profile.vue"),
       },
       {
         path: "minha-conta/alterar-perfil/",
         name: "change-user",
-        component: () => import("../components/user/ChangeUser.vue"),
+        component: () =>
+          import("../components/user/profile/profile/ChangeUser.vue"),
       },
       {
         path: "/minha-conta/alterar-senha/",
         name: "change-pass",
-        component: () => import("../components/user/ChangePass.vue"),
+        component: () =>
+          import("../components/user/profile/profile/ChangePass.vue"),
       },
     ],
   },
@@ -54,42 +57,59 @@ const routes = [
       {
         path: "",
         name: "login",
-        component: () => import("../components/user/Login.vue"),
+        component: () => import("../components/user/session/Login.vue"),
+      },
+      {
+        path: "/cadastro-tipo",
+        name: "register-type",
+        component: () => import("../components/user/session/RegisterType.vue"),
       },
       {
         path: "/cadastro",
         name: "register",
-        component: () => import("../components/user/Register.vue"),
+        component: () => import("../components/user/session/Register.vue"),
+      },
+      {
+        path: "/cadastro-email",
+        name: "register-email",
+        component: () => import("../components/user/session/RegisterEmail.vue"),
       },
       {
         path: "/resetar-senha",
         name: "forgot-pass",
-        component: () => import("../components/user/ForgotPass.vue"),
+        component: () => import("../components/user/session/ForgotPass.vue"),
       },
       {
         path: "/reseta-senha/tel",
         name: "forgot-pass-tel",
-        component: () => import("../components/user/ForgotPassTel.vue"),
+        component: () => import("../components/user/session/ForgotPassTel.vue"),
       },
       {
         path: "/confimarcao/",
         name: "code-verify",
-        component: () => import("../components/user/CodeVerify.vue"),
+        component: () => import("../components/user/session/CodeVerify.vue"),
+      },
+      {
+        path: "/confirmar-cadastro/",
+        name: "confirm-register",
+        component: () =>
+          import("../components/user/session/ConfirmRegister.vue"),
       },
       {
         path: "/nova-senha",
         name: "new-password",
-        component: () => import("../components/user/NewPassword.vue"),
+        component: () => import("../components/user/session/NewPassword.vue"),
       },
       {
         path: "/senha-alterada",
         name: "success-forgot",
-        component: () => import("../components/user/SuccessForgot.vue"),
+        component: () => import("../components/user/session/SuccessForgot.vue"),
       },
       {
         path: "/confirmado",
         name: "success-process",
-        component: () => import("../components/user/SuccessProcess.vue"),
+        component: () =>
+          import("../components/user/session/SuccessProcess.vue"),
       },
     ],
   },
@@ -102,12 +122,14 @@ const routes = [
       {
         path: "/",
         name: "purchaseslist",
-        component: () => import("../components/user/PurchasesList.vue"),
+        component: () =>
+          import("../components/user/purchase/PurchasesList.vue"),
       },
       {
         path: "/meus-pedidos/pedido/:id",
         name: "purchase-details",
-        component: () => import("../components/user/PurchaseDetails.vue"),
+        component: () =>
+          import("../components/user/purchase/PurchaseDetails.vue"),
       },
     ],
   },

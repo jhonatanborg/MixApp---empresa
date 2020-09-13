@@ -49,12 +49,7 @@
       :dialogAddress="viewDialogNewAddress"
       :closeDialog="closeDialog"
     />
-    <DialogEditAdress
-      :idAddress="idAddress"
-      :address="addressEdit"
-      :viewDialogAddress="viewDialogAddress"
-      :closeDialog="this.closeDialog"
-    />
+    <DialogEditAddress />
     <DialogDeleteAddress
       :closeDialog="this.closeDialog"
       :userAddress="addressEdit"
@@ -64,22 +59,23 @@
 </template>
 
 <script>
-import DialogEditAdress from "@/components/DialogAddress";
-import DialogNewAddress from "@/components/DialogNewAdress";
-import DialogDeleteAddress from "@/components/DeleteAddress";
+import DialogEditAddress from "@/components/user/profile/address/DialogAddress";
+import DialogNewAddress from "@/components/user/profile/address/DialogNewAdress";
+import DialogDeleteAddress from "@/components/user/profile/address/DeleteAddress";
 
 export default {
-  props: {
-    user: Object,
-  },
   components: {
-    DialogEditAdress,
+    DialogEditAddress,
     DialogNewAddress,
     DialogDeleteAddress,
   },
+  computed: {
+    user() {
+      return this.$store.state.user.userProfile || {};
+    },
+  },
 
   data: () => ({
-    viewDialogAddress: null,
     addressEdit: null,
     modalEdit: "",
     idAddress: null,
@@ -89,9 +85,10 @@ export default {
 
   methods: {
     editAddress(key, item) {
-      this.viewDialogAddress = true;
-      this.addressEdit = item;
-      this.idAddress = item.id;
+      this.$store.commit("user/setAddressEdit", {
+        address: item,
+        dialog: true,
+      });
     },
     closeDialog() {
       this.viewDialogAddress = false;

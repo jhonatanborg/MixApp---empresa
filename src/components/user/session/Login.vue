@@ -10,12 +10,9 @@
         <v-text-field
           outlined
           autocomplete="new-password"
-          v-model="user.email"
+          v-model="user.login"
           :error="errorMail"
-          :error-messages="
-            errorMail ? 'Preencha esse campo com um e-mail válido' : ''
-          "
-          label="E-mail"
+          label="E-mail ou telefone"
         ></v-text-field>
       </div>
       <div>
@@ -58,7 +55,7 @@
           <span>Ainda não possui uma conta </span>
           <br />
           <b
-            ><router-link :to="{ name: 'register' }"
+            ><router-link :to="{ name: 'register-type' }"
               >Crie uma conta agora</router-link
             ></b
           >
@@ -74,15 +71,9 @@ export default {
   data: () => ({
     loading: false,
     user: {
-      email: "",
+      login: "",
       pass: "",
     },
-    isConnected: false,
-    name: "",
-    email: "",
-    personalID: "",
-    picture: "",
-    FB: undefined,
     show: false,
     error: false,
     messageError: null,
@@ -91,55 +82,10 @@ export default {
   }),
 
   methods: {
-    getUserData() {
-      this.FB.api(
-        "/me",
-        "GET",
-        {
-          fields: "id,name,email,picture",
-        },
-        (user) => {
-          this.personalID = user.id;
-          this.email = user.email;
-          this.name = user.name;
-          this.picture = user.picture.data.url;
-        }
-      );
-    },
-    sdkLoaded(payload) {
-      this.isConnected = payload.isConnected;
-      this.FB = payload.FB;
-      if (this.isConnected) this.getUserData();
-    },
-    onLogin() {
-      this.isConnected = true;
-      this.getUserData();
-    },
-    onLogout() {
-      this.isConnected = false;
-    },
-    handleSdkInit({ FB, scope }) {
-      this.FB = FB;
-
-      this.scope = scope;
-    },
-    activate() {
-      if (this.windowSize.x <= 700) {
-        return "d-none";
-      } else {
-        return "col-sm-6 normal";
-      }
-    },
-    onResize() {
-      this.windowSize = {
-        x: window.innerWidth,
-        y: window.innerHeight,
-      };
-    },
     login() {
       this.loading = true;
-      if (!this.user.email) {
-        this.errorMail = true;
+      if (!this.user.login) {
+        this.login = true;
         this.loading = false;
       }
 
@@ -151,23 +97,22 @@ export default {
           url: process.env.VUE_APP_BASE_URL_SERVER_LOCAL + "/session",
           method: "post",
           data: {
-            email: this.user.email,
+            login: this.user.login,
             password: this.user.pass,
           },
         })
           .then((resp) => {
-            console.log("aqui");
+            console.log(resp);
             localStorage.setItem("acess-token", resp.data.token);
+            localStorage.setItem("id-user", resp.data.id);
             this.$store.commit("user/setUser", resp.data);
             this.$store.commit("user/setUserName", resp.data.name);
-            if (localStorage.getItem("company")) {
-              let company = JSON.parse(localStorage.getItem("company"));
-              console.log(company.object_id);
-              this.$router.push({ name: "company", params: company.object_id });
-            }
+            this.$router.push("/");
+
             this.loading = false;
           })
           .catch((err) => {
+            console.log(err);
             if (err.response.data[0]) {
               this.error = true;
               this.messageError = err.response.data[0].message;

@@ -5,7 +5,7 @@
         <v-row align="center" justify="space-between">
           <v-col cols="auto">
             <v-btn dense :to="'/'" :ripple="false" text>
-              <v-icon>mdi-food</v-icon><b>Mix</b>
+              <v-icon>mdi-food</v-icon><b>{{ company.name }}</b>
             </v-btn>
           </v-col>
           <v-col cols="auto">
@@ -14,14 +14,9 @@
             </v-btn>
           </v-col>
         </v-row>
-        <v-row justify="space-between" align="center" no-gutters>
+        <v-row justify="center" align="center" no-gutters>
           <v-col cols="12" sm="6">
-            <div class="d-flex justify-center align-center">
-              <v-img src="https://i.imgur.com/xr56jrb.png"> </v-img>
-            </div>
-          </v-col>
-          <v-col cols="12" sm="6">
-            <router-view class="col-sm-10 mx-auto"></router-view>
+            <router-view></router-view>
           </v-col>
         </v-row>
       </v-col>
@@ -32,6 +27,11 @@
 <script>
 export default {
   components: {},
+  computed: {
+    company() {
+      return this.$store.getters["company/getCompany"] || {};
+    },
+  },
 };
 </script>
 

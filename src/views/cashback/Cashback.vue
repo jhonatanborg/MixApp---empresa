@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import MenuBar from "@/components/MenuBar.vue";
+import MenuBar from "@/components/shared/MenuBar.vue";
 import CoinIcon from "@/components/cashback/assets/CoinIcon.vue";
 import PointIcon from "@/components/cashback/assets/PointIcon.vue";
 

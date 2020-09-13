@@ -1,5 +1,11 @@
 <template>
   <div class="pa-5">
+    <v-alert color="#765eda" dark border="left">
+      <small>
+        {{ address.street }}, {{ address.number }} - {{ address.district }},
+        {{ address.city }} - {{ address.state }}</small
+      >
+    </v-alert>
     <v-row>
       <v-col class="py-0" sm="4">
         <v-text-field
