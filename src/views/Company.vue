@@ -1,14 +1,22 @@
 <template>
   <div class="grey lighten-5">
     <MenuBar />
-
     <div id="company" v-if="company.name">
+      <div v-if="!$vuetify.breakpoint.xsOnly">
+        <ProfileDetails :company="company" />
+      </div>
+      <div v-else><ProfileMobile :company="company" /></div>
+      <div class="">
+        <v-container fluid>
+          <v-row>
+            <v-col cols="12">
+              <span class="title-category">Promoções</span>
+              <PromoBar />
+            </v-col>
+          </v-row>
+        </v-container>
+      </div>
       <v-container>
-        <div v-if="!$vuetify.breakpoint.xsOnly">
-          <ProfileDetails :company="company" />
-        </div>
-
-        <div v-else><ProfileMobile :company="company" /></div>
         <v-row>
           <v-col cols="12" sm="12" lg="3">
             <v-overflow-btn
@@ -48,6 +56,7 @@
 
 <script>
 import ProductBar from "@/components/company/ProductBar";
+import PromoBar from "@/components/company/PromoBar";
 import Brands from "@/components/company/BrandsPay.vue";
 import MenuBar from "@/components/shared/MenuBar";
 import ProfileDetails from "@/components/company/HeaderProfile";
@@ -57,6 +66,7 @@ export default {
   name: "Company",
   components: {
     ProductBar,
+    PromoBar,
     Brands,
     MenuBar,
     ProfileDetails,

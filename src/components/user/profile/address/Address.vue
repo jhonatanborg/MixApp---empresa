@@ -45,10 +45,7 @@
         >Novo endereço</v-btn
       >
     </v-card>
-    <DialogNewAddress
-      :dialogAddress="viewDialogNewAddress"
-      :closeDialog="closeDialog"
-    />
+
     <DialogEditAddress />
     <DialogDeleteAddress
       :closeDialog="this.closeDialog"
@@ -60,13 +57,11 @@
 
 <script>
 import DialogEditAddress from "@/components/user/profile/address/DialogAddress";
-import DialogNewAddress from "@/components/user/profile/address/DialogNewAdress";
 import DialogDeleteAddress from "@/components/user/profile/address/DeleteAddress";
 
 export default {
   components: {
     DialogEditAddress,
-    DialogNewAddress,
     DialogDeleteAddress,
   },
   computed: {
@@ -96,7 +91,8 @@ export default {
       this.viewDialogDelete = false;
     },
     dialog() {
-      this.viewDialogNewAddress = true;
+      this.$store.commit("alertAddress", { value: true });
+      this.$store.commit("user/request", { state: "addressTabs", data: 1 });
     },
     deleteAddress(key, item) {
       this.addressEdit = item;

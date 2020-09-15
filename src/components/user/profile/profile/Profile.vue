@@ -30,8 +30,8 @@
           <v-divider></v-divider>
           <v-list-item>
             <v-list-item-content>
-              <v-list-item-subtitle>E-mail</v-list-item-subtitle>
-              <v-list-item-title>{{ user.email }}</v-list-item-title>
+              <v-list-item-subtitle>Login</v-list-item-subtitle>
+              <v-list-item-title>{{ user.login }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-divider></v-divider>

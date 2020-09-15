@@ -58,6 +58,7 @@
           </v-col>
           <v-col>
             <v-btn
+              dark
               :loading="loader"
               @click="save()"
               depressed

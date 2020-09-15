@@ -96,6 +96,13 @@
               </v-btn>
             </v-toolbar>
             <div class="pa-5">
+              <v-alert color="#765eda" dark border="left">
+                <small>
+                  {{ address.street }}, {{ address.number }} -
+                  {{ address.district }}, {{ address.city }} -
+                  {{ address.state }}</small
+                >
+              </v-alert>
               <v-row class="overflow-x-hidden">
                 <v-col sm="4">
                   <v-text-field
@@ -115,9 +122,7 @@
                     color="#765eda"
                     outlined
                     dense
-                    :rules="ruleTitle"
-                    :error="error"
-                    v-model="title"
+                    v-model="address.title"
                     label="Título"
                     placeholder="Ex: Casa"
                   ></v-text-field>
@@ -129,7 +134,7 @@
                     color="#765eda"
                     outlined
                     dense
-                    v-model="complement"
+                    v-model="address.complement"
                     label="Complemento"
                     placeholder="Ex: Ao lado da mercearia do jão"
                   ></v-text-field>
@@ -138,7 +143,12 @@
                   <v-btn @click="step--" outlined color="error">Voltar</v-btn>
                 </v-col>
                 <v-col cols="12" sm="8">
-                  <v-btn @click="updateLocalAddress" dark block color="#765eda"
+                  <v-btn
+                    @click="updateAddress"
+                    :loading="loading"
+                    dark
+                    block
+                    color="#765eda"
                     >Confirmar</v-btn
                   >
                 </v-col>
@@ -152,6 +162,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 import L from "leaflet";
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 export default {
@@ -168,7 +180,7 @@ export default {
   },
   data: () => ({
     step: 1,
-
+    loading: false,
     sheet: true,
     coordsMaker: [0, 0],
     zoomIsUpdating: false,
@@ -255,6 +267,30 @@ export default {
           longitude: position.coords.longitude,
         };
         localStorage.setItem("geolocation", JSON.stringify(location));
+      }
+    },
+    updateAddress() {
+      this.loading = true;
+      if (this.address) {
+        axios({
+          method: "PUT",
+          url: `${process.env.VUE_APP_BASE_URL_SERVER_LOCAL}/address-client/${this.address.id}`,
+          headers: null || {
+            Authorization: `Bearer ${localStorage.getItem("acess-token")}`,
+          },
+          data: this.address,
+        })
+          .then((resp) => {
+            this.$store.commit("user/setUser", resp.data);
+            this.loading = false;
+            this.$store.commit("user/setAddressEdit", {
+              address: null,
+              dialog: false,
+            });
+          })
+          .catch(() => {
+            this.loading = false;
+          });
       }
     },
   },

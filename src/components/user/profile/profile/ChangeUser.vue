@@ -18,27 +18,19 @@
         </div>
         <div class="subtitle-large">
           <v-text-field
-            label="E-mail"
+            label="Login"
             outlined
             dense
             disabled
-            v-model="user.email"
+            v-model="user.login"
           ></v-text-field>
         </div>
-        <div class="subtitle-large">
-          <v-text-field
-            label="Data de nascimento"
-            outlined
-            autofocus
-            dense
-            type="date"
-            v-model="user.birthday"
-          ></v-text-field>
-        </div>
+
         <div class="subtitle-large">
           <v-text-field
             label="Telefone"
             outlined
+            v-mask="['(##) ####-####', '(##) #####-####']"
             dense
             v-model="user.phone"
           ></v-text-field>
