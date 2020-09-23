@@ -18,7 +18,7 @@
                 v-for="product in item.products"
                 :key="product.id"
                 cols="12"
-                sm="6"
+                sm="4"
               >
                 <a @click="modal(product)">
                   <Product :product="product" />
@@ -599,6 +599,7 @@ export default {
   font-size: 18px;
   font-weight: 600;
   text-transform: capitalize;
+  color: #3c3a41;
 }
 .title-product {
   font-family: Montserrat;

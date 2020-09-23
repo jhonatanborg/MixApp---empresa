@@ -6,35 +6,15 @@
         <ProfileDetails :company="company" />
       </div>
       <div v-else><ProfileMobile :company="company" /></div>
-      <div class="">
+      <div
+        class="grey darken-4
+"
+      >
         <v-container fluid>
-          <v-row>
-            <v-col cols="12">
-              <span class="title-category">Promoções</span>
-              <PromoBar />
-            </v-col>
-          </v-row>
+          <PromoBar />
         </v-container>
       </div>
-      <v-container>
-        <v-row>
-          <v-col cols="12" sm="12" lg="3">
-            <v-overflow-btn
-              dense
-              hide-details
-              class="my-0 py-0"
-              color="#765eda"
-              @change="filterScroll()"
-              v-model="filterItem"
-              deletable-chips
-              :items="company.prodCategories"
-              item-text="name"
-              item-value="id"
-              label="Relevância"
-              target="#dropdown-example"
-            ></v-overflow-btn>
-          </v-col>
-        </v-row>
+      <v-container fluid>
         <v-row align="center" justify="space-between">
           <v-col cols="auto " sm="12">
             <ProductBar :company="company" :products="company.prodCategories" />
@@ -103,6 +83,7 @@ export default {
       );
       return this.$store.getters["company/getCompany"] || {};
     },
+
     categories() {
       return this.$store.getters["company/getCategories"];
     },

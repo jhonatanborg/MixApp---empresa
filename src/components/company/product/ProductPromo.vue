@@ -1,26 +1,31 @@
 <template>
   <div class="product">
-    <v-card flat color="white">
+    <v-card link flat color="white">
       <v-list-item three-line>
         <v-list-item-avatar tile size="150">
           <v-img
             width="50"
             aspect-ratio="1.1"
-            src="https://images.rappi.com.br/products/product-1597354596131.png?d=400x400&e=webp"
+            src="https://static1.conquistesuavida.com.br/articles//8/10/47/8/@/28952-frutas-como-banana-morango-kiwi-e-mang-article_block_media_large-2.jpg"
           ></v-img>
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title class="title-product" v-text="product.name">
+          <v-list-item-title
+            class="title-product"
+            v-text="product.product.name"
+          >
           </v-list-item-title>
-          <v-list-item-subtitle v-text="product.description">
+          <v-list-item-subtitle v-text="product.product.description">
           </v-list-item-subtitle>
-          <v-btn depressed color="white darken-3">
-            <span
-              class="text--black"
-              v-text="'Comprar ' + convertMoney(product.sale_value)"
-            >
-            </span>
-          </v-btn>
+          <v-list-item-action>
+            <v-chip dense color="#00c996" text-color="white" dark>
+              <b
+                class=" mx-2"
+                v-text="convertMoney(product.product.sale_value)"
+              >
+              </b>
+            </v-chip>
+          </v-list-item-action>
         </v-list-item-content>
       </v-list-item>
     </v-card>

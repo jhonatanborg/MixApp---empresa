@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <v-app-bar dark color="#ff5252" app flat id="app-bar">
+    <v-app-bar app flat id="app-bar">
       <v-btn dense :to="'/'" :ripple="false" text
         ><b>{{ company.name }}</b></v-btn
       >
