@@ -4,16 +4,28 @@
     <div id="company" v-if="company.name">
       <div v-if="!$vuetify.breakpoint.xsOnly">
         <ProfileDetails :company="company" />
+        <v-row>
+          <v-col
+            cols="auto"
+            v-for="(item, key) in company.prodCategories"
+            :key="key"
+          >
+            <v-btn text @click="filterScroll(item)" rounded color="black">{{
+              item.name
+            }}</v-btn>
+          </v-col>
+        </v-row>
       </div>
       <div v-else><ProfileMobile :company="company" /></div>
       <div
         class="grey darken-4
 "
       >
-        <v-container fluid>
+        <v-container v-if="company.promotions.length > 0" fluid>
           <PromoBar />
         </v-container>
       </div>
+
       <v-container fluid>
         <v-row align="center" justify="space-between">
           <v-col cols="auto " sm="12">
@@ -111,10 +123,8 @@ export default {
         data,
       });
     },
-    filterScroll() {
-      if (this.filterItem) {
-        this.$vuetify.goTo((this.selector = "#go" + this.filterItem));
-      }
+    filterScroll(item) {
+      this.$vuetify.goTo((this.selector = "#go" + item.id));
     },
     idGroupSelector(item) {
       item = item.replace(" ", "");

@@ -18,7 +18,7 @@
               <v-img
                 aspect-ratio="1.1"
                 width="400px"
-                src="https://scontent.fcgb1-1.fna.fbcdn.net/v/t1.0-9/20799930_1574456292577856_3034606225261362567_n.png?_nc_cat=107&_nc_sid=85a577&_nc_ohc=94JCmYb-6eIAX9OFD3X&_nc_ht=scontent.fcgb1-1.fna&oh=a7f22d34c9ae509badbf22f05b84ee8c&oe=5F930D89"
+                src="https://s3-sa-east-1.amazonaws.com/projetos-artes/fullsize%2f2019%2f02%2f28%2f17%2fLogo-253716_341712_173106804_1653267716.jpg"
               >
                 <!-- :src="$store.state.server + company.logo" -->
               </v-img></v-card

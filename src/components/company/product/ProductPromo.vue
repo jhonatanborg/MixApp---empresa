@@ -17,14 +17,15 @@
           </v-list-item-title>
           <v-list-item-subtitle v-text="product.product.description">
           </v-list-item-subtitle>
-          <v-list-item-action>
-            <v-chip dense color="#00c996" text-color="white" dark>
-              <b
-                class=" mx-2"
-                v-text="convertMoney(product.product.sale_value)"
-              >
-              </b>
-            </v-chip>
+          <v-list-item-action left class="pa-0 ma-0">
+            <v-list-item-action-text class="pa-0 ma-0">
+              <v-chip color="#00c996" text-color="white" dark>
+                <b
+                  class=" mx-2"
+                  v-text="convertMoney(product.product.sale_value)"
+                >
+                </b> </v-chip
+            ></v-list-item-action-text>
           </v-list-item-action>
         </v-list-item-content>
       </v-list-item>
@@ -43,16 +44,12 @@ export default {
   },
   methods: {
     convertMoney(money) {
-      if (money > 0) {
-        const toCurrency = (n, curr, LanguageFormat = undefined) =>
-          Intl.NumberFormat(LanguageFormat, {
-            style: "currency",
-            currency: curr,
-          }).format(n);
-        return toCurrency(money, "BRL");
-      } else {
-        return "Grátis";
-      }
+      const toCurrency = (n, curr, LanguageFormat = undefined) =>
+        Intl.NumberFormat(LanguageFormat, {
+          style: "currency",
+          currency: curr,
+        }).format(n);
+      return toCurrency(money, "BRL");
     },
   },
 };
