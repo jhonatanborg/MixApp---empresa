@@ -30,15 +30,16 @@
         ></v-text-field>
       </div>
       <div>
-        <vue-tel-input-vuetify
+        <v-text-field
           outlined
           :error="errors.phone"
           :placeholder="''"
           :label="'Digite seu telefone'"
           :rules="telRules"
+          v-mask="['(##) ####-####', '(##) #####-####']"
           :error-messages="errors.phone ? 'O telefone é obrigatório.' : ''"
           v-model="user.phone"
-        ></vue-tel-input-vuetify>
+        ></v-text-field>
       </div>
       <div class>
         <v-text-field
@@ -137,7 +138,6 @@ export default {
     },
     register() {
       this.loading = true;
-      console.log(this.validForm());
 
       if (this.validForm()) {
         axios({
@@ -146,10 +146,12 @@ export default {
           data: this.user,
         })
           .then((resp) => {
+            localStorage.setItem("user-register", JSON.stringify(this.user));
             this.loading = false;
             console.log(resp);
+            localStorage.setItem("message-register", JSON.stringify(resp.data));
             this.$router.push({
-              name: "login",
+              name: "confirm-register",
             });
           })
           .catch((err) => {

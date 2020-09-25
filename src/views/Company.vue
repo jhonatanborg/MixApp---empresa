@@ -5,11 +5,7 @@
       <div v-if="!$vuetify.breakpoint.xsOnly">
         <ProfileDetails :company="company" />
         <v-row>
-          <v-col
-            cols="auto"
-            v-for="(item, key) in company.prodCategories"
-            :key="key"
-          >
+          <v-col cols="auto" v-for="(item, key) in categories" :key="key">
             <v-btn text @click="filterScroll(item)" rounded color="black">{{
               item.name
             }}</v-btn>
@@ -43,6 +39,22 @@
     >
       <Brands @close-dialog="dialogPay = false" />
     </v-dialog>
+    <v-layout
+      v-if="bagStatus && $vuetify.breakpoint.xsOnly"
+      class="col-sm-12 sale"
+    >
+      <v-btn
+        @click="$store.commit('cart/sidebar', { open: true, step: 1 })"
+        class="elevation-7"
+        block
+        large
+        color="#765eda"
+        dark
+        rounded
+      >
+        Sacola ({{ sale.length }})
+      </v-btn>
+    </v-layout>
   </div>
 </template>
 
@@ -95,7 +107,12 @@ export default {
       );
       return this.$store.getters["company/getCompany"] || {};
     },
-
+    bagStatus() {
+      return this.$store.getters["cart/getStatusSale"];
+    },
+    sale() {
+      return this.$store.state.cart.saleIdb;
+    },
     categories() {
       return this.$store.getters["company/getCategories"];
     },

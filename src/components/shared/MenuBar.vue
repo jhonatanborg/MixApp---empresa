@@ -44,8 +44,8 @@
           <MenuUser :user="user" />
         </div>
       </div>
-      <div v-if="$vuetify.breakpoint.xsOnly">
-        <v-icon @click="openMenuMobile()" color="white">mdi-menu</v-icon>
+      <div v-if="$vuetify.breakpoint.smAndDown">
+        <v-icon @click="openMenuMobile()" color="black">mdi-menu</v-icon>
       </div>
     </v-app-bar>
   </div>

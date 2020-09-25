@@ -18,20 +18,26 @@
               <v-img
                 aspect-ratio="1.1"
                 width="400px"
-                src="https://s3-sa-east-1.amazonaws.com/projetos-artes/fullsize%2f2019%2f02%2f28%2f17%2fLogo-253716_341712_173106804_1653267716.jpg"
+                :src="$store.state.server + company.logo"
               >
-                <!-- :src="$store.state.server + company.logo" -->
+                <!-- src="https://s3-sa-east-1.amazonaws.com/projetos-artes/fullsize%2f2019%2f02%2f28%2f17%2fLogo-253716_341712_173106804_1653267716.jpg" -->
               </v-img></v-card
             ></v-col
           >
           <v-col>
             <div class="details">
-              <div class="title-company">
+              <div class="title-company-header">
                 <span v-text="company.name"></span>
               </div>
               <div class="category">
                 <span v-text="company.primaryCategory.name"> </span>
                 <v-icon x-small class="mx-3">mdi-circle</v-icon>
+                <span
+                  v-if="company.deliveryFee && !company.deliveryFee.length"
+                  v-text="company.deliveryFee.delivery_max_time + ' min'"
+                >
+                </span>
+
                 <div v-if="company.distance">
                   <span v-text="company.distance"></span> <span>KM</span>
                 </div>
@@ -98,11 +104,11 @@ export default {
 </script>
 
 <style>
-.title-company {
+.title-company-header {
   font-weight: normal;
-  font-size: 34px;
+  font-size: 20px;
   text-align: left;
   color: #111;
-  text-transform: capitalize;
+  text-transform: initial;
 }
 </style>

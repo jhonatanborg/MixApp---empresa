@@ -9,7 +9,9 @@
         >
           <div :id="'go' + item.id">
             <div class="">
-              <h3 class="title-category">{{ item.name }}</h3>
+              <h3 v-if="item.products.length > 0" class="title-category">
+                {{ item.name }}
+              </h3>
             </div>
           </div>
           <div>
@@ -155,7 +157,7 @@
                   rows="2"
                   v-model="comment"
                   placeholder="Ex. sem pimenta, sem molho verde"
-                  label="Personalize se pedido"
+                  label="Personalize seu pedido"
                   id="id"
                 ></v-textarea>
               </div>
@@ -273,7 +275,7 @@
                   rows="2"
                   v-model="comment"
                   placeholder="Ex. sem pimenta, sem molho verde"
-                  label="Personalize se pedido"
+                  label="Personalize seu pedido"
                   id="id"
                 ></v-textarea>
               </div>

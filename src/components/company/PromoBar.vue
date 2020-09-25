@@ -98,7 +98,7 @@
                 rows="2"
                 v-model="comment"
                 placeholder="Ex. sem pimenta, sem molho verde"
-                label="Personalize se pedido"
+                label="Personalize seu pedido"
                 id="id"
               ></v-textarea>
             </div>
@@ -266,7 +266,7 @@
                 rows="2"
                 v-model="comment"
                 placeholder="Ex. sem pimenta, sem molho verde"
-                label="Personalize se pedido"
+                label="Personalize seu pedido"
                 id="id"
               ></v-textarea>
             </div>

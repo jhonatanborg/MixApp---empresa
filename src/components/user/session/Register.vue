@@ -127,9 +127,10 @@ export default {
         })
           .then((resp) => {
             this.loading = false;
-            console.log(resp);
+            localStorage.setItem("user-register", JSON.stringify(this.user));
+            localStorage.setItem("message-register", JSON.stringify(resp.data));
             this.$router.push({
-              name: "login",
+              name: "confirm-register",
             });
           })
           .catch((err) => {
