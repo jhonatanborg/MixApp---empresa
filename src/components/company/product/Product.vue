@@ -1,17 +1,18 @@
 <template>
   <div class="product">
-    <v-card flat>
+    <v-card link flat>
       <v-list-item three-line>
         <v-list-item-avatar tile size="100">
           <v-img
             width="50"
             aspect-ratio="1.1"
             :src="$store.state.server + product.img"
-          ></v-img>
+          >
+            <!-- src="https://static1.conquistesuavida.com.br/articles//8/10/47/8/@/28952-frutas-como-banana-morango-kiwi-e-mang-article_block_media_large-2.jpg" -->
+          </v-img>
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title class="title-product" v-text="product.name">
-          </v-list-item-title>
+          <v-list-item-title v-text="product.name"> </v-list-item-title>
           <v-list-item-subtitle v-text="product.description">
           </v-list-item-subtitle>
           <span v-text="convertMoney(product.sale_value)"> </span>
@@ -70,7 +71,6 @@ export default {
   font-weight: 600;
   font-size: 15px;
   text-align: left;
-  color: #000;
   text-transform: uppercase;
 }
 </style>

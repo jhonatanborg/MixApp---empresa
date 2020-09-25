@@ -1,25 +1,30 @@
 <template>
-  <v-card class="pa-5" outlined flat>
-    <div class="py-1">
-      <h4 class="px-2">
-        Utilize o telefone ou e-mail
-      </h4>
-    </div>
-    <div class="py-5">
-      <v-btn large block dark color="#765eda" :to="{ name: 'register' }"
-        >Telefone</v-btn
-      >
-    </div>
-    <div>
-      <v-btn
-        large
-        dark
-        outlined
-        block
-        color="#765eda"
-        :to="{ name: 'register-email' }"
-        >E-mail</v-btn
-      >
+  <v-card outlined>
+    <div class="pa-5">
+      <div>
+        <h3>
+          Escolha como se cadastrar
+        </h3>
+        <h4>
+          Selecione o telefone ou e-mail
+        </h4>
+      </div>
+      <div class="py-5">
+        <v-btn large block dark color="#765eda" :to="{ name: 'register' }"
+          >Telefone</v-btn
+        >
+      </div>
+      <div>
+        <v-btn
+          large
+          dark
+          outlined
+          block
+          color="#765eda"
+          :to="{ name: 'register-email' }"
+          >E-mail</v-btn
+        >
+      </div>
     </div>
   </v-card>
 </template>
@@ -55,16 +60,7 @@ export default {
     menu: false,
     errorPass: false,
   }),
-  watch: {
-    login(val) {
-      if (val.match(/[0-9]/g)) {
-        this.loginTel = true;
-        console.log("ISSO É UM number");
-      } else {
-        console.log("nao é number");
-      }
-    },
-  },
+  watch: {},
   methods: {
     register() {
       this.loading = true;

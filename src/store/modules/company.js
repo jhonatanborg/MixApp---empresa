@@ -32,10 +32,12 @@ const company = {
     getCategories(state) {
       let categories = [];
       Object.values(state.company.prodCategories).forEach((value) => {
-        categories.push({
-          id: value.id,
-          name: value.name,
-        });
+        if (value.products.length > 0) {
+          categories.push({
+            id: value.id,
+            name: value.name,
+          });
+        }
       });
       return categories;
     },

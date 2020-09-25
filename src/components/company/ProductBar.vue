@@ -9,7 +9,9 @@
         >
           <div :id="'go' + item.id">
             <div class="">
-              <h3 class="title-category">{{ item.name }}</h3>
+              <h3 v-if="item.products.length > 0" class="title-category">
+                {{ item.name }}
+              </h3>
             </div>
           </div>
           <div>
@@ -18,7 +20,7 @@
                 v-for="product in item.products"
                 :key="product.id"
                 cols="12"
-                sm="6"
+                sm="4"
               >
                 <a @click="modal(product)">
                   <Product :product="product" />
@@ -155,7 +157,7 @@
                   rows="2"
                   v-model="comment"
                   placeholder="Ex. sem pimenta, sem molho verde"
-                  label="Personalize se pedido"
+                  label="Personalize seu pedido"
                   id="id"
                 ></v-textarea>
               </div>
@@ -273,7 +275,7 @@
                   rows="2"
                   v-model="comment"
                   placeholder="Ex. sem pimenta, sem molho verde"
-                  label="Personalize se pedido"
+                  label="Personalize seu pedido"
                   id="id"
                 ></v-textarea>
               </div>
@@ -599,6 +601,7 @@ export default {
   font-size: 18px;
   font-weight: 600;
   text-transform: capitalize;
+  color: #3c3a41;
 }
 .title-product {
   font-family: Montserrat;

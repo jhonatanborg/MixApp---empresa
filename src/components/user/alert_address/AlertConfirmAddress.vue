@@ -118,7 +118,7 @@ export default {
       if (this.address.number) {
         axios({
           method: "POST",
-          url: `${process.env.VUE_APP_BASE_URL_SERVER_LOCAL}/address/`,
+          url: `${process.env.VUE_APP_BASE_URL_SERVER_LOCAL}/address-client/`,
           headers: null || {
             Authorization: `Bearer ${localStorage.getItem("acess-token")}`,
           },

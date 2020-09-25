@@ -1,43 +1,76 @@
 <template>
-  <v-row class="col-sm-12" justify="center" v-if="company">
-    <v-card color="grey lighten-5" flat>
-      <v-row justify="start" align="content-center">
-        <v-col cols="4">
-          <v-img
-            src="https://scontent.fops1-1.fna.fbcdn.net/v/t1.0-9/20799930_1574456292577856_3034606225261362567_n.png?_nc_cat=107&_nc_sid=09cbfe&_nc_ohc=NAMN85BwskwAX_q7XCT&_nc_ht=scontent.fops1-1.fna&oh=94380ef7bfc671bb22a96cc1ea0202d1&oe=5F775E09"
-          ></v-img>
-        </v-col>
-        <v-col>
-          <div class="title-company">
-            <span v-text="company.name"> </span>
-          </div>
-          <div class="">
-            <span v-text="company.primaryCategory.name"> </span>
-          </div>
-          <v-chip
-            small
-            class="mr-3 my-2"
-            @click="
-              $store.commit('company/request', {
-                state: 'aboutCompany',
-                data: true,
-              })
-            "
-            outlined
-          >
-            <v-icon size="15" class="mr-1  ">mdi-information</v-icon>
-            Sobre</v-chip
-          >
-          <v-chip
-            small
-            :color="company.opened === 'S' ? 'success' : 'error'"
-            v-text="company.opened === 'S' ? ' Aberto' : 'Fechado agora'"
-          >
-          </v-chip>
+  <div>
+    <v-img
+      height="150px"
+      :aspect-ratio="16 / 9"
+      gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
+      src="https://images.pexels.com/photos/262947/pexels-photo-262947.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    >
+      <v-card
+        tile
+        flat
+        class="transparent  white--text"
+        max-width="100%"
+        max-height="150px"
+      >
+        <v-list-item three-line>
+          <v-list-item-avatar tile rounded="3" size="110">
+            <v-img
+              aspect-ratio="1.1"
+              :src="$store.state.server + company.logo"
+            ></v-img>
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title class="white--text" v-text="company.name">
+            </v-list-item-title>
+            <v-list-item-subtitle
+              class="white--text"
+              v-text="company.primaryCategory.name"
+            >
+            </v-list-item-subtitle>
+            <v-list-item-action left class="pa-0 ma-0">
+              <v-list-item-action-text class="pa-0 ma-0 white--text">
+                <v-chip
+                  class="mr-3"
+                  v-text="company.opened === 'S' ? 'Aberto' : ' Fechado'"
+                  :color="company.opened === 'S' ? 'success' : 'error'"
+                >
+                </v-chip>
+                <v-chip
+                  v-if="company.deliveryFee && !company.deliveryFee.length"
+                  color="white"
+                >
+                  <v-icon>mdi-moped</v-icon>
+                  <b
+                    class="mx-3 "
+                    v-text="convertMoney(company.deliveryFee.value)"
+                  ></b></v-chip
+              ></v-list-item-action-text>
+            </v-list-item-action>
+          </v-list-item-content>
+        </v-list-item>
+      </v-card>
+    </v-img>
+    <v-container>
+      <v-row justify-sm="center">
+        <v-col sm="auto">
+          <v-overflow-btn
+            dense
+            hide-details
+            class="my-0 py-0"
+            color="#765eda"
+            @change="filterScroll()"
+            v-model="filterItem"
+            :items="categories"
+            item-text="name"
+            item-value="id"
+            label="Relevância"
+            target="#dropdown-example"
+          ></v-overflow-btn>
         </v-col>
       </v-row>
-    </v-card>
-  </v-row>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -47,16 +80,41 @@ export default {
       type: Object,
     },
   },
+  data() {
+    return {
+      filterItem: null,
+    };
+  },
+  computed: {
+    categories() {
+      return this.$store.getters["company/getCategories"] || {};
+    },
+  },
   methods: {
-    // convertDistance(value) {
-    //   let distance;
-    //   if (value >= 1000) {
-    //     distance = value / 1000;
-    //   } else {
-    //     distance = value;
-    //   }
-    //   return distance;
-    // },
+    filterScroll() {
+      if (this.filterItem) {
+        this.$vuetify.goTo((this.selector = "#go" + this.filterItem));
+      }
+    },
+    convertMoney(money) {
+      if (money > 0) {
+        const toCurrency = (n, curr, LanguageFormat = undefined) =>
+          Intl.NumberFormat(LanguageFormat, {
+            style: "currency",
+            currency: curr,
+          }).format(n);
+        return toCurrency(money, "BRL");
+      } else {
+        return "Grátis";
+      }
+    },
+
+    openAboutDialog() {
+      this.$store.commit("company/request", {
+        state: "aboutCompany",
+        data: true,
+      });
+    },
   },
 };
 </script>
@@ -66,7 +124,7 @@ export default {
   font-weight: 800;
   font-size: 16px;
   text-align: left;
-  color: #111;
+  color: white;
   text-transform: initial;
 }
 </style>

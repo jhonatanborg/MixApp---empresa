@@ -23,15 +23,21 @@ const user = {
     },
     getPurchase(state) {
       if (state.purchaseDetails) {
-        const {
-          itens: [{ childItem }],
-        } = state.purchaseDetails;
+        const childItems = [];
+
+        state.purchaseDetails.itens.map((item) => {
+          childItems.push(...item.childItem);
+        });
+
         const subcategories = [];
 
-        childItem.map((item) => {
+        childItems.map((item) => {
+          item.product.subcategory.sale_item_id = item.parent_sale_item;
           if (
             !subcategories.find(
-              (item2) => item.product.subcategory.id === item2.id
+              (item2) =>
+                item.product.subcategory.id === item2.id &&
+                item.parent_sale_item === item2.sale_item_id
             )
           ) {
             subcategories.push(item.product.subcategory);
@@ -39,8 +45,11 @@ const user = {
         });
         subcategories.map((sub) => {
           sub.products = [];
-          childItem.map((item) => {
-            if (item.product.subcategory.id === sub.id) {
+          childItems.map((item) => {
+            if (
+              item.product.subcategory.id === sub.id &&
+              sub.sale_item_id === item.parent_sale_item
+            ) {
               item.product.qtd = item.product_qtd;
               sub.products.push(item.product);
             }

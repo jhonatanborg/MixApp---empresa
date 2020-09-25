@@ -9,13 +9,13 @@
             </v-btn>
           </v-col>
           <v-col cols="auto">
-            <v-btn to="/" class="px-5" color="#765eda" outlined>
+            <v-btn to="/" class="px-5" color="grey darken-4" outlined>
               Voltar
             </v-btn>
           </v-col>
         </v-row>
         <v-row justify="center" align="center" no-gutters>
-          <v-col cols="12" sm="6">
+          <v-col cols="12" sm="5">
             <router-view></router-view>
           </v-col>
         </v-row>
