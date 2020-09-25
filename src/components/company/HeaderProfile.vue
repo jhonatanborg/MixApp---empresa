@@ -3,7 +3,7 @@
     <v-img
       height="300px"
       :aspect-ratio="16 / 9"
-      src="http://www.shoppingbalneario.com.br/wp-content/uploads/2020/01/acai.jpg"
+      src="https://images.pexels.com/photos/262947/pexels-photo-262947.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
     >
       <v-card
         tile
