@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer
     @input="hiden"
-    v-if="user"
+    v-if="user && $vuetify.breakpoint.smAndDown"
     :value="$store.state.mobile.mobileMenu"
     app
   >

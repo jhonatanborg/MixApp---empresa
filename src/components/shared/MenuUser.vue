@@ -43,12 +43,7 @@
               <v-list-item color="#765eda" :to="{ name: 'purchases' }" link>
                 Meus Pedidos
               </v-list-item>
-              <v-list-item link>
-                Segurança
-              </v-list-item>
-              <v-list-item link>
-                Ajuda
-              </v-list-item>
+
               <v-list-item>
                 <v-btn block @click="logout()" outlined color="error"
                   >Encerrar sessão
