@@ -249,6 +249,12 @@ export default {
 </script>
 
 <style>
+.v-expansion-panel-content__wrap {
+  padding: 0px 16px !important;
+}
+.v-expansion-panel--active > .v-expansion-panel-header {
+  min-height: 24px !important;
+}
 .complements {
   font-size: 13px;
   color: grey;

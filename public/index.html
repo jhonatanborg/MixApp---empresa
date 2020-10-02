@@ -16,6 +16,21 @@
 
   <body>
     <div id="app"></div>
-    <!-- built files will be auto injected -->
+    <!-- <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script> -->
+    <script>
+      if (window.navigator && navigator.serviceWorker) {
+        navigator.serviceWorker
+          .getRegistrations()
+          .then(function(registrations) {
+            for (let registration of registrations) {
+              registration.unregister();
+            }
+          });
+      }
+    </script>
   </body>
 </html>
