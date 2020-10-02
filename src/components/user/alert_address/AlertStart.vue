@@ -87,14 +87,15 @@ export default {
     },
   },
   methods: {
-    execRequest(action, state, url, method, insert, data = null) {
-      this.$store.dispatch(action, {
+    async execRequest(action, state, url, method, insert, data = null) {
+      await this.$store.dispatch(action, {
         state: state,
         method: method,
         url: url,
         insert,
         data,
       });
+      this.isLoading = false;
     },
     getAddressByString() {
       if (
@@ -131,11 +132,13 @@ export default {
     },
 
     searchLocal() {
+      this.isLoading = true;
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(this.showPosition);
         // this.$store.commit("alertAddress", { value: false });
       } else {
         this.$store.commit("alertAddress", true);
+        this.isLoading = false;
       }
     },
     showPosition(position) {
