@@ -1,68 +1,70 @@
 <template>
-  <div>
-    <div class="py-1">
-      <h2 class="px-2">
-        Olá! Para continuar, faça o login ou cadastre-se
-      </h2>
-    </div>
-    <div class="pa-1">
-      <div class="pt-4">
-        <v-text-field
-          outlined
-          autocomplete="new-password"
-          v-model="user.login"
-          :error="errorMail"
-          label="E-mail ou telefone"
-        ></v-text-field>
+  <v-card :loading="loading" outlined>
+    <div class="pa-5">
+      <div class="py-1">
+        <h2 class="px-2">
+          Olá! Para continuar, faça o login ou cadastre-se
+        </h2>
       </div>
-      <div>
-        <v-text-field
-          outlined
-          autocomplete="new-password"
-          :error="errorPass"
-          :error-messages="errorPass ? 'Use sua senha padrão' : ''"
-          v-model="user.pass"
-          :type="show ? 'text' : 'password'"
-          :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-          @click:append="show = !show"
-          label="Senha"
-        ></v-text-field>
-        <div class="mb-4">
-          <router-link :to="{ name: 'forgot-pass-tel' }">
-            <b>Esqueceu sua senha?</b>
-          </router-link>
+      <div class="pa-1">
+        <div class="pt-4">
+          <v-text-field
+            outlined
+            autocomplete="new-password"
+            v-model="user.login"
+            :error="errorMail"
+            label="E-mail ou telefone"
+          ></v-text-field>
         </div>
-      </div>
-
-      <div>
-        <v-alert dense type="error" :value="error">
-          {{ messageError }}
-        </v-alert>
-      </div>
-      <div id="buttons-login">
         <div>
-          <v-btn
-            :loading="loading"
-            dark
-            x-large
-            @click="login()"
-            block
-            color="#765eda"
-            >Entrar</v-btn
-          >
+          <v-text-field
+            outlined
+            autocomplete="new-password"
+            :error="errorPass"
+            :error-messages="errorPass ? 'Use sua senha padrão' : ''"
+            v-model="user.pass"
+            :type="show ? 'text' : 'password'"
+            :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="show = !show"
+            label="Senha"
+          ></v-text-field>
+          <div class="mb-4">
+            <router-link :to="{ name: 'forgot-pass-tel' }">
+              <b class="black--text">Esqueceu sua senha?</b>
+            </router-link>
+          </div>
         </div>
-        <div class="mt-3">
-          <span>Ainda não possui uma conta </span>
-          <br />
-          <b
-            ><router-link :to="{ name: 'register-type' }"
-              >Crie uma conta agora</router-link
-            ></b
-          >
+
+        <div>
+          <v-alert dense type="error" :value="error">
+            {{ messageError }}
+          </v-alert>
+        </div>
+        <div id="buttons-login">
+          <div>
+            <v-btn
+              :loading="loading"
+              dark
+              x-large
+              @click="login()"
+              block
+              color="#765eda"
+              >Entrar</v-btn
+            >
+          </div>
+          <div class="mt-3">
+            <span>Ainda não possui uma conta </span>
+            <br />
+            <b
+              ><router-link :to="{ name: 'register-type' }" class="black--text"
+                >Crie uma conta agora</router-link
+              ></b
+            >
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </v-card>
 </template>
 
 <script>

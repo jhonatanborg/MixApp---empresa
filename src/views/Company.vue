@@ -4,37 +4,25 @@
     <div id="company" v-if="company.name">
       <div v-if="!$vuetify.breakpoint.xsOnly">
         <ProfileDetails :company="company" />
-      </div>
-      <div v-else><ProfileMobile :company="company" /></div>
-      <div class="">
-        <v-container fluid>
-          <v-row>
-            <v-col cols="12">
-              <span class="title-category">Promoções</span>
-              <PromoBar />
-            </v-col>
-          </v-row>
-        </v-container>
-      </div>
-      <v-container>
         <v-row>
-          <v-col cols="12" sm="12" lg="3">
-            <v-overflow-btn
-              dense
-              hide-details
-              class="my-0 py-0"
-              color="#765eda"
-              @change="filterScroll()"
-              v-model="filterItem"
-              deletable-chips
-              :items="company.prodCategories"
-              item-text="name"
-              item-value="id"
-              label="Relevância"
-              target="#dropdown-example"
-            ></v-overflow-btn>
+          <v-col cols="auto" v-for="(item, key) in categories" :key="key">
+            <v-btn text @click="filterScroll(item)" rounded color="black">{{
+              item.name
+            }}</v-btn>
           </v-col>
         </v-row>
+      </div>
+      <div v-else><ProfileMobile :company="company" /></div>
+      <div
+        class="grey darken-4
+"
+      >
+        <v-container v-if="company.promotions.length > 0" fluid>
+          <PromoBar />
+        </v-container>
+      </div>
+
+      <v-container fluid>
         <v-row align="center" justify="space-between">
           <v-col cols="auto " sm="12">
             <ProductBar :company="company" :products="company.prodCategories" />
@@ -51,6 +39,22 @@
     >
       <Brands @close-dialog="dialogPay = false" />
     </v-dialog>
+    <v-layout
+      v-if="bagStatus && $vuetify.breakpoint.xsOnly"
+      class="col-sm-12 sale"
+    >
+      <v-btn
+        @click="$store.commit('cart/sidebar', { open: true, step: 1 })"
+        class="elevation-7"
+        block
+        large
+        color="#765eda"
+        dark
+        rounded
+      >
+        Sacola ({{ sale.length }})
+      </v-btn>
+    </v-layout>
   </div>
 </template>
 
@@ -103,6 +107,12 @@ export default {
       );
       return this.$store.getters["company/getCompany"] || {};
     },
+    bagStatus() {
+      return this.$store.getters["cart/getStatusSale"];
+    },
+    sale() {
+      return this.$store.state.cart.saleIdb;
+    },
     categories() {
       return this.$store.getters["company/getCategories"];
     },
@@ -130,10 +140,8 @@ export default {
         data,
       });
     },
-    filterScroll() {
-      if (this.filterItem) {
-        this.$vuetify.goTo((this.selector = "#go" + this.filterItem));
-      }
+    filterScroll(item) {
+      this.$vuetify.goTo((this.selector = "#go" + item.id));
     },
     idGroupSelector(item) {
       item = item.replace(" ", "");

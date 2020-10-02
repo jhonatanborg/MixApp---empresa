@@ -7,23 +7,6 @@
 
       <Sale />
       <router-view />
-
-      <v-layout
-        v-if="bagStatus && $vuetify.breakpoint.xsOnly"
-        class="col-sm-12 sale"
-      >
-        <v-btn
-          @click="$store.commit('cart/sidebar', { open: true, step: 1 })"
-          class="elevation-7"
-          block
-          large
-          color="#765eda"
-          dark
-          rounded
-        >
-          Sacola ({{ sale.length }})
-        </v-btn>
-      </v-layout>
     </v-main>
   </v-app>
 </template>
@@ -49,12 +32,6 @@ export default {
     dialogStep: null,
   }),
   computed: {
-    sale() {
-      return this.$store.state.cart.saleIdb;
-    },
-    bagStatus() {
-      return this.$store.getters["cart/getStatusSale"];
-    },
     addressAlert() {
       return this.$store.state.addressAlert;
     },

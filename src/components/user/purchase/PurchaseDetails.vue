@@ -32,10 +32,10 @@
           </div>
           <div v-if="item.comment"><span>obs: </span>{{ item.comment }}</div>
           <div v-if="item.childItem.length > 0">
-            <v-expansion-panels flat tile>
+            <v-expansion-panels class="pa-0" flat tile>
               <v-expansion-panel>
                 <v-expansion-panel-header>
-                  <v-row>
+                  <v-row dense>
                     <v-btn small color="primary" class="pa-0 " text>
                       Detalhes
                     </v-btn>
@@ -44,20 +44,24 @@
                 <v-expansion-panel-content
                   v-for="(subcategory, i) in subcategories"
                   :key="i"
-                  class="complements"
+                  class="complements  "
                 >
-                  <div>
-                    <h3>{{ subcategory.name }}</h3>
-                  </div>
-                  <div
-                    v-for="child in subcategory.products"
-                    class="d-flex justify-space-between"
-                    :key="child.id"
-                  >
-                    <div>{{ child.qtd }}x {{ child.name }}</div>
+                  <div v-if="item.id === subcategory.sale_item_id">
                     <div>
-                      R$
-                      {{ parseFloat(child.sale_value * child.qtd).toFixed(2) }}
+                      <h3>{{ subcategory.name }}</h3>
+                    </div>
+                    <div
+                      v-for="child in subcategory.products"
+                      class="d-flex justify-space-between pa-0"
+                      :key="child.id"
+                    >
+                      <div>{{ child.qtd }}x {{ child.name }}</div>
+                      <div>
+                        R$
+                        {{
+                          parseFloat(child.sale_value * child.qtd).toFixed(2)
+                        }}
+                      </div>
                     </div>
                   </div>
                 </v-expansion-panel-content>
@@ -248,6 +252,7 @@ export default {
 .complements {
   font-size: 13px;
   color: grey;
+  padding-bottom: 0px !important;
 }
 
 .subheader {

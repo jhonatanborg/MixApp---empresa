@@ -1,13 +1,15 @@
 <template>
   <div class="product">
-    <v-card flat>
+    <v-card link flat>
       <v-list-item three-line>
-        <v-list-item-avatar tile size="150">
+        <v-list-item-avatar tile size="100">
           <v-img
             width="50"
             aspect-ratio="1.1"
             :src="$store.state.server + product.img"
-          ></v-img>
+          >
+            <!-- src="https://static1.conquistesuavida.com.br/articles//8/10/47/8/@/28952-frutas-como-banana-morango-kiwi-e-mang-article_block_media_large-2.jpg" -->
+          </v-img>
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title v-text="product.name"> </v-list-item-title>

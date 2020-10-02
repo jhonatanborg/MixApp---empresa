@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <v-app-bar dark color="#ff5252" app flat id="app-bar">
+    <v-app-bar app flat id="app-bar">
       <v-btn dense :to="'/'" :ripple="false" text
         ><b>{{ company.name }}</b></v-btn
       >
@@ -44,8 +44,8 @@
           <MenuUser :user="user" />
         </div>
       </div>
-      <div v-if="$vuetify.breakpoint.xsOnly">
-        <v-icon @click="openMenuMobile()" color="white">mdi-menu</v-icon>
+      <div v-if="$vuetify.breakpoint.smAndDown">
+        <v-icon @click="openMenuMobile()" color="black">mdi-menu</v-icon>
       </div>
     </v-app-bar>
   </div>
