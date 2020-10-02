@@ -4,5 +4,11 @@ module.exports = {
   pwa: {
     themeColor: "#000000",
     name: "Mix Entregas",
+    appleMobileWebAppCapable: "yes",
+    appleMobileWebAppStatusBarStyle: "black",
+    workboxPluginMode: "InjectManifest",
+    workboxOptions: {
+      swSrc: "sw.js",
+    },
   },
 };
