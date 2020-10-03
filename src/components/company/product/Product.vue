@@ -58,7 +58,7 @@ export default {
           }).format(n);
         return toCurrency(money, "BRL");
       } else {
-        return "Grátis";
+        return "";
       }
     },
   },
