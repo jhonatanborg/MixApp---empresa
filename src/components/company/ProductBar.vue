@@ -87,7 +87,7 @@
                 >
               </v-row>
             </v-card-title>
-            <v-card-text class="px-0">
+            <v-card-text class="px-0 overflow-x-hidden">
               <div class="px-6 description">
                 <span>
                   {{ productSelected.description }}
@@ -117,38 +117,46 @@
                     </v-chip>
                   </v-col>
                 </v-row>
+                <v-list>
+                  <v-list-item-group
+                    dense
+                    v-model="lista[item.name]"
+                    color="#765eda"
+                    multiple
+                    :max="item.limit > 0 ? item.limit : 1000"
+                  >
+                    <template v-for="(item2, key) in item.products">
+                      <v-list-item dense :value="item2" :key="key">
+                        <template v-slot:default="{ active, toggle }">
+                          <v-list-item-content>
+                            <v-list-item-title>
+                              {{ item2.name }}
+                            </v-list-item-title>
+                            <v-list-item-subtitle class="font-weight-bold">
+                              + {{ convertMoney(item2.sale_value) }}
+                            </v-list-item-subtitle>
+                          </v-list-item-content>
 
-                <v-list-item-group
-                  dense
-                  v-for="item2 in item.products"
-                  v-model="lista[item.name]"
-                  :key="item2.id"
-                  color="#765eda"
-                  multiple
-                  :max="item.limit > 0 ? item.limit : 1000"
-                >
-                  <v-list-item dense :value="item2">
-                    <template v-slot:default="{ active, toggle }">
-                      <v-list-item-content>
-                        <v-list-item-title>
-                          {{ item2.name }}
-                        </v-list-item-title>
-                        <v-list-item-subtitle class="font-weight-bold">
-                          + {{ convertMoney(item2.sale_value) }}
-                        </v-list-item-subtitle>
-                      </v-list-item-content>
-
-                      <v-list-item-action>
-                        <v-checkbox
-                          :input-value="active"
-                          :true-value="item2"
-                          color="#765eda"
-                          @click="toggle"
-                        ></v-checkbox>
-                      </v-list-item-action>
+                          <v-list-item-action>
+                            <v-checkbox
+                              :readonly="
+                                lista[item.name]
+                                  ? lista[item.name].length === item.limit
+                                    ? true
+                                    : false
+                                  : false
+                              "
+                              :input-value="active"
+                              :true-value="item2"
+                              color="#765eda"
+                              @click.stop="toggle"
+                            ></v-checkbox>
+                          </v-list-item-action>
+                        </template>
+                      </v-list-item>
                     </template>
-                  </v-list-item>
-                </v-list-item-group>
+                  </v-list-item-group>
+                </v-list>
               </div>
               <div class="my-3 px-5">
                 <v-textarea
