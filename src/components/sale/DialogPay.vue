@@ -7,6 +7,7 @@
     :overlay="false"
     max-width="500"
     transition="dialog-transition"
+    scrollable
   >
     <v-card v-if="company">
       <div class="align-center">
@@ -43,52 +44,42 @@
             </v-list-item-title>
           </v-list-item-content>
           <v-list-item-action>
-            <v-icon @click="step++" color="#765eda"
-              >mdi-help-circle-outline</v-icon
-            >
+            <v-icon color="#765eda">mdi-help-circle-outline</v-icon>
           </v-list-item-action>
         </v-list-item>
       </div>
-      <div>
-        <div>
-          <v-list-item-group
-            v-for="(item, i) in payments"
-            :key="i"
-            multiple
-            color="#765eda"
-            rounded
-            max="2"
-            v-model="payment"
-          >
-            <div>
-              <div class="py-3 grey lighten-4">
-                <span class="mx-3 text-capitalize">{{ item.title }}</span>
-              </div>
-
-              <v-list-item
-                v-for="(pay, key) in item.payments"
-                :key="key"
-                :value="pay"
+      <div class="overflow-x-hidden">
+        <div class="px-5 ">
+          <v-row cols="6" v-for="(item, i) in payments" :key="i">
+            <v-col cols="12">
+              <small>
+                {{ item.title }}
+              </small>
+            </v-col>
+            <v-col v-for="(value, n) in item.payments" :key="n" cols="6">
+              <v-card
+                @click="selectPay(value)"
+                :color="
+                  payment.filter((item) => item.id === value.id).length > 0
+                    ? 'purple darken-5 white--text'
+                    : 'grey lighten-5'
+                "
+                flat
+                outlined
+                link
+                class="px-2"
               >
-                <template v-slot:default="{ active, toggle }">
-                  <v-list-item-content>
-                    <v-list-item-title class="text-capitalize">
-                      {{ pay.title }}
-                    </v-list-item-title>
-                  </v-list-item-content>
-
-                  <v-list-item-action>
-                    <v-checkbox
-                      :input-value="active"
-                      :true-value="pay.id"
-                      color="#765eda"
-                      @click="toggle"
-                    ></v-checkbox>
-                  </v-list-item-action>
-                </template>
-              </v-list-item>
-            </div>
-          </v-list-item-group>
+                <v-row justify="center">
+                  <v-col cols="auto">
+                    <v-img :src="$store.state.server + value.img"></v-img>
+                  </v-col>
+                  <v-col>
+                    <small class="text-capitalize"> {{ value.title }} </small>
+                  </v-col>
+                </v-row>
+              </v-card></v-col
+            >
+          </v-row>
           <div
             v-if="returnMoney"
             class="my-2 col-sm-12 animate__animated animate__zoomIn"
@@ -105,36 +96,23 @@
             ></v-text-field>
           </div>
         </div>
-        <div class="pa-5">
-          <!-- <div class="py-3 grey lighten-4">
-            <span class="mx-3">Usar cashback</span>
-          </div>
-          <v-list-item>
-            <template v-slot:default="{ active, toggle }">
-              <v-list-item-content>
-                <v-list-item-title>
-                  Seu saldo |
-                  <b> <span class="green--text">140 pontos</span> </b>
-                </v-list-item-title>
-              </v-list-item-content>
-              <v-chip color="red lighten-5" dense
-                ><b class="red--text">-30 pontos</b></v-chip
-              >
-              <v-list-item-action>
-                <v-checkbox
-                  :input-value="active"
-                  color="#765eda"
-                  @click="toggle"
-                ></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item> -->
-
-          <v-btn @click="payConfirm()" x-large color="#765eda" dark block>
-            Confirmar
-          </v-btn>
-        </div>
       </div>
+      <v-toolbar height="80px" bottom>
+        <v-row>
+          <v-col cols="12">
+            <v-btn
+              :disabled="payVerify"
+              block
+              :dark="payVerify ? false : true"
+              @click="payConfirm()"
+              x-large
+              color="#765eda"
+            >
+              Confirmar
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-toolbar>
     </v-card>
   </v-dialog>
 </template>
@@ -178,10 +156,35 @@ export default {
       }
       return change;
     },
+    payVerify() {
+      if (this.payment.length > 0) {
+        return false;
+      } else {
+        return true;
+      }
+    },
   },
   methods: {
+    selectPay(value) {
+      if (
+        this.payment.length > 0 &&
+        this.payment.filter((item) => item.id === value.id).length === 0
+      ) {
+        this.payment.push(value);
+      } else if (this.payment.length === 0) {
+        this.payment.push(value);
+      } else if (
+        this.payment.length > 0 &&
+        this.payment.filter((item) => item.id === value.id).length > 0
+      ) {
+        this.payment.forEach((item, index) => {
+          if (item.id === value.id) {
+            this.payment.splice(index, 1);
+          }
+        });
+      }
+    },
     payConfirm() {
-      console.log(this.payment);
       let change;
       if (this.payment) {
         if (this.valueChange) {
