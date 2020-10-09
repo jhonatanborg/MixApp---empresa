@@ -106,7 +106,9 @@
             v-if="purchaseDetails.userCupom"
             class="my-5 d-flex justify-space-between"
           >
-            <div>Cupom: {{ purchaseDetails.userCupom.cupom.name }}</div>
+            <div>
+              Cupom: {{ purchaseDetails.userCupom.cupom.name.split("@")[0] }}
+            </div>
             <v-chip color="red" class="white--text">
               - R$
               {{
@@ -117,7 +119,7 @@
                         purchaseDetails.userCupom.cupom.discount_value / 100
                       ).toFixed(2)
                     ).toFixed(2)
-                  : ""
+                  : purchaseDetails.userCupom.cupom.discount_value
               }}
             </v-chip>
           </div>

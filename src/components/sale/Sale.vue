@@ -152,6 +152,12 @@
                           :error-messages="errorCupom ? 'Cupom inválido' : ''"
                           outlined
                           dense
+                          @input="
+                            cupom = cupom
+                              .split(' ')
+                              .join('')
+                              .toUpperCase()
+                          "
                           :hide-details="!errorCupom"
                         ></v-text-field
                       ></v-col>
