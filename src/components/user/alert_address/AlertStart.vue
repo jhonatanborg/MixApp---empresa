@@ -116,7 +116,7 @@ export default {
                 latitude: resp.data.latitude,
                 longitude: resp.data.longitude,
               };
-              this.$store.commit("user/setAddresEdit", resp.data);
+              this.$store.commit("user/setAddress", resp.data);
               this.$emit("next-register", 2);
               localStorage.setItem("geolocation", JSON.stringify(location));
             } else {
