@@ -19,15 +19,16 @@
       </div>
 
       <div>
-        <vue-tel-input-vuetify
+        <v-text-field
           outlined
           :error="errors.login"
           :placeholder="''"
           :label="'Digite seu telefone'"
           :rules="telRules"
-          :error-messages="errors.login ? 'O login é obrigatório.' : ''"
+          v-mask="['(##) ####-####', '(##) #####-####']"
+          :error-messages="errors.login ? 'Digite um telefone válido  ' : ''"
           v-model="user.login"
-        ></vue-tel-input-vuetify>
+        ></v-text-field>
       </div>
       <div class>
         <v-text-field
@@ -97,7 +98,12 @@ export default {
     validForm() {
       let valid;
       if (this.user.name && this.user.login && this.user.password) {
-        valid = true;
+        valid =
+          this.user.login.match(/[0-9]/g) &&
+          this.user.login.match(/[0-9]/g).length === 11 &&
+          this.user.login.indexOf("@") < 0
+            ? true
+            : ((this.errors.login = true), (valid = false));
       }
       if (!this.user.name) {
         this.errors.name = true;

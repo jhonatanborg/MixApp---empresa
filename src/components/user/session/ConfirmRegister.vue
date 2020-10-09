@@ -4,6 +4,10 @@
       <div class="py-4">
         <h3>Confirme o código</h3>
       </div>
+      <span class="my-3 text-center">
+        Forneça informações adicionais para auxiliar no processo de recuperação
+        de conta.
+      </span>
       <span class="my-3">
         {{ message.message }}
       </span>
@@ -71,37 +75,15 @@ export default {
       })
         .then((resp) => {
           this.loading = false;
-          console.log(resp);
-          this.ContinueLogin();
+          this.$router.push({
+            name: "login",
+            params: { confirm: resp.data.message },
+          });
         })
         .catch((err) => {
           this.loading = false;
           this.msg = err.response.data.message;
         });
-    },
-    ContinueLogin() {
-      this.user = JSON.parse(localStorage.getItem("user-register"));
-      console.log(this.user);
-      axios({
-        url: process.env.VUE_APP_BASE_URL_SERVER_LOCAL + "/session",
-        method: "post",
-        data: {
-          login: this.user.login,
-          password: this.user.password,
-        },
-      }).then((resp) => {
-        localStorage.removeItem("user-register");
-        localStorage.removeItem("message-register");
-        localStorage.setItem("acess-token", resp.data.token);
-        this.$store.commit("user/setUser", resp.data);
-        this.$store.commit("user/setUserName", resp.data.name);
-        if (localStorage.getItem("company")) {
-          let company = JSON.parse(localStorage.getItem("company"));
-          console.log(company.object_id);
-          this.$router.push({ name: "company", params: company.object_id });
-        }
-        this.loading = false;
-      });
     },
   },
 };

@@ -80,7 +80,7 @@ const routes = [
         component: () => import("../components/user/session/ForgotPass.vue"),
       },
       {
-        path: "/reseta-senha/tel",
+        path: "/reseta-senha-tel",
         name: "forgot-pass-tel",
         component: () => import("../components/user/session/ForgotPassTel.vue"),
       },
@@ -88,6 +88,11 @@ const routes = [
         path: "/confimarcao/",
         name: "code-verify",
         component: () => import("../components/user/session/CodeVerify.vue"),
+      },
+      {
+        path: "/autenticar/",
+        name: "code-confirm",
+        component: () => import("../components/user/session/CodeConfirm.vue"),
       },
       {
         path: "/confirmar-cadastro/",

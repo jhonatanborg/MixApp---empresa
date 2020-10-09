@@ -1,11 +1,14 @@
 <template>
   <v-card :loading="loading" outlined>
     <div class="pa-5">
-      <div class="py-1">
-        <h2 class="px-2">
-          Olá! Para continuar, faça o login ou cadastre-se
-        </h2>
+      <div class="headline">
+        <h5>
+          Olá! Para continuar faça o login ou cadastre-se
+        </h5>
       </div>
+      <v-alert dense v-if="confirm" border="left" type="success">
+        {{ confirm }}
+      </v-alert>
       <div class="pa-1">
         <div class="pt-4">
           <v-text-field
@@ -70,6 +73,11 @@
 <script>
 import axios from "axios";
 export default {
+  mounted() {
+    if (this.$route.params.confirm) {
+      this.confirm = this.$route.params.confirm;
+    }
+  },
   data: () => ({
     loading: false,
     user: {
@@ -81,6 +89,7 @@ export default {
     messageError: null,
     errorMail: false,
     errorPass: false,
+    confirm: null,
   }),
 
   methods: {
@@ -114,7 +123,6 @@ export default {
             this.loading = false;
           })
           .catch((err) => {
-            console.log(err);
             if (err.response.data[0]) {
               this.error = true;
               this.messageError = err.response.data[0].message;
@@ -123,6 +131,12 @@ export default {
               this.error = true;
               this.messageError = err.response.data.message;
               this.loading = false;
+              if (err.response.data.confirm) {
+                this.$router.push({
+                  name: "code-confirm",
+                });
+                localStorage.setItem("user", JSON.stringify(this.user));
+              }
             }
           });
       }

@@ -26,6 +26,7 @@ export default new Vuex.Store({
     alertSale: false,
     addressAlert: false,
     server: process.env.VUE_APP_BASE_URL_SERVER_LOCAL,
+    timezone: "America/Cuiaba",
   },
   mutations: {
     showAlert(state, data) {

@@ -17,7 +17,7 @@
           <h4 class="value-purchase" v-text="convertMoney(item.total)"></h4>
         </v-col>
         <v-col cols="auto">
-          <h4 class="data-purchase" v-text="convertDate(item.updated_at)"></h4>
+          <h4 class="data-purchase" v-text="datetime(item.updated_at)"></h4>
         </v-col>
       </v-row>
       <v-row justify="space-between">
@@ -36,7 +36,10 @@
 </template>
 
 <script>
+import mixin from "@/mixins/mixins.js";
 export default {
+  mixins: [mixin],
+
   mounted() {
     this.getPurchases();
   },
