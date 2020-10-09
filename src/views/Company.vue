@@ -156,7 +156,6 @@ export default {
           url: `/company-show/${process.env.VUE_APP_DOMAIN},${coords.latitude},${coords.longitude}`,
           insert: true,
         };
-        console.log(payload.url);
         this.execRequest("user/request", "address", "/coord", "POST", true, {
           lat: coords.latitude,
           long: coords.longitude,
@@ -169,7 +168,6 @@ export default {
           url: `/company-show-one/${process.env.VUE_APP_DOMAIN}`,
           insert: true,
         };
-        console.log(payload.url);
 
         this.$store.dispatch("company/request", payload);
       }

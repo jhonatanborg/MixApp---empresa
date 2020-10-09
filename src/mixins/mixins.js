@@ -1,4 +1,3 @@
-import { utcToZonedTime, format } from "date-fns-tz";
 export default {
   methods: {
     convertMoney(money) {
@@ -12,17 +11,6 @@ export default {
       } else {
         return "Grátis";
       }
-    },
-    datetime(date) {
-      const timeZone = this.$store.state.timezone;
-      const zonedDate = utcToZonedTime(date, timeZone);
-
-      const pattern = "dd/M/yyyy HH:mm:ss";
-      const output = format(zonedDate, pattern, {
-        timeZone,
-      });
-
-      return output;
     },
   },
 };
