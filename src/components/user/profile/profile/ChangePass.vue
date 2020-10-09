@@ -123,7 +123,9 @@ export default {
       if (next) {
         axios({
           url:
-            process.env.VUE_APP_BASE_URL_SERVER_LOCAL + "/user/" + this.user.id,
+            process.env.VUE_APP_BASE_URL_SERVER_LOCAL +
+            "/user-client/" +
+            this.user.id,
           method: "PUT",
           headers: null || {
             Authorization: `Bearer ${localStorage.getItem("acess-token")}`,
@@ -133,10 +135,13 @@ export default {
             password: this.newPassword,
           },
         })
-          .then(() => {
+          .then((resp) => {
+            console.log(resp);
             this.$router.go(-1);
           })
           .catch((err) => {
+            console.log(err);
+
             if (err.response.data[0]) {
               this.errorPassOld = true;
               this.msgErrorOldPass = err.response.data[0].message;
