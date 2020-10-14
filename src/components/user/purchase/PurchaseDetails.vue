@@ -13,7 +13,9 @@
           </div>
         </div>
         <div>
-          <div class="complements">Horário: {{ time }}</div>
+          <div class="complements">
+            Horário: {{ purchaseDetails.created_at }}
+          </div>
         </div>
       </div>
 
@@ -174,9 +176,7 @@ export default {
     subcategories() {
       return this.$store.getters["user/getPurchase"];
     },
-    time() {
-      return new Date(this.purchaseDetails.created_at).toLocaleTimeString();
-    },
+
     statusPurchase() {
       let status;
       let action;
