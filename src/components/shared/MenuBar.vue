@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <v-app-bar app flat id="app-bar">
+    <v-app-bar app id="app-bar" flat hide-on-scroll>
       <v-btn dense :to="'/'" :ripple="false" text
         ><b>{{ company.name }}</b></v-btn
       >

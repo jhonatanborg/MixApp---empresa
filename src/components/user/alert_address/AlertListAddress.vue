@@ -54,7 +54,7 @@
               block
               dark
               dense
-              color="#765eda"
+              color="#ffa602"
               class="font-weight-bold"
               >Confirmar</v-btn
             >
@@ -78,7 +78,7 @@
               large
               depressed
               block
-              color="#765eda"
+              color="#ffa602"
             >
               Cadastrar endereço
             </v-btn>

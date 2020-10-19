@@ -41,7 +41,7 @@
           <v-divider></v-divider>
         </div>
       </v-list>
-      <v-btn block @click="dialog()" outlined color="#765eda" dark
+      <v-btn block @click="dialog()" outlined color="#ffa602" dark
         >Novo endereço</v-btn
       >
     </v-card>

@@ -8,7 +8,7 @@
       </div>
       <div class="pt-4">
         <v-text-field
-          color="#765eda"
+          color="#ffa602"
           v-model="user.name"
           outlined
           :rules="nameRules"
@@ -20,7 +20,7 @@
 
       <div>
         <v-text-field
-          color="#765eda"
+          color="#ffa602"
           v-model="user.login"
           outlined
           :rules="nameRules"
@@ -43,7 +43,7 @@
       </div>
       <div class>
         <v-text-field
-          color="#765eda"
+          color="#ffa602"
           v-model="user.password"
           :rules="passRules"
           outlined
@@ -64,7 +64,7 @@
           :loading="loading"
           block
           large
-          color="#765eda"
+          color="#ffa602"
           dark
           @click="register()"
           >Confirmar</v-btn

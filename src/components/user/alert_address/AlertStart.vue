@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12" sm="9">
         <v-text-field
-          color="#765eda"
+          color="#ffa602"
           outlined
           dense
           hide-details
@@ -16,7 +16,7 @@
       <v-col cols="12" sm="3">
         <v-text-field
           hide-details
-          color="#765eda"
+          color="#ffa602"
           outlined
           dense
           v-model="newAddress.number"
@@ -26,7 +26,7 @@
       </v-col>
       <v-col cols="12" sm="12">
         <v-text-field
-          color="#765eda"
+          color="#ffa602"
           outlined
           dense
           hide-details
@@ -57,7 +57,7 @@
         ></v-col
       >
       <v-col cols="12" sm="6">
-        <v-btn @click="getAddressByString()" block dark color="#765eda">
+        <v-btn @click="getAddressByString()" block dark color="#ffa602">
           <v-icon>mdi-magnify</v-icon> Buscar endereço
         </v-btn>
       </v-col>

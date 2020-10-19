@@ -27,7 +27,7 @@
         </v-list-item>
         <v-list-item
           class="mt-3"
-          color="#765eda"
+          color="#ffa602"
           :to="{
             name: 'profile',
             params: { userRouter: user },
@@ -35,13 +35,13 @@
         >
           Informações de conta
         </v-list-item>
-        <!-- <v-list-item color="#765eda" :to="{ name: 'cashback' }" link>
+        <!-- <v-list-item color="#ffa602" :to="{ name: 'cashback' }" link>
           Cashback
         </v-list-item> -->
-        <v-list-item color="#765eda" :to="{ name: 'address' }" link>
+        <v-list-item color="#ffa602" :to="{ name: 'address' }" link>
           Meus Endereços
         </v-list-item>
-        <v-list-item color="#765eda" :to="{ name: 'purchases' }" link>
+        <v-list-item color="#ffa602" :to="{ name: 'purchases' }" link>
           Meus Pedidos
         </v-list-item>
         <!-- <v-list-item link>

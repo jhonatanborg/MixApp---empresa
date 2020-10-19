@@ -6,6 +6,7 @@
       <SaleError />
 
       <Sale />
+
       <router-view />
     </v-main>
   </v-app>

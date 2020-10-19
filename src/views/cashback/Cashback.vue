@@ -118,6 +118,6 @@ export default {
   font-weight: bold;
   font-size: 14px;
   text-align: left;
-  color: #765eda;
+  color: #ffa602;
 }
 </style>

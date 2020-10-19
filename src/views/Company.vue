@@ -4,13 +4,15 @@
     <div id="company" v-if="company.name">
       <div v-if="!$vuetify.breakpoint.xsOnly">
         <ProfileDetails :company="company" />
-        <v-row>
-          <v-col cols="auto" v-for="(item, key) in categories" :key="key">
-            <v-btn text @click="filterScroll(item)" rounded color="black">{{
-              item.name
-            }}</v-btn>
-          </v-col>
-        </v-row>
+        <v-app-bar class="fixed-bar" flat color="#ffa602">
+          <div v-for="(item, key) in categories" :key="key">
+            <v-btn text @click="filterScroll(item)">
+              <b>
+                {{ item.name }}
+              </b>
+            </v-btn>
+          </div>
+        </v-app-bar>
       </div>
       <div v-else><ProfileMobile :company="company" /></div>
       <div
@@ -48,7 +50,7 @@
         class="elevation-7"
         block
         large
-        color="#765eda"
+        color="#ffa602"
         dark
         rounded
       >
@@ -193,5 +195,11 @@ export default {
 <style>
 .v-btn {
   text-transform: none !important;
+}
+.fixed-bar {
+  position: sticky !important;
+  position: -webkit-sticky !important; /* for Safari */
+  top: 2em !important;
+  z-index: 2 !important;
 }
 </style>

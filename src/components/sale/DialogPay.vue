@@ -44,7 +44,7 @@
             </v-list-item-title>
           </v-list-item-content>
           <v-list-item-action>
-            <v-icon color="#765eda">mdi-help-circle-outline</v-icon>
+            <v-icon color="#ffa602">mdi-help-circle-outline</v-icon>
           </v-list-item-action>
         </v-list-item>
       </div>
@@ -106,7 +106,7 @@
               :dark="payVerify ? false : true"
               @click="payConfirm()"
               x-large
-              color="#765eda"
+              color="#ffa602"
             >
               Confirmar
             </v-btn>

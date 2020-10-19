@@ -51,7 +51,7 @@
               depressed
               dark
               block
-              color="#765eda"
+              color="#ffa602"
               >Confirmar
             </v-btn>
           </v-col>

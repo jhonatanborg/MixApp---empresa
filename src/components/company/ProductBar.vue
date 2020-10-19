@@ -121,7 +121,7 @@
                   <v-list-item-group
                     dense
                     v-model="lista[item.name]"
-                    color="#765eda"
+                    color="#ffa602"
                     multiple
                     :max="item.limit > 0 ? item.limit : 1000"
                   >
@@ -148,7 +148,7 @@
                               "
                               :input-value="active"
                               :true-value="item2"
-                              color="#765eda"
+                              color="#ffa602"
                               @click.stop="toggle"
                             ></v-checkbox>
                           </v-list-item-action>
@@ -190,7 +190,7 @@
                     block
                     x-large
                     depressed
-                    color="#765eda"
+                    color="#ffa602"
                     @click="AddPurchaseMount"
                     :disabled="verifyMandatory"
                   >
@@ -288,7 +288,7 @@
                 ></v-textarea>
               </div>
             </v-card-text>
-            <v-toolbar absolute bottom>
+            <v-toolbar bottom floating absolute height="80px">
               <v-row align="center">
                 <v-col cols="4" sm="4">
                   <v-select
@@ -306,7 +306,7 @@
                     type="submit"
                     depressed
                     dark
-                    color="#765eda"
+                    color="#ffa602"
                     @click="AddPurchase"
                   >
                     <div>

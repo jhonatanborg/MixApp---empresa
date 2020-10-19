@@ -31,7 +31,10 @@
           <AlertStart @next-register="controlsTabs" />
         </v-window-item>
         <v-window-item class="px-3 py-0" :value="2">
-          <MapAddress @confirm-address="controlsTabs" />
+          <MapAddress
+            @confirm-address="controlsTabs"
+            @return-start="controlsTabs"
+          />
         </v-window-item>
         <v-window-item class="pa-0" :value="3">
           <AlertListAddress

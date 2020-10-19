@@ -49,7 +49,7 @@
     <v-container class="grey lighten-5 col-md-10 mx-auto">
       <v-row justify="space-between" align="center">
         <v-col cols="auto">
-          <v-chip class="pa-5" large text-color="white" color="#765eda">
+          <v-chip class="pa-5" large text-color="white" color="#ffa602">
             <span class="mr-4">Mix on |</span>
             <span>seu saldo:</span>
             <b class="mx-3">120 pontos</b></v-chip
@@ -61,7 +61,7 @@
             dense
             hide-details
             class="my-0 py-0"
-            color="#765eda"
+            color="#ffa602"
             item-text="name"
             item-value="id"
             label="Relevância"

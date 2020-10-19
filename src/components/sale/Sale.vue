@@ -67,7 +67,7 @@
                       {{ address.complement }}</v-list-item-subtitle
                     >
                   </v-list-item-content>
-                  <v-btn small icon color="#765eda">
+                  <v-btn small icon color="#ffa602">
                     <v-icon size="20">mdi-pencil-outline</v-icon>
                   </v-btn>
                 </v-list-item>
@@ -127,7 +127,7 @@
                   ></div>
                 </v-list-item>
                 <div class="col-sm-12">
-                  <v-btn dense @click="userVerify()" block color="#765eda" dark
+                  <v-btn dense @click="userVerify()" block color="#ffa602" dark
                     >Confirmar</v-btn
                   >
                 </div>
@@ -168,7 +168,7 @@
                           dark
                           :loading="loadingCupom"
                           block
-                          color="#765eda"
+                          color="#ffa602"
                           >Validar</v-btn
                         >
                       </v-col>
@@ -243,7 +243,7 @@
                           @click="paySelect()"
                           dense
                           outlined
-                          color="#765eda"
+                          color="#ffa602"
                           dark
                           block
                         >
@@ -264,7 +264,7 @@
                             </v-list-item-subtitle>
                           </v-list-item-content>
                           <v-list-item-action>
-                            <v-btn icon small color="#765eda">
+                            <v-btn icon small color="#ffa602">
                               <v-icon size="20">mdi-pencil-outline</v-icon>
                             </v-btn>
                           </v-list-item-action>
@@ -275,7 +275,7 @@
                         <v-btn
                           @click="sendPurchase()"
                           dense
-                          color="#765eda"
+                          color="#ffa602"
                           :disabled="!verifyPay"
                           block
                           class="white--text"
@@ -309,7 +309,7 @@
                   Não sabe o que comer? Centenas de delicias esperam por você!
                 </h4>
               </div>
-              <v-btn large color="#765eda" to="/" dark>Veja o cardápio</v-btn>
+              <v-btn large color="#ffa602" to="/" dark>Veja o cardápio</v-btn>
             </div>
           </div>
         </v-card>
