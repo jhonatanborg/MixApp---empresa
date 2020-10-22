@@ -17,11 +17,8 @@
           <h4 class="value-purchase" v-text="convertMoney(item.total)"></h4>
         </v-col>
         <v-col cols="auto">
-<<<<<<< HEAD
           <h4 class="data-purchase" v-text="item.created_at"></h4>
-=======
           <h4 class="data-purchase" v-text="convertDate(item.created_at)"></h4>
->>>>>>> b238ecfec61226306f083764d96e734a1ef28c3a
         </v-col>
       </v-row>
       <v-row justify="space-between">
