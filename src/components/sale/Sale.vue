@@ -55,6 +55,52 @@
           <div id="list-products">
             <v-window :value="step.step">
               <v-window-item :value="1">
+                <v-card
+                  class="overflow-y-auto barscroll "
+                  style="max-height: 320px;"
+                  flat
+                >
+                  <div class="py-3 ">
+                    <span class="mx-3">Produtos</span>
+                  </div>
+                  <v-divider></v-divider>
+                  <v-list-item
+                    dense
+                    v-for="item in sale"
+                    :key="item.id"
+                    link
+                    class="my-0"
+                  >
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        <b> {{ item.product_qtd }}x</b>
+                        {{ item.product_name }}</v-list-item-title
+                      >
+                      <v-list-item-subtitle class="price-item">
+                        <b v-text="convertMoney(item.total)"> </b>
+                      </v-list-item-subtitle>
+                    </v-list-item-content>
+
+                    <v-list-item-action>
+                      <v-btn
+                        @click="deleteItemSale(item.id)"
+                        icon
+                        color="error"
+                      >
+                        <v-icon>mdi-close-circle-outline</v-icon>
+                      </v-btn>
+                    </v-list-item-action>
+                  </v-list-item>
+                </v-card>
+
+                <v-list-item>
+                  <span class="pay-subtitle">Subtotal</span>
+                  <v-spacer></v-spacer>
+                  <div
+                    class="font-weight-bold black--text"
+                    v-text="convertMoney(subTotal)"
+                  ></div>
+                </v-list-item>
                 <div class="py-2 grey lighten-4">
                   <span class="mx-3">Entregar em:</span>
                 </div>
@@ -71,64 +117,14 @@
                     <v-icon size="20">mdi-pencil-outline</v-icon>
                   </v-btn>
                 </v-list-item>
-                <v-card
-                  class="overflow-y-auto barscroll "
-                  style="max-height: 320px;"
-                  flat
-                >
-                  <div class="py-3 grey lighten-4">
-                    <span class="mx-3">Produtos</span>
-                  </div>
-                  <v-list-item
-                    dense
-                    v-for="item in sale"
-                    :key="item.id"
-                    link
-                    class="my-0"
-                  >
-                    <v-list-item-content>
-                      <div class=""></div>
-                      <v-list-item-title>
-                        <b> {{ item.product_qtd }}x</b>
-                        {{ item.product_name }}</v-list-item-title
-                      >
-                      <v-list-item-subtitle
-                        v-if="item.cashback_return"
-                        class="green--text"
-                      >
-                        + {{ parseInt(item.cashback_return) }} pontos
-                      </v-list-item-subtitle>
-                    </v-list-item-content>
-                    <v-list-item-action>
-                      <div class="price-item">
-                        <small>
-                          <b v-text="convertMoney(item.total)"> </b>
-                        </small>
-                      </div>
-                    </v-list-item-action>
-                    <v-list-item-action>
-                      <v-btn
-                        @click="deleteItemSale(item.id)"
-                        icon
-                        color="error"
-                      >
-                        <v-icon>mdi-close-circle-outline</v-icon>
-                      </v-btn>
-                    </v-list-item-action>
-                  </v-list-item>
-                </v-card>
-
-                <v-list-item class=" grey lighten-4">
-                  <span class="pay-subtitle">Subtotal</span>
-                  <v-spacer></v-spacer>
-                  <div
-                    class="font-weight-bold black--text"
-                    v-text="convertMoney(subTotal)"
-                  ></div>
-                </v-list-item>
                 <div class="col-sm-12">
-                  <v-btn dense @click="userVerify()" block color="#ffa602" dark
-                    >Confirmar</v-btn
+                  <v-btn
+                    depressed
+                    @click="userVerify()"
+                    block
+                    color="#ffa602"
+                    dark
+                    >Selecionar forma de pagamento</v-btn
                   >
                 </div>
               </v-window-item>
