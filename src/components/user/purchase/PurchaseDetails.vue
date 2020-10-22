@@ -13,7 +13,9 @@
           </div>
         </div>
         <div>
-          <div class="complements">Horário: {{ time }}</div>
+          <div class="complements">
+            Horário: {{ purchaseDetails.created_at }}
+          </div>
         </div>
       </div>
 
@@ -106,7 +108,9 @@
             v-if="purchaseDetails.userCupom"
             class="my-5 d-flex justify-space-between"
           >
-            <div>Cupom: {{ purchaseDetails.userCupom.cupom.name }}</div>
+            <div>
+              Cupom: {{ purchaseDetails.userCupom.cupom.name.split("@")[0] }}
+            </div>
             <v-chip color="red" class="white--text">
               - R$
               {{
@@ -117,7 +121,7 @@
                         purchaseDetails.userCupom.cupom.discount_value / 100
                       ).toFixed(2)
                     ).toFixed(2)
-                  : ""
+                  : purchaseDetails.userCupom.cupom.discount_value
               }}
             </v-chip>
           </div>
@@ -172,9 +176,7 @@ export default {
     subcategories() {
       return this.$store.getters["user/getPurchase"];
     },
-    time() {
-      return new Date(this.purchaseDetails.created_at).toLocaleTimeString();
-    },
+
     statusPurchase() {
       let status;
       let action;

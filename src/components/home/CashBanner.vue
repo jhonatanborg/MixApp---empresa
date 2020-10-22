@@ -30,7 +30,7 @@
 
           <v-row>
             <v-col sm="6">
-              <v-btn block rounded dark x-large color="#765eda"
+              <v-btn block rounded dark x-large color="#ffa602"
                 >Veja mais</v-btn
               >
             </v-col>

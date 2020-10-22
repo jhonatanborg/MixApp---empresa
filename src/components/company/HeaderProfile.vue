@@ -1,15 +1,16 @@
 <template>
   <div>
     <v-img
+      class="d-flex align-center "
       height="300px"
       :aspect-ratio="16 / 9"
-      src="https://images.pexels.com/photos/262947/pexels-photo-262947.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      :src="$store.state.server + company.capa"
     >
       <v-card
         tile
         flat
-        class="white pa-6 my-7"
-        max-width="750px"
+        class="white pa-1 "
+        max-width="600px"
         max-height="250px"
       >
         <v-row>
@@ -17,13 +18,10 @@
             ><v-card flat>
               <v-img
                 aspect-ratio="1.1"
-                width="400px"
                 :src="$store.state.server + company.logo"
               >
-                <!-- src="https://s3-sa-east-1.amazonaws.com/projetos-artes/fullsize%2f2019%2f02%2f28%2f17%2fLogo-253716_341712_173106804_1653267716.jpg" -->
               </v-img></v-card
-            ></v-col
-          >
+          ></v-col>
           <v-col>
             <div class="details">
               <div class="title-company-header">
@@ -63,7 +61,7 @@
                 <v-col cols="auto"
                   ><v-chip @click="openAboutDialog()" outlined>
                     <v-icon size="20" class="mr-1  ">mdi-information</v-icon>
-                    Mais informações</v-chip
+                    Sobre</v-chip
                   ></v-col
                 >
               </v-row>

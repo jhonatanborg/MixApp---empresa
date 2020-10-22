@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row justify="center" v-if="address">
+    <v-row justify="center" align-sm="center" v-if="address">
       <v-col cols="12">
         <v-card flat max-width="600px">
           <div class="map">
@@ -13,7 +13,7 @@
               :center="coords"
             >
               <l-control position="topright" tag="v-" name="map">
-                <v-alert dark color="#765eda">
+                <v-alert dark color="#ffa602">
                   <small>
                     {{ address.street }}, {{ address.number }} -
                     {{ address.district }}, {{ address.city }} -
@@ -32,16 +32,35 @@
               ></l-marker>
             </l-map>
           </div>
-          <v-btn
-            block
-            class="my-5"
-            color="#765eda"
-            @click="updateLocalAddress()"
-            dark
-            >Confirmar</v-btn
-          >
         </v-card>
       </v-col>
+    </v-row>
+    <v-row>
+      <v-toolbar height="80px" bottom short>
+        <v-row align="center">
+          <v-col cols="4" sm="4">
+            <v-btn
+              @click="$emit('return-start', 1)"
+              block
+              class="my-5"
+              color="#ffa602"
+              outlined
+              dark
+              >Voltar</v-btn
+            >
+          </v-col>
+          <v-col cols="8" sm="8">
+            <v-btn
+              block
+              class="my-5"
+              color="#ffa602"
+              @click="updateLocalAddress()"
+              dark
+              >Confirmar</v-btn
+            >
+          </v-col>
+        </v-row>
+      </v-toolbar>
     </v-row>
   </div>
 </template>

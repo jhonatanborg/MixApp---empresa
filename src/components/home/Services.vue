@@ -11,7 +11,7 @@
           </v-img>
           <div class="my-3">
             <span class="d-flex align center my-3">
-              <v-icon color="#765eda" class="mr-2" size="20">mdi-circle</v-icon>
+              <v-icon color="#ffa602" class="mr-2" size="20">mdi-circle</v-icon>
               <b>Todos os sabores</b>
             </span>
           </div>
@@ -23,7 +23,7 @@
             </p>
           </div>
           <div>
-            <v-btn block color="#765eda" dark depressed rounded
+            <v-btn block color="#ffa602" dark depressed rounded
               ><b>Cadastre-se</b></v-btn
             >
           </div>
@@ -39,7 +39,7 @@
           </v-img>
           <div class="my-3">
             <span class="d-flex align center my-3">
-              <v-icon color="#765eda" dark class="mr-2" size="20"
+              <v-icon color="#ffa602" dark class="mr-2" size="20"
                 >mdi-circle</v-icon
               >
               <b>Entregadores</b>
@@ -53,7 +53,7 @@
             </p>
           </div>
           <div>
-            <v-btn block color="#765eda" dark depressed rounded
+            <v-btn block color="#ffa602" dark depressed rounded
               ><b>Cadastre-se</b></v-btn
             >
           </div>
@@ -65,7 +65,7 @@
           </v-img>
           <div class="my-3">
             <span class="d-flex align center my-3">
-              <v-icon color="#765eda" class="mr-2" size="20">mdi-circle</v-icon>
+              <v-icon color="#ffa602" class="mr-2" size="20">mdi-circle</v-icon>
               <b>Para empresas</b>
             </span>
           </div>
@@ -77,7 +77,7 @@
             </p>
           </div>
           <div>
-            <v-btn block color="#765eda" dark depressed rounded
+            <v-btn block color="#ffa602" dark depressed rounded
               ><b>Cadastre-se</b></v-btn
             >
           </div>
@@ -93,7 +93,7 @@
           </v-img>
           <div class="my-3">
             <span class="d-flex align center my-3">
-              <v-icon color="#765eda" class="mr-2" size="20">mdi-circle</v-icon>
+              <v-icon color="#ffa602" class="mr-2" size="20">mdi-circle</v-icon>
               <b>Cashback</b>
             </span>
           </div>
@@ -105,7 +105,7 @@
             </p>
           </div>
           <div>
-            <v-btn block color="#765eda" dark depressed rounded
+            <v-btn block color="#ffa602" dark depressed rounded
               ><b>Cadastre-se</b></v-btn
             >
           </div>

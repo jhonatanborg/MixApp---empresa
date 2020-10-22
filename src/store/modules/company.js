@@ -14,7 +14,7 @@ const company = {
   getters: {
     getProducts(state) {
       if (state.company) {
-        return state.company.prodCategories.find("products");
+        return state.company.prodCategories.reverse();
       }
     },
     getAllCategories(state) {

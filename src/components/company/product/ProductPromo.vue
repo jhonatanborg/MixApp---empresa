@@ -6,7 +6,7 @@
           <v-img
             width="50"
             aspect-ratio="1.1"
-            src="https://static1.conquistesuavida.com.br/articles//8/10/47/8/@/28952-frutas-como-banana-morango-kiwi-e-mang-article_block_media_large-2.jpg"
+            :src="$store.state.server + product.product.img"
           ></v-img>
         </v-list-item-avatar>
         <v-list-item-content>

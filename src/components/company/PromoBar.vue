@@ -123,7 +123,7 @@
                   type="submit"
                   depressed
                   dark
-                  color="#765eda"
+                  color="#ffa602"
                   @click="AddPurchase"
                 >
                   <div>
@@ -232,7 +232,7 @@
                 v-for="item2 in item.products"
                 v-model="lista[item.name]"
                 :key="item2.id"
-                color="#765eda"
+                color="#ffa602"
                 multiple
                 :max="item.limit > 0 ? item.limit : 1000"
               >
@@ -251,7 +251,7 @@
                       <v-checkbox
                         :input-value="active"
                         :true-value="item2"
-                        color="#765eda"
+                        color="#ffa602"
                         @click="toggle"
                       ></v-checkbox>
                     </v-list-item-action>
@@ -291,7 +291,7 @@
                   block
                   x-large
                   depressed
-                  color="#765eda"
+                  color="#ffa602"
                   @click="AddPurchaseMount"
                   :disabled="verifyMandatory"
                 >

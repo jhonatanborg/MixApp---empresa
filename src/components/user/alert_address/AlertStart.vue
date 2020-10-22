@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12" sm="9">
         <v-text-field
-          color="#765eda"
+          color="#ffa602"
           outlined
           dense
           hide-details
@@ -16,7 +16,7 @@
       <v-col cols="12" sm="3">
         <v-text-field
           hide-details
-          color="#765eda"
+          color="#ffa602"
           outlined
           dense
           v-model="newAddress.number"
@@ -26,7 +26,7 @@
       </v-col>
       <v-col cols="12" sm="12">
         <v-text-field
-          color="#765eda"
+          color="#ffa602"
           outlined
           dense
           hide-details
@@ -57,7 +57,7 @@
         ></v-col
       >
       <v-col cols="12" sm="6">
-        <v-btn @click="getAddressByString()" block dark color="#765eda">
+        <v-btn @click="getAddressByString()" block dark color="#ffa602">
           <v-icon>mdi-magnify</v-icon> Buscar endereço
         </v-btn>
       </v-col>
@@ -116,7 +116,7 @@ export default {
                 latitude: resp.data.latitude,
                 longitude: resp.data.longitude,
               };
-              this.$store.commit("user/setAddresEdit", resp.data);
+              this.$store.commit("user/setAddress", resp.data);
               this.$emit("next-register", 2);
               localStorage.setItem("geolocation", JSON.stringify(location));
             } else {

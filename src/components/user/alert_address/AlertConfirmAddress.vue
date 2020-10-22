@@ -1,6 +1,6 @@
 <template>
   <div class="pa-5">
-    <v-alert color="#765eda" dark border="left">
+    <v-alert color="#ffa602" dark border="left">
       <small>
         {{ address.street }}, {{ address.number }} - {{ address.district }},
         {{ address.city }} - {{ address.state }}</small
@@ -11,7 +11,7 @@
         <v-text-field
           hide-details
           clearable
-          color="#765eda"
+          color="#ffa602"
           outlined
           dense
           label="Número"
@@ -22,7 +22,7 @@
         <v-text-field
           clearable
           hide-details
-          color="#765eda"
+          color="#ffa602"
           outlined
           dense
           :rules="ruleTitle"
@@ -36,7 +36,7 @@
         <v-text-field
           clearable
           hide-details
-          color="#765eda"
+          color="#ffa602"
           outlined
           dense
           v-model="complement"
@@ -50,7 +50,7 @@
         >
       </v-col>
       <v-col cols="12" sm="8">
-        <v-btn @click="updateLocalAddress" dark block color="#765eda"
+        <v-btn @click="updateLocalAddress" dark block color="#ffa602"
           >Confirmar</v-btn
         >
       </v-col>

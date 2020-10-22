@@ -121,7 +121,7 @@
                   <v-list-item-group
                     dense
                     v-model="lista[item.name]"
-                    color="#765eda"
+                    color="#ffa602"
                     multiple
                     :max="item.limit > 0 ? item.limit : 1000"
                   >
@@ -148,7 +148,7 @@
                               "
                               :input-value="active"
                               :true-value="item2"
-                              color="#765eda"
+                              color="#ffa602"
                               @click.stop="toggle"
                             ></v-checkbox>
                           </v-list-item-action>
@@ -190,7 +190,7 @@
                     block
                     x-large
                     depressed
-                    color="#765eda"
+                    color="#ffa602"
                     @click="AddPurchaseMount"
                     :disabled="verifyMandatory"
                   >
@@ -288,7 +288,7 @@
                 ></v-textarea>
               </div>
             </v-card-text>
-            <v-toolbar absolute bottom>
+            <v-toolbar bottom floating absolute height="80px">
               <v-row align="center">
                 <v-col cols="4" sm="4">
                   <v-select
@@ -296,8 +296,6 @@
                     :items="items"
                     v-model="quantity"
                     solo
-                    :item-text="items.text"
-                    :item-value="items.value"
                     :menu-props="{ top: true, offsetY: true }"
                   ></v-select>
                 </v-col>
@@ -308,7 +306,7 @@
                     type="submit"
                     depressed
                     dark
-                    color="#765eda"
+                    color="#ffa602"
                     @click="AddPurchase"
                   >
                     <div>
@@ -351,44 +349,7 @@ export default {
     lista: [],
     comment: "",
     alertSale: true,
-    items: [
-      {
-        text: "1 item",
-        value: 1,
-      },
-      {
-        text: "2 items",
-        value: 2,
-      },
-      {
-        text: "3 itens",
-        value: 3,
-      },
-      {
-        text: "4 itens",
-        value: 4,
-      },
-      {
-        text: "5 itens",
-        value: 5,
-      },
-      {
-        text: "6 itens",
-        value: 6,
-      },
-      {
-        text: "7 itens",
-        value: 7,
-      },
-      {
-        text: "8 itens",
-        value: 8,
-      },
-      {
-        text: "9 itens",
-        value: 9,
-      },
-    ],
+    items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     total: Number,
     quantity: 1,
     productSelected: Object,

@@ -4,7 +4,7 @@
       <div class=" mx-auto">
         <v-card
           tile
-          color="#765eda"
+          color="#ffa602"
           flat
           class="pa-5  py-auto"
           min-height="250px"
