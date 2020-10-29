@@ -72,7 +72,7 @@ export default {
         url: process.env.VUE_APP_BASE_URL_SERVER_LOCAL + "/verify-forgot",
         method: "post",
         data: {
-          email: this.email,
+          login: this.email,
         },
       }).then((resp) => {
         if (resp.data.next) {

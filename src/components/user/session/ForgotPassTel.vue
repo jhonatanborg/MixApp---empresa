@@ -58,7 +58,7 @@ export default {
         url: process.env.VUE_APP_BASE_URL_SERVER_LOCAL + "/verify-forgot",
         method: "post",
         data: {
-          phone: this.tel,
+          login: this.tel,
         },
       })
         .then((resp) => {
