@@ -4,7 +4,7 @@
       <div>
         <div
           id="list-products text-uppercase"
-          v-for="(item, index) in products.reverse()"
+          v-for="(item, index) in products"
           :key="index"
         >
           <div :id="'go' + item.id">
