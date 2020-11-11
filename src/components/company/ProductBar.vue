@@ -512,7 +512,6 @@ export default {
         product_name: this.productSelected.name,
         total: parseFloat(this.Total),
         cashback_return: this.productSelected.cashback_return,
-
         sale_type_id: 1,
         company_id: this.company.id,
         childs: objectChilds,
@@ -558,7 +557,6 @@ export default {
         },
       });
       this.$store.commit("cart/sidebar", true);
-
       this.lista = [];
     },
   },

@@ -12,5 +12,21 @@ export default {
         return "Grátis";
       }
     },
+    convertDate(date) {
+      return date
+        .substr(0, 10)
+        .split("-")
+        .reverse()
+        .join("/");
+    },
+    compareDate(expires) {
+      var date = new Date(
+        expires
+          .split("/")
+          .reverse()
+          .join("/")
+      );
+      return new Date() <= date ? true : false;
+    },
   },
 };

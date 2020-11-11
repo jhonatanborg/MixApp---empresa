@@ -1,5 +1,7 @@
 import actionsGlobal from "../actions";
 import mutationsGlobal from "../mutations";
+import getDay from "date-fns/getDay";
+import mixins from "@/mixins/mixins.js";
 
 const company = {
   namespaced: true,
@@ -44,6 +46,25 @@ const company = {
     getCompany(state) {
       if (state.company.message) return (state.company = state.company.company);
       return state.company;
+    },
+    getPromo(state) {
+      let products = [];
+      if (state.company.promotions) {
+        state.company.promotions.forEach((value) => {
+          if (
+            (value.expires && mixins.methods.compareDate(value.expires)) ||
+            (value.days.match(/[0-9]/g) &&
+              value.days
+                .match(/[0-9]/g)
+                .includes(getDay(new Date()).toString()))
+          ) {
+            return products.push(value);
+          } else if (!value.expires && !value.days.match(/[0-9]/g)) {
+            return products.push(value);
+          }
+        });
+        return products;
+      }
     },
   },
 

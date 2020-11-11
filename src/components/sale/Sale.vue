@@ -469,7 +469,6 @@ export default {
         console.log(this.pay);
         if (paymentsArray.length > 0) {
           delete this.address.type;
-          console.log(this.address);
           let sale = {
             address: this.address,
             saleItems: this.sale,
@@ -477,6 +476,7 @@ export default {
             cupom: this.cupom ? this.cupom + "@" + this.company.id : "",
             payment_available_id: paymentsArray,
             company_id: this.company.id,
+            ispromotion: true,
           };
 
           axios({
