@@ -15,13 +15,9 @@
         </v-app-bar>
       </div>
       <div v-else><ProfileMobile :company="company" /></div>
-      <div
-        class="grey darken-4
-"
-      >
-        <v-container v-if="company.promotions.length > 0" fluid>
-          <PromoBar />
-        </v-container>
+
+      <div fluid>
+        <PromoBar />
       </div>
 
       <v-container fluid>

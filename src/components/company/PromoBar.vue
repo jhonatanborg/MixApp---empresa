@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-row v-for="(promo, key) in promotions" :key="key">
+  <div v-if="promotions" class="grey darken-4 pa-5">
+    <v-row dense v-for="(promo, key) in promotions" :key="key">
       <v-col cols="12">
         <div>
           <span class="white--text">{{ promo.title }}</span>
@@ -327,7 +327,7 @@ export default {
       return this.$store.getters["company/getCompany"] || {};
     },
     promotions() {
-      return this.$store.getters["company/getCompany"].promotions || {};
+      return this.$store.getters["company/getPromo"] || {};
     },
     verifyMandatory() {
       let disabled = false;
