@@ -2,28 +2,30 @@
   <v-app id="App" class="app grey lighten-5 ">
     <MenuMobile />
     <v-main class="bar">
-      <AlertAdress @close-dialog="closeDialog" />
+      <Address @close-dialog="closeDialog" />
       <SaleError />
 
-      <Sale />
-
+      <!-- <Sale /> -->
+      <Main />
       <router-view />
     </v-main>
   </v-app>
 </template>
 <script>
-import Sale from "@/components/sale/Sale";
+// import Sale from "@/components/sale/Sale";
+import Main from "@/components/sale/Main";
 import MenuMobile from "@/components/mobile/shared/MenuMobile";
-import AlertAdress from "@/components/user/alert_address/AlertAddress";
+import Address from "@/components/address/Main.vue";
 import SaleError from "@/components/sale/SaleError";
 
 export default {
   name: "App",
   components: {
-    Sale,
-    AlertAdress,
+    // Sale,
+    Address,
     SaleError,
     MenuMobile,
+    Main,
   },
   mounted() {
     this.getSaleIdb();
@@ -97,8 +99,9 @@ export default {
   color: #293040 !important;
 }
 
-.bar ::-webkit-scrollbar {
+body ::-webkit-scrollbar {
   display: contents;
+  visibility: hidden !important;
 }
 .v-btn {
   text-transform: none !important;

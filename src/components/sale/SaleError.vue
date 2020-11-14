@@ -56,9 +56,6 @@ export default {
           table: "sale",
         },
       });
-      this.$router.push({
-        name: "company",
-      });
       this.$store.commit("cart/request", {
         state: "errorSale",
         data: {
