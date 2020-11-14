@@ -29,6 +29,7 @@
         transition="dialog-transition"
         v-model="viewDialog"
         persistent
+        scrollable
       >
         <v-card>
           <v-img
@@ -362,7 +363,7 @@ export default {
       }
       return (
         parseFloat(total) +
-        parseFloat(this.productSelected.sale_value) * parseFloat(this.quantity)
+        parseFloat(this.productSelected.promo_value) * parseFloat(this.quantity)
       );
     },
     error() {
@@ -476,6 +477,7 @@ export default {
       return "Opcional";
     },
     AddPurchase() {
+      localStorage.setItem("promo", "ispromo");
       localStorage.setItem("company", JSON.stringify(this.company));
       let sale = {
         product_id: this.productSelected.id,
@@ -506,6 +508,8 @@ export default {
       }
     },
     AddPurchaseMount() {
+      localStorage.setItem("promo", "ispromo");
+
       let objectChilds = [];
       if (this.complements.length > 0) {
         this.complements.forEach((item) => {

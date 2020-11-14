@@ -4,7 +4,7 @@
       <div>
         <div
           id="list-products text-uppercase"
-          v-for="(item, index) in products.reverse()"
+          v-for="(item, index) in products"
           :key="index"
         >
           <div :id="'go' + item.id">
@@ -214,8 +214,9 @@
           transition="dialog-transition"
           v-model="viewDialog"
           persistent
+          scrollable
         >
-          <v-card>
+          <v-card width="100%">
             <v-img
               :aspect-ratio="16 / 9"
               width="100%"
@@ -275,7 +276,6 @@
                   pontos</span
                 >
               </div>
-
               <div class="my-3 px-5 mb-10 pb-10">
                 <v-textarea
                   outlined
@@ -330,7 +330,6 @@
 <script>
 import Product from "@/components/company/product/Product";
 import AlertSale from "@/components/sale/AlertSale";
-
 // import ProductDialog from "@/components/ProductDialog";
 import axios from "axios";
 export default {
@@ -344,7 +343,6 @@ export default {
     company: Object,
   },
   created() {},
-
   data: () => ({
     lista: [],
     comment: "",
@@ -361,7 +359,6 @@ export default {
   computed: {
     verifyMandatory() {
       let disabled = false;
-
       if (this.complements.length > 0) {
         this.complements.forEach((item) => {
           if (
@@ -375,10 +372,8 @@ export default {
           }
         });
       }
-
       return disabled;
     },
-
     Total() {
       let total = 0;
       if (this.complements.length > 0) {
@@ -399,7 +394,6 @@ export default {
       return this.$store.state.error;
     },
   },
-
   methods: {
     idGroupSelector(item) {
       item = item.replace(" ", "");
@@ -431,7 +425,6 @@ export default {
         this.productSelected = item;
       }
     },
-
     closeDialogMount() {
       this.viewDialogMount = false;
       this.lista = [];
@@ -517,7 +510,6 @@ export default {
         childs: objectChilds,
         comment: this.comment,
       };
-
       if (localStorage.getItem("geolocation")) {
         this.insertIdb(sale);
         this.viewDialogMount = false;
@@ -536,7 +528,6 @@ export default {
         }
       }
     },
-
     insertIdb(item) {
       const payload = {
         idb: {

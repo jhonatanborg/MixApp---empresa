@@ -15,11 +15,14 @@
         </v-app-bar>
       </div>
       <div v-else><ProfileMobile :company="company" /></div>
-
-      <div fluid>
-        <PromoBar />
+      <div
+        class="grey darken-4
+"
+      >
+        <v-container v-if="promotions.length > 0" fluid>
+          <PromoBar />
+        </v-container>
       </div>
-
       <v-container fluid>
         <v-row align="center" justify="space-between">
           <v-col cols="auto " sm="12">
@@ -126,6 +129,9 @@ export default {
     addressVerify() {
       return this.$store.state.company.addressVerify;
     },
+    promotions() {
+      return this.$store.getters["company/getPromo"] || {};
+    },
   },
   watch: {},
   methods: {
@@ -166,7 +172,6 @@ export default {
           url: `/company-show-one/${process.env.VUE_APP_DOMAIN}`,
           insert: true,
         };
-
         this.$store.dispatch("company/request", payload);
       }
     },

@@ -16,7 +16,7 @@ const company = {
   getters: {
     getProducts(state) {
       if (state.company) {
-        return state.company.prodCategories.reverse();
+        return state.company.prodCategories();
       }
     },
     getAllCategories(state) {
@@ -51,19 +51,46 @@ const company = {
       let products = [];
       if (state.company.promotions) {
         state.company.promotions.forEach((value) => {
-          if (
-            (value.expires && mixins.methods.compareDate(value.expires)) ||
-            (value.days.match(/[0-9]/g) &&
-              value.days
-                .match(/[0-9]/g)
-                .includes(getDay(new Date()).toString()))
-          ) {
-            return products.push(value);
-          } else if (!value.expires && !value.days.match(/[0-9]/g)) {
-            return products.push(value);
+          if (value.expires && !mixins.methods.compareDate(value.expires)) {
+            return;
           }
+          if (
+            value.days.match(/[0-9]/g) &&
+            !value.days.match(/[0-9]/g).includes(getDay(new Date()).toString())
+          ) {
+            return;
+          }
+          return products.push(value);
         });
         return products;
+      }
+    },
+    getPayments(state) {
+      if (state.company) {
+        const groups = [];
+        const payments = state.company.payments;
+        payments.map((payment) => {
+          if (!groups.find((item) => item.id === payment.payment.group.id)) {
+            groups.push(payment.payment.group);
+          }
+          groups.map((group) => {
+            group.payments = [];
+          });
+        });
+
+        groups.map((group) => {
+          payments.map((payment) => {
+            if (group.id === payment.payment.payment_group_available_id) {
+              group.payments.push({
+                id: payment.payment.id,
+                title: payment.payment.title,
+                img: payment.payment.img,
+              });
+            }
+          });
+        });
+
+        return groups;
       }
     },
   },
@@ -82,3 +109,15 @@ const company = {
 };
 
 export default company;
+
+//  if (
+//             (value.expires && mixins.methods.compareDate(value.expires)) ||
+//             (value.days.match(/[0-9]/g) &&
+//               value.days
+//                 .match(/[0-9]/g)
+//                 .includes(getDay(new Date()).toString()))
+//           )
+
+//  else if (!value.expires && !value.days.match(/[0-9]/g)) {
+//             return products.push(value);
+//           }

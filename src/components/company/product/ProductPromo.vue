@@ -22,7 +22,7 @@
               <v-chip color="#00c996" text-color="white" dark>
                 <b
                   class=" mx-2"
-                  v-text="convertMoney(product.product.sale_value)"
+                  v-text="convertMoney(product.product.promo_value)"
                 >
                 </b> </v-chip
             ></v-list-item-action-text>
@@ -33,23 +33,17 @@
   </div>
 </template>
 <script>
+import mixin from "@/mixins/mixins.js";
+
 export default {
+  mixins: [mixin],
+
   props: {
     product: Object,
   },
   computed: {
     company() {
       return this.$store.getters["company/getCompany"] || {};
-    },
-  },
-  methods: {
-    convertMoney(money) {
-      const toCurrency = (n, curr, LanguageFormat = undefined) =>
-        Intl.NumberFormat(LanguageFormat, {
-          style: "currency",
-          currency: curr,
-        }).format(n);
-      return toCurrency(money, "BRL");
     },
   },
 };
