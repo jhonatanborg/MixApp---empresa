@@ -1,11 +1,23 @@
 <template>
   <div v-if="purchaseDetails && purchaseDetails.deliveryAddress">
-    <v-card class=" card-purchase-details" tile outlined>
-      <v-alert :color="statusPurchase.status" class="ma-0"
-        ><span class="white--text font-weight-bold">{{
-          purchaseDetails.status
-        }}</span></v-alert
-      >
+    <v-card
+      :loading="purchaseDetails.status === 'Pendente' ? true : false"
+      class=" card-purchase-details"
+      tile
+      outlined
+    >
+      <v-alert :color="statusPurchase.status" class="ma-0">
+        <v-flex class="white--text">
+          <div>
+            <span class="white--text font-weight-bold">{{
+              purchaseDetails.status
+            }}</span>
+          </div>
+          <div>
+            <small v-text="statusPurchase.details"></small>
+          </div>
+        </v-flex>
+      </v-alert>
       <div class="d-flex justify-space-between pa-5 ">
         <div>
           <div>
@@ -181,30 +193,32 @@ export default {
       let status;
       let action;
       let statusUpdate;
+      let details;
       switch (this.purchaseDetails.status) {
         case "Pendente":
           status = "warning";
-
           statusUpdate = "Confirmado";
+          details = "Seu pedido foi enviado até a empresa";
           break;
         case "Confirmado":
           status = "purple";
-
+          details = "Seu pedido está sendo preparado";
           statusUpdate = "Saiu para Entrega";
           break;
         case "Saiu para Entrega":
           status = "primary";
-
+          details = "Atenção! seu pedido está indo até você";
           statusUpdate = "Entregue";
           break;
         case "Entregue":
           status = "green";
-
+          details = "Seu pedido foi entregue";
           statusUpdate = "Finalizado";
           break;
         case "Cancelado":
           status = "red";
           action = "Pedido Cancelado";
+          details = "Ops! seu pedido foi cancelado";
           break;
         case "Finalizado":
           status = "light-green";
@@ -213,7 +227,7 @@ export default {
         default:
           break;
       }
-      return { status, action, statusUpdate };
+      return { status, action, details, statusUpdate };
     },
   },
   methods: {
