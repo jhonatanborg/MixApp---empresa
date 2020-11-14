@@ -135,13 +135,10 @@ export default {
             password: this.newPassword,
           },
         })
-          .then((resp) => {
-            console.log(resp);
+          .then(() => {
             this.$router.go(-1);
           })
           .catch((err) => {
-            console.log(err);
-
             if (err.response.data[0]) {
               this.errorPassOld = true;
               this.msgErrorOldPass = err.response.data[0].message;
