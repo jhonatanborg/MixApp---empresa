@@ -148,7 +148,6 @@ export default {
           .then((resp) => {
             localStorage.setItem("user-register", JSON.stringify(this.user));
             this.loading = false;
-            console.log(resp);
             localStorage.setItem("message-register", JSON.stringify(resp.data));
             this.$router.push({
               name: "confirm-register",

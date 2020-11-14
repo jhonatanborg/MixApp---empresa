@@ -113,7 +113,6 @@ export default {
           },
         })
           .then((resp) => {
-            console.log(resp);
             localStorage.setItem("acess-token", resp.data.token);
             localStorage.setItem("id-user", resp.data.id);
             this.$store.commit("user/setUser", resp.data);

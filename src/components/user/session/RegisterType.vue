@@ -71,7 +71,6 @@ export default {
       })
         .then((resp) => {
           this.loading = false;
-          console.log(resp);
           this.$router.push({
             name: "confirm-register",
             params: {
@@ -79,8 +78,7 @@ export default {
             },
           });
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           this.loading = false;
         });
     },

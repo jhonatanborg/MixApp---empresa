@@ -75,8 +75,8 @@ export default {
           login: this.email,
         },
       }).then((resp) => {
-        if (resp.data.next) {
-          this.$router.replace("/code-verify");
+        if (resp.data.message) {
+          this.$router.push({ name: "code-verify" });
         } else {
           this.isActive = true;
         }

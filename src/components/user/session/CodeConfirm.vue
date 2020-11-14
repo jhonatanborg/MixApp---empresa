@@ -79,8 +79,7 @@ export default {
             });
             this.loading = false;
           })
-          .catch((err) => {
-            console.log(err.data);
+          .catch(() => {
             this.msg = "Código Expirado";
             this.isActive = true;
             this.loading = false;

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-card outlined>
     <div class="py-1">
       <h3>Recuperação de conta</h3>
       <span class="">
@@ -26,11 +26,11 @@
       </router-link>
       <div id="buttons-login">
         <v-row>
-          <!-- <v-col cols="auto" sm="6">
-            <v-btn text color="primary" :to="{ name: 'forgot-pass' }"
+          <v-col cols="auto" sm="6">
+            <v-btn outlined text color="primary" :to="{ name: 'forgot-pass' }"
               >Tente com seu e-mail</v-btn
             >
-          </v-col> -->
+          </v-col>
           <v-col cols="auto" sm="6">
             <v-btn dark depressed @click="verifyTel()" block color="#ffa602"
               >Avançar
@@ -39,7 +39,7 @@
         </v-row>
       </div>
     </div>
-  </div>
+  </v-card>
 </template>
 
 <script>

@@ -108,7 +108,6 @@ export default {
       if (!this.user.name) {
         this.errors.name = true;
         valid = false;
-        console.log("resp");
       }
       if (!this.user.login) {
         this.errors.login = true;
@@ -123,7 +122,6 @@ export default {
     },
     register() {
       this.loading = true;
-      console.log(this.validForm());
 
       if (this.validForm()) {
         axios({
