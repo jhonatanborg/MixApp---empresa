@@ -8,8 +8,6 @@ export default {
             currency: curr,
           }).format(n);
         return toCurrency(money, "BRL");
-      } else {
-        return "Grátis";
       }
     },
     convertDate(date) {
@@ -20,13 +18,16 @@ export default {
         .join("/");
     },
     compareDate(expires) {
-      var date = new Date(
-        expires
-          .split("/")
-          .reverse()
-          .join("/")
-      );
-      return new Date() <= date ? true : false;
+      if (expires) {
+        var date = new Date(
+          expires
+            .split("/")
+            .reverse()
+            .join("/")
+        );
+        return new Date() <= date ? true : false;
+      }
+      return true;
     },
   },
 };
