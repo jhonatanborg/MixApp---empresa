@@ -12,13 +12,7 @@
           {{ address.street }}, {{ address.number }} - {{ address.city }}
           <v-icon>mdi-chevron-down</v-icon>
         </v-btn>
-        <v-btn
-          rounded
-          large
-          text
-          v-else
-          @click="$store.commit('alertAddress', { value: true })"
-        >
+        <v-btn rounded large text v-else @click="openDialogAddress()">
           <v-icon class="mr-3">mdi-map-marker-radius</v-icon>
           Localização
           <v-icon>mdi-chevron-down</v-icon>
@@ -158,7 +152,7 @@ export default {
     openDialogAddress() {
       this.$store.commit("alertAddress", { value: true });
       if (localStorage.getItem("acess-token")) {
-        this.$store.commit("user/request", { state: "addressTabs", data: 3 });
+        this.$store.commit("user/request", { state: "addressTabs", data: 4 });
       } else {
         this.$store.commit("user/request", { state: "addressTabs", data: 1 });
       }
