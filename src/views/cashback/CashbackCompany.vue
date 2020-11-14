@@ -119,11 +119,7 @@ export default {
       { text: "Sobre a empresa", icon: "mdi-star", route: "about" },
     ],
   }),
-  methods: {
-    openDetails() {
-      console.log("coco");
-    },
-  },
+  methods: {},
 };
 </script>
 
