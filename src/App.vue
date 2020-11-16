@@ -30,7 +30,9 @@ export default {
   mounted() {
     this.getSaleIdb();
     this.listDataCompany();
+    console.log(window.location.hostname);
   },
+
   data: () => ({
     dialogStep: null,
   }),
