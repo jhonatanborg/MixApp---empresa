@@ -13,7 +13,6 @@ if (workbox) {
       })
     );
   });
-
   self.addEventListener("activate", function(event) {
     var cacheWhitelist = [cache_version];
     event.waitUntil(
@@ -28,21 +27,4 @@ if (workbox) {
       })
     );
   });
-
-  // this.addEventListener('fetch', (event) => {
-  //   event.respondWith(
-  //     caches.match(event.request).then((resp) => {
-  //       if(resp) return resp
-  //       fetch(event.request).then((response) => {
-  //         if(event.request.url.indexOf('chrome-extension') < 0){
-  //           caches.open(cache_version).then((cache) => {
-  //             cache.put(event.request, response);
-  //           });
-  //        }
-  //       });
-  //       return fetch(event.request).then((response) => response);
-  //     }).catch(() => 'aa')
-  //     // caches.match('página de erro')
-  //   );
-  // });
 }

@@ -4,15 +4,12 @@
     <v-main class="bar">
       <Address @close-dialog="closeDialog" />
       <SaleError />
-
-      <!-- <Sale /> -->
       <Main />
       <router-view />
     </v-main>
   </v-app>
 </template>
 <script>
-// import Sale from "@/components/sale/Sale";
 import Main from "@/components/sale/Main";
 import MenuMobile from "@/components/mobile/shared/MenuMobile";
 import Address from "@/components/address/Main.vue";
@@ -21,7 +18,6 @@ import SaleError from "@/components/sale/SaleError";
 export default {
   name: "App",
   components: {
-    // Sale,
     Address,
     SaleError,
     MenuMobile,

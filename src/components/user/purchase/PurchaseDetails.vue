@@ -1,5 +1,7 @@
 <template>
   <div v-if="purchaseDetails && purchaseDetails.deliveryAddress">
+    <Notify />
+
     <v-card
       :loading="purchaseDetails.status === 'Pendente' ? true : false"
       class=" card-purchase-details"
@@ -177,7 +179,13 @@
 </template>
 
 <script>
+import mixin from "@/mixins/mixins.js";
+import Notify from "@/components/shared/NotifyPush.vue";
 export default {
+  mixins: [mixin],
+  components: {
+    Notify,
+  },
   mounted() {
     this.getPurchase();
   },
@@ -188,7 +196,6 @@ export default {
     subcategories() {
       return this.$store.getters["user/getPurchase"];
     },
-
     statusPurchase() {
       let status;
       let action;
@@ -231,13 +238,6 @@ export default {
     },
   },
   methods: {
-    convertDate(date) {
-      return date
-        .substr(0, 10)
-        .split("-")
-        .reverse()
-        .join("/");
-    },
     convertMoney(money) {
       if (money > 0) {
         const toCurrency = (n, curr, LanguageFormat = undefined) =>
@@ -258,7 +258,22 @@ export default {
       });
       setTimeout(() => {
         this.getPurchase();
-      }, 40000);
+        this.displayNotification();
+      }, 20000);
+    },
+    displayNotification() {
+      Notification.requestPermission(function(result) {
+        if (result === "granted") {
+          navigator.serviceWorker.ready.then(function(registration) {
+            registration.showNotification("Mix entregas", {
+              body: "Seu pedido saiu para entrega!",
+              icon: "../images/touch/chrome-touch-icon-192x192.png",
+              vibrate: [200, 100, 200, 100, 200, 100, 200],
+              tag: "vibration-sample",
+            });
+          });
+        }
+      });
     },
   },
 };
