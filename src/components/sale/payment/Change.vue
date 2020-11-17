@@ -113,11 +113,11 @@ export default {
       } else {
         this.changeError = false;
         this.$store.commit("cart/changeFor", change);
-        this.$store.commit("cart/sidebar", { open: true, step: 3 });
+        this.$store.commit("cart/sidebar", { open: true, step: 6 });
       }
     },
     notChange() {
-      this.$store.commit("cart/sidebar", { open: true, step: 3 });
+      this.$store.commit("cart/sidebar", { open: true, step: 6 });
     },
   },
 };
