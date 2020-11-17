@@ -62,7 +62,7 @@
     </v-list-item>
 
     <div class="mx-3">
-      <v-btn depressed x-large @click="userVerify()" block color="#ffa602">
+      <v-btn depressed x-large @click="userVerify()" block color="#FFBA0A">
         <b>Selecione forma de pagamento </b>
       </v-btn>
     </div>

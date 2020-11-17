@@ -172,9 +172,10 @@
         <v-btn
           class="btn-send"
           @click="sendPurchase()"
-          color="#ffa602"
+          color="#FFBA0A"
           block
           x-large
+          depressed
         >
           Fazer Pedido
 

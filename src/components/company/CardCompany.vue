@@ -15,7 +15,7 @@
             <v-list-item-subtitle class="subtitle">{{
               company.primaryCategory.name
             }}</v-list-item-subtitle>
-            <v-icon size="18" color="#ffa602">mdi-star</v-icon>
+            <v-icon size="18" color="#FFBA0A">mdi-star</v-icon>
 
             <div class>
               <v-list-item-subtitle>4,5</v-list-item-subtitle>

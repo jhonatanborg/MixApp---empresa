@@ -63,7 +63,7 @@
               @click="save()"
               depressed
               block
-              color="#ffa602"
+              color="#FFBA0A"
               >Confirmar
             </v-btn>
           </v-col>

@@ -59,7 +59,7 @@
             </v-list-item>
           </v-list>
           <v-card-actions>
-            <v-btn block color="#ffa602" outlined>Ver produto</v-btn>
+            <v-btn block color="#FFBA0A" outlined>Ver produto</v-btn>
           </v-card-actions>
         </div>
       </v-card>

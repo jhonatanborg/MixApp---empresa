@@ -23,14 +23,14 @@
               large
               depressed
               block
-              color="#ffa602"
+              color="#FFBA0A"
               >Limpar Sacola
             </v-btn>
           </v-col>
           <v-col cols="12">
             <v-btn
               @click="$emit('return-list', 3)"
-              color="#ffa602"
+              color="#FFBA0A"
               text
               large
               depressed
@@ -87,7 +87,7 @@ export default {
   font-weight: 600;
   font-size: 16px;
   text-align: center;
-  color: #ffa602;
+  color: #ffba0a;
 }
 .details-message-error {
   font-family: Montserrat;

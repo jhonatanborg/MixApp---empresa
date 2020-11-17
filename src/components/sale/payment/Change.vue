@@ -7,7 +7,7 @@
             <span> Pague na entrega </span>
           </div>
           <div>
-            <v-icon color="#ffa602">mdi-help-circle-outline</v-icon>
+            <v-icon color="#FFBA0A">mdi-help-circle-outline</v-icon>
           </div>
         </div>
       </v-col>
@@ -38,7 +38,7 @@
             </v-btn>
           </v-col>
           <v-col>
-            <v-btn depressed block @click="confirmChange" color="#ffa602">
+            <v-btn depressed block @click="confirmChange" color="#FFBA0A">
               <b>Confirmar</b>
             </v-btn>
           </v-col>

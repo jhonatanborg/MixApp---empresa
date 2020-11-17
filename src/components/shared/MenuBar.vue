@@ -18,12 +18,7 @@
           <v-icon>mdi-chevron-down</v-icon>
         </v-btn>
 
-        <v-btn
-          v-if="sale.length > 0"
-          class="mr-3"
-          rounded
-          @click="$store.commit('cart/sidebar', { open: true, step: 1 })"
-        >
+        <v-btn v-if="sale.length > 0" class="mr-3" rounded @click="openSale()">
           <v-icon class="mr-2">mdi-basket-outline</v-icon>Sacola
           <b class="notify">{{ sale.length }}</b>
         </v-btn>
@@ -156,6 +151,10 @@ export default {
       } else {
         this.$store.commit("user/request", { state: "addressTabs", data: 1 });
       }
+    },
+    openSale() {
+      console.log("sale");
+      this.$store.commit("cart/sidebar", { open: true, step: 2 });
     },
   },
 };

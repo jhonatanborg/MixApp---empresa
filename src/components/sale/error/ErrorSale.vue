@@ -20,7 +20,7 @@
                   large
                   depressed
                   block
-                  color="#ffa602"
+                  color="#FFBA0A"
                   >Tentar fazer outro pedido
                 </v-btn>
               </v-col>

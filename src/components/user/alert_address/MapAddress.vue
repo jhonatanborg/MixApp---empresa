@@ -13,7 +13,7 @@
               :center="coords"
             >
               <l-control position="topright" tag="v-" name="map">
-                <v-alert dark color="#ffa602">
+                <v-alert dark color="#FFBA0A">
                   <small>
                     {{ address.street }}, {{ address.number }} -
                     {{ address.district }}, {{ address.city }} -
@@ -43,7 +43,7 @@
               @click="$emit('return-start', 1)"
               block
               class="my-5"
-              color="#ffa602"
+              color="#FFBA0A"
               outlined
               dark
               >Voltar</v-btn
@@ -53,7 +53,7 @@
             <v-btn
               block
               class="my-5"
-              color="#ffa602"
+              color="#FFBA0A"
               @click="updateLocalAddress()"
               dark
               >Confirmar</v-btn

@@ -26,7 +26,7 @@
           </v-alert>
         </v-col>
         <v-col>
-          <v-alert dense border="left" color="#ffa602" outlined dark>
+          <v-alert dense border="left" color="#FFBA0A" outlined dark>
             <small>Você usou:</small>
             <h2>50 <b>pontos</b></h2>
           </v-alert>
@@ -126,7 +126,7 @@ export default {
   font-weight: bold;
   font-size: 14px;
   text-align: left;
-  color: #ffa602;
+  color: #ffba0a;
 }
 .mix-status {
   font-family: Montserrat;

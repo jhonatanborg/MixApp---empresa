@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card flat color="#ffa602" dark class="pa-0" rounded>
+    <v-card flat color="#FFBA0A" dark class="pa-0" rounded>
       <v-row class="mx-5 mt-5 pt-5" justify="start" align="center" no-gutters>
         <v-col class="pa-5" cols="auto" sm="7">
           <h2>Instale o Mix</h2>

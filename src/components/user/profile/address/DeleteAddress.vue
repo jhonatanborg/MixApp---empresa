@@ -16,7 +16,7 @@
         </v-toolbar>
         <v-row class="justify-center align-center">
           <v-col cols="12">
-            <v-alert color="#ffa602" outlined border="left">
+            <v-alert color="#FFBA0A" outlined border="left">
               <small>
                 <b>
                   {{ userAddress.title }}
@@ -34,7 +34,7 @@
                 :loading="loading"
                 large
                 block
-                color="#ffa602"
+                color="#FFBA0A"
                 @click="deleteAddress"
                 dark
                 >Confirmar</v-btn

@@ -64,16 +64,17 @@
             <v-window-item :value="5">
               <Change />
             </v-window-item>
+            <v-window-item :value="6">
+              <Address />
+            </v-window-item>
+            <v-window-item :value="7">
+              <AddressEdit />
+            </v-window-item>
           </v-window>
         </div>
       </div>
     </v-card>
     <v-card flat class="mx-auto col-sm-12" v-else>
-      <div class="d-flex justify-space-bettwen my-3 align-center">
-        <v-list-item two-line>
-          <v-list-item-content> </v-list-item-content>
-        </v-list-item>
-      </div>
       <v-card class="d-flex" flat min-height="500">
         <div class="align-self-center mx-auto">
           <div class="text-center">
@@ -86,7 +87,7 @@
                 Não sabe o que comer? Centenas de delicias esperam por você!
               </h4>
             </div>
-            <v-btn large color="#ffa602" @click="close" dark
+            <v-btn large color="#FFBA0A" @click="close" dark
               >Veja o cardápio</v-btn
             >
           </div>
@@ -103,6 +104,8 @@ import Payment from "@/components/sale/payment/Payment";
 import Send from "@/components/sale/send/SendPurchase";
 import ErrorSale from "@/components/sale/error/ErrorSale";
 import Change from "@/components/sale/payment/Change";
+import Address from "@/components/sale/address/ConfirmAddress";
+import AddressEdit from "@/components/sale/address/EditAddress";
 
 export default {
   components: {
@@ -112,6 +115,8 @@ export default {
     Send,
     ErrorSale,
     Change,
+    Address,
+    AddressEdit,
   },
   computed: {
     shoppingCart: {

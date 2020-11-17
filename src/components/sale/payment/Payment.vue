@@ -10,13 +10,13 @@
           </v-list-item-title>
         </v-list-item-content>
         <v-list-item-action>
-          <v-icon color="#ffa602">mdi-help-circle-outline</v-icon>
+          <v-icon color="#FFBA0A">mdi-help-circle-outline</v-icon>
         </v-list-item-action>
       </v-list-item>
     </div>
     <div class="overflow-x-hidden overflow-y-auto pay">
-      <div class="px-5 ">
-        <v-row cols="6" v-for="(item, i) in payments" :key="i">
+      <div class="px-2">
+        <v-row cols="auto" v-for="(item, i) in payments" :key="i">
           <v-col cols="12">
             <span class="font-weight-bold">
               <small>
@@ -29,20 +29,31 @@
               @click="selectPay(value)"
               :color="
                 payment.filter((item) => item.id === value.id).length > 0
-                  ? 'purple darken-5 white--text'
+                  ? 'primary'
                   : 'grey lighten-5'
               "
               flat
               outlined
               link
               class="px-2"
+              :class="
+                payment.filter((item) => item.id === value.id).length > 0
+                  ? 'white--text'
+                  : 'grey lighten-5'
+              "
             >
-              <v-row justify="center">
+              <v-row justify="start" no-gutters align="center">
                 <v-col cols="auto">
-                  <v-img :src="$store.state.server + value.img"></v-img>
+                  <v-img
+                    class="ma-2"
+                    width="25px"
+                    :src="$store.state.server + value.img"
+                  ></v-img>
                 </v-col>
-                <v-col>
-                  <small class="text-capitalize"> {{ value.title }} </small>
+                <v-col cols="auto">
+                  <small class="text-capitalize item-pay">
+                    {{ value.title }}
+                  </small>
                 </v-col>
               </v-row>
             </v-card>
@@ -50,13 +61,13 @@
         </v-row>
       </div>
     </div>
-    <div class="mx-3 my-5">
+    <div class="mx-3 mt-3">
       <v-btn
         :disabled="payVerify"
         block
         @click="payConfirm()"
         x-large
-        color="#ffa602"
+        color="#FFBA0A"
       >
         <b>Confirmar</b>
       </v-btn>
@@ -123,7 +134,7 @@ export default {
       ) {
         this.$store.commit("cart/sidebar", { open: true, step: 5 });
       } else if (this.payment) {
-        this.$store.commit("cart/sidebar", { open: true, step: 3 });
+        this.$store.commit("cart/sidebar", { open: true, step: 6 });
       }
     },
   },
@@ -131,7 +142,43 @@ export default {
 </script>
 
 <style>
-.pay {
-  max-height: 70vh;
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) {
+  .pay {
+    max-height: 65vh;
+  }
+  .item-pay {
+    width: 60px;
+  }
+}
+@media only screen and (min-device-width: 360px) and (max-device-width: 540px) and (-webkit-min-device-pixel-ratio: 2) {
+  .pay {
+    max-height: 70vh;
+  }
+  .item-pay {
+    width: 60px;
+  }
+}
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) {
+  .pay {
+    max-height: 73vh;
+  }
+  .item-pay {
+    width: 60px;
+  }
+}
+@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) {
+  .pay {
+    max-height: 70vh;
+  }
+  .item-pay {
+    width: 70px;
+  }
+}
+.item-pay {
+  display: block;
+  overflow: hidden;
+  min-width: 60px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 </style>

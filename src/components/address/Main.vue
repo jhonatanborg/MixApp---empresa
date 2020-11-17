@@ -6,8 +6,8 @@
     max-width="700px"
   >
     <v-card tile>
-      <v-toolbar color="#765eda" height="80" flat>
-        <v-flex class="white--text">
+      <v-toolbar color="#FFBA0A" height="80" flat>
+        <v-flex>
           <div>
             <span>
               {{ currentTitle }}
@@ -17,7 +17,6 @@
             <small>Esse será o endereço de entrega</small>
           </div>
         </v-flex>
-
         <v-spacer></v-spacer>
         <v-btn
           v-if="addressStep != 5"
@@ -26,7 +25,7 @@
               (error = false)
           "
           icon
-          color="white"
+          color="black"
         >
           <v-icon>mdi-close</v-icon>
         </v-btn>
@@ -72,7 +71,7 @@ export default {
         case 1:
           return "Informe sua localização";
         case 2:
-          return "Entregar em:";
+          return "Arraste o mapa para ajustar";
         case 3:
           return "Confirmar endereço:";
         case 4:

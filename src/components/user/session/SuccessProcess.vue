@@ -17,7 +17,7 @@
       <v-col cols="8">
         <v-btn
           :to="{ name: 'session' }"
-          color="#ffa602"
+          color="#FFBA0A"
           dark
           large
           depressed
@@ -44,7 +44,7 @@ export default {};
   font-weight: 600;
   font-size: 16px;
   text-align: center;
-  color: #ffa602;
+  color: #ffba0a;
 }
 .details-message-success {
   font-family: Montserrat;

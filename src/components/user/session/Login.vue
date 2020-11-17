@@ -51,7 +51,7 @@
               x-large
               @click="login()"
               block
-              color="#ffa602"
+              color="#FFBA0A"
               >Entrar</v-btn
             >
           </div>

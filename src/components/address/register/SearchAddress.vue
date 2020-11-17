@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12" sm="9">
         <v-text-field
-          color="#765eda"
+          color="primary"
           outlined
           dense
           hide-details
@@ -16,7 +16,7 @@
       <v-col cols="12" sm="3">
         <v-text-field
           hide-details
-          color="#765eda"
+          color="primary"
           outlined
           dense
           v-model="newAddress.number"
@@ -26,7 +26,7 @@
       </v-col>
       <v-col cols="12" sm="6">
         <v-text-field
-          color="#765eda"
+          color="primary"
           outlined
           dense
           hide-details
@@ -37,13 +37,13 @@
       </v-col>
       <v-col cols="12" sm="6">
         <v-text-field
-          color="#765eda"
+          color="primary"
           outlined
           dense
           hide-details
           v-model="newAddress.cep"
           label="CEP"
-          placeholder="Ex: Residencial Sul"
+          placeholder="Digite o Cep"
         ></v-text-field>
       </v-col>
       <v-col cols="12" sm="12" class="py-0" v-if="error">
@@ -59,7 +59,6 @@
           @click="searchLocal()"
           block
           color="primary"
-          dark
           outlined
         >
           <v-icon class="mx-1">mdi-crosshairs-gps</v-icon>
@@ -68,7 +67,7 @@
         ></v-col
       >
       <v-col cols="12" sm="6">
-        <v-btn @click="getAddressByString()" block dark color="#765eda">
+        <v-btn @click="getAddressByString()" depressed block color="#FFBA0A">
           <v-icon>mdi-magnify</v-icon> Buscar endereço
         </v-btn>
       </v-col>
@@ -84,10 +83,10 @@ export default {
     lat: "",
     long: "",
     newAddress: {
-      street: "Rua das amendoeiras",
-      number: "1976",
-      district: "Bairro 13  de Maio",
-      cep: "75520-00",
+      street: null,
+      number: null,
+      district: null,
+      cep: null,
     },
     error: false,
     isLoading: false,

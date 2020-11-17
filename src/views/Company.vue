@@ -4,7 +4,7 @@
     <div id="company" v-if="company.name">
       <div v-if="!$vuetify.breakpoint.xsOnly">
         <ProfileDetails :company="company" />
-        <v-app-bar class="fixed-bar" flat color="#ffa602">
+        <v-app-bar class="fixed-bar" flat color="#FFBA0A">
           <div v-for="(item, key) in categories" :key="key">
             <v-btn text @click="filterScroll(item)">
               <b>
@@ -49,7 +49,7 @@
         class="elevation-7"
         block
         large
-        color="#ffa602"
+        color="#FFBA0A"
         dark
         rounded
       >

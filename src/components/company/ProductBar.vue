@@ -108,9 +108,14 @@
                   align="center"
                 >
                   <v-col cols="auto">
-                    <span class="font-weight-bold title-subcategory">
-                      {{ item.name }}
-                    </span>
+                    <div>
+                      <span class="font-weight-bold title-subcategory">
+                        {{ item.name }}
+                      </span>
+                    </div>
+                    <div class="">
+                      <span><b v-text="limitOptions(item.limit)"></b></span>
+                    </div>
                   </v-col>
                   <v-col cols="auto">
                     <v-chip small v-text="convertMandatory(item.mandatory)">
@@ -121,7 +126,7 @@
                   <v-list-item-group
                     dense
                     v-model="lista[item.name]"
-                    color="#ffa602"
+                    color="primary"
                     multiple
                     :max="item.limit > 0 ? item.limit : 1000"
                   >
@@ -148,7 +153,7 @@
                               "
                               :input-value="active"
                               :true-value="item2"
-                              color="#ffa602"
+                              color="primary"
                               @click.stop="toggle"
                             ></v-checkbox>
                           </v-list-item-action>
@@ -185,12 +190,11 @@
                 </v-col>
                 <v-col cols="8" sm="8">
                   <v-btn
-                    :dark="!verifyMandatory"
                     type="submit"
                     block
                     x-large
                     depressed
-                    color="#ffa602"
+                    color="#FFBA0A"
                     @click="AddPurchaseMount"
                     :disabled="verifyMandatory"
                   >
@@ -305,12 +309,11 @@
                     block
                     type="submit"
                     depressed
-                    dark
-                    color="#ffa602"
+                    color="#FFBA0A"
                     @click="AddPurchase"
                   >
                     <div>
-                      Confirmar
+                      Adicionar
                       <span v-text="convertMoney(Total)">
                         R$
                       </span>
@@ -395,6 +398,16 @@ export default {
     },
   },
   methods: {
+    limitOptions(limit) {
+      console.log(limit);
+      if (!limit) {
+        return "Escolha quantas opções você desejar";
+      } else if (limit >= 1) {
+        return limit == 1
+          ? `Escolha até ${limit} opção`
+          : `Escolha até ${limit} opções`;
+      }
+    },
     idGroupSelector(item) {
       item = item.replace(" ", "");
       return item;

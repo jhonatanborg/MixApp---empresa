@@ -35,7 +35,7 @@
               depressed
               @click="verifyCode()"
               block
-              color="#ffa602"
+              color="#FFBA0A"
               >Verificar
             </v-btn>
           </v-col>

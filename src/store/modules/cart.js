@@ -10,7 +10,7 @@ const cart = {
     saleCompany: null,
     sidebar: {
       open: false,
-      step: 1,
+      step: null,
     },
     quantitySale: null,
     saleMode: null,
