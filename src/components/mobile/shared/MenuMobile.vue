@@ -44,6 +44,13 @@
         <v-list-item color="#FFBA0A" :to="{ name: 'purchases' }" link>
           Meus Pedidos
         </v-list-item>
+        <v-list-item
+          color="#FFBA0A"
+          @click="$store.commit('cart/sidebar', { open: true, step: 1 })"
+          link
+        >
+          Minha Sacola
+        </v-list-item>
         <!-- <v-list-item link>
           Segurança
         </v-list-item>

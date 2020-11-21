@@ -3,6 +3,7 @@
     :fullscreen="$vuetify.breakpoint.xsOnly"
     :value="$store.state.company.aboutCompany"
     persistent
+    scrollable
     max-width="550px"
   >
     <v-card v-if="company.address">

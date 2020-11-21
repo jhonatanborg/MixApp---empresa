@@ -1,56 +1,46 @@
 <template>
   <div>
     <v-img
-      height="150px"
+      height="200px"
       :aspect-ratio="16 / 9"
-      gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
-      src="https://images.pexels.com/photos/262947/pexels-photo-262947.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      :src="$store.state.server + company.capa"
     >
-      <v-card
-        tile
-        flat
-        class="transparent  white--text"
-        max-width="100%"
-        max-height="150px"
-      >
-        <v-list-item three-line>
-          <v-list-item-avatar tile rounded="3" size="110">
+      <v-row justify="center" align="center">
+        <v-card tile flat class="white mt-9 pa-2 fill-height">
+          <v-avatar size="120px">
             <v-img
+              rounded="3"
               aspect-ratio="1.1"
               :src="$store.state.server + company.logo"
             ></v-img>
-          </v-list-item-avatar>
-          <v-list-item-content>
-            <v-list-item-title class="white--text" v-text="company.name">
-            </v-list-item-title>
-            <v-list-item-subtitle
-              class="white--text"
-              v-text="company.primaryCategory.name"
-            >
-            </v-list-item-subtitle>
-            <v-list-item-action left class="pa-0 ma-0">
-              <v-list-item-action-text class="pa-0 ma-0 white--text">
-                <v-chip
-                  class="mr-3"
-                  v-text="company.opened === 'S' ? 'Aberto' : ' Fechado'"
-                  :color="company.opened === 'S' ? 'success' : 'error'"
-                >
-                </v-chip>
-                <v-chip
-                  v-if="company.deliveryFee && !company.deliveryFee.length"
-                  color="white"
-                >
-                  <v-icon>mdi-moped</v-icon>
-                  <b
-                    class="mx-3 "
-                    v-text="convertMoney(company.deliveryFee.value)"
-                  ></b></v-chip
-              ></v-list-item-action-text>
-            </v-list-item-action>
-          </v-list-item-content>
-        </v-list-item>
-      </v-card>
+          </v-avatar>
+        </v-card>
+      </v-row>
     </v-img>
+    <div class="my-5">
+      <div class="item-title-company my-3">
+        <span v-text="company.name"></span>
+      </div>
+
+      <div class="d-flex justify-center align-center">
+        <v-chip
+          class="mr-3"
+          v-text="company.opened === 'S' ? 'Aberto' : ' Fechado'"
+          :color="company.opened === 'S' ? 'success' : 'error'"
+        >
+        </v-chip>
+        <v-chip
+          v-if="company.deliveryFee && !company.deliveryFee.length"
+          color="white"
+        >
+          <b
+            class="mx-3 "
+            v-text="'Entrega: ' + convertMoney(company.deliveryFee.value)"
+          ></b
+        ></v-chip>
+      </div>
+    </div>
+
     <v-container>
       <v-row justify-sm="center">
         <v-col sm="auto">
@@ -120,11 +110,16 @@ export default {
 </script>
 
 <style>
-.title-company {
-  font-weight: 800;
+.item-title-company {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
   font-size: 16px;
-  text-align: left;
-  color: white;
-  text-transform: initial;
+  line-height: 20px;
+  /* identical to box height */
+
+  text-align: center;
+
+  color: #2d2c2c;
 }
 </style>

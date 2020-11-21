@@ -126,6 +126,13 @@ export default {
                 latitude: resp.data.latitude,
                 longitude: resp.data.longitude,
               };
+              const payload = {
+                state: "company",
+                method: "get",
+                url: `/company-show/${process.env.VUE_APP_DOMAIN},${location.latitude},${location.longitude}`,
+                insert: true,
+              };
+              this.$store.dispatch("company/request", payload);
               this.$store.commit("user/setAddress", resp.data);
               this.$emit("next-register", 2);
               localStorage.setItem("geolocation", JSON.stringify(location));

@@ -4,6 +4,7 @@
       <div>
         <div
           id="list-products text-uppercase"
+          class="my-8"
           v-for="(item, index) in products"
           :key="index"
         >
@@ -15,12 +16,13 @@
             </div>
           </div>
           <div>
-            <v-row outlined row wrap>
+            <v-row no-gutters outlined row wrap>
               <v-col
                 v-for="product in item.products"
                 :key="product.id"
                 cols="12"
-                sm="4"
+                md="4"
+                sm="6"
               >
                 <a @click="modal(product)">
                   <Product :product="product" />
@@ -61,46 +63,19 @@
               </v-row>
             </v-img>
 
-            <v-card-title>
-              <v-row justify="space-between">
-                <v-col cols="auto">
-                  <div class="title-product mr-3">
-                    <span>{{ productSelected.name }}</span>
-                  </div>
-                </v-col>
-                <v-col cols="auto">
-                  <v-chip
-                    v-if="productSelected.cashback_return > 0"
-                    dense
-                    color="#00c996"
-                    text-color="white"
-                    dark
-                  >
-                    Ganhe
-                    <b
-                      class=" mx-2"
-                      v-text="parseInt(productSelected.cashback_return)"
-                    >
-                    </b
-                    >pontos
-                  </v-chip></v-col
-                >
-              </v-row>
-            </v-card-title>
-            <v-card-text class="px-0 overflow-x-hidden">
-              <div class="px-6 description">
-                <span>
-                  {{ productSelected.description }}
-                </span>
+            <div class="pa-5 ">
+              <div>
+                <div class="item-title-product">
+                  <span>{{ productSelected.name }}</span>
+                </div>
+                <div class="description">
+                  <span>
+                    {{ productSelected.description }}
+                  </span>
+                </div>
               </div>
-              <div class="cashback-value px-6 my-4">
-                <span v-if="productSelected.cashback_cost > 0">
-                  Compre por
-                  <span v-text="parseInt(productSelected.cashback_cost)"></span>
-                  pontos</span
-                >
-              </div>
-
+            </div>
+            <v-card-text class="pa-0 ma-0  overflow-x-hidden">
               <div v-for="item in complements" :key="item.id">
                 <v-row
                   class="grey lighten-4 px-6"
@@ -113,7 +88,7 @@
                         {{ item.name }}
                       </span>
                     </div>
-                    <div class="">
+                    <div class="limit-details">
                       <span><b v-text="limitOptions(item.limit)"></b></span>
                     </div>
                   </v-col>
@@ -574,23 +549,28 @@ export default {
   text-transform: capitalize;
   color: #3c3a41;
 }
-.title-product {
+.item-title-product {
   font-family: Montserrat;
   font-weight: 600;
   font-size: 15px;
   text-align: left;
   color: #000;
-  text-transform: uppercase;
 }
 .title-subcategory {
   text-transform: uppercase;
+  font-size: 12px;
 }
 .description {
   text-transform: initial;
+  color: #3c3a41;
+  font-size: 14px;
 }
 .cashback-value {
   color: #3c3a41;
   font-size: 15px;
   font-weight: bold;
+}
+.limit-details {
+  font-size: 12px;
 }
 </style>
