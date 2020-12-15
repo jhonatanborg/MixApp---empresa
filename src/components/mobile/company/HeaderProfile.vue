@@ -17,28 +17,39 @@
         </v-card>
       </v-row>
     </v-img>
-    <div class="my-5">
-      <div class="item-title-company my-3">
-        <span v-text="company.name"></span>
+    <div class="my-5 px-5">
+      <div class=" my-3 ">
+        <div class="item-title-company">
+          <span v-text="company.name"></span>
+        </div>
+        <div>
+          <span
+            :class="company.opened === 'S' ? 'green--text' : 'red--text'"
+            v-text="company.opened === 'S' ? 'Aberto' : 'Fechado Agora'"
+          ></span>
+        </div>
       </div>
-
-      <div class="d-flex justify-center align-center">
-        <v-chip
-          class="mr-3"
-          v-text="company.opened === 'S' ? 'Aberto' : ' Fechado'"
-          :color="company.opened === 'S' ? 'success' : 'error'"
-        >
-        </v-chip>
-        <v-chip
-          v-if="company.deliveryFee && !company.deliveryFee.length"
-          color="white"
-        >
-          <b
-            class="mx-3 "
-            v-text="'Entrega: ' + convertMoney(company.deliveryFee.value)"
-          ></b
-        ></v-chip>
-      </div>
+      <v-row justify="start" dense>
+        <v-col cols="auto" sm="6">
+          <v-chip
+            v-if="company.deliveryFee && !company.deliveryFee.length"
+            color="white"
+          >
+            <b
+              class="mx-3 "
+              v-text="'Entrega: ' + convertMoney(company.deliveryFee.value)"
+            ></b
+          ></v-chip>
+        </v-col>
+        <v-col cols="auto" sm="6">
+          <div class="text-center">
+            <v-chip @click="openAboutDialog()" outlined>
+              <v-icon size="20" class="mr-1  ">mdi-information</v-icon>
+              + informações</v-chip
+            >
+          </div>
+        </v-col>
+      </v-row>
     </div>
 
     <v-container>
@@ -118,7 +129,7 @@ export default {
   line-height: 20px;
   /* identical to box height */
 
-  text-align: center;
+  text-align: left;
 
   color: #2d2c2c;
 }

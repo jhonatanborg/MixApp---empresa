@@ -173,7 +173,6 @@ export default {
 }
 #app-bar {
   height: 50px;
-  font-family: Montserrat;
 }
 .subheader {
   font-size: 13px;

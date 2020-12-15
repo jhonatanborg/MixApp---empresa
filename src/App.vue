@@ -91,7 +91,7 @@ export default {
 </script>
 <style>
 #App {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Monda", sans-serif !important;
   overflow-x: hidden;
   background-color: #fafafa;
   color: #293040 !important;

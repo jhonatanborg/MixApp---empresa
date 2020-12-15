@@ -61,10 +61,17 @@
       <div class="black--text" v-text="convertMoney(subTotal)"></div>
     </v-list-item>
 
-    <div class="mx-3">
+    <div class="mx-3" v-if="minPurchaseVerify">
       <v-btn depressed x-large @click="userVerify()" block color="#FFBA0A">
         <b>Selecione forma de pagamento </b>
       </v-btn>
+    </div>
+    <div v-else>
+      <v-card class="pa-5 grey lighten-4 item-min-purchase" flat>
+        O pedido mínimo para nessa empresa é de
+        <b>{{ convertMoney(company.min_purchase_value) }}</b> , não inclusa a
+        taxa de entrega. Selecione + itens!
+      </v-card>
     </div>
   </div>
 </template>
@@ -87,6 +94,12 @@ export default {
         sum = this.sale.reduce((sum, item) => sum + item.total, 0);
       }
       return sum;
+    },
+    minPurchaseVerify() {
+      if (this.subTotal >= this.company.min_purchase_value) {
+        return true;
+      }
+      return false;
     },
     company() {
       localStorage.setItem(
@@ -193,5 +206,8 @@ a {
   font-weight: 600;
   font-size: 14px;
   line-height: 17px;
+}
+.item-min-purchase {
+  font-size: 14px;
 }
 </style>

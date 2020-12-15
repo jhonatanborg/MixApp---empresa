@@ -258,23 +258,22 @@ export default {
       });
       setTimeout(() => {
         this.getPurchase();
-        this.displayNotification();
       }, 20000);
     },
-    displayNotification() {
-      Notification.requestPermission(function(result) {
-        if (result === "granted") {
-          navigator.serviceWorker.ready.then(function(registration) {
-            registration.showNotification("Mix entregas", {
-              body: "Seu pedido saiu para entrega!",
-              icon: "../images/touch/chrome-touch-icon-192x192.png",
-              vibrate: [200, 100, 200, 100, 200, 100, 200],
-              tag: "vibration-sample",
-            });
-          });
-        }
-      });
-    },
+    // displayNotification() {
+    //   Notification.requestPermission(function(result) {
+    //     if (result === "granted") {
+    //       navigator.serviceWorker.ready.then(function(registration) {
+    //         registration.showNotification("Mix entregas", {
+    //           body: "Seu pedido saiu para entrega!",
+    //           icon: "../images/touch/chrome-touch-icon-192x192.png",
+    //           vibrate: [200, 100, 200, 100, 200, 100, 200],
+    //           tag: "vibration-sample",
+    //         });
+    //       });
+    //     }
+    //   });
+    // },
   },
 };
 </script>

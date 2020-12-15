@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :value="true" max-width="400px" transition="dialog-transition">
+  <v-dialog max-width="400px" transition="dialog-transition">
     <v-card class="fill-height " height="100%">
       <div class="mx-3">
         <v-row justify="end">
