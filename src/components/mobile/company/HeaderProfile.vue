@@ -51,7 +51,6 @@
         </v-col>
       </v-row>
     </div>
-
     <v-container>
       <v-row justify-sm="center">
         <v-col sm="auto">
