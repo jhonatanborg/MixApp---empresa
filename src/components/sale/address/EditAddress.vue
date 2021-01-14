@@ -91,8 +91,12 @@
 </template>
 
 <script>
+import mixin from "@/mixins/mixins.js";
+
 import axios from "axios";
 export default {
+  mixins: [mixin],
+
   mounted() {},
   data: () => ({
     lat: "",

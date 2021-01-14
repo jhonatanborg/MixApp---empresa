@@ -76,8 +76,12 @@
 </template>
 
 <script>
+import mixin from "@/mixins/mixins.js";
+
 import axios from "axios";
 export default {
+  mixins: [mixin],
+
   mounted() {},
   data: () => ({
     lat: "",
@@ -117,10 +121,13 @@ export default {
           method: "POST",
           url: `${process.env.VUE_APP_BASE_URL_SERVER_LOCAL}/coord-address`,
           data: {
-            address: `${this.newAddress.street}, ${this.newAddress.number},${this.newAddress.district}, ${this.newAddress.cep}`,
+            address: `${this.characterRemove(this.newAddress.street)}, ${
+              this.newAddress.number
+            },${this.newAddress.district}, ${this.newAddress.cep}`,
           },
         })
           .then((resp) => {
+            console.log(this.characterRemove(this.newAddress.street));
             if (resp.data.street && resp.data.number && resp.data.district) {
               let location = {
                 latitude: resp.data.latitude,

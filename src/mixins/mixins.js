@@ -29,5 +29,11 @@ export default {
       }
       return true;
     },
+    characterRemove(value) {
+      value = value.replace(/[ÀÁÂÃÄÅ]/g, "A");
+      value = value.replace(/[àáâãäå]/g, "a");
+      value = value.replace(/[ÈÉÊË]/g, "E");
+      return value;
+    },
   },
 };
