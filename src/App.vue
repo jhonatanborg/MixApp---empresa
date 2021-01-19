@@ -1,5 +1,5 @@
 <template>
-  <v-app id="App" class="app grey lighten-5 ">
+  <v-app id="App" class="app grey lighten-3 ">
     <MenuMobile />
     <v-main class="bar">
       <Address @close-dialog="closeDialog" />
@@ -26,7 +26,6 @@ export default {
   mounted() {
     this.getSaleIdb();
     this.listDataCompany();
-    console.log(window.location.hostname);
   },
 
   data: () => ({

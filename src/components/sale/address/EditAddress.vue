@@ -124,10 +124,16 @@ export default {
           method: "POST",
           url: `${process.env.VUE_APP_BASE_URL_SERVER_LOCAL}/coord-address`,
           data: {
-            address: `${this.newAddress.street}, ${this.newAddress.number},${this.newAddress.district}, ${this.newAddress.cep},  ${this.newAddress.complement}`,
+            address: `${this.characterRemove(this.newAddress.street)}, ${
+              this.newAddress.number
+            },${this.characterRemove(this.newAddress.district)}, ${
+              this.newAddress.cep
+            },  ${this.newAddress.complement}`,
           },
         })
           .then((resp) => {
+            console.log(this.characterRemove(this.newAddress.street));
+
             resp.data.complement = this.newAddress.complement;
             if (resp.data.street && resp.data.number && resp.data.district) {
               let location = {
@@ -144,6 +150,8 @@ export default {
             }
           })
           .catch(() => {
+            console.log(this.characterRemove(this.newAddress.street));
+
             this.error = true;
             this.isLoading = false;
           });

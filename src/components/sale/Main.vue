@@ -48,7 +48,7 @@
       </div>
       <div>
         <div id="list-products">
-          <v-window :value="step">
+          <v-window touchless :value="step">
             <v-window-item :value="1">
               <ListProducts />
             </v-window-item>
@@ -141,7 +141,6 @@ export default {
     step() {
       return this.$store.state.cart.sidebar.step;
     },
-
     address() {
       return this.$store.state.user.address;
     },

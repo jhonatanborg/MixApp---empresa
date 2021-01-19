@@ -30,6 +30,7 @@
           </v-col>
         </v-row>
       </v-container>
+      <Footer />
     </div>
     <DialogAbout />
     <v-dialog
@@ -63,6 +64,7 @@
 import ProductBar from "@/components/company/ProductBar";
 import PromoBar from "@/components/company/PromoBar";
 import Brands from "@/components/company/BrandsPay.vue";
+import Footer from "@/components/shared/Footer.vue";
 import MenuBar from "@/components/shared/MenuBar";
 import ProfileDetails from "@/components/company/HeaderProfile";
 import ProfileMobile from "@/components/mobile/company/HeaderProfile";
@@ -77,6 +79,7 @@ export default {
     ProfileDetails,
     ProfileMobile,
     DialogAbout,
+    Footer,
   },
   beforeMount() {
     this.listDataCompany();

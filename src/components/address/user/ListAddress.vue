@@ -1,12 +1,12 @@
 <template>
-  <div v-if="user.address.length > 0">
+  <div v-if="address.length > 0">
     <v-list
       class="overflow-y-auto barscroll px-0 mx-0"
       max-height="500px"
       two-line
     >
       <v-list-item-group class="mx-0" dense v-model="addressSelected">
-        <template v-for="(item, i) in user.address">
+        <template v-for="(item, i) in address">
           <v-divider v-if="!item" :key="`divider-${i}`"></v-divider>
 
           <v-list-item
@@ -92,8 +92,8 @@
 <script>
 export default {
   computed: {
-    user() {
-      return this.$store.getters["user/getUser"] || {};
+    address() {
+      return this.$store.getters["user/getListAddress"] || {};
     },
     sale() {
       return this.$store.state.cart.saleIdb;
@@ -123,6 +123,7 @@ export default {
       });
     },
     async updateLocalAddress() {
+      this.$store.commit("cart/setType", "online");
       this.$store.commit("user/request", {
         state: "address",
         data: this.addressSelected,

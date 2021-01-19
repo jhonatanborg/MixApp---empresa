@@ -63,6 +63,7 @@ export default {
       this.$store.commit("cart/sidebar", { open: true, step: 7 });
     },
     confirmAddress() {
+      this.$store.commit("cart/setType", "online");
       this.$store.commit("cart/sidebar", { open: true, step: 3 });
     },
   },

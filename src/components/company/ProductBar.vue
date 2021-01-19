@@ -16,7 +16,7 @@
             </div>
           </div>
           <div>
-            <v-row no-gutters outlined row wrap>
+            <v-row outlined row wrap>
               <v-col
                 v-for="product in item.products"
                 :key="product.id"
@@ -174,7 +174,7 @@
                     :disabled="verifyMandatory"
                   >
                     <div>
-                      Confirmar
+                      Adicionar
                       <span v-text="convertMoney(Total)">
                         R$
                       </span>

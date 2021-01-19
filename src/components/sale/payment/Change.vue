@@ -113,11 +113,19 @@ export default {
       } else {
         this.changeError = false;
         this.$store.commit("cart/changeFor", change);
-        this.$store.commit("cart/sidebar", { open: true, step: 6 });
+        if (this.$store.state.cart.type === "retirada") {
+          this.$store.commit("cart/sidebar", { open: true, step: 3 });
+        } else {
+          this.$store.commit("cart/sidebar", { open: true, step: 6 });
+        }
       }
     },
     notChange() {
-      this.$store.commit("cart/sidebar", { open: true, step: 6 });
+      if (this.$store.state.cart.type === "retirada") {
+        this.$store.commit("cart/sidebar", { open: true, step: 3 });
+      } else {
+        this.$store.commit("cart/sidebar", { open: true, step: 6 });
+      }
     },
   },
 };

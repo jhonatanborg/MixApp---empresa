@@ -58,6 +58,12 @@ const user = {
         return subcategories;
       }
     },
+    getListAddress(state) {
+      let address = state.userProfile.address;
+      if (state.userProfile) {
+        return address;
+      }
+    },
   },
 
   mutations: {

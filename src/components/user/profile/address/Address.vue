@@ -96,7 +96,6 @@ export default {
     },
     deleteAddress(key, item) {
       this.addressEdit = item;
-
       this.viewDialogDelete = true;
     },
   },

@@ -86,38 +86,64 @@
         </v-card>
       </div>
     </div>
-    <div class="py-2">
-      <span class="mx-3 item-title">
-        Endereço para entrega:
-      </span>
-    </div>
-    <div class="mx-3">
-      <v-card flat color="grey lighten-4">
-        <v-list-item dense @click="openDialogAddress()" link class="my-2">
-          <v-list-item-content>
-            <v-list-item-subtitle class="price-item">
-              <span class="item-address">
-                {{ address.street }}, {{ address.number }} -
-                {{ address.district }}
+    <div v-if="$store.state.cart.type !== 'retirada'" class="mx-3">
+      <div class="py-2">
+        <span class="mx-3 item-title">
+          Endereço para entrega:
+        </span>
+      </div>
+      <div>
+        <v-card flat color="grey lighten-4">
+          <v-list-item dense @click="openDialogAddress()" link class="my-2">
+            <v-list-item-content>
+              <v-list-item-subtitle class="price-item">
+                <span class="item-address">
+                  {{ address.street }}, {{ address.number }} -
+                  {{ address.district }}
 
-                {{ address.complement }}</span
-              >
-            </v-list-item-subtitle>
-            <v-list-item-subtitle>
-              <div
-                v-if="company.deliveryFee"
-                class="item-value-address"
-                v-text="convertMoney(company.deliveryFee.value)"
-              ></div>
-            </v-list-item-subtitle>
-          </v-list-item-content>
-          <v-list-item-action>
-            <v-btn icon color="primary">
-              <v-icon size="20">mdi-pencil-outline</v-icon>
-            </v-btn>
-          </v-list-item-action>
-        </v-list-item>
-      </v-card>
+                  {{ address.complement }}</span
+                >
+              </v-list-item-subtitle>
+              <v-list-item-subtitle>
+                <div
+                  v-if="company.deliveryFee"
+                  class="item-value-address"
+                  v-text="convertMoney(company.deliveryFee.value)"
+                ></div>
+              </v-list-item-subtitle>
+            </v-list-item-content>
+            <v-list-item-action>
+              <v-btn icon color="primary">
+                <v-icon size="20">mdi-pencil-outline</v-icon>
+              </v-btn>
+            </v-list-item-action>
+          </v-list-item>
+        </v-card>
+      </div>
+    </div>
+    <div v-else>
+      <div class="py-2">
+        <span class="mx-3 item-title">
+          Retire seu pedido em:
+        </span>
+      </div>
+      <v-list-item dense @click="openDialogAddress()" link class="my-2">
+        <v-list-item-content>
+          <v-list-item-subtitle class="price-item">
+            <span class="item-address">
+              {{ company.address.street }}, {{ company.address.number }} -
+              {{ company.address.district }}
+
+              {{ company.address.complement }}</span
+            >
+          </v-list-item-subtitle>
+        </v-list-item-content>
+        <v-list-item-action>
+          <v-btn icon color="primary">
+            <v-icon size="20">mdi-pencil-outline</v-icon>
+          </v-btn>
+        </v-list-item-action>
+      </v-list-item>
     </div>
 
     <div class="py-2 ">
@@ -147,7 +173,7 @@
         ><span v-text="convertMoney(discount_value)"> </span
       ></v-chip>
     </v-list-item>
-    <v-list-item dense>
+    <v-list-item dense v-if="$store.state.cart.type !== 'retirada'">
       <v-list-item-content>
         <v-list-item-subtitle>
           <span class="item-subtitle"> Taxa de entrega </span>
@@ -215,13 +241,8 @@ export default {
       return this.$store.state.company.companies;
     },
     company() {
-      localStorage.setItem(
-        "company",
-        JSON.stringify(this.$store.getters["company/getCompany"])
-      );
       return this.$store.getters["company/getCompany"] || {};
     },
-
     sale() {
       return this.$store.state.cart.saleIdb;
     },
@@ -245,11 +266,14 @@ export default {
 
     total() {
       let sum = this.subTotal;
-      if (this.company.deliveryFee) {
-        if (this.discount_value) {
-          sum = parseFloat(sum) - parseFloat(this.discount_value);
-        }
+      if (
+        this.company.deliveryFee &&
+        this.$store.state.cart.type !== "retirada"
+      ) {
         sum = parseFloat(sum) + parseFloat(this.company.deliveryFee.value);
+      }
+      if (this.discount_value) {
+        sum = parseFloat(sum) - parseFloat(this.discount_value);
       }
       return sum;
     },
@@ -277,17 +301,19 @@ export default {
           paymentsArray.push(element.id);
         });
         if (paymentsArray.length > 0) {
-          delete this.address.type;
           let sale = {
             address: this.address,
             saleItems: this.sale,
+            type:
+              this.$store.state.cart.type === "retirada"
+                ? "retirada"
+                : "online",
             change_for: this.change ? this.change : null,
             cupom: this.cupom ? this.cupom + "@" + this.company.id : "",
             payment_available_id: paymentsArray,
             company_id: this.company.id,
             ispromotion: localStorage.getItem("promo") ? true : false,
           };
-
           axios({
             method: "POST",
             headers: {

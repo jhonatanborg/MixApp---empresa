@@ -1,111 +1,108 @@
 <template>
-  <div>
-    <v-card flat class="py-5">
-      <v-row class="col-sm-12 mx-auto">
-        <v-col cols="10" sm="4">
-          <div>
-            <span class="display-2">
-              <b>Mix</b>
-            </span>
-            <h3>comida boa em casa</h3>
-          </div>
-          <v-row class="align-center">
-            <v-col cols="auto">
-              <div>
-                <h3>Disponivel em:</h3>
-                <div>
-                  <GooglePlay />
+  <v-footer width="100%" height="auto">
+    <v-row justify="center" align="center" dense>
+      <!-- <v-col cols="12" sm="12">
+        <div>
+          <router-link :to="{ name: 'Home' }">
+            <v-img
+              width="200px"
+              :src="$store.state.server + company.logo"
+            ></v-img>
+          </router-link>
+        </div>
+      </v-col> -->
+      <v-col cols="12" sm="12">
+        <v-row>
+          <v-col cols="12" sm="12">
+            <div class="item-tel">
+              <span>Formas de pagamento:</span>
+            </div>
+            <div class="item-details">
+              <div class="overflow-x-hidden overflow-y-auto pay">
+                <div class="px-2">
+                  <v-row dense v-for="(item, i) in payments" :key="i">
+                    <v-col cols="12" sm="12">
+                      <span class="font-weight-bold">
+                        <small>
+                          {{ item.title }}
+                        </small>
+                      </span>
+                    </v-col>
+                    <v-col
+                      v-for="(value, n) in item.payments"
+                      :key="n"
+                      cols="6"
+                      sm="2"
+                      xs="6"
+                    >
+                      <v-card
+                        color="grey lighten-5"
+                        flat
+                        outlined
+                        link
+                        class="grey lighten-5"
+                      >
+                        <v-row justify="start" no-gutters align="center">
+                          <v-col cols="auto">
+                            <v-img
+                              class="ma-2"
+                              width="20px"
+                              :src="$store.state.server + value.img"
+                            ></v-img>
+                          </v-col>
+                          <v-col cols="auto">
+                            <small class="text-capitalize ">
+                              {{ value.title }}
+                            </small>
+                          </v-col>
+                        </v-row>
+                      </v-card>
+                    </v-col>
+                  </v-row>
                 </div>
               </div>
-            </v-col>
-          </v-row>
-        </v-col>
-        <v-col cols="12" sm="8">
-          <v-row justify="start">
-            <v-col sm="6" v-for="item in about" :key="item.id">
-              <router-link :to="{ params: { type: item.name } }">
-                {{ item.name }}
-              </router-link>
-            </v-col>
-
-            <v-col sm="6" v-for="item in helps" :key="item.id">
-              <router-link :to="{ params: { type: item.name } }">
-                {{ item.name }}
-              </router-link>
-            </v-col>
-          </v-row>
-        </v-col>
-      </v-row>
-      <div class="col-sm-12 my-0 py-0 mx-auto">
-        <v-divider></v-divider>
-      </div>
-      <v-layout column align-content-center>
-        <v-col cols="auto" sm="2">
-          <span> &copy;Vedas Sistemas - 2020</span>
-        </v-col>
-      </v-layout>
-    </v-card>
-  </div>
+            </div>
+          </v-col>
+          <v-col cols="12" sm="12">
+            <div class="address">
+              <span>Endereço:</span>
+            </div>
+            <div class="item-details">
+              <span>
+                {{ company.address.street }}, {{ company.address.number }} -
+                Bairro {{ company.address.district }} <br />
+                {{ company.address.city }} - {{ company.address.state }}
+              </span>
+            </div>
+          </v-col>
+        </v-row>
+      </v-col>
+      <v-col cols="auto">
+        <small>
+          &copy;2020 —
+          <a
+            href="http://vedassistemas.com.br"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <strong>vedassistemas.com.br</strong>
+          </a>
+        </small>
+      </v-col>
+    </v-row>
+  </v-footer>
 </template>
 
 <script>
-import GooglePlay from "@/components/images/GooglePlay";
-
 export default {
   name: "Footer",
-  props: {
-    categories: Array,
-  },
-  components: {
-    GooglePlay,
-  },
-  data() {
-    return {
-      about: [
-        {
-          id: 5,
-          name: "Fale Conosco",
-          route: "/",
-        },
-        {
-          id: 6,
-          name: "Cashbacks",
-          route: "/",
-        },
-        {
-          id: 7,
-          name: "Nosso blog",
-          route: "/",
-        },
-        {
-          id: 9,
-          name: "Adicione sua empresa",
-          route: "/",
-        },
-      ],
-      helps: [
-        {
-          id: 1,
-          name: "Perguntas frequentes",
-          route: "/",
-        },
-        {
-          id: 2,
-          name: "Todas as cidades",
-          route: "/",
-        },
-        {
-          id: 3,
-          name: "Restaurantes perto de mim",
-          route: "/",
-        },
-        {
-          id: 4,
-          name: "Termos e condições",
-          route: "/",
-        },
-      ],
-    };
+  computed: {
+    company() {
+      return this.$store.getters["company/getCompany"] || {};
+    },
+    payments() {
+      return this.$store.getters["company/getPayments"] || [];
+    },
   },
 };
 </script>

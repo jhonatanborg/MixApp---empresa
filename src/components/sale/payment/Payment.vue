@@ -134,7 +134,11 @@ export default {
       ) {
         this.$store.commit("cart/sidebar", { open: true, step: 5 });
       } else if (this.payment) {
-        this.$store.commit("cart/sidebar", { open: true, step: 6 });
+        if (this.$store.state.cart.type === "retirada") {
+          this.$store.commit("cart/sidebar", { open: true, step: 3 });
+        } else {
+          this.$store.commit("cart/sidebar", { open: true, step: 6 });
+        }
       }
     },
   },

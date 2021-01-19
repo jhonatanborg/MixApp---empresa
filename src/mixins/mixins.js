@@ -30,9 +30,17 @@ export default {
       return true;
     },
     characterRemove(value) {
-      value = value.replace(/[ÀÁÂÃÄÅ]/g, "A");
-      value = value.replace(/[àáâãäå]/g, "a");
-      value = value.replace(/[ÈÉÊË]/g, "E");
+      const array = value.split(" ");
+
+      value = array
+        .map((letra) =>
+          letra
+            .normalize("NFD")
+            .replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, "")
+            .toLocaleLowerCase()
+        )
+        .join(" ");
+
       return value;
     },
   },

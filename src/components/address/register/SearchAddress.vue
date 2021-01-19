@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <v-row>
+    <v-row justify="start">
       <v-col cols="12" sm="9">
         <v-text-field
           color="primary"
@@ -52,25 +52,37 @@
         </v-alert>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col cols="12" sm="6">
+    <v-row dense justify="center">
+      <v-col cols="12" sm="12">
+        <v-btn
+          @click="getAddressByString()"
+          depressed
+          block
+          color="#FFBA0A"
+          large
+        >
+          <v-icon>mdi-magnify</v-icon> Buscar endereço
+        </v-btn>
+      </v-col>
+      <v-col cols="12" xs="12" sm="2" class="text-center">
+        <span>
+          ou
+        </span>
+      </v-col>
+      <v-col cols="12" sm="12">
         <v-btn
           :loading="isLoading"
           @click="searchLocal()"
           block
           color="primary"
           outlined
+          large
         >
           <v-icon class="mx-1">mdi-crosshairs-gps</v-icon>
 
           Usar localização atual</v-btn
         ></v-col
       >
-      <v-col cols="12" sm="6">
-        <v-btn @click="getAddressByString()" depressed block color="#FFBA0A">
-          <v-icon>mdi-magnify</v-icon> Buscar endereço
-        </v-btn>
-      </v-col>
     </v-row>
   </div>
 </template>
@@ -123,11 +135,12 @@ export default {
           data: {
             address: `${this.characterRemove(this.newAddress.street)}, ${
               this.newAddress.number
-            },${this.newAddress.district}, ${this.newAddress.cep}`,
+            },${this.characterRemove(this.newAddress.district)}, ${
+              this.newAddress.cep
+            }`,
           },
         })
           .then((resp) => {
-            console.log(this.characterRemove(this.newAddress.street));
             if (resp.data.street && resp.data.number && resp.data.district) {
               let location = {
                 latitude: resp.data.latitude,

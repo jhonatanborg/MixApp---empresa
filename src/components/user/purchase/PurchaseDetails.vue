@@ -1,5 +1,5 @@
 <template>
-  <div v-if="purchaseDetails && purchaseDetails.deliveryAddress">
+  <div v-if="purchaseDetails">
     <Notify />
 
     <v-card
@@ -93,7 +93,7 @@
         <div>
           <div class="font-weight-bold">Entregar em</div>
         </div>
-        <div>
+        <div v-if="purchaseDetails.type === 'online'">
           <v-list-item-title>
             {{ purchaseDetails.deliveryAddress.title }}</v-list-item-title
           >
@@ -140,7 +140,10 @@
             </v-chip>
           </div>
           <v-divider v-if="purchaseDetails.cupom"></v-divider>
-          <div class="my-5 d-flex justify-space-between">
+          <div
+            v-if="purchaseDetails.type === 'online'"
+            class="my-5 d-flex justify-space-between"
+          >
             <div>Taxa de entrega</div>
             <v-chip color="green" class="white--text">
               + R$ {{ purchaseDetails.delivery_value }}
@@ -215,6 +218,11 @@ export default {
         case "Saiu para Entrega":
           status = "primary";
           details = "Atenção! seu pedido está indo até você";
+          statusUpdate = "Entregue";
+          break;
+        case "Pronto":
+          status = "primary";
+          details = "Atenção! seu pedido está pronto";
           statusUpdate = "Entregue";
           break;
         case "Entregue":

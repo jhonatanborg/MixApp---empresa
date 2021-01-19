@@ -54,13 +54,24 @@
           </v-list-item-action>
         </v-list-item>
       </v-card>
+      <div class="mx-3 my-2" v-if="minPurchaseVerify">
+        <v-btn
+          depressed
+          outlined
+          x-large
+          @click="withdrawalVerify()"
+          block
+          color="primary"
+        >
+          <b>Quero retirar</b>
+        </v-btn>
+      </div>
     </div>
     <v-list-item>
       <span class="item-title">Subtotal</span>
       <v-spacer></v-spacer>
       <div class="black--text" v-text="convertMoney(subTotal)"></div>
     </v-list-item>
-
     <div class="mx-3" v-if="minPurchaseVerify">
       <v-btn depressed x-large @click="userVerify()" block color="#FFBA0A">
         <b>Selecione forma de pagamento </b>
@@ -120,6 +131,7 @@ export default {
     },
     userVerify() {
       if (localStorage.getItem("acess-token")) {
+        this.$store.commit("cart/setType", "online");
         this.$store.commit("cart/sidebar", { open: true, step: 2 });
       } else this.$router.push({ name: "session" });
     },
@@ -139,6 +151,12 @@ export default {
           table: "sale",
         },
       });
+    },
+    withdrawalVerify() {
+      if (localStorage.getItem("acess-token")) {
+        this.$store.commit("cart/sidebar", { open: true, step: 2 });
+        this.$store.commit("cart/setType", "retirada");
+      } else this.$router.push({ name: "session" });
     },
   },
 };

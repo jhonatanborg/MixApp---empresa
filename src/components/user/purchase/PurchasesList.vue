@@ -18,7 +18,6 @@
         </v-col>
         <v-col cols="auto">
           <h4 class="data-purchase" v-text="item.created_at"></h4>
-          <h4 class="data-purchase" v-text="convertDate(item.created_at)"></h4>
         </v-col>
       </v-row>
       <v-row justify="space-between">
@@ -60,6 +59,9 @@ export default {
           statusColor = "purple";
           break;
         case "Saiu para Entrega":
+          statusColor = "primary";
+          break;
+        case "Pronto":
           statusColor = "primary";
           break;
         case "Entregue":

@@ -20,6 +20,7 @@ const cart = {
       value: false,
       message: null,
     },
+    type: "online",
   },
   mutations: {
     addSale(state, data) {
@@ -28,6 +29,9 @@ const cart = {
     },
     getSaleIdb(state, data) {
       state.saleIdb = data;
+    },
+    setType(state, data) {
+      state.type = data;
     },
     saleQuantity(state) {
       state.quantitySale = state.saleIdb.length;
