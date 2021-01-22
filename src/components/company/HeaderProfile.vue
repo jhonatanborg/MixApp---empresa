@@ -2,8 +2,8 @@
   <div>
     <v-img
       class="d-flex align-center "
-      height="400px"
       :aspect-ratio="16 / 9"
+      height="400px"
       :src="$store.state.server + company.capa"
     >
       <v-card

@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <v-app-bar app id="app-bar" flat hide-on-scroll>
+    <v-app-bar app id="app-bar" flat>
       <v-btn dense :to="'/'" :ripple="false" text
         ><b>{{ company.name }}</b></v-btn
       >
@@ -18,7 +18,13 @@
           <v-icon>mdi-chevron-down</v-icon>
         </v-btn>
 
-        <v-btn v-if="sale.length > 0" class="mr-3" rounded @click="openSale()">
+        <v-btn
+          v-if="sale.length > 0"
+          class="mr-3 animate__animated animate__pulse animate__infinite"
+          rounded
+          @click="openSale()"
+          color="#FFBA0A"
+        >
           <v-icon class="mr-2">mdi-basket-outline</v-icon>Sacola
           <b class="notify">{{ sale.length }}</b>
         </v-btn>
@@ -191,7 +197,7 @@ export default {
   border-radius: 20px;
   width: 20px;
   height: 20px;
-  background-color: #ff6b6b;
+  background-color: #1a0c0c;
   font-size: 13px;
   line-height: 20px;
   font-family: "Roboto", sans-serif;

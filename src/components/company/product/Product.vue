@@ -9,9 +9,12 @@
             alt="alt"
           />
         </v-avatar>
-        <div class="ml-3">
+        <div class="ml-3 ">
           <div>
             <span v-text="product.name"></span>
+          </div>
+          <div class="details-product my-3">
+            <span v-text="product.description"></span>
           </div>
           <div class="mt-3 font-weight-bold">
             <span v-text="convertMoney(product.sale_value)"> </span>
@@ -48,4 +51,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.details-product {
+  font-size: 90%;
+}
+</style>

@@ -338,10 +338,8 @@ export default {
             })
             .catch((err) => {
               localStorage.removeItem("promo");
-
               this.cupom = "";
               this.successCupom = null;
-
               if (err.response.data.message) {
                 this.$store.commit("cart/sidebar", {
                   open: true,
@@ -389,6 +387,11 @@ export default {
         })
           .then((resp) => {
             let cupom = resp.data;
+            this.$store.commit("cart/request", {
+              state: "cupom",
+              data: resp.data,
+            });
+
             if (cupom.type === "currency") {
               this.discount_value = cupom.discount_value;
               this.successCupom = true;
@@ -398,7 +401,6 @@ export default {
               this.discount_value =
                 parseFloat(cupom.discount_value / 100) *
                 parseFloat(this.subTotal);
-
               this.loadingCupom = false;
             }
           })

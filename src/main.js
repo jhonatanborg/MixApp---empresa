@@ -8,9 +8,11 @@ import vuetify from "@/plugins/vuetify";
 import VueTheMask from "vue-the-mask";
 import store from "./store";
 import money from "v-money";
-import "animate.css";
+
 import VueTelInputVuetify from "vue-tel-input-vuetify/lib";
-require("vue2-animate/dist/vue2-animate.min.css");
+import AnimateCSS from "animate.css";
+
+Vue.use(AnimateCSS);
 
 Vue.use(VueTelInputVuetify, {
   vuetify,

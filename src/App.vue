@@ -67,7 +67,7 @@ export default {
         const payload = {
           state: "company",
           method: "get",
-          url: `/company-show/${process.env.VUE_APP_DOMAIN},${coords.latitude},${coords.longitude}`,
+          url: `/company-show/${window.location.host},${coords.latitude},${coords.longitude}`,
           insert: true,
         };
         this.execRequest("user/request", "address", "/coord", "POST", true, {
@@ -79,7 +79,7 @@ export default {
         const payload = {
           state: "company",
           method: "get",
-          url: `/company-show-one/${process.env.VUE_APP_DOMAIN}`,
+          url: `/company-show-one/${window.location.host}`,
           insert: true,
         };
         this.$store.dispatch("company/request", payload);

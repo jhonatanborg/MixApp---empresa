@@ -458,7 +458,7 @@ export default {
         if (localStorage.getItem("acess-token")) {
           this.$store.commit("user/request", {
             state: "addressTabs",
-            data: 3,
+            data: 4,
           });
         } else {
           this.$store.commit("user/request", {
@@ -506,7 +506,7 @@ export default {
         if (localStorage.getItem("acess-token")) {
           this.$store.commit("user/request", {
             state: "addressTabs",
-            data: 3,
+            data: 4,
           });
         } else {
           this.$store.commit("user/request", {

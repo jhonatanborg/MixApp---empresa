@@ -47,14 +47,14 @@
     >
       <v-btn
         @click="$store.commit('cart/sidebar', { open: true, step: 1 })"
-        class="elevation-7"
-        block
-        large
-        color="#FFBA0A"
-        dark
+        class="mr-3 animate__animated animate__pulse animate__infinite"
         rounded
+        block
+        x-large
+        color="#FFBA0A"
       >
-        Sacola ({{ sale.length }})
+        <v-icon class="mr-2">mdi-basket-outline</v-icon> Sacola
+        <b class="notify">{{ sale.length }}</b>
       </v-btn>
     </v-layout>
   </div>
@@ -153,30 +153,6 @@ export default {
     idGroupSelector(item) {
       item = item.replace(" ", "");
       return item;
-    },
-    listDataCompany() {
-      if (localStorage.getItem("geolocation")) {
-        let coords = JSON.parse(localStorage.getItem("geolocation"));
-        const payload = {
-          state: "company",
-          method: "get",
-          url: `/company-show/${process.env.VUE_APP_DOMAIN},${coords.latitude},${coords.longitude}`,
-          insert: true,
-        };
-        this.execRequest("user/request", "address", "/coord", "POST", true, {
-          lat: coords.latitude,
-          long: coords.longitude,
-        });
-        this.$store.dispatch("company/request", payload);
-      } else {
-        const payload = {
-          state: "company",
-          method: "get",
-          url: `/company-show-one/${process.env.VUE_APP_DOMAIN}`,
-          insert: true,
-        };
-        this.$store.dispatch("company/request", payload);
-      }
     },
     convertMoney(money) {
       if (money > 0) {

@@ -21,6 +21,7 @@ const cart = {
       message: null,
     },
     type: "online",
+    cupom: null,
   },
   mutations: {
     addSale(state, data) {
