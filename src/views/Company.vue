@@ -81,9 +81,6 @@ export default {
     DialogAbout,
     Footer,
   },
-  beforeMount() {
-    this.listDataCompany();
-  },
   data: () => ({
     dialogPay: false,
     statusLogin: true,

@@ -39,6 +39,9 @@ export default {
       if (window.location.host.indexOf("localhost") >= 0) {
         return "pastelariadopaulo.mixentregas.com.br";
       }
+      if (window.location.host.indexOf("www") >= 0) {
+        return window.location.host.split("www.")[1];
+      }
       return window.location.host;
     },
   },
