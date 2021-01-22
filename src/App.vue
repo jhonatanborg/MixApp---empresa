@@ -35,6 +35,12 @@ export default {
     addressAlert() {
       return this.$store.state.addressAlert;
     },
+    hostname() {
+      if (window.location.host.indexOf("localhost") >= 0) {
+        return "pastelariadopaulo.mixentregas.com.br";
+      }
+      return window.location.host;
+    },
   },
   methods: {
     execRequest(action, state, url, method, insert, data = null) {
@@ -67,22 +73,26 @@ export default {
         const payload = {
           state: "company",
           method: "get",
-          url: `/company-show/${window.location.host},${coords.latitude},${coords.longitude}`,
+          url: `/company-show/${this.hostname},${coords.latitude},${coords.longitude}`,
           insert: true,
         };
         this.execRequest("user/request", "address", "/coord", "POST", true, {
           lat: coords.latitude,
           long: coords.longitude,
         });
-        this.$store.dispatch("company/request", payload);
+        this.$store.dispatch("company/request", payload).then((resp) => {
+          document.title = resp.data.name;
+        });
       } else {
         const payload = {
           state: "company",
           method: "get",
-          url: `/company-show-one/${window.location.host}`,
+          url: `/company-show-one/${this.hostname}`,
           insert: true,
         };
-        this.$store.dispatch("company/request", payload);
+        this.$store.dispatch("company/request", payload).then((resp) => {
+          document.title = resp.data.name;
+        });
       }
     },
   },
