@@ -5,7 +5,7 @@ module.exports = {
     themeColor: "#000000",
     name: "Pastelaria do Paulo",
     short_name: "Pastelaria do Paulo",
-    start_url: "https://pastelariadopaulo.mixentregas.com.br/",
+    start_url: "https://mixempresa.netlify.app/",
     appleMobileWebAppCapable: "yes",
     appleMobileWebAppStatusBarStyle: "black",
     workboxPluginMode: "InjectManifest",
