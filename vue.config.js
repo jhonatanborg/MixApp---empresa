@@ -8,7 +8,6 @@ module.exports = {
     start_url: "https://mixempresa.netlify.app/",
     appleMobileWebAppCapable: "yes",
     appleMobileWebAppStatusBarStyle: "black",
-    workboxPluginMode: "InjectManifest",
     workboxOptions: {
       swSrc: "sw.js",
     },
