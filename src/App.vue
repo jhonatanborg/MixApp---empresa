@@ -36,7 +36,10 @@ export default {
       return this.$store.state.addressAlert;
     },
     hostname() {
-      if (window.location.host.indexOf("localhost") >= 0) {
+      if (
+        window.location.host.indexOf("localhost") >= 0 ||
+        window.location.host.indexOf("netlify") >= 0
+      ) {
         return "pastelariadopaulo.mixentregas.com.br";
       }
       if (window.location.host.indexOf("www") >= 0) {
