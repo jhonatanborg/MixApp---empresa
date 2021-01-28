@@ -9,19 +9,10 @@
       <v-dialog
         max-width="400px"
         :value="updateExists"
+        persistent
         transition="dialog-transition"
       >
         <v-card class="fill-height " height="100%">
-          <div class="mx-3">
-            <v-row justify="end">
-              <v-col cols="auto">
-                <v-btn x-small color="#FFE0E0" fab depressed>
-                  <v-icon color="#FF4141" size="20">mdi-close</v-icon>
-                </v-btn>
-              </v-col>
-            </v-row>
-          </div>
-
           <div class="pa-5">
             <v-row justify="center" align="center">
               <v-col cols="auto">
