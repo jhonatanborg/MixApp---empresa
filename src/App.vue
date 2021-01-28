@@ -5,8 +5,50 @@
       <Address @close-dialog="closeDialog" />
       <SaleError />
       <Main />
-      <NotifyPush :update="showUpdateUI" />
       <router-view />
+      <v-dialog
+        max-width="400px"
+        :value="updateExists"
+        transition="dialog-transition"
+      >
+        <v-card class="fill-height " height="100%">
+          <div class="mx-3">
+            <v-row justify="end">
+              <v-col cols="auto">
+                <v-btn x-small color="#FFE0E0" fab depressed>
+                  <v-icon color="#FF4141" size="20">mdi-close</v-icon>
+                </v-btn>
+              </v-col>
+            </v-row>
+          </div>
+
+          <div class="pa-5">
+            <v-row justify="center" align="center">
+              <v-col cols="auto">
+                <div>
+                  <v-img
+                    width="100"
+                    src="@/assets/images/notify/notification.svg"
+                  ></v-img>
+                </div>
+              </v-col>
+              <v-col cols="12">
+                <div class="title-notify">
+                  <span>Nova versão</span>
+                </div>
+                <div class="details-notify">
+                  <span>Nova versão disponivel, clique em atualiazar</span>
+                </div>
+              </v-col>
+              <v-col cols="12">
+                <v-btn x-large block color="#FFBA0A" @click="notify"
+                  ><b>Aceitar</b></v-btn
+                >
+              </v-col>
+            </v-row>
+          </div>
+        </v-card>
+      </v-dialog>
     </v-main>
   </v-app>
 </template>
@@ -15,7 +57,6 @@ import Main from "@/components/sale/Main";
 import MenuMobile from "@/components/mobile/shared/MenuMobile";
 import Address from "@/components/address/Main.vue";
 import SaleError from "@/components/sale/SaleError";
-import NotifyPush from "@/components/shared/NotifyPush.vue";
 
 export default {
   name: "App",
@@ -24,22 +65,28 @@ export default {
     SaleError,
     MenuMobile,
     Main,
-    NotifyPush,
   },
   mounted() {
     this.getSaleIdb();
     this.listDataCompany();
   },
   created() {
-    if (this.$workbox) {
-      this.$workbox.addEventListener("waiting", () => {
-        this.showUpdateUI = true;
+    // Listen for swUpdated event and display refresh snackbar as required.
+    document.addEventListener("swUpdated", this.showRefreshUI, { once: true });
+    // Refresh all open app tabs when a new service worker is installed.
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        if (this.refreshing) return;
+        this.refreshing = true;
+        window.location.reload();
       });
     }
   },
   data: () => ({
     dialogStep: null,
-    showUpdateUI: false,
+    updateExists: false,
+    refreshing: false,
+    registration: null,
   }),
   computed: {
     addressAlert() {
@@ -110,6 +157,23 @@ export default {
           document.title = resp.data.name;
         });
       }
+    },
+    showRefreshUI(e) {
+      // Display a button inviting the user to refresh/reload the app due
+      // to an app update being available.
+      // The new service worker is installed, but not yet active.
+      // Store the ServiceWorkerRegistration instance for later use.
+      this.registration = e.detail;
+      this.updateExists = true;
+    },
+    refreshApp() {
+      // Handle a user tap on the update app button.
+      this.updateExists = false;
+      // Protect against missing registration.waiting.
+      if (!this.registration || !this.registration.waiting) {
+        return;
+      }
+      this.registration.waiting.postMessage("skipWaiting");
     },
   },
 };
