@@ -35,7 +35,12 @@
                 </div>
               </v-col>
               <v-col cols="12">
-                <v-btn x-large block color="#FFBA0A" @click="refreshApp"
+                <v-btn
+                  x-large
+                  block
+                  depressed
+                  color="#FFBA0A"
+                  @click="refreshApp"
                   ><b>Atualizar</b></v-btn
                 >
               </v-col>
