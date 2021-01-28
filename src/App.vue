@@ -33,16 +33,19 @@
                 </div>
               </v-col>
               <v-col cols="12">
-                <div class="title-notify">
-                  <span>Nova versão</span>
+                <div class="title-notify text-center">
+                  <h3>Nova versão</h3>
                 </div>
-                <div class="details-notify">
-                  <span>Nova versão disponivel, clique em atualiazar</span>
+                <div class="details-notify text-center">
+                  <span
+                    >Existe uma nova versão disponivel. <br />
+                    Clique em atualizar</span
+                  >
                 </div>
               </v-col>
               <v-col cols="12">
-                <v-btn x-large block color="#FFBA0A" @click="notify"
-                  ><b>Aceitar</b></v-btn
+                <v-btn x-large block color="#FFBA0A" @click="refreshApp"
+                  ><b>Atualizar</b></v-btn
                 >
               </v-col>
             </v-row>
