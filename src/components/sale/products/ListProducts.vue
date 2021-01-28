@@ -192,7 +192,7 @@ a {
 .title-item {
   left: 22px;
   top: 101px;
-  font-family: Montserrat;
+
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
@@ -205,7 +205,6 @@ a {
   }
 }
 .item-title {
-  font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
@@ -213,13 +212,11 @@ a {
   width: 100%;
 }
 .item-address {
-  font-family: Montserrat;
   font-style: normal;
   font-size: 14px;
   line-height: 17px;
 }
 .item-value-address {
-  font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
   font-size: 14px;

@@ -550,7 +550,6 @@ export default {
   color: #3c3a41;
 }
 .item-title-product {
-  font-family: Montserrat;
   font-weight: 600;
   font-size: 15px;
   text-align: left;

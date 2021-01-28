@@ -121,7 +121,6 @@ export default {
 
 <style>
 .item-title-company {
-  font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;

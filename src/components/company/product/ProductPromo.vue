@@ -51,7 +51,6 @@ export default {
 
 <style>
 .title-product {
-  font-family: Montserrat;
   font-weight: 600;
   font-size: 15px;
   text-align: left;

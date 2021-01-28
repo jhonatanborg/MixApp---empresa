@@ -128,14 +128,12 @@ export default {
   color: #111;
 }
 .category {
-  font-family: Montserrat;
   font-weight: 500;
   font-size: 15px;
   text-align: left;
   color: #000;
 }
 .address {
-  font-family: Montserrat;
   font-weight: 600;
   font-size: 15px;
   text-align: left;
@@ -143,7 +141,6 @@ export default {
 }
 
 .mix {
-  font-family: Montserrat;
   font-weight: bold;
   font-size: 23px;
   text-align: left;
