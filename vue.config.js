@@ -5,7 +5,6 @@ module.exports = {
     themeColor: "#000000",
     name: "Pastelaria do Paulo",
     short_name: "Pastelaria do Paulo",
-    start_url: ".",
     appleMobileWebAppCapable: "yes",
     appleMobileWebAppStatusBarStyle: "black",
     workboxPluginMode: "InjectManifest",
