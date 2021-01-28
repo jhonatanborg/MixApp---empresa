@@ -5,6 +5,7 @@
       <Address @close-dialog="closeDialog" />
       <SaleError />
       <Main />
+      <NotifyPush :update="showUpdateUI" />
       <router-view />
     </v-main>
   </v-app>
@@ -14,6 +15,7 @@ import Main from "@/components/sale/Main";
 import MenuMobile from "@/components/mobile/shared/MenuMobile";
 import Address from "@/components/address/Main.vue";
 import SaleError from "@/components/sale/SaleError";
+import NotifyPush from "@/components/shared/NotifyPush.vue";
 
 export default {
   name: "App",
@@ -22,14 +24,22 @@ export default {
     SaleError,
     MenuMobile,
     Main,
+    NotifyPush,
   },
   mounted() {
     this.getSaleIdb();
     this.listDataCompany();
   },
-
+  created() {
+    if (this.$workbox) {
+      this.$workbox.addEventListener("waiting", () => {
+        this.showUpdateUI = true;
+      });
+    }
+  },
   data: () => ({
     dialogStep: null,
+    showUpdateUI: false,
   }),
   computed: {
     addressAlert() {

@@ -1,5 +1,5 @@
 <template>
-  <v-dialog max-width="400px" transition="dialog-transition">
+  <v-dialog max-width="400px" :value="update" transition="dialog-transition">
     <v-card class="fill-height " height="100%">
       <div class="mx-3">
         <v-row justify="end">
@@ -23,13 +23,10 @@
           </v-col>
           <v-col cols="12">
             <div class="title-notify">
-              <span>Acompanhe seu pedido</span>
+              <span>Nova versão</span>
             </div>
             <div class="details-notify">
-              <span
-                >Clique em aceitar e depois <b>permitir</b> para receber
-                notificações sobre seu pedido</span
-              >
+              <span>Nova versão disponivel, clique em atualiazar</span>
             </div>
           </v-col>
           <v-col cols="12">
@@ -45,26 +42,16 @@
 
 <script>
 export default {
+  props: {
+    update: {
+      type: Boolean,
+      default: false,
+    },
+  },
   methods: {
-    notify() {
-      return new Promise(function(resolve, reject) {
-        const permissionResult = Notification.requestPermission(function(
-          result
-        ) {
-          // Handling deprecated version with callback.
-          resolve(result);
-        });
-
-        if (permissionResult) {
-          permissionResult.then(resolve, reject);
-        }
-      }).then(function(permissionResult) {
-        if (permissionResult !== "granted") {
-          console.log(permissionResult);
-        } else {
-          console.log("temos permissão");
-        }
-      });
+    async notify() {
+      this.update = false;
+      await this.$workbox.messageSW({ type: "SKIP_WAITING" });
     },
   },
 };
