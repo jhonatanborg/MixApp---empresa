@@ -82,14 +82,12 @@ export default {
   background: transparent;
 }
 .title-message-error {
-  font-family: Montserrat;
   font-weight: 600;
   font-size: 16px;
   text-align: center;
   color: #ffba0a;
 }
 .details-message-error {
-  font-family: Montserrat;
   font-size: 16px;
   margin-top: 25px;
   margin-bottom: 25px;

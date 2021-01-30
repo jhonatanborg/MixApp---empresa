@@ -132,14 +132,13 @@ export default {
   padding: 10px 15px;
   border-radius: 5px;
   background: #ff5291;
-  font-family: Montserrat;
+
   font-weight: bold;
   font-size: 14px;
   text-align: left;
   color: white;
 }
 .title-company-cash {
-  font-family: Montserrat;
   font-weight: bold;
   font-size: 15px;
   line-height: 15px;
@@ -151,14 +150,12 @@ export default {
   height: 30px;
   border-radius: 5px;
   background: #ff5291;
-  font-family: Montserrat;
 }
 .cash-label-percentage {
   width: 100%;
   height: 30px;
   border-radius: 5px;
   background: #00c996;
-  font-family: Montserrat;
 }
 .cash-value {
   font-weight: bold;

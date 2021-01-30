@@ -59,7 +59,6 @@ export default {
 
 <style>
 .title-notify {
-  font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -70,7 +69,6 @@ export default {
   color: #2d2c2c;
 }
 .details-notify {
-  font-family: Montserrat;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;

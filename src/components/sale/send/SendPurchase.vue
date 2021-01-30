@@ -448,14 +448,12 @@ export default {
 
 <style>
 .btn-send {
-  font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
   line-height: 22px;
 }
 .item-subtitle {
-  font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
   font-size: 14px;

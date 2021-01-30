@@ -97,14 +97,12 @@ export default {
 
 <style>
 .title-intro {
-  font-family: Montserrat;
   font-weight: 600;
   font-size: 39px;
   text-align: left;
   color: #f5f5f5;
 }
 .slogan {
-  font-family: Montserrat;
   font-weight: 500;
   font-size: 23px;
   text-align: center;

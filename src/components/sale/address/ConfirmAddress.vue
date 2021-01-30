@@ -72,7 +72,6 @@ export default {
 
 <style>
 .title-info-address {
-  font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
@@ -83,7 +82,6 @@ export default {
   color: #2d2c2c;
 }
 .details-info-address {
-  font-family: Montserrat;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -92,7 +90,6 @@ export default {
   color: #2d2c2c;
 }
 .info-address {
-  font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;

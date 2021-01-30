@@ -100,21 +100,18 @@ export default {
   transform: translateX(-30%);
 }
 .home-title {
-  font-family: Montserrat;
   font-weight: bold;
   font-size: 14px;
   text-align: left;
   color: #3c3a41;
 }
 .details-cash-banner {
-  font-family: Montserrat;
   font-weight: 500;
   font-size: 12px;
   text-align: left;
   color: #808080;
 }
 .title-cash-banner {
-  font-family: Montserrat;
   font-weight: bold;
   font-size: 14px;
   text-align: left;

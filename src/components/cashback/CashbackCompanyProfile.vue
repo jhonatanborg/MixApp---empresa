@@ -122,14 +122,12 @@ export default {
 
 <style>
 .cashs {
-  font-family: Montserrat;
   font-weight: bold;
   font-size: 14px;
   text-align: left;
   color: #ffba0a;
 }
 .mix-status {
-  font-family: Montserrat;
   font-weight: 600;
   font-size: 11px;
   line-height: 15px;
@@ -137,7 +135,6 @@ export default {
   color: #00c996;
 }
 .mix-points {
-  font-family: Montserrat;
   font-weight: 600;
   font-size: 14px;
   line-height: 19px;
@@ -145,7 +142,6 @@ export default {
   color: #00c996;
 }
 .title-company {
-  font-family: Montserrat;
   font-weight: normal;
   font-size: 20px;
   line-height: 20px;
