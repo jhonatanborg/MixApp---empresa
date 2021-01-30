@@ -10,10 +10,14 @@ import store from "./store";
 import money from "v-money";
 import VueTelInputVuetify from "vue-tel-input-vuetify/lib";
 import AnimateCSS from "animate.css";
+
+import { Capacitor } from "@capacitor/core";
+
+Vue.use(Capacitor);
 Vue.use(AnimateCSS);
 
 Vue.use(VueTelInputVuetify, {
-  vuetify,
+  vuetify
 });
 import { LMap, LTileLayer, LMarker, LControl } from "vue2-leaflet";
 import "leaflet";
@@ -31,7 +35,8 @@ new Vue({
   router,
   vuetify,
   store,
+  Capacitor,
   render: function(h) {
     return h(App);
-  },
+  }
 }).$mount("#app");

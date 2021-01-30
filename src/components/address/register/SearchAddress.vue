@@ -89,7 +89,8 @@
 
 <script>
 import mixin from "@/mixins/mixins.js";
-
+// import { Geolocation } from "@capacitor/geolocation";
+import { Capacitor } from "@capacitor/core";
 import axios from "axios";
 export default {
   mixins: [mixin],
@@ -167,10 +168,12 @@ export default {
         this.error = true;
       }
     },
-    searchLocal() {
+    async searchLocal() {
+      const coordinates = await Capacitor.Plugins.Geolocation.getCurrentPosition();
+
       this.isLoading = true;
       if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(this.showPosition);
+        this.showPosition(coordinates);
       } else {
         this.$store.commit("alertAddress", true);
         this.isLoading = false;

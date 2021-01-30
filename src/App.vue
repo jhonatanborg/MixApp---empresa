@@ -92,16 +92,17 @@ export default {
       return this.$store.state.addressAlert;
     },
     hostname() {
-      if (
-        window.location.host.indexOf("localhost") >= 0 ||
-        window.location.host.indexOf("netlify") >= 0
-      ) {
-        return "pastelariadopaulo.mixentregas.com.br";
-      }
-      if (window.location.host.indexOf("www") >= 0) {
-        return window.location.host.split("www.")[1];
-      }
-      return window.location.host;
+      // if (
+      //   window.location.host.indexOf("localhost") >= 0 ||
+      //   window.location.host.indexOf("netlify") >= 0
+      // ) {
+      //   return "pastelariadopaulo.mixentregas.com.br";
+      // }
+      // if (window.location.host.indexOf("www") >= 0) {
+      //   return window.location.host.split("www.")[1];
+      // }
+      // return window.location.host;
+      return "pastelariadopaulo.mixentregas.com.br";
     },
   },
   methods: {

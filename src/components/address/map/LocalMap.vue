@@ -71,6 +71,7 @@
 const icon = require("../assets/local-icon.svg");
 import L from "leaflet";
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
+import { Capacitor } from "@capacitor/core";
 export default {
   components: {
     LMap,
@@ -159,8 +160,10 @@ export default {
     makerUpdate(center) {
       this.coordsMaker = center;
     },
-    getCoords() {
-      navigator.geolocation.getCurrentPosition(this.showPositionNavigator);
+    async getCoords() {
+      const coordinates = await Capacitor.Plugins.Geolocation.getCurrentPosition();
+      this.showPositionNavigator(coordinates);
+      // navigator.geolocation.getCurrentPosition(this.showPositionNavigator);
     },
     showPosition(position) {
       if (position) {

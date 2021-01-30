@@ -67,6 +67,7 @@
 
 <script>
 import axios from "axios";
+import { Capacitor } from "@capacitor/core";
 
 export default {
   mounted() {},
@@ -131,11 +132,11 @@ export default {
       }
     },
 
-    searchLocal() {
+    async searchLocal() {
+      const coordinates = await Capacitor.Plugins.Geolocation.getCurrentPosition();
       this.isLoading = true;
       if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(this.showPosition);
-        // this.$store.commit("alertAddress", { value: false });
+        this.showPosition(coordinates);
       } else {
         this.$store.commit("alertAddress", true);
         this.isLoading = false;

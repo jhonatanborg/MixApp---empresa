@@ -3,8 +3,9 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "xyz.appmaker.mwwfha",
-      "sha256_cert_fingerprints": ["47:27:86:85:D7:C4:D0:CA:0C:D5:68:FE:97:A5:08:3C:C9:0D:3A:3E:7A:36:7D:9B:00:AB:FC:75:6F:69:D9:CC"]
+      "package_name": "com.mixentregas.pastelariadopaulo",
+      "sha256_cert_fingerprints":
+      ["E2:41:9C:75:5B:4D:26:DC:E0:E9:41:94:A4:AA:B4:C5:41:29:32:DD:46:18:52:C1:CC:FA:57:D5:A9:0C:BA:33"]
     }
   }
 ]
