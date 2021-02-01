@@ -96,7 +96,7 @@ export default {
         window.location.host.indexOf("localhost") >= 0 ||
         window.location.host.indexOf("netlify") >= 0
       ) {
-        return "pastelariadopaulo.mixentregas.com.br";
+        return "salsichalanches.com.br";
       }
       if (window.location.host.indexOf("www") >= 0) {
         return window.location.host.split("www.")[1];
