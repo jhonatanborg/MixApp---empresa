@@ -2,9 +2,9 @@ module.exports = {
   transpileDependencies: ["vuetify", "vue-tel-input-vuetify"],
 
   pwa: {
-    themeColor: "#000000",
-    name: "Pastelaria do Paulo",
-    short_name: "Pastelaria do Paulo",
+    themeColor: "#4144E8",
+    name: "MIX APP",
+    short_name: "MIX APP",
     appleMobileWebAppCapable: "yes",
     appleMobileWebAppStatusBarStyle: "black",
     workboxPluginMode: "InjectManifest",
