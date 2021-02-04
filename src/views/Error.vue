@@ -25,7 +25,7 @@
             </div>
           </v-col>
           <v-col cols="12">
-            <v-btn x-large @click="verify" block depressed color="#fff"
+            <v-btn x-large @click="windowLocation" block depressed color="#fff"
               ><b>Atualizar</b></v-btn
             >
           </v-col>
@@ -43,8 +43,13 @@ export default {
   methods: {
     verify() {
       if (window.navigator.onLine) {
-        this.$router.push("/");
+        this.$router.push({
+          path: "/",
+        });
       }
+    },
+    windowLocation() {
+      window.location.reload();
     },
   },
 };
