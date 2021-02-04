@@ -2,21 +2,21 @@
   <div class="product">
     <v-card link flat class="pa-3">
       <div class="d-flex">
-        <v-avatar tile size="120">
+        <v-avatar tile size="100">
           <img
-            :aspect-ratio="16 / 9"
+            aspect-ratio="1.1"
             :src="$store.state.server + product.img"
-            alt="alt"
+            alt="Imagem do produto"
           />
         </v-avatar>
         <div class="ml-3 ">
-          <div>
+          <div class="title-product">
             <span v-text="product.name"></span>
           </div>
-          <div class="details-product my-3">
+          <div class="details-product">
             <span v-text="product.description"></span>
           </div>
-          <div class="mt-3 font-weight-bold">
+          <div class="mt-1 font-weight-bold">
             <span v-text="convertMoney(product.sale_value)"> </span>
           </div>
         </div>

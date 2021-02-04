@@ -79,8 +79,9 @@
           x-large
           @click="getAddressByString()"
           block
+          dark
           depressed
-          color="#FFBA0A"
+          color="#5530E5"
           :loading="isLoading"
         >
           <v-icon>mdi-magnify</v-icon> Buscar endereço

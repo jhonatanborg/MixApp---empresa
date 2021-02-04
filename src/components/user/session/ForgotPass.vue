@@ -42,7 +42,7 @@
             >
           </v-col>
           <v-col>
-            <v-btn @click="verifyEmail()" depressed block color="#FFBA0A"
+            <v-btn @click="verifyEmail()" depressed block color="#5530E5"
               >Avançar
             </v-btn>
           </v-col>

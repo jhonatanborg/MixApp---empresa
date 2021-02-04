@@ -91,7 +91,7 @@ export default {
       this.execRequest(
         "user/request",
         "purchase",
-        "/my-purchase-domain/" + process.env.VUE_APP_DOMAIN,
+        "/my-purchase-domain/" + this.$store.state.domain,
         "GET",
         true
       );

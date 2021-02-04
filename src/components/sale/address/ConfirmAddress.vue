@@ -30,8 +30,9 @@
             x-large
             block
             @click="confirmAddress()"
-            color="#FFBA0A"
+            color="#5530E5"
             depressed
+            dark
             ><b>Confirmar endereço</b></v-btn
           >
         </v-col>

@@ -10,7 +10,7 @@
         </h4>
       </div>
       <div class="py-5">
-        <v-btn large block dark color="#FFBA0A" :to="{ name: 'register' }"
+        <v-btn large block dark color="#5530E5" :to="{ name: 'register' }"
           >Telefone</v-btn
         >
       </div>
@@ -20,7 +20,7 @@
           dark
           outlined
           block
-          color="#FFBA0A"
+          color="#5530E5"
           :to="{ name: 'register-email' }"
           >E-mail</v-btn
         >

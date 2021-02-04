@@ -58,7 +58,7 @@
             dense
             hide-details
             class="my-0 py-0"
-            color="#FFBA0A"
+            color="#5530E5"
             @change="filterScroll()"
             v-model="filterItem"
             :items="categories"

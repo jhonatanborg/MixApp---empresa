@@ -101,7 +101,7 @@
                   <v-list-item-group
                     dense
                     v-model="lista[item.name]"
-                    color="primary"
+                    color="#5530E5"
                     multiple
                     :max="item.limit > 0 ? item.limit : 1000"
                   >
@@ -128,7 +128,7 @@
                               "
                               :input-value="active"
                               :true-value="item2"
-                              color="primary"
+                              color="#5530E5"
                               @click.stop="toggle"
                             ></v-checkbox>
                           </v-list-item-action>
@@ -168,8 +168,9 @@
                     type="submit"
                     block
                     x-large
+                    :dark="!verifyMandatory"
                     depressed
-                    color="#FFBA0A"
+                    color="#5530E5"
                     @click="AddPurchaseMount"
                     :disabled="verifyMandatory"
                   >
@@ -282,9 +283,10 @@
                   <v-btn
                     x-large
                     block
+                    dark
                     type="submit"
                     depressed
-                    color="#FFBA0A"
+                    color="#5530E5"
                     @click="AddPurchase"
                   >
                     <div>
@@ -374,7 +376,6 @@ export default {
   },
   methods: {
     limitOptions(limit) {
-      console.log(limit);
       if (!limit) {
         return "Escolha quantas opções você desejar";
       } else if (limit >= 1) {

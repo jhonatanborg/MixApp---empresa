@@ -14,7 +14,7 @@
             :key="`item-${i}`"
             :value="item"
             class="mx-0"
-            active-class="primary--text text--accent-4"
+            color="#5530E5"
           >
             <template v-slot:default="{ active }">
               <v-list-item-content>
@@ -29,10 +29,7 @@
               </v-list-item-content>
 
               <v-list-item-action>
-                <v-checkbox
-                  :input-value="active"
-                  color="primary accent-4"
-                ></v-checkbox>
+                <v-checkbox :input-value="active" color="#5530E5"></v-checkbox>
               </v-list-item-action>
             </template>
           </v-list-item>
@@ -56,8 +53,8 @@
           depressed
           block
           dense
-          color="#FFBA0A"
-          class="font-weight-bold"
+          dark
+          color="#5530E5"
           >Confirmar</v-btn
         >
       </v-col>
@@ -79,7 +76,7 @@
             large
             depressed
             block
-            color="#FFBA0A"
+            color="#5530E5"
           >
             Cadastrar endereço
           </v-btn>

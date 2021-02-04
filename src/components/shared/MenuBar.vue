@@ -22,8 +22,9 @@
           v-if="sale.length > 0"
           class="mr-3 animate__animated animate__pulse animate__infinite"
           rounded
+          dark
           @click="openSale()"
-          color="#FFBA0A"
+          color="#5530E5"
         >
           <v-icon class="mr-2">mdi-basket-outline</v-icon>Sacola
           <b class="notify">{{ sale.length }}</b>
@@ -197,12 +198,12 @@ export default {
   border-radius: 20px;
   width: 20px;
   height: 20px;
-  background-color: #1a0c0c;
+  background-color: #c7c7c7;
   font-size: 13px;
   line-height: 20px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
-  color: #fff;
+  color: rgb(36, 31, 31);
   font-weight: 700;
 }
 </style>

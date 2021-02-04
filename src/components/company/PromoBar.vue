@@ -1,11 +1,11 @@
 <template>
-  <div v-if="promotions" class="grey darken-4 pa-5">
+  <div v-if="promotions" class="pa-1">
     <v-row dense v-for="(promo, key) in promotions" :key="key">
       <v-col cols="12">
-        <div>
+        <div class="mx-2 promo-title">
           <span class="white--text">{{ promo.title }}</span>
         </div>
-        <div>
+        <div class="mx-2">
           <small class="white--text">{{ promo.description }}</small>
         </div>
         <v-row dense>
@@ -124,7 +124,7 @@
                   type="submit"
                   depressed
                   dark
-                  color="#FFBA0A"
+                  color="#5530E5"
                   @click="AddPurchase"
                 >
                   <div>
@@ -221,6 +221,9 @@
                   <span class="font-weight-bold title-subcategory">
                     {{ item.name }}
                   </span>
+                  <div class="limit-details">
+                    <span><b v-text="limitOptions(item.limit)"></b></span>
+                  </div>
                 </v-col>
                 <v-col cols="auto">
                   <v-chip small v-text="convertMandatory(item.mandatory)">
@@ -233,7 +236,7 @@
                 v-for="item2 in item.products"
                 v-model="lista[item.name]"
                 :key="item2.id"
-                color="#FFBA0A"
+                color="#5530E5"
                 multiple
                 :max="item.limit > 0 ? item.limit : 1000"
               >
@@ -250,9 +253,16 @@
 
                     <v-list-item-action>
                       <v-checkbox
+                        :readonly="
+                          lista[item.name]
+                            ? lista[item.name].length === item.limit
+                              ? true
+                              : false
+                            : false
+                        "
                         :input-value="active"
                         :true-value="item2"
-                        color="#FFBA0A"
+                        color="#5530E5"
                         @click="toggle"
                       ></v-checkbox>
                     </v-list-item-action>
@@ -292,7 +302,7 @@
                   block
                   x-large
                   depressed
-                  color="#FFBA0A"
+                  color="#5530E5"
                   @click="AddPurchaseMount"
                   :disabled="verifyMandatory"
                 >
@@ -424,6 +434,15 @@ export default {
     };
   },
   methods: {
+    limitOptions(limit) {
+      if (!limit) {
+        return "Escolha quantas opções você desejar";
+      } else if (limit >= 1) {
+        return limit == 1
+          ? `Escolha até ${limit} opção`
+          : `Escolha até ${limit} opções`;
+      }
+    },
     modal(item) {
       if (item.mount == "S") {
         axios({
@@ -497,7 +516,7 @@ export default {
         if (localStorage.getItem("acess-token")) {
           this.$store.commit("user/request", {
             state: "addressTabs",
-            data: 3,
+            data: 4,
           });
         } else {
           this.$store.commit("user/request", {
@@ -549,7 +568,7 @@ export default {
         if (localStorage.getItem("acess-token")) {
           this.$store.commit("user/request", {
             state: "addressTabs",
-            data: 3,
+            data: 4,
           });
         } else {
           this.$store.commit("user/request", {
@@ -587,4 +606,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.promo-title::first-letter {
+  text-transform: capitalize !important;
+}
+</style>

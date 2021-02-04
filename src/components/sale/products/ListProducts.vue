@@ -27,7 +27,7 @@
         Endereço para entrega:
       </span>
     </div>
-    <div class="mx-3">
+    <div>
       <v-card flat color="grey lighten-4">
         <v-list-item dense @click="openDialogAddress()" link class="my-2">
           <v-list-item-content>
@@ -73,7 +73,7 @@
       <div class="black--text" v-text="convertMoney(subTotal)"></div>
     </v-list-item>
     <div class="mx-3" v-if="minPurchaseVerify">
-      <v-btn depressed x-large @click="userVerify()" block color="#FFBA0A">
+      <v-btn depressed dark x-large @click="userVerify()" block color="#5530E5">
         <b>Selecione forma de pagamento </b>
       </v-btn>
     </div>

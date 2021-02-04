@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-alert color="#FFBA0A" border="left">
+    <v-alert dark color="#5530E5" border="left">
       <small>
         {{ address.street }}, {{ address.number }} - {{ address.district }},
         {{ address.city }} - {{ address.state }}</small
@@ -11,8 +11,9 @@
         <v-col class="py-0" sm="4">
           <v-text-field
             clearable
-            color="#FFBA0A"
+            color="#5530E5"
             outlined
+            hide-details
             dense
             :rules="[(v, i) => !!v || 'obrigatório']"
             label="Número"
@@ -22,9 +23,10 @@
         <v-col class="py-0" cols="6" sm="8">
           <v-text-field
             clearable
-            color="#FFBA0A"
+            color="#5530E5"
             outlined
             dense
+            hide-details
             :rules="[(v, i) => !!v || 'obrigatório']"
             :error="error"
             v-model="title"
@@ -35,7 +37,7 @@
         <v-col class="pb-0" cols="12">
           <v-text-field
             clearable
-            color="#FFBA0A"
+            color="#5530E5"
             outlined
             dense
             v-model="complement"
@@ -45,7 +47,12 @@
         </v-col>
 
         <v-col cols="12" sm="4">
-          <v-btn block @click="$emit('return', 2)" large outlined color="error"
+          <v-btn
+            block
+            @click="$emit('return', 2)"
+            large
+            outlined
+            color="primary"
             >Voltar</v-btn
           >
         </v-col>
@@ -55,7 +62,8 @@
             large
             depressed
             block
-            color="#FFBA0A"
+            dark
+            color="#5530E5"
             >Confirmar</v-btn
           >
         </v-col>

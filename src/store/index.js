@@ -9,6 +9,19 @@ import cashback from "./modules/cashback";
 import actionsGlobal from "./actions";
 import mutationsGlobal from "./mutations";
 
+let domain;
+if (
+  window.location.host.indexOf("localhost") >= 0 ||
+  window.location.host.indexOf("netlify") >= 0 ||
+  window.location.host.indexOf("192.168") >= 0
+) {
+  domain = "salsichalanches.com.br";
+} else if (window.location.host.indexOf("www") >= 0) {
+  domain = window.location.host.split("www.")[1];
+} else {
+  domain = window.location.host;
+}
+// return "pastelariadopaulo.mixentregas.com.br";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -27,6 +40,7 @@ export default new Vuex.Store({
     addressAlert: false,
     server: process.env.VUE_APP_BASE_URL_SERVER_LOCAL,
     timezone: "America/Cuiaba",
+    domain,
   },
   mutations: {
     showAlert(state, data) {

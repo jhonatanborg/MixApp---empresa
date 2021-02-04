@@ -23,14 +23,14 @@
               large
               depressed
               block
-              color="#FFBA0A"
+              color="#5530E5"
               >Limpar Sacola
             </v-btn>
           </v-col>
           <v-col cols="12">
             <v-btn
               @click="$emit('return-list', 3)"
-              color="#FFBA0A"
+              color="#5530E5"
               text
               large
               depressed
@@ -86,7 +86,7 @@ export default {
   font-weight: 600;
   font-size: 16px;
   text-align: center;
-  color: #ffba0a;
+  color: #5530e5;
 }
 .details-message-error {
   font-size: 16px;

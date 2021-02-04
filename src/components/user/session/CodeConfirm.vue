@@ -31,7 +31,7 @@
             <v-btn text color="primary" :to="{ name: 'login' }">Voltar</v-btn>
           </v-col>
           <v-col cols="auto" sm="6">
-            <v-btn dark depressed @click="verifyCode()" block color="#FFBA0A"
+            <v-btn dark depressed @click="verifyCode()" block color="#5530E5"
               >Verificar
             </v-btn>
           </v-col>

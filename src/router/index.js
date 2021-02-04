@@ -5,7 +5,7 @@ import goTo from "vuetify/es5/services/goto";
 Vue.use(VueRouter);
 const routes = [
   {
-    path: "*",
+    path: "/error",
     name: "error",
     component: () => import("../views/Error.vue"),
   },

@@ -30,7 +30,7 @@
             </div>
           </v-col>
           <v-col cols="12">
-            <v-btn x-large block color="#FFBA0A" @click="notify"
+            <v-btn x-large block color="#5530E5" @click="notify"
               ><b>Aceitar</b></v-btn
             >
           </v-col>

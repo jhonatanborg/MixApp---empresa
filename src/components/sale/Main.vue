@@ -87,7 +87,7 @@
                 Não sabe o que comer? Centenas de delicias esperam por você!
               </h4>
             </div>
-            <v-btn large color="#FFBA0A" @click="close" dark
+            <v-btn large color="#5530E5" @click="close" dark
               >Veja o cardápio</v-btn
             >
           </div>

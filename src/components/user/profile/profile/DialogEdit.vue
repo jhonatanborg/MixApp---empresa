@@ -29,7 +29,7 @@
           ></v-text-field>
         </div>
         <v-spacer></v-spacer>
-        <v-btn block color="#FFBA0A" @click="updateUser(itemsUser)" dark
+        <v-btn block color="#5530E5" @click="updateUser(itemsUser)" dark
           >Confirmar</v-btn
         >
       </v-card>

@@ -2,9 +2,8 @@
   <div class="product">
     <v-card link flat color="white">
       <v-list-item three-line>
-        <v-list-item-avatar tile size="150">
+        <v-list-item-avatar tile size="100">
           <v-img
-            width="50"
             aspect-ratio="1.1"
             :src="$store.state.server + product.product.img"
           ></v-img>
@@ -52,7 +51,7 @@ export default {
 <style>
 .title-product {
   font-weight: 600;
-  font-size: 15px;
+  font-size: 12px;
   text-align: left;
   text-transform: uppercase;
 }

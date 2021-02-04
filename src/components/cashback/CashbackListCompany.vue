@@ -169,11 +169,11 @@ export default {
   height: 30px;
   border-radius: 5px;
   background: #fff;
-  border: 1px solid #ffba0a;
+  border: 1px solid #5530e5;
 }
 .cash-value-return {
   font-size: 14px;
   margin: auto 15px;
-  color: #ffba0a;
+  color: #5530e5;
 }
 </style>

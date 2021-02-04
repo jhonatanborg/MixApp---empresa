@@ -4,7 +4,7 @@
     <div id="company" v-if="company.name">
       <div v-if="!$vuetify.breakpoint.xsOnly">
         <ProfileDetails :company="company" />
-        <v-app-bar class="fixed-bar" flat color="#FFBA0A">
+        <v-app-bar class="fixed-bar" dark flat color="#5530E5">
           <div v-for="(item, key) in categories" :key="key">
             <v-btn text @click="filterScroll(item)">
               <b>
@@ -15,13 +15,8 @@
         </v-app-bar>
       </div>
       <div v-else><ProfileMobile :company="company" /></div>
-      <div
-        class="grey darken-4
-"
-      >
-        <v-container v-if="promotions.length > 0" fluid>
-          <PromoBar />
-        </v-container>
+      <div class="promo-bar" v-if="promotions.length > 0" fluid>
+        <PromoBar />
       </div>
       <v-container fluid>
         <v-row align="center" justify="space-between">
@@ -50,8 +45,9 @@
         class="mr-3 animate__animated animate__pulse animate__infinite"
         rounded
         block
+        dark
         x-large
-        color="#FFBA0A"
+        color="#5530E5"
       >
         <v-icon class="mr-2">mdi-basket-outline</v-icon> Sacola
         <b class="notify">{{ sale.length }}</b>
@@ -176,5 +172,8 @@ export default {
   position: -webkit-sticky !important; /* for Safari */
   top: 2em !important;
   z-index: 2 !important;
+}
+.promo-bar {
+  background: linear-gradient(-45deg, #9300dc 20%, #4144e8 70%);
 }
 </style>

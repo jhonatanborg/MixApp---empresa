@@ -40,7 +40,7 @@
                         :center="coords"
                       >
                         <l-control position="topright" tag="v-" name="map">
-                          <v-alert dark color="#FFBA0A">
+                          <v-alert dark color="#5530E5">
                             <small>
                               {{ address.street }}, {{ address.number }} -
                               {{ address.district }}, {{ address.city }} -
@@ -62,7 +62,7 @@
                     <v-btn
                       block
                       class="my-5"
-                      color="#FFBA0A"
+                      color="#5530E5"
                       @click="confirm()"
                       dark
                       >Confirmar</v-btn
@@ -96,7 +96,7 @@
               </v-btn>
             </v-toolbar>
             <div class="pa-5">
-              <v-alert color="#FFBA0A" dark border="left">
+              <v-alert color="#5530E5" dark border="left">
                 <small>
                   {{ address.street }}, {{ address.number }} -
                   {{ address.district }}, {{ address.city }} -
@@ -108,7 +108,7 @@
                   <v-text-field
                     hide-details
                     clearable
-                    color="#FFBA0A"
+                    color="#5530E5"
                     outlined
                     dense
                     label="Número"
@@ -119,7 +119,7 @@
                   <v-text-field
                     clearable
                     hide-details
-                    color="#FFBA0A"
+                    color="#5530E5"
                     outlined
                     dense
                     v-model="address.title"
@@ -131,7 +131,7 @@
                   <v-text-field
                     clearable
                     hide-details
-                    color="#FFBA0A"
+                    color="#5530E5"
                     outlined
                     dense
                     v-model="address.complement"
@@ -148,7 +148,7 @@
                     :loading="loading"
                     dark
                     block
-                    color="#FFBA0A"
+                    color="#5530E5"
                     >Confirmar</v-btn
                   >
                 </v-col>

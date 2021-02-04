@@ -58,8 +58,9 @@
           @click="getAddressByString()"
           depressed
           block
-          color="#FFBA0A"
+          color="#5530E5"
           large
+          dark
         >
           <v-icon>mdi-magnify</v-icon> Buscar endereço
         </v-btn>
@@ -74,7 +75,7 @@
           :loading="isLoading"
           @click="searchLocal()"
           block
-          color="primary"
+          color="#5530E5"
           outlined
           large
         >

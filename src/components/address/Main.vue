@@ -6,7 +6,7 @@
     max-width="700px"
   >
     <v-card tile>
-      <v-toolbar color="#FFBA0A" height="80" flat>
+      <v-toolbar dark color="#5530E5" height="80" flat>
         <v-flex>
           <div>
             <span>
@@ -19,18 +19,18 @@
         </v-flex>
         <v-spacer></v-spacer>
         <v-btn
+          dark
           v-if="addressStep != 5"
           @click.stop="
             $store.commit('alertAddress', { value: false, route: 'home' }),
               (error = false)
           "
           icon
-          color="black"
         >
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-toolbar>
-      <v-window class="py-5" v-model="addressStep">
+      <v-window touchless class="py-5" v-model="addressStep">
         <v-window-item class="px-3 py-0" :value="1">
           <Search @next-register="controlsTabs" />
         </v-window-item>

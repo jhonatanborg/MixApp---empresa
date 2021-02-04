@@ -42,7 +42,7 @@
             ></v-col
           >
           <v-col>
-            <v-btn @click="changeUser()" large block color="#FFBA0A" dark
+            <v-btn @click="changeUser()" large block color="#5530E5" dark
               >Salvar
             </v-btn>
           </v-col>

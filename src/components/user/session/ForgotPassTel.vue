@@ -32,7 +32,7 @@
             >
           </v-col>
           <v-col cols="auto" sm="6">
-            <v-btn dark depressed @click="verifyTel()" block color="#FFBA0A"
+            <v-btn dark depressed @click="verifyTel()" block color="#5530E5"
               >Avançar
             </v-btn>
           </v-col>

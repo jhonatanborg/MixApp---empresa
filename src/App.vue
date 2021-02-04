@@ -39,7 +39,8 @@
                   x-large
                   block
                   depressed
-                  color="#FFBA0A"
+                  dark
+                  color="#5530E5"
                   @click="refreshApp"
                   ><b>Atualizar</b></v-btn
                 >
@@ -68,6 +69,9 @@ export default {
   mounted() {
     this.getSaleIdb();
     this.listDataCompany();
+    if (!window.navigator.onLine) {
+      this.$router.push({ name: "error" });
+    }
   },
   created() {
     // Listen for swUpdated event and display refresh snackbar as required.
@@ -90,19 +94,6 @@ export default {
   computed: {
     addressAlert() {
       return this.$store.state.addressAlert;
-    },
-    hostname() {
-      if (
-        window.location.host.indexOf("localhost") >= 0 ||
-        window.location.host.indexOf("netlify") >= 0
-      ) {
-        return "salsichalanches.com.br";
-      }
-      if (window.location.host.indexOf("www") >= 0) {
-        return window.location.host.split("www.")[1];
-      }
-      return window.location.host;
-      // return "pastelariadopaulo.mixentregas.com.br";
     },
   },
   methods: {
@@ -136,26 +127,36 @@ export default {
         const payload = {
           state: "company",
           method: "get",
-          url: `/company-show/${this.hostname},${coords.latitude},${coords.longitude}`,
+          url: `/company-show/${this.$store.state.domain},${coords.latitude},${coords.longitude}`,
           insert: true,
         };
         this.execRequest("user/request", "address", "/coord", "POST", true, {
           lat: coords.latitude,
           long: coords.longitude,
         });
-        this.$store.dispatch("company/request", payload).then((resp) => {
-          document.title = resp.data.name;
-        });
+        this.$store
+          .dispatch("company/request", payload)
+          .then((resp) => {
+            document.title = resp.data.name;
+          })
+          .catch(() => {
+            console.log("erro com coord");
+          });
       } else {
         const payload = {
           state: "company",
           method: "get",
-          url: `/company-show-one/${this.hostname}`,
+          url: `/company-show-one/${this.$store.state.domain}`,
           insert: true,
         };
-        this.$store.dispatch("company/request", payload).then((resp) => {
-          document.title = resp.data.name;
-        });
+        this.$store
+          .dispatch("company/request", payload)
+          .then((resp) => {
+            document.title = resp.data.name;
+          })
+          .catch(() => {
+            console.log("erro sem coord");
+          });
       }
     },
     showRefreshUI(e) {

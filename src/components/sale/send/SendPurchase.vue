@@ -198,14 +198,15 @@
         <v-btn
           class="btn-send"
           @click="sendPurchase()"
-          color="#FFBA0A"
+          color="#5530E5"
           block
           x-large
           depressed
+          dark
         >
           Fazer Pedido
 
-          <span v-text="convertMoney(total)"> </span>
+          <span v-text="' ' + convertMoney(total)"> </span>
         </v-btn>
       </div>
     </div>
@@ -449,8 +450,7 @@ export default {
 <style>
 .btn-send {
   font-style: normal;
-  font-weight: bold;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 22px;
 }
 .item-subtitle {

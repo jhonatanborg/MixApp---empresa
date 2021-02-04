@@ -17,7 +17,7 @@
       <v-col cols="8">
         <v-btn
           :to="{ name: 'session' }"
-          color="#FFBA0A"
+          color="#5530E5"
           dark
           large
           depressed
@@ -43,7 +43,7 @@ export default {};
   font-weight: 600;
   font-size: 16px;
   text-align: center;
-  color: #ffba0a;
+  color: #5530e5;
 }
 .details-message-success {
   font-size: 16px;
