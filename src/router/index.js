@@ -200,6 +200,7 @@ router.beforeEach((to, from, next) => {
     "/alert-start",
     "/register-address",
     "/alert-address",
+    "/error",
     "",
   ];
   const authRequired = !publicPages.includes(to.matched[0].path);
