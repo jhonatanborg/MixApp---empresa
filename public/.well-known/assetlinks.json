@@ -12,7 +12,7 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.mixentregas.pastelariadopaulo",
+      "package_name": "com.mixentregas.pastelaria_do_paulo",
       "sha256_cert_fingerprints":
       ["E2:41:9C:75:5B:4D:26:DC:E0:E9:41:94:A4:AA:B4:C5:41:29:32:DD:46:18:52:C1:CC:FA:57:D5:A9:0C:BA:33"]
     }
