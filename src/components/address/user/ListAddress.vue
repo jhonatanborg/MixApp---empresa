@@ -139,7 +139,7 @@ export default {
       const payload = {
         state: "company",
         method: "get",
-        url: `/company-show/${process.env.VUE_APP_DOMAIN},${this.addressSelected.latitude},${this.addressSelected.longitude}`,
+        url: `/company-show/${this.$store.state.domain},${this.addressSelected.latitude},${this.addressSelected.longitude}`,
         insert: true,
       };
       this.$store.dispatch("company/request", payload);

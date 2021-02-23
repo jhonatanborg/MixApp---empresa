@@ -101,9 +101,9 @@ export default {
     lat: "",
     long: "",
     newAddress: {
-      street: null,
-      number: null,
-      district: null,
+      street: "Rua amendoeiras",
+      number: "49",
+      district: "Setor Comercial",
       cep: null,
     },
     error: false,
@@ -151,7 +151,7 @@ export default {
               const payload = {
                 state: "company",
                 method: "get",
-                url: `/company-show/${process.env.VUE_APP_DOMAIN},${location.latitude},${location.longitude}`,
+                url: `/company-show/${this.$store.state.domain},${location.latitude},${location.longitude}`,
                 insert: true,
               };
               this.$store.dispatch("company/request", payload);
@@ -185,7 +185,7 @@ export default {
         this.execRequest(
           "company/request",
           "companies",
-          `/company/${position.coords.latitude},${position.coords.longitude}`,
+          `/company/${this.$store.state.domain},${position.coords.latitude},${position.coords.longitude}`,
           "GET",
           true
         );

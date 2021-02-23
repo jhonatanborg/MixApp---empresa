@@ -1,69 +1,59 @@
 <template>
-  <div>
-    <v-row justify="center" align-sm="center" v-if="address">
-      <v-col cols="12">
-        <v-card flat max-width="700px">
-          <div class="map">
-            <l-map
-              ref="myMap"
-              id="myMap"
-              @ready="mapReady()"
-              style="height:100%; position: relative"
-              :zoom="zoom"
-              :center="coords"
+  <div v-if="address">
+    <div class="map">
+      <l-map
+        ref="myMap"
+        id="myMap"
+        @ready="mapReady()"
+        style="height:100%; position: relative"
+        :zoom="zoom"
+        :center="coords"
+      >
+        <l-control position="topright" tag="v-" name="map">
+          <v-alert dark color="#5530E5">
+            <small>
+              {{ address.street }}, {{ address.number }} -
+              {{ address.district }}, {{ address.city }} -
+              {{ address.state }}</small
             >
-              <l-control position="topright" tag="v-" name="map">
-                <v-alert dark color="#5530E5">
-                  <small>
-                    {{ address.street }}, {{ address.number }} -
-                    {{ address.district }}, {{ address.city }} -
-                    {{ address.state }}</small
-                  >
-                </v-alert>
-              </l-control>
+          </v-alert>
+        </l-control>
 
-              <l-tile-layer :url="url" :attribution="attribution" />
+        <l-tile-layer :url="url" :attribution="attribution" />
 
-              <l-marker
-                class="marker"
-                :draggable="false"
-                :lat-lng="coordsMaker"
-                :icon="markerIcon"
-              ></l-marker>
-            </l-map>
-          </div>
-        </v-card>
+        <l-marker
+          class="marker"
+          :draggable="false"
+          :lat-lng="coordsMaker"
+          :icon="markerIcon"
+        ></l-marker>
+      </l-map>
+    </div>
+    <v-row class="px-3" align="center" justify="space-between">
+      <v-col cols="4" xs="4" sm="4">
+        <v-btn
+          @click="$emit('return-start', 1)"
+          block
+          large
+          class="my-5"
+          color="primary"
+          outlined
+          dark
+          >Voltar</v-btn
+        >
       </v-col>
-    </v-row>
-    <v-row>
-      <v-toolbar flat height="70px" bottom short>
-        <v-row align="center">
-          <v-col cols="4" sm="4">
-            <v-btn
-              @click="$emit('return-start', 1)"
-              block
-              large
-              class="my-5"
-              color="primary"
-              outlined
-              dark
-              >Voltar</v-btn
-            >
-          </v-col>
-          <v-col cols="8" sm="8">
-            <v-btn
-              block
-              large
-              dark
-              class="my-5"
-              depressed
-              color="#5530E5"
-              @click="updateLocalAddress()"
-              >Confirmar</v-btn
-            >
-          </v-col>
-        </v-row>
-      </v-toolbar>
+      <v-col cols="8" xs="8" sm="8">
+        <v-btn
+          block
+          large
+          dark
+          class="my-5"
+          depressed
+          color="#5530E5"
+          @click="updateLocalAddress()"
+          >Confirmar</v-btn
+        >
+      </v-col>
     </v-row>
   </div>
 </template>
@@ -201,11 +191,11 @@ export default {
   position: absolute !important;
 }
 .map {
-  height: 60vh;
+  height: 70vh;
 }
 @media (max-width: 780px) {
   .map {
-    height: 80vh;
+    height: 90vh;
   }
 }
 @media (max-width: 640px) {
@@ -215,7 +205,7 @@ export default {
 }
 @media (max-width: 568px) {
   .map {
-    height: 69vh;
+    height: 60vh;
   }
 }
 .leaflet-control-attribution.leaflet-control {

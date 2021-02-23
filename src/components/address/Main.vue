@@ -5,18 +5,18 @@
     persistent
     max-width="700px"
   >
-    <v-card tile>
-      <v-toolbar dark color="#5530E5" height="80" flat>
-        <v-flex>
-          <div>
+    <v-card>
+      <v-toolbar flat height="80px" dark color="primary">
+        <v-toolbar-title
+          ><div>
             <span>
               {{ currentTitle }}
             </span>
           </div>
           <div>
             <small>Esse será o endereço de entrega</small>
-          </div>
-        </v-flex>
+          </div></v-toolbar-title
+        >
         <v-spacer></v-spacer>
         <v-btn
           dark
@@ -30,20 +30,20 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-toolbar>
-      <v-window touchless class="py-5" v-model="addressStep">
-        <v-window-item class="px-3 py-0" :value="1">
+      <v-window touchless v-model="addressStep">
+        <v-window-item class="px-0 py-0" :value="1">
           <Search @next-register="controlsTabs" />
         </v-window-item>
-        <v-window-item class="px-3 py-0" :value="2">
+        <v-window-item class="px-0 py-0" :value="2">
           <Map @return-start="controlsTabs" @confirm-address="controlsTabs" />
         </v-window-item>
-        <v-window-item class="px-3 py-0" :value="3">
+        <v-window-item class="px-0 py-0" :value="3">
           <Register @return="controlsTabs" />
         </v-window-item>
-        <v-window-item class="px-3 py-0" :value="4">
+        <v-window-item class="px-0 py-0" :value="4">
           <List @new-address="controlsTabs" @error-address="controlsTabs" />
         </v-window-item>
-        <v-window-item class="px-3 py-0" :value="5">
+        <v-window-item class="px-0 py-0" :value="5">
           <Error @return-list="controlsTabs" />
         </v-window-item>
       </v-window>

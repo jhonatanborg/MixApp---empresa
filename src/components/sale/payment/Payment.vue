@@ -60,18 +60,18 @@
           </v-col>
         </v-row>
       </div>
-    </div>
-    <div class="mx-3 mt-3">
-      <v-btn
-        :disabled="payVerify"
-        block
-        @click="payConfirm()"
-        x-large
-        :dark="!payVerify"
-        color="#5530E5"
-      >
-        <b>Confirmar</b>
-      </v-btn>
+      <div class="mx-3 mt-3">
+        <v-btn
+          :disabled="payVerify"
+          block
+          @click="payConfirm()"
+          x-large
+          :dark="!payVerify"
+          color="#5530E5"
+        >
+          <b>Confirmar</b>
+        </v-btn>
+      </div>
     </div>
   </div>
 </template>
@@ -160,12 +160,12 @@ export default {
     max-height: 70vh;
   }
   .item-pay {
-    width: 60px;
+    width: 70px;
   }
 }
 @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) {
   .pay {
-    max-height: 73vh;
+    max-height: 70vh;
   }
   .item-pay {
     width: 60px;

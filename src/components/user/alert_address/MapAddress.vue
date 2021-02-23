@@ -134,7 +134,7 @@ export default {
       const payload = {
         state: "company",
         method: "get",
-        url: `/company-show/${process.env.VUE_APP_DOMAIN},${this.address.latitude},${this.address.longitude}`,
+        url: `/company-show/${this.$store.state.domain},${this.address.latitude},${this.address.longitude}`,
         insert: true,
       };
       let location = {

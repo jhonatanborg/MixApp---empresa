@@ -6,7 +6,7 @@
         {{ address.city }} - {{ address.state }}</small
       >
     </v-alert>
-    <v-form ref="address">
+    <v-form class="pa-5" ref="address">
       <v-row>
         <v-col class="py-0" sm="4">
           <v-text-field
