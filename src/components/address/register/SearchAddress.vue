@@ -101,9 +101,9 @@ export default {
     lat: "",
     long: "",
     newAddress: {
-      street: "Rua amendoeiras",
-      number: "49",
-      district: "Setor Comercial",
+      street: null,
+      number: null,
+      district: null,
       cep: null,
     },
     error: false,
