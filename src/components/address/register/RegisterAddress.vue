@@ -104,13 +104,13 @@ export default {
           state: "address",
           data: this.address,
         });
-        this.execRequest(
-          "company/request",
-          "companies",
-          `/company/${this.address.latitude},${this.address.longitude}`,
-          "GET",
-          true
-        );
+        const payload = {
+          state: "company",
+          method: "get",
+          url: `/company-show/${this.$store.state.domain},${this.address.latitude},${this.address.longitude}`,
+          insert: true,
+        };
+        this.$store.dispatch("company/request", payload);
         let location = {
           latitude: this.address.latitude,
           longitude: this.address.longitude,
