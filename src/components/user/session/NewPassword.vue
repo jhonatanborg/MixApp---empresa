@@ -1,12 +1,9 @@
 <template>
-  <div>
+  <v-card outlined class="pa-5">
     <div class="py-1">
       <h3>Recuperação de conta</h3>
     </div>
-    <span
-      >Escolha uma senha forte e não a reutilize em outras contas. Utilize no
-      mínimo 8 caracteres!!</span
-    >
+    <span>Escolha uma senha forte e não a reutilize em outras contas.</span>
     <div class="pa-1">
       <div>
         <v-text-field
@@ -59,7 +56,7 @@
         <div></div>
       </div>
     </div>
-  </div>
+  </v-card>
 </template>
 
 <script>

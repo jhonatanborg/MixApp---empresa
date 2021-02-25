@@ -3,9 +3,11 @@
     :fullscreen="$vuetify.breakpoint.xsOnly"
     :value="$store.state.addressAlert"
     persistent
+    class="pa-0"
+    width="100%"
     max-width="700px"
   >
-    <v-card>
+    <v-card width="100%">
       <v-toolbar flat height="80px" dark color="primary">
         <v-toolbar-title
           ><div>

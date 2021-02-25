@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-card outlined class="pa-5">
     <div class="py-1">
       <div class="py-4">
         <h3>Recuperação de conta</h3>
@@ -32,7 +32,7 @@
         </v-row>
       </div>
     </div>
-  </div>
+  </v-card>
 </template>
 
 <script>

@@ -41,7 +41,7 @@
       class="col-sm-12 sale"
     >
       <v-btn
-        @click="$store.commit('cart/sidebar', { open: true, step: 1 })"
+        @click="routeSale()"
         class="mr-3 animate__animated animate__pulse animate__infinite"
         rounded
         block
@@ -158,6 +158,10 @@ export default {
       } else {
         return "grátis";
       }
+    },
+    routeSale() {
+      this.$router.push({ name: "sale" });
+      this.$store.commit("cart/mobileStep", 1);
     },
   },
 };

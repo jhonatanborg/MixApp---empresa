@@ -1,5 +1,5 @@
 <template>
-  <div v-if="address.length > 0">
+  <div class="px-2" v-if="address.length > 0">
     <v-list
       class="overflow-y-auto barscroll px-0 mx-0"
       max-height="500px"
@@ -15,17 +15,18 @@
             :value="item"
             class="mx-0"
             color="#5530E5"
+            three-line
           >
             <template v-slot:default="{ active }">
               <v-list-item-content>
                 <v-list-item-title v-text="item.title"></v-list-item-title>
-                <v-list-item-title>
+                <v-list-item-subtitle>
                   {{ item.street }}, {{ item.number }} - {{ item.district }}
                   <span
                     v-if="item.complement"
                     v-text="' - ' + item.complement"
                   ></span>
-                </v-list-item-title>
+                </v-list-item-subtitle>
               </v-list-item-content>
 
               <v-list-item-action>
@@ -125,13 +126,7 @@ export default {
         state: "address",
         data: this.addressSelected,
       });
-      await this.execRequest(
-        "company/request",
-        "companies",
-        `/company/${this.addressSelected.latitude},${this.addressSelected.longitude}`,
-        "GET",
-        true
-      );
+
       let location = {
         latitude: this.addressSelected.latitude,
         longitude: this.addressSelected.longitude,

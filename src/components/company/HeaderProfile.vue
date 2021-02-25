@@ -76,10 +76,7 @@
                     </span>
                   </div>
                 </v-col>
-                <v-col
-                  v-if="company.deliveryFee && !company.deliveryFee.length"
-                  cols="auto"
-                >
+                <v-col v-if="company.min_purchase_value" cols="auto">
                   <div class="item-title-details-company">
                     <span>Pedido minimo</span>
                   </div>

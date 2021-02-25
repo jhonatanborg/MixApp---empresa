@@ -1,5 +1,5 @@
 <template>
-  <v-card outlined>
+  <v-card outlined class="pa-5">
     <div class="py-1">
       <h3>Recuperação de conta</h3>
       <span class="">
@@ -15,8 +15,8 @@
           autocomplete="new-password"
           label="Telefone"
           v-model="tel"
-          :error="isActive"
-          :error-messages="isActive ? 'Telefone não encontrado ' : ''"
+          :error="error"
+          :error-messages="error ? message : ''"
         ></v-text-field>
       </div>
       <router-link :to="{ name: 'code-verify' }">
@@ -49,7 +49,8 @@ export default {
   data() {
     return {
       tel: null,
-      isActive: false,
+      error: false,
+      message: null,
     };
   },
   methods: {
@@ -61,15 +62,12 @@ export default {
           login: this.tel,
         },
       })
-        .then((resp) => {
-          if (resp.data.next) {
-            this.$router.replace({ name: "code-verify" });
-          } else {
-            this.isActive = true;
-          }
+        .then(() => {
+          this.$router.replace({ name: "code-verify" });
         })
-        .catch(() => {
-          this.isActive = true;
+        .catch((err) => {
+          this.error = true;
+          this.message = err.response.data.message;
         });
     },
   },

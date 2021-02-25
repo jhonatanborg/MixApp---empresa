@@ -12,6 +12,7 @@ const cart = {
       open: false,
       step: null,
     },
+    stepMobile: null,
     quantitySale: null,
     saleMode: null,
     paySelect: null,
@@ -48,6 +49,9 @@ const cart = {
     },
     changeFor(state, data) {
       state.changeFor = data;
+    },
+    mobileStep(state, data) {
+      state.stepMobile = data;
     },
     ...mutationsGlobal,
   },

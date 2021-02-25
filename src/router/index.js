@@ -14,6 +14,11 @@ const routes = [
     name: "company",
     component: () => import("../views/Company.vue"),
   },
+  {
+    path: "/sacola",
+    name: "sale",
+    component: () => import("../views/Sale.vue"),
+  },
 
   {
     path: "/minha-conta/",
@@ -201,6 +206,7 @@ router.beforeEach((to, from, next) => {
     "/register-address",
     "/alert-address",
     "/error",
+    "/sacola",
     "",
   ];
   const authRequired = !publicPages.includes(to.matched[0].path);

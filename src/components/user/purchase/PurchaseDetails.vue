@@ -89,11 +89,15 @@
 
       <v-divider></v-divider>
 
-      <div class="my-5 pa-5" id="address">
+      <div
+        v-if="purchaseDetails.type === 'online'"
+        class="my-5 pa-5"
+        id="address"
+      >
         <div>
           <div class="font-weight-bold">Entregar em</div>
         </div>
-        <div v-if="purchaseDetails.type === 'online'">
+        <div>
           <v-list-item-title>
             {{ purchaseDetails.deliveryAddress.title }}</v-list-item-title
           >
@@ -106,6 +110,15 @@
             >
           </div>
         </div>
+      </div>
+      <div class="my-5 px-3" v-else>
+        <v-chip
+          v-if="purchaseDetails.type === 'retirada'"
+          color="#9c27b0"
+          class="white--text text-capitalize"
+          v-text="purchaseDetails.type"
+        >
+        </v-chip>
       </div>
       <div class="font-weight-bold my-5 pa-5">
         <v-divider></v-divider>

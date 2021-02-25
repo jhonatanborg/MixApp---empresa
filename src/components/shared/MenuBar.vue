@@ -160,7 +160,9 @@ export default {
       }
     },
     openSale() {
-      console.log("sale");
+      if (this.$vuetify.breakpoint.xsOnly) {
+        this.$router.push({ name: "sale " });
+      }
       this.$store.commit("cart/sidebar", { open: true, step: 2 });
     },
   },

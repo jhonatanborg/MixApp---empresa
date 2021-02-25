@@ -5,9 +5,10 @@
         ref="myMap"
         id="myMap"
         @ready="mapReady()"
-        style="height:100%; position: relative"
+        style="height:100%; width:100%; position: relative"
         :zoom="zoom"
         :center="coords"
+        :options="mapOptions"
       >
         <l-control position="topright" tag="v-" name="map">
           <v-alert dark color="#5530E5">
@@ -18,7 +19,59 @@
             >
           </v-alert>
         </l-control>
-
+        <l-control position="bottomright" tag="v-" name="map">
+          <div class="d-flex align-center">
+            <div class="mr-3 white">
+              <v-btn
+                @click="$emit('return-start', 1)"
+                large
+                block
+                depressed
+                outlined
+                color="primary"
+                >Voltar</v-btn
+              >
+            </div>
+            <div>
+              <v-btn
+                large
+                dark
+                block
+                class="my-5"
+                depressed
+                color="#5530E5"
+                @click="updateLocalAddress()"
+                >Confirmar</v-btn
+              >
+            </div>
+          </div>
+        </l-control>
+        <!-- <l-control
+          position="bottomright"
+          tag="v-"
+          name="map"
+          class="d-flex red justify-center align-center"
+        >
+         <v-btn
+              @click="$emit('return-start', 1)"
+              large
+              block
+              color="primary"
+              outlined
+              dark
+              >Voltar</v-btn
+            >
+            <v-btn
+              large
+              dark
+              block
+              class="my-5"
+              depressed
+              color="#5530E5"
+              @click="updateLocalAddress()"
+              >Confirmar</v-btn
+            >
+        </l-control> -->
         <l-tile-layer :url="url" :attribution="attribution" />
 
         <l-marker
@@ -29,32 +82,6 @@
         ></l-marker>
       </l-map>
     </div>
-    <v-row class="px-3" align="center" justify="space-between">
-      <v-col cols="4" xs="4" sm="4">
-        <v-btn
-          @click="$emit('return-start', 1)"
-          block
-          large
-          class="my-5"
-          color="primary"
-          outlined
-          dark
-          >Voltar</v-btn
-        >
-      </v-col>
-      <v-col cols="8" xs="8" sm="8">
-        <v-btn
-          block
-          large
-          dark
-          class="my-5"
-          depressed
-          color="#5530E5"
-          @click="updateLocalAddress()"
-          >Confirmar</v-btn
-        >
-      </v-col>
-    </v-row>
   </div>
 </template>
 
@@ -88,6 +115,7 @@ export default {
     attribution:
       '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
     mapOptions: {
+      scrollWheelZoom: false,
       zoomSnap: 0.5,
     },
   }),
@@ -122,13 +150,13 @@ export default {
         state: "address",
         data: this.address,
       });
-      this.execRequest(
-        "company/request",
-        "companies",
-        `/company/${this.address.latitude},${this.address.longitude}`,
-        "GET",
-        true
-      );
+      const payload = {
+        state: "company",
+        method: "get",
+        url: `/company-show/${this.$store.state.domain},${this.address.latitude},${this.address.longitude}`,
+        insert: true,
+      };
+      this.$store.dispatch("company/request", payload);
       let location = {
         latitude: this.address.latitude,
         longitude: this.address.longitude,
@@ -190,22 +218,24 @@ export default {
 .marker {
   position: absolute !important;
 }
-.map {
-  height: 70vh;
-}
 @media (max-width: 780px) {
   .map {
-    height: 90vh;
+    height: 100vh;
   }
 }
 @media (max-width: 640px) {
   .map {
-    height: 78vh;
+    height: 100vh;
   }
 }
 @media (max-width: 568px) {
   .map {
-    height: 60vh;
+    height: 100vh;
+  }
+}
+@media (max-width: 1366px) {
+  .map {
+    height: 75vh;
   }
 }
 .leaflet-control-attribution.leaflet-control {

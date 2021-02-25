@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="pa-5">
     <v-row justify="start">
       <v-col cols="12" sm="9">
         <v-text-field

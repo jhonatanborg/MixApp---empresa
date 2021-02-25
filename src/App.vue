@@ -187,10 +187,10 @@ export default {
   color: #293040 !important;
 }
 
-body ::-webkit-scrollbar {
+/* body ::-webkit-scrollbar {
   display: contents;
   visibility: hidden !important;
-}
+} */
 .v-btn {
   text-transform: none !important;
 }
