@@ -61,12 +61,15 @@ export default {
   },
   methods: {
     changeUser() {
+      const newUser = { ...this.user };
+      delete newUser.password;
+      delete newUser.birthday;
       const payload = {
         state: "user",
         method: "PUT",
-        url: "/user/" + this.user.id,
+        url: "/user-client/" + this.user.id,
         insert: true,
-        data: this.user,
+        data: newUser,
       };
       this.$store.commit("user/setUserName", this.user.name);
       this.$store.dispatch("user/request", payload);
