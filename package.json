@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "npm run build && node server.js"
+    "deploy": "npm run build && node server.js",
+    "pm2": "pm2 deploy personal"
   },
   "dependencies": {
     "@capacitor/android": "^2.4.6",
