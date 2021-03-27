@@ -41,155 +41,6 @@
           persistent
           scrollable
         >
-          <!-- <v-row> -->
-          <!-- <v-col>
-              <v-card>
-                <v-img
-                  width="100%"
-                  height="25%"
-                  aspect-ratio="1.1"
-                  :src="$store.state.server + productSelected.img"
-                >
-                  <v-row justify="end">
-                    <v-col cols="auto">
-                      <v-btn
-                        class="mr-3"
-                        x-small
-                        color="white"
-                        fab
-                        @click="closeDialogMount"
-                      >
-                        <v-icon size="20">mdi-close</v-icon>
-                      </v-btn>
-                    </v-col>
-                  </v-row>
-                </v-img>
-
-                <div class="pa-5 ">
-                  <div>
-                    <div class="item-title-product">
-                      <span>{{ productSelected.name }}</span>
-                    </div>
-                    <div class="description">
-                      <span>
-                        {{ productSelected.description }}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <v-card-text class="pa-0 ma-0  overflow-x-hidden">
-                  <div v-for="item in complements" :key="item.id">
-                    <v-row
-                      class="grey lighten-4 px-6"
-                      justify="space-between"
-                      align="center"
-                    >
-                      <v-col cols="auto">
-                        <div>
-                          <span class="font-weight-bold title-subcategory">
-                            {{ item.name }}
-                          </span>
-                        </div>
-                        <div class="limit-details">
-                          <span><b v-text="limitOptions(item.limit)"></b></span>
-                        </div>
-                      </v-col>
-                      <v-col cols="auto">
-                        <v-chip small v-text="convertMandatory(item.mandatory)">
-                        </v-chip>
-                      </v-col>
-                    </v-row>
-                    <v-list>
-                      <v-list-item-group
-                        dense
-                        v-model="lista[item.name]"
-                        color="#5530E5"
-                        multiple
-                        :max="item.limit > 0 ? item.limit : 1000"
-                      >
-                        <template v-for="(item2, key) in item.products">
-                          <v-list-item dense :value="item2" :key="key">
-                            <template v-slot:default="{ active, toggle }">
-                              <v-list-item-content>
-                                <v-list-item-title>
-                                  {{ item2.name }}
-                                </v-list-item-title>
-                                <v-list-item-subtitle class="font-weight-bold">
-                                  + {{ convertMoney(item2.sale_value) }}
-                                </v-list-item-subtitle>
-                              </v-list-item-content>
-
-                              <v-list-item-action>
-                                <v-checkbox
-                                  :readonly="
-                                    lista[item.name]
-                                      ? lista[item.name].length === item.limit
-                                        ? true
-                                        : false
-                                      : false
-                                  "
-                                  :input-value="active"
-                                  :true-value="item2"
-                                  color="#5530E5"
-                                  @click.stop="toggle"
-                                ></v-checkbox>
-                              </v-list-item-action>
-                            </template>
-                          </v-list-item>
-                        </template>
-                      </v-list-item-group>
-                    </v-list>
-                  </div>
-                  <div class="my-3 px-5">
-                    <v-textarea
-                      outlined
-                      dense
-                      rows="2"
-                      v-model="comment"
-                      placeholder="Ex. sem pimenta, sem molho verde"
-                      label="Personalize seu pedido"
-                      id="id"
-                    ></v-textarea>
-                  </div>
-                </v-card-text>
-                <v-toolbar height="80px" floating bottom>
-                  <v-row align="center">
-                    <v-col cols="4" sm="4">
-                      <v-select
-                        :items="items"
-                        v-model="quantity"
-                        hide-details
-                        :item-text="items.text"
-                        :item-value="items.value"
-                        solo
-                        :menu-props="{ top: true, offsetY: true }"
-                      ></v-select>
-                    </v-col>
-                    <v-col cols="8" sm="8">
-                      <v-btn
-                        type="submit"
-                        block
-                        x-large
-                        :dark="!verifyMandatory"
-                        depressed
-                        color="#5530E5"
-                        @click="AddPurchaseMount"
-                        :disabled="verifyMandatory"
-                      >
-                        <div>
-                          Adicionar
-                          <span v-text="convertMoney(Total)">
-                            R$
-                          </span>
-                        </div>
-                      </v-btn>
-                    </v-col>
-                  </v-row>
-                </v-toolbar>
-              </v-card></v-col
-            > -->
-          <!-- <v-col> -->
           <v-card>
             <v-img
               width="100%"
@@ -221,11 +72,10 @@
                   <span>
                     {{ productSelected.description }}
                   </span>
-                  {{ listanova }}
                 </div>
               </div>
             </div>
-            {{ totalNovo }}
+
             <v-card-text class="pa-0 ma-0  overflow-x-hidden">
               <div v-for="item in complements" :key="item.id">
                 <v-row
@@ -259,13 +109,15 @@
                       <v-list-item-title>
                         {{ item2.name }}
                       </v-list-item-title>
-                      <v-list-item-subtitle class="font-weight-bold">
+                      <v-list-item-subtitle
+                        class="font-weight-bold color-theme"
+                      >
                         + {{ convertMoney(item2.sale_value) }}
                       </v-list-item-subtitle>
                     </v-list-item-content>
 
                     <v-list-item-action>
-                      <v-row no-gutters dense>
+                      <v-row no-gutters dense align="center" justify="center">
                         <v-col v-if="item2.qtd >= 1" cols="auto"
                           ><v-btn
                             @click="
@@ -274,9 +126,8 @@
                                 complement: item2,
                               })
                             "
-                            fab
                             icon
-                            color="primary"
+                            color="#5530E5"
                           >
                             <v-icon>mdi-minus</v-icon>
                           </v-btn></v-col
@@ -294,9 +145,8 @@
                                 limit: item.limit,
                               })
                             "
-                            fab
                             icon
-                            color="primary"
+                            color="#5530E5"
                           >
                             <v-icon>mdi-plus</v-icon>
                           </v-btn></v-col
@@ -318,39 +168,41 @@
                 ></v-textarea>
               </div>
             </v-card-text>
-            <v-toolbar height="80px" floating bottom>
-              <v-row align="center">
-                <v-col cols="4" sm="4">
-                  <v-select
-                    :items="items"
-                    v-model="quantity"
-                    hide-details
-                    :item-text="items.text"
-                    :item-value="items.value"
-                    solo
-                    :menu-props="{ top: true, offsetY: true }"
-                  ></v-select>
-                </v-col>
-                <v-col cols="8" sm="8">
-                  <v-btn
-                    type="submit"
-                    block
-                    x-large
-                    :dark="!verifyMandatory"
-                    depressed
-                    color="#5530E5"
-                    @click="AddPurchaseMount"
-                    :disabled="verifyMandatory"
-                  >
-                    <div>
-                      Adicionar
-                      <span v-text="convertMoney(totalNovo)">
-                        R$
-                      </span>
-                    </div>
-                  </v-btn>
-                </v-col>
-              </v-row>
+
+            <v-toolbar bottom floating height="80px">
+              <v-btn
+                @click="quantity > 1 ? quantity-- : (quantity = 1)"
+                icon
+                class="mx-0"
+                color="#5530E5"
+              >
+                <v-icon>mdi-minus</v-icon>
+              </v-btn>
+
+              <span v-text="quantity"></span>
+
+              <v-btn class="mx-0" @click="quantity++" icon color="#5530E5">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+              <v-col sm="12">
+                <v-btn
+                  type="submit"
+                  block
+                  x-large
+                  :dark="!verifyMandatory"
+                  depressed
+                  color="#5530E5"
+                  @click="AddPurchaseMount"
+                  :disabled="verifyMandatory"
+                >
+                  <div>
+                    Adicionar
+                    <span v-text="convertMoney(Total)">
+                      R$
+                    </span>
+                  </div>
+                </v-btn>
+              </v-col>
             </v-toolbar>
           </v-card>
           <!-- </v-col> -->
@@ -438,36 +290,40 @@
                 ></v-textarea>
               </div>
             </v-card-text>
-            <v-toolbar bottom floating absolute height="80px">
-              <v-row align="center">
-                <v-col cols="4" sm="4">
-                  <v-select
-                    hide-details
-                    :items="items"
-                    v-model="quantity"
-                    solo
-                    :menu-props="{ top: true, offsetY: true }"
-                  ></v-select>
-                </v-col>
-                <v-col cols="8" sm="8">
-                  <v-btn
-                    x-large
-                    block
-                    dark
-                    type="submit"
-                    depressed
-                    color="#5530E5"
-                    @click="AddPurchase"
-                  >
-                    <div>
-                      Adicionar
-                      <span v-text="convertMoney(Total)">
-                        R$
-                      </span>
-                    </div>
-                  </v-btn>
-                </v-col>
-              </v-row>
+            <v-toolbar bottom absolute floating height="80px">
+              <v-btn
+                @click="quantity > 1 ? quantity-- : (quantity = 1)"
+                icon
+                class="mx-0"
+                color="#5530E5"
+              >
+                <v-icon>mdi-minus</v-icon>
+              </v-btn>
+
+              <span v-text="quantity"></span>
+
+              <v-btn class="mx-0" @click="quantity++" icon color="#5530E5">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+
+              <v-col sm="12">
+                <v-btn
+                  x-large
+                  block
+                  dark
+                  type="submit"
+                  depressed
+                  color="#5530E5"
+                  @click="AddPurchase"
+                >
+                  <div>
+                    Adicionar
+                    <span v-text="convertMoney(Total)">
+                      R$
+                    </span>
+                  </div>
+                </v-btn>
+              </v-col>
             </v-toolbar>
           </v-card>
         </v-dialog>
@@ -492,7 +348,6 @@ export default {
     products: Array,
     company: Object,
   },
-  created() {},
   data: () => ({
     lista: [],
     comment: "",
@@ -512,14 +367,18 @@ export default {
     verifyMandatory() {
       let disabled = false;
       if (this.complements.length > 0) {
-        this.complements.forEach((item) => {
+        this.complements.forEach((category) => {
+          console.log(this.listanova[category.name]);
           if (
-            this.lista[item.name] &&
-            item.mandatory === "S" &&
-            this.lista[item.name].length <= 0
+            this.listanova[category.name] &&
+            category.mandatory === "S" &&
+            this.listanova[category.name].allQtd <= 0
           ) {
             disabled = true;
-          } else if (!this.lista[item.name] && item.mandatory === "S") {
+          } else if (
+            !this.listanova[category.name] &&
+            category.mandatory === "S"
+          ) {
             disabled = true;
           }
         });
@@ -527,21 +386,7 @@ export default {
       return disabled;
     },
     Total() {
-      let total = 0;
-      if (this.complements.length > 0) {
-        this.complements.forEach((item) => {
-          if (this.lista[item.name]) {
-            this.lista[item.name].forEach((item) => {
-              total += item.sale_value * parseFloat(this.quantity);
-            });
-          }
-        });
-      }
-      return (
-        parseFloat(total) +
-        parseFloat(this.productSelected.sale_value || 0) *
-          parseFloat(this.quantity)
-      );
+      return parseFloat(this.totalNovo) * parseFloat(this.quantity);
     },
     error() {
       return this.$store.state.error;
@@ -549,78 +394,72 @@ export default {
   },
   methods: {
     AddMountComplements({ category, complement, limit }) {
-      if (this.listanova[category]) {
-        const findexIndex = this.listanova[category].findIndex(
+      let findedCategory = this.listanova[category];
+      if (findedCategory) {
+        const findexIndex = findedCategory.findIndex(
           (item) => item && item.id === complement.id
         );
-        if (findexIndex >= 0 && this.listanova[category].limite === 0) {
-          console.log(this.listanova[category]);
-          this.listanova[category][findexIndex].qtd++;
-          this.listanova[category].quantidadeGeral++;
-          this.totalNovo += Number(
-            this.listanova[category][findexIndex].sale_value
-          );
-        } else if (findexIndex >= 0 && this.listanova[category].limite >= 0) {
-          if (
-            this.listanova[category].quantidadeGeral <
-            this.listanova[category].limite
-          ) {
-            this.listanova[category][findexIndex].qtd++;
-            this.listanova[category].quantidadeGeral++;
-          } else {
-            console.log("deu erro aqui 2");
-          }
+        if (
+          findexIndex >= 0 &&
+          findedCategory.limite > 0 &&
+          findedCategory.allQtd < findedCategory.limite
+        ) {
+          findedCategory[findexIndex].qtd++;
+          findedCategory.allQtd++;
           this.totalNovo += Number(complement.sale_value);
-        } else {
-          if (
-            this.listanova[category].quantidadeGeral <
-            this.listanova[category].limite
-          ) {
-            console.log("deu erro aqui 3");
-            complement.qtd = 1;
-            this.totalNovo += Number(complement.sale_value);
-            this.listanova[category].push(complement);
+        } else if (findedCategory.allQtd < findedCategory.limite) {
+          complement.qtd = 1;
+          this.totalNovo += Number(complement.sale_value);
+          findedCategory.push(complement);
 
-            this.listanova[category].quantidadeGeral++;
-          }
+          findedCategory.allQtd++;
         }
       } else {
-        console.log("bem aqui que estou");
         complement.qtd = 1;
-        console.log(category);
-        this.listanova[category] = [complement];
-        this.listanova[category].limite = limit === 0 ? 50 : limit;
-        this.listanova[category].quantidadeGeral = 1;
+        findedCategory = [complement];
+        findedCategory.limite = limit === 0 ? 9999 : limit;
+        findedCategory.allQtd = 1;
         this.totalNovo = this.totalNovo + Number(complement.sale_value);
       }
-      console.log("LISTA COMPLETA :", this.listanova);
+      this.listanova[category] = findedCategory;
+      // this.listanova = listanova;
+
+      const newListaNova = [];
+      Object.keys(this.listanova).forEach((key) => {
+        if (this.listanova[key].allQtd > 0) {
+          newListaNova[key] = this.listanova[key];
+        }
+      });
+      this.listanova = newListaNova;
     },
     RemoveMountComplements({ category, complement }) {
       if (this.listanova[category]) {
         const findexIndex = this.listanova[category].findIndex(
           (item) => item && item.id === complement.id
         );
-        console.log(findexIndex);
         if (findexIndex >= 0) {
-          this.listanova[category][findexIndex].qtd =
-            this.listanova[category][findexIndex].qtd - 1;
-          this.listanova[category].quantidadeGeral =
-            this.listanova[category].quantidadeGeral - 1;
+          this.listanova[category][findexIndex].qtd--;
+          this.listanova[category].allQtd--;
 
           this.totalNovo -= Number(
             this.listanova[category][findexIndex].sale_value
           );
-          if (this.listanova[category].quantidadeGeral < 1) {
-            this.listanova = this.listanova.filter(
-              (item) => item != this.listanova[category]
-            );
+
+          if (this.listanova[category][findexIndex].qtd <= 0) {
+            this.listanova[category].splice(findexIndex, 1);
+          }
+
+          const newListaNova = [];
+          if (this.listanova[category].allQtd <= 0) {
+            Object.keys(this.listanova).forEach((key) => {
+              if (this.listanova[key].allQtd > 0) {
+                newListaNova[key] = this.listanova[key];
+              }
+            });
+            this.listanova = newListaNova;
           }
         }
       }
-      // if (this.listanova[category] && this.listanova[category].length === 0) {
-      //   this.listanova = this.listanova.filter((item) => item.length > 0);
-      //   console.log("na verdade entrou aqui");
-      // }
     },
     limitOptions(limit) {
       if (!limit) {
@@ -648,11 +487,11 @@ export default {
             response.data.childs.map((child) =>
               child.products.map((product) => (product.qtd = 0))
             );
-            console.log(response.data.childs);
             this.productSelected = item;
             this.complements = response.data.childs.sort(
               (a, b) => a.order - b.order
             );
+
             this.viewDialogMount = true;
             this.totalNovo = Number(item.sale_value);
           } else {
@@ -668,6 +507,7 @@ export default {
     closeDialogMount() {
       this.viewDialogMount = false;
       this.lista = [];
+      this.listanova = [];
     },
     closeDialog() {
       this.viewDialog = false;
@@ -722,15 +562,14 @@ export default {
     },
 
     AddPurchaseMount() {
-      console.log(this.lista);
       let objectChilds = [];
       if (this.complements.length > 0) {
         this.complements.forEach((item) => {
-          if (this.lista[item.name]) {
-            this.lista[item.name].forEach((item) => {
+          if (this.listanova[item.name]) {
+            this.listanova[item.name].forEach((item) => {
               objectChilds.push({
                 product_id: item.id,
-                product_qtd: this.qtd,
+                product_qtd: item.qtd,
                 cashback_return: item.cashback_return,
                 product_name: item.name,
                 total: item.sale_value,
@@ -752,23 +591,8 @@ export default {
         childs: objectChilds,
         comment: this.comment,
       };
-      if (localStorage.getItem("geolocation")) {
-        this.insertIdb(sale);
-        this.viewDialogMount = false;
-      } else {
-        this.$store.commit("alertAddress", { value: true });
-        if (localStorage.getItem("acess-token")) {
-          this.$store.commit("user/request", {
-            state: "addressTabs",
-            data: 4,
-          });
-        } else {
-          this.$store.commit("user/request", {
-            state: "addressTabs",
-            data: 1,
-          });
-        }
-      }
+      this.insertIdb(sale);
+      this.viewDialogMount = false;
     },
     insertIdb(item) {
       const payload = {
@@ -790,9 +614,10 @@ export default {
         },
       });
       this.$store.commit("cart/sidebar", true);
-      this.lista = [];
+      this.listanova = [];
     },
   },
+  watch: {},
 };
 </script>
 
@@ -825,5 +650,8 @@ export default {
 }
 .limit-details {
   font-size: 12px;
+}
+.color-theme {
+  color: #5530e5 !important;
 }
 </style>

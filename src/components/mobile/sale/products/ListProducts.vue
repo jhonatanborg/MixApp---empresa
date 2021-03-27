@@ -22,12 +22,10 @@
         </v-list-item-action>
       </v-list-item>
     </v-card>
-    <div class="py-2">
+    <div class="py-2" v-if="address">
       <span class="mx-3 item-title">
         Endereço para entrega:
       </span>
-    </div>
-    <div>
       <v-card flat color="grey lighten-4">
         <v-list-item dense @click="openDialogAddress()" link class="my-2">
           <v-list-item-content>
@@ -54,7 +52,26 @@
           </v-list-item-action>
         </v-list-item>
       </v-card>
-      <div class="mx-3 my-2" v-if="minPurchaseVerify">
+    </div>
+
+    <v-list-item>
+      <span class="item-title">Subtotal</span>
+      <v-spacer></v-spacer>
+      <div class="black--text" v-text="convertMoney(subTotal)"></div>
+    </v-list-item>
+    <div class="mx-3" v-if="minPurchaseVerify && address">
+      <v-btn depressed dark x-large @click="userVerify()" block color="#5530E5">
+        <b>Selecione forma de pagamento </b>
+      </v-btn>
+    </div>
+    <div>
+      <div class="mx-3 my-2" v-if="minPurchaseVerify && company.withdraw">
+        <div class="my-3">
+          <span
+            >Quer pedir para <b>Retirar</b> ? <br />
+            Basta clicar no botão abaixo:</span
+          >
+        </div>
         <v-btn
           depressed
           outlined
@@ -67,21 +84,28 @@
         </v-btn>
       </div>
     </div>
-    <v-list-item>
-      <span class="item-title">Subtotal</span>
-      <v-spacer></v-spacer>
-      <div class="black--text" v-text="convertMoney(subTotal)"></div>
-    </v-list-item>
-    <div class="mx-3" v-if="minPurchaseVerify">
-      <v-btn depressed dark x-large @click="userVerify()" block color="#5530E5">
-        <b>Selecione forma de pagamento </b>
+    <div class="mx-3 my-5" v-if="!address">
+      <div class="my-3">
+        <span
+          >Quer pedir para <b>Entrega</b> ? <br />
+          Basta clicar no botão abaixo:</span
+        >
+      </div>
+      <v-btn
+        depressed
+        x-large
+        @click="openDialogAddress()"
+        block
+        color="primary"
+      >
+        <b>Informar meu endereço</b>
       </v-btn>
     </div>
-    <div v-else>
-      <v-card class="pa-5 grey lighten-4 item-min-purchase" flat>
+    <div v-if="company.min_purchase_value && !minPurchaseVerify">
+      <v-card class="pa-5 red lighten-1 item-min-purchase" flat>
         O pedido mínimo para nessa empresa é de
-        <b>{{ convertMoney(company.min_purchase_value) }}</b> , não inclusa a
-        taxa de entrega. Selecione + itens!
+        <b>{{ convertMoney(company.min_purchase_value) }}</b>
+        , não inclusa a taxa de entrega. Selecione + itens!
       </v-card>
     </div>
   </div>

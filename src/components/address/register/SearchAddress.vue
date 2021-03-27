@@ -40,10 +40,11 @@
           color="primary"
           outlined
           dense
-          hide-details
+          persistent-hint
+          hint="Se o endereço não for encontrado, tente com o CEP"
           v-model="newAddress.cep"
-          label="CEP"
-          placeholder="Digite o Cep"
+          label="CEP (opcional)"
+          placeholder="Digite o Cep "
         ></v-text-field>
       </v-col>
       <v-col cols="12" sm="12" class="py-0" v-if="error">

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card flat class="mx-0 pa-0 my-0 " v-if="bagStatus && address && company">
+    <v-card flat class="mx-0 pa-0 my-0 " v-if="bagStatus && company">
       <div class="align-center">
         <v-list-item class="mx-0">
           <v-list-item-avatar tile>

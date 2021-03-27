@@ -3,7 +3,12 @@
     <Notify />
 
     <v-card
-      :loading="purchaseDetails.status === 'Pendente' ? true : false"
+      :loading="
+        purchaseDetails.status !== 'Cancelado' &&
+        purchaseDetails.status !== 'Entregue'
+          ? true
+          : false
+      "
       class=" card-purchase-details"
       tile
       outlined
@@ -15,6 +20,7 @@
               purchaseDetails.status
             }}</span>
           </div>
+
           <div>
             <small v-text="statusPurchase.details"></small>
           </div>
@@ -28,7 +34,10 @@
         </div>
         <div>
           <div class="complements">
-            Horário: {{ purchaseDetails.created_at }}
+            Previsto para ser entregue:
+            <div>
+              <span v-text="timeDelivery"></span>
+            </div>
           </div>
         </div>
       </div>
@@ -197,6 +206,7 @@
 <script>
 import mixin from "@/mixins/mixins.js";
 import Notify from "@/components/shared/NotifyPush.vue";
+import { addHours, addMinutes, format } from "date-fns";
 export default {
   mixins: [mixin],
   components: {
@@ -211,6 +221,22 @@ export default {
     },
     subcategories() {
       return this.$store.getters["user/getPurchase"];
+    },
+    timeDelivery() {
+      let newTime = this.purchaseDetails.created_at.split(" ");
+      newTime[0] = newTime[0]
+        .split("/")
+        .reverse()
+        .join("-");
+      newTime = new Date(`${newTime[0]} ${newTime[1]}`);
+
+      const [hours, minutes] = this.purchaseDetails.delivery_max_time.split(
+        ":"
+      );
+
+      newTime = addHours(newTime, Number(hours));
+      newTime = addMinutes(newTime, Number(minutes));
+      return format(newTime, "HH:mm:ss");
     },
     statusPurchase() {
       let status;

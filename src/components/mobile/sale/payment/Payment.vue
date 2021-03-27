@@ -14,7 +14,7 @@
         </v-list-item-action>
       </v-list-item>
     </div>
-    <div class="overflow-x-hidden overflow-y-auto pay">
+    <div class="">
       <div class="px-2">
         <v-row cols="auto" v-for="(item, i) in payments" :key="i">
           <v-col cols="12">

@@ -13,7 +13,7 @@
             <div class="details-message-error ">
               <span> {{ $store.state.cart.sidebar.message }}</span>
             </div>
-            <v-row>
+            <v-row v-if="company.withdraw">
               <v-col cols="12">
                 <v-btn
                   depressed
