@@ -136,6 +136,7 @@
                           <!-- Aqui -->
                           {{ item2.qtd }}</v-col
                         >
+
                         <v-col cols="auto"
                           ><v-btn
                             @click="
@@ -144,6 +145,12 @@
                                 complement: item2,
                                 limit: item.limit,
                               })
+                            "
+                            :disabled="
+                              listanova[item.name] &&
+                              listanova[item.name].allQtd === item.limit
+                                ? true
+                                : false
                             "
                             icon
                             color="#5530E5"
@@ -173,6 +180,7 @@
               <v-btn
                 @click="quantity > 1 ? quantity-- : (quantity = 1)"
                 icon
+                :disabled="quantity === 1"
                 class="mx-0"
                 color="#5530E5"
               >
