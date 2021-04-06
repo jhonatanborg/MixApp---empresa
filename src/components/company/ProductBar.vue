@@ -551,23 +551,8 @@ export default {
         company_id: this.company.id,
         cashback_return: this.productSelected.cashback_return,
       };
-      if (localStorage.getItem("geolocation")) {
-        this.insertIdb(sale);
-        this.viewDialog = false;
-      } else {
-        this.$store.commit("alertAddress", { value: true });
-        if (localStorage.getItem("acess-token")) {
-          this.$store.commit("user/request", {
-            state: "addressTabs",
-            data: 4,
-          });
-        } else {
-          this.$store.commit("user/request", {
-            state: "addressTabs",
-            data: 1,
-          });
-        }
-      }
+      this.insertIdb(sale);
+      this.viewDialog = false;
     },
 
     AddPurchaseMount() {
