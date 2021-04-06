@@ -251,7 +251,7 @@
               <v-row justify="space-between" align="center">
                 <v-col cols="auto">
                   <div class="title-product mr-3">
-                    <span>{{ productSelected.name }}</span>
+                    <span>{{ productSelected.name }} </span>
                   </div>
                 </v-col>
                 <v-col cols="auto">
@@ -510,6 +510,7 @@ export default {
       } else {
         this.viewDialog = true;
         this.productSelected = item;
+        this.totalNovo = Number(item.sale_value);
       }
     },
     closeDialogMount() {

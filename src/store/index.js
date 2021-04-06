@@ -15,7 +15,7 @@ if (
   window.location.host.indexOf("netlify") >= 0 ||
   window.location.host.indexOf("192.168") >= 0
 ) {
-  domain = "emporiodocaldo.mixentregas.com.br";
+  domain = "emporiodocaldo.com.br";
 } else if (window.location.host.indexOf("www") >= 0) {
   domain = window.location.host.split("www.")[1];
 } else {
