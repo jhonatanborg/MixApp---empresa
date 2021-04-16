@@ -233,7 +233,7 @@ export default {
     height: 100vh;
   }
 }
-@media (max-width: 1366px) {
+@media (max-width: 2540px) {
   .map {
     height: 75vh;
   }
