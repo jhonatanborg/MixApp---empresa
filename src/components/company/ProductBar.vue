@@ -2,33 +2,66 @@
   <div>
     <div id="ProductBar">
       <div>
-        <div
-          id="list-products text-uppercase"
-          class="my-8"
-          v-for="(item, index) in products"
-          :key="index"
+        <v-expansion-panels
+          class="pa-0"
+          v-if="$vuetify.breakpoint.xsOnly"
+          accordion
         >
-          <div :id="'go' + item.id">
-            <div class="">
-              <h3 v-if="item.products.length > 0" class="title-category">
-                {{ item.name }}
-              </h3>
+          <v-expansion-panel
+            class="pa-0"
+            v-for="(item, index) in products"
+            :key="index"
+          >
+            <v-expansion-panel-header>
+              {{ item.name }}</v-expansion-panel-header
+            >
+            <v-expansion-panel-content class="pa-0">
+              <v-row no-gutters outlined row wrap>
+                <v-col
+                  v-for="product in item.products"
+                  :key="product.id"
+                  cols="12"
+                  md="4"
+                  sm="6"
+                  class="pa-0"
+                >
+                  <a @click="modal(product)">
+                    <Product :product="product" />
+                  </a>
+                </v-col>
+              </v-row>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+        <div v-if="!$vuetify.breakpoint.xsOnly" class="">
+          <div
+            id="list-products text-uppercase"
+            class="my-8"
+            v-for="(item, index) in products"
+            :key="index"
+          >
+            <div :id="'go' + item.id">
+              <div class="">
+                <h3 v-if="item.products.length > 0" class="title-category">
+                  {{ item.name }}
+                </h3>
+              </div>
             </div>
-          </div>
-          <div>
-            <v-row outlined row wrap>
-              <v-col
-                v-for="product in item.products"
-                :key="product.id"
-                cols="12"
-                md="4"
-                sm="6"
-              >
-                <a @click="modal(product)">
-                  <Product :product="product" />
-                </a>
-              </v-col>
-            </v-row>
+            <div>
+              <v-row outlined row wrap>
+                <v-col
+                  v-for="product in item.products"
+                  :key="product.id"
+                  cols="12"
+                  md="4"
+                  sm="6"
+                >
+                  <a @click="modal(product)">
+                    <Product :product="product" />
+                  </a>
+                </v-col>
+              </v-row>
+            </div>
           </div>
         </div>
       </div>
@@ -42,26 +75,28 @@
           scrollable
         >
           <v-card>
-            <v-img
-              width="100%"
-              height="25%"
-              aspect-ratio="1.1"
-              :src="$store.state.server + productSelected.img"
+            <v-btn
+              x-small
+              color="white"
+              fab
+              absolute
+              top
+              class="mt-5"
+              right
+              @click="closeDialogMount"
             >
-              <v-row justify="end">
-                <v-col cols="auto">
-                  <v-btn
-                    class="mr-3"
-                    x-small
-                    color="white"
-                    fab
-                    @click="closeDialogMount"
-                  >
-                    <v-icon size="20">mdi-close</v-icon>
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-img>
+              <v-icon size="20">mdi-close</v-icon>
+            </v-btn>
+
+            <v-row no-gutters justify="center">
+              <v-col :cols="$vuetify.breakpoint.xsOnly ? 10 : 6">
+                <v-img
+                  aspect-ratio="1.1"
+                  :src="$store.state.server + productSelected.img"
+                >
+                </v-img>
+              </v-col>
+            </v-row>
 
             <div class="pa-5 ">
               <div>
@@ -353,7 +388,6 @@ export default {
     AlertSale,
   },
   props: {
-    products: Array,
     company: Object,
   },
   data: () => ({
@@ -376,7 +410,6 @@ export default {
       let disabled = false;
       if (this.complements.length > 0) {
         this.complements.forEach((category) => {
-          console.log(this.listanova[category.name]);
           if (
             this.listanova[category.name] &&
             category.mandatory === "S" &&
@@ -398,6 +431,9 @@ export default {
     },
     error() {
       return this.$store.state.error;
+    },
+    products() {
+      return this.$store.getters["company/getProducts"];
     },
   },
   methods: {

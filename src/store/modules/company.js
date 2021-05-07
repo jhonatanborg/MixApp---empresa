@@ -15,9 +15,25 @@ const company = {
   }),
   getters: {
     getProducts(state) {
+      console.log(state.company);
+
       if (state.company) {
-        return state.company.prodCategories();
+        let Allproducts = state.company.prodCategories;
+        let categories = Allproducts.filter((item) => {
+          item.products = item.products.sort((a, b) => {
+            if (a.sale_value > b.sale_value) {
+              return 1;
+            }
+            if (a.sale_value < b.sale_value) {
+              return -1;
+            }
+          });
+          return item.products.length > 0;
+        });
+
+        return categories;
       }
+      return [];
     },
     getAllCategories(state) {
       const all = [

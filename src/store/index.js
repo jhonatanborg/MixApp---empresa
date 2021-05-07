@@ -13,7 +13,8 @@ let domain;
 if (
   window.location.host.indexOf("localhost") >= 0 ||
   window.location.host.indexOf("netlify") >= 0 ||
-  window.location.host.indexOf("192.168") >= 0
+  window.location.host.indexOf("192.168") >= 0 ||
+  window.location.host.indexOf("10.0.0") >= 0
 ) {
   domain = "emporiodocaldo.com.br";
 } else if (window.location.host.indexOf("www") >= 0) {
@@ -23,7 +24,6 @@ if (
 }
 // return "pastelariadopaulo.mixentregas.com.br";
 Vue.use(Vuex);
-
 export default new Vuex.Store({
   modules: {
     cart,

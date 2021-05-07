@@ -45,31 +45,12 @@
           <div class="text-center">
             <v-chip @click="openAboutDialog()" outlined>
               <v-icon size="20" class="mr-1  ">mdi-information</v-icon>
-              + informações</v-chip
+              Horário de atendimento</v-chip
             >
           </div>
         </v-col>
       </v-row>
     </div>
-    <v-container>
-      <v-row justify-sm="center">
-        <v-col sm="auto">
-          <v-overflow-btn
-            dense
-            hide-details
-            class="my-0 py-0"
-            color="#5530E5"
-            @change="filterScroll()"
-            v-model="filterItem"
-            :items="categories"
-            item-text="name"
-            item-value="id"
-            label="Relevância"
-            target="#dropdown-example"
-          ></v-overflow-btn>
-        </v-col>
-      </v-row>
-    </v-container>
   </div>
 </template>
 

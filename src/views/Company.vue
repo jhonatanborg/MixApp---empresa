@@ -21,7 +21,7 @@
       <v-container fluid>
         <v-row align="center" justify="space-between">
           <v-col cols="auto " sm="12">
-            <ProductBar :company="company" :products="company.prodCategories" />
+            <ProductBar :company="company" />
           </v-col>
         </v-row>
       </v-container>
