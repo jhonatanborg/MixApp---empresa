@@ -42,7 +42,7 @@
     >
       <v-btn
         @click="routeSale()"
-        class="mr-3 animate__animated animate__pulse animate__infinite"
+        class="mr-3 animate__animated animate__pulse animate__infinite "
         rounded
         block
         dark
@@ -176,6 +176,9 @@ export default {
   position: -webkit-sticky !important; /* for Safari */
   top: 2em !important;
   z-index: 2 !important;
+}
+.sale {
+  z-index: 3 !important;
 }
 .promo-bar {
   background: linear-gradient(-45deg, #9300dc 20%, #4144e8 70%);
