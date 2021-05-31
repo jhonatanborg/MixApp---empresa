@@ -437,6 +437,11 @@ export default {
     },
   },
   methods: {
+    orderItems(products) {
+      products.sort(function(a, b) {
+        return a.name === b.name ? 0 : a.name < b.name ? -1 : 1;
+      });
+    },
     AddMountComplements({ category, complement, limit }) {
       let findedCategory = this.listanova[category];
       if (findedCategory) {
@@ -532,9 +537,15 @@ export default {
               child.products.map((product) => (product.qtd = 0))
             );
             this.productSelected = item;
-            this.complements = response.data.childs.sort(
+            let complements = response.data.childs.sort(
               (a, b) => a.order - b.order
             );
+            let newArray = complements.map((item) => {
+              item.products.sort((a, b) => (a.name > b.name) * 2 - 1);
+              return item;
+            });
+            this.complements = newArray;
+            console.log(newArray);
 
             this.viewDialogMount = true;
             this.totalNovo = Number(item.sale_value);

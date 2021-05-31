@@ -15,16 +15,14 @@ const company = {
   }),
   getters: {
     getProducts(state) {
-      console.log(state.company);
-
       if (state.company) {
         let Allproducts = state.company.prodCategories;
         let categories = Allproducts.filter((item) => {
           item.products = item.products.sort((a, b) => {
-            if (a.sale_value > b.sale_value) {
+            if (Number(a.sale_value) > Number(b.sale_value)) {
               return 1;
             }
-            if (a.sale_value < b.sale_value) {
+            if (Number(a.sale_value) < Number(b.sale_value)) {
               return -1;
             }
           });
