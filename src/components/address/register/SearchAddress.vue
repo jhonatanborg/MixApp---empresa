@@ -1,7 +1,7 @@
 <template>
   <div class="pa-5">
     <v-row justify="start">
-      <v-col cols="12" sm="9">
+      <!-- <v-col cols="12" sm="9">
         <v-text-field
           color="primary"
           outlined
@@ -70,7 +70,7 @@
         <span>
           ou
         </span>
-      </v-col>
+      </v-col> -->
       <v-col cols="12" sm="12">
         <v-btn
           :loading="isLoading"

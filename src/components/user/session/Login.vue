@@ -59,7 +59,7 @@
             <span>Ainda não possui uma conta </span>
             <br />
             <b
-              ><router-link :to="{ name: 'register-type' }" class="black--text"
+              ><router-link :to="{ name: 'register-email' }" class="black--text"
                 >Crie uma conta agora</router-link
               ></b
             >
