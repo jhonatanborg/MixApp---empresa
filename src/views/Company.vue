@@ -147,6 +147,7 @@ export default {
       localStorage.setItem("id-user", data.id);
       this.$store.commit("user/setUser", data);
       this.$store.commit("user/setUserName", data.name);
+      this.$router.replace({ name: "company" });
     },
     execRequest(action, state, url, method, insert, data = null) {
       this.$store.dispatch(action, {
