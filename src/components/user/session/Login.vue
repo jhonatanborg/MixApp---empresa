@@ -54,6 +54,19 @@
               color="#5530E5"
               >Entrar</v-btn
             >
+            <v-btn
+              class="my-5"
+              block
+              @click="fetchFacebook"
+              color="primary"
+              dark
+              x-large
+            >
+              Entrar com o Facebook
+              <v-icon dark right>
+                mdi-facebook
+              </v-icon>
+            </v-btn>
           </div>
           <div class="mt-3">
             <span>Ainda não possui uma conta </span>
@@ -91,7 +104,11 @@ export default {
     errorPass: false,
     confirm: null,
   }),
-
+  computed: {
+    company() {
+      return this.$store.getters["company/getCompany"] || {};
+    },
+  },
   methods: {
     login() {
       this.loading = true;
@@ -116,9 +133,9 @@ export default {
             localStorage.setItem("acess-token", resp.data.token);
             localStorage.setItem("id-user", resp.data.id);
             this.$store.commit("user/setUser", resp.data);
+            console.log(resp.data);
             this.$store.commit("user/setUserName", resp.data.name);
             this.$router.push("/");
-
             this.loading = false;
           })
           .catch((err) => {
@@ -138,6 +155,20 @@ export default {
               }
             }
           });
+      }
+    },
+    async fetchFacebook() {
+      try {
+        const response = await axios({
+          url: process.env.VUE_APP_BASE_URL_SERVER_LOCAL + "/facebook",
+          method: "post",
+          params: {
+            company_id: this.company.id,
+          },
+        });
+        window.location.href = response.data.facebookLoginUrl;
+      } catch (error) {
+        console.log(error.message);
       }
     },
   },

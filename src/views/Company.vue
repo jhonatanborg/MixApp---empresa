@@ -77,6 +77,9 @@ export default {
     DialogAbout,
     Footer,
   },
+  mounted() {
+    this.facebookCallback();
+  },
   data: () => ({
     dialogPay: false,
     statusLogin: true,
@@ -131,6 +134,20 @@ export default {
   },
   watch: {},
   methods: {
+    async facebookCallback() {
+      const { token } = this.$route.params;
+      if (!token) return;
+      localStorage.setItem("acess-token", token);
+      const { data } = await this.$store.dispatch("request", {
+        state: "userProfile",
+        method: "GET",
+        url: "/my-profile-client",
+        insert: true,
+      });
+      localStorage.setItem("id-user", data.id);
+      this.$store.commit("user/setUser", data);
+      this.$store.commit("user/setUserName", data.name);
+    },
     execRequest(action, state, url, method, insert, data = null) {
       this.$store.dispatch(action, {
         state: state,
