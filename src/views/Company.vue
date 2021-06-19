@@ -135,7 +135,7 @@ export default {
   watch: {},
   methods: {
     async facebookCallback() {
-      const { token } = this.$route.params;
+      const { token } = this.$route.query;
       if (!token) return;
       localStorage.setItem("acess-token", token);
       const { data } = await this.$store.dispatch("request", {
