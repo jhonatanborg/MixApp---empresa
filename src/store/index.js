@@ -16,7 +16,7 @@ if (
   window.location.host.indexOf("192.168") >= 0 ||
   window.location.host.indexOf("10.0.0") >= 0
 ) {
-  domain = "pandaitaubas.com.br";
+  domain = "emporiodocaldo.com.br";
 } else if (window.location.host.indexOf("www") >= 0) {
   domain = window.location.host.split("www.")[1];
 } else {
@@ -38,6 +38,7 @@ export default new Vuex.Store({
     next: true,
     alertSale: false,
     addressAlert: false,
+    comission: 8,
     server: process.env.VUE_APP_BASE_URL_SERVER_LOCAL,
     timezone: "America/Cuiaba",
     domain,

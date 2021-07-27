@@ -2,6 +2,7 @@
   <v-app id="App" class="app grey lighten-3 ">
     <MenuMobile />
     <v-main class="bar">
+      <NotifyPhoneRequired />
       <Address @close-dialog="closeDialog" />
       <SaleError />
       <Main />
@@ -57,7 +58,7 @@ import Main from "@/components/sale/Main";
 import MenuMobile from "@/components/mobile/shared/MenuMobile";
 import Address from "@/components/address/Main.vue";
 import SaleError from "@/components/sale/SaleError";
-
+import NotifyPhoneRequired from "@/components/user/profile/notifyPhone/NotifyPhoneRequired";
 export default {
   name: "App",
   components: {
@@ -65,6 +66,7 @@ export default {
     SaleError,
     MenuMobile,
     Main,
+    NotifyPhoneRequired,
   },
   mounted() {
     this.getSaleIdb();
@@ -72,6 +74,7 @@ export default {
     if (!window.navigator.onLine) {
       this.$router.push({ name: "error" });
     }
+    this.verifyPhoneRequired();
   },
   created() {
     // Listen for swUpdated event and display refresh snackbar as required.
@@ -105,6 +108,15 @@ export default {
         insert,
         data,
       });
+    },
+    verifyPhoneRequired() {
+      if (this.$store.state.user && this.$store.state.user.userProfile) {
+        const user = this.$store.state.user.userProfile;
+        if (user.login_source === "facebook" && !user.phone) {
+          console.log(user.phone);
+          this.$store.commit("user/setModalPhoneRequired", true);
+        }
+      }
     },
     getSaleIdb() {
       this.$store.dispatch("cart/request", {

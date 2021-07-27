@@ -185,6 +185,14 @@
         v-text="convertMoney(company.deliveryFee.value)"
       ></div>
     </v-list-item>
+    <v-list-item dense>
+      <v-list-item-content>
+        <v-list-item-subtitle>
+          <span class="item-subtitle">Taxa de serviço</span>
+        </v-list-item-subtitle>
+      </v-list-item-content>
+      <div v-if="fee" class="subtitle" v-text="convertMoney(fee)"></div>
+    </v-list-item>
     <v-list-item>
       <v-list-item-content>
         <v-list-item-subtitle>
@@ -267,6 +275,8 @@ export default {
 
     total() {
       let sum = this.subTotal;
+      let comission = this.$store.state.comission;
+
       if (
         this.company.deliveryFee &&
         this.$store.state.cart.type !== "retirada"
@@ -276,6 +286,9 @@ export default {
       if (this.discount_value) {
         sum = parseFloat(sum) - parseFloat(this.discount_value);
       }
+      sum =
+        sum + parseFloat(Number(comission) / 100) * parseFloat(this.subTotal);
+
       return sum;
     },
     address() {
@@ -284,6 +297,12 @@ export default {
 
     bagStatus() {
       return this.$store.state.cart.saleIdb.length > 0 ? true : false;
+    },
+    fee() {
+      let sum = this.subTotal;
+      let comission = this.$store.state.comission;
+      sum = parseFloat(Number(comission) / 100) * parseFloat(sum);
+      return sum;
     },
   },
   methods: {
