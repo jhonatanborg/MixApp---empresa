@@ -98,6 +98,17 @@ export default {
     addressAlert() {
       return this.$store.state.addressAlert;
     },
+    user() {
+      return this.$store.state.user.userProfile;
+    },
+  },
+  watch: {
+    user(value) {
+      console.log(value);
+      if (value && !value.phone) {
+        this.$store.commit("user/setModalPhoneRequired", true);
+      }
+    },
   },
   methods: {
     execRequest(action, state, url, method, insert, data = null) {
@@ -110,11 +121,10 @@ export default {
       });
     },
     verifyPhoneRequired() {
-      if (this.$store.state.user && this.$store.state.user.userProfile) {
-        const user = this.$store.state.user.userProfile;
-        if (user.login_source === "facebook" && !user.phone) {
-          this.$store.commit("user/setModalPhoneRequired", true);
-        }
+      const user = this.$store.state.user;
+      if (user && user.userProfile && !user.userProfile.phone) {
+        console.log(user);
+        this.$store.commit("user/setModalPhoneRequired", true);
       }
     },
     getSaleIdb() {
@@ -163,7 +173,6 @@ export default {
         this.$store
           .dispatch("company/request", payload)
           .then((resp) => {
-            console.log(resp.data);
             document.title = resp.data.name;
           })
           .catch(() => {
