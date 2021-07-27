@@ -174,8 +174,14 @@
           <v-divider></v-divider>
 
           <div class="my-5 d-flex justify-space-between">
+            <div>Taxa de serviço</div>
+            <v-chip color="primary" v-text="fee ? fee : '0'"></v-chip>
+          </div>
+          <v-divider></v-divider>
+
+          <div class="my-5 d-flex justify-space-between">
             <div>Total</div>
-            <v-chip color="primary">R$ {{ purchaseDetails.total }}</v-chip>
+            <v-chip color="primary">{{ total }}</v-chip>
           </div>
           <v-divider></v-divider>
           <div class="my-5">
@@ -218,6 +224,22 @@ export default {
   computed: {
     purchaseDetails() {
       return this.$store.state.user.purchaseDetails || {};
+    },
+
+    fee() {
+      let purchase = this.$store.state.user.purchaseDetails;
+      let comission = this.$store.state.comission;
+      let sum = parseFloat(purchase.subtotal);
+      sum = parseFloat(Number(comission) / 100) * parseFloat(sum);
+      return this.convertMoney(sum);
+    },
+    total() {
+      let purchase = this.$store.state.user.purchaseDetails;
+      let comission = this.$store.state.comission;
+      let sum = parseFloat(purchase.total);
+      sum = sum + parseFloat(Number(comission) / 100) * parseFloat(sum);
+      console.log("total", sum);
+      return this.convertMoney(sum);
     },
     subcategories() {
       return this.$store.getters["user/getPurchase"];

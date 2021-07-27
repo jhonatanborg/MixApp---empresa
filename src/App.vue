@@ -113,7 +113,6 @@ export default {
       if (this.$store.state.user && this.$store.state.user.userProfile) {
         const user = this.$store.state.user.userProfile;
         if (user.login_source === "facebook" && !user.phone) {
-          console.log(user.phone);
           this.$store.commit("user/setModalPhoneRequired", true);
         }
       }
@@ -164,6 +163,7 @@ export default {
         this.$store
           .dispatch("company/request", payload)
           .then((resp) => {
+            console.log(resp.data);
             document.title = resp.data.name;
           })
           .catch(() => {
