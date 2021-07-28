@@ -16,7 +16,7 @@ if (
   window.location.host.indexOf("192.168") >= 0 ||
   window.location.host.indexOf("10.0.0") >= 0
 ) {
-  domain = "pandaitaubas.com.br";
+  domain = "emporiodaeconomia.com.br";
 } else if (window.location.host.indexOf("www") >= 0) {
   domain = window.location.host.split("www.")[1];
 } else {

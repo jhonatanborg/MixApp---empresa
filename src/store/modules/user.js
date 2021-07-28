@@ -12,6 +12,7 @@ const user = {
     purchaseDetails: null,
     editAddress: "",
     dialogAddress: true,
+    modalPhoneRequired: false,
   }),
   getters: {
     getUser(state) {
@@ -83,7 +84,9 @@ const user = {
     setPurchase(state, data) {
       state.purchaseDetails = data;
     },
-
+    setModalPhoneRequired(state, data) {
+      state.modalPhoneRequired = data;
+    },
     ...mutationsGlobal,
   },
   actions: { ...actionsGlobal },

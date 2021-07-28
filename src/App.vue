@@ -1,6 +1,8 @@
 <template>
   <v-app id="App" class="app grey lighten-3 ">
     <MenuMobile />
+    <NotifyPhoneRequired />
+
     <v-main class="bar">
       <Address @close-dialog="closeDialog" />
       <SaleError />
@@ -57,6 +59,7 @@ import Main from "@/components/sale/Main";
 import MenuMobile from "@/components/mobile/shared/MenuMobile";
 import Address from "@/components/address/Main.vue";
 import SaleError from "@/components/sale/SaleError";
+import NotifyPhoneRequired from "@/components/user/profile/notifyPhone/NotifyPhoneRequired";
 
 export default {
   name: "App",
@@ -65,6 +68,7 @@ export default {
     SaleError,
     MenuMobile,
     Main,
+    NotifyPhoneRequired,
   },
   mounted() {
     this.getSaleIdb();
@@ -94,6 +98,16 @@ export default {
   computed: {
     addressAlert() {
       return this.$store.state.addressAlert;
+    },
+    user() {
+      return this.$store.state.user.userProfile;
+    },
+  },
+  watch: {
+    user(value) {
+      if (value && !value.phone) {
+        this.$store.commit("user/setModalPhoneRequired", true);
+      }
     },
   },
   methods: {
