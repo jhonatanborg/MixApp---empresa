@@ -8,7 +8,24 @@ import cashback from "./modules/cashback";
 
 import actionsGlobal from "./actions";
 import mutationsGlobal from "./mutations";
+import * as VueGoogleMaps from "vue2-google-maps";
 
+import VuetifyGoogleAutocomplete from "vuetify-google-autocomplete";
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "AIzaSyA1V6gzCf6d626ltnUePQnMNKE8VZE4o_Q",
+    // This is required to use the Autocomplete plugin
+    libraries: "places", // 'places,drawing,visualization'
+  },
+});
+Vue.use(VuetifyGoogleAutocomplete, {
+  /*
+      not used as loaded with component
+      apiKey: key,
+    */
+  vueGoogleMapsCompatibility: true,
+});
 let domain;
 if (
   window.location.host.indexOf("localhost") >= 0 ||

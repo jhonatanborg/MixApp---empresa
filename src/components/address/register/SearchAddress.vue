@@ -71,6 +71,14 @@
           ou
         </span>
       </v-col> -->
+      <vuetify-google-autocomplete
+        id="map"
+        append-icon="mdi-magnify"
+        v-bind:disabled="false"
+        placeholder="Digite seu endereço"
+        v-on:placechanged="getAddressData"
+      >
+      </vuetify-google-autocomplete>
       <v-col cols="12" sm="12">
         <v-btn
           :loading="isLoading"
@@ -125,6 +133,29 @@ export default {
         data,
       });
       this.isLoading = false;
+    },
+    getAddressData: function(addressData, placeResultData) {
+      this.address = addressData;
+      const lat = placeResultData.geometry.location.lat();
+      const lng = placeResultData.geometry.location.lng();
+      let location = {
+        latitude: lat,
+        longitude: lng,
+      };
+      this.execRequest(
+        "company/request",
+        "companies",
+        `/company/${this.$store.state.domain},${location.latitude},${location.longitude}`,
+        "GET",
+        true
+      );
+      this.execRequest("user/request", "address", "/coord", "POST", true, {
+        lat: location.latitude,
+        long: location.longitude,
+      });
+      this.$emit("next-register", 2);
+      localStorage.setItem("geolocation", JSON.stringify(location));
+      console.log(location);
     },
     getAddressByString() {
       if (
