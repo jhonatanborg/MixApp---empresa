@@ -14,6 +14,7 @@ module.exports = {
         VUE_APP_COMPANY_NAME: "Empório do Caldo",
         VUE_APP_PORT: 8082,
         VUE_APP_COLOR: "#ff5252",
+        VUE_APP_GOOGLE_KEY: "AIzaSyA1V6gzCf6d626ltnUePQnMNKE8VZE4o_Q",
       },
     },
   ],
